@@ -1,1 +1,21 @@
-/mnt/dostb2/fuendetodos/DATOS/repositorio/spei/trunk/fergus/datos/paquete_sequia/data.R
+#' @name Datasets
+
+#' @title radiation
+#' @rdname Datasets
+#' @description Data used in the examples
+#' @details See description.
+#' @usage data(radiation)
+"radiation.value"
+
+#' @title toa
+#' @rdname Datasets
+#' @description See wichita
+#' @details See description.
+#' @usage data(toa)
+"toa.value"
+
+#' @title MinMAP
+#' @rdname Datasets
+#' @description See wichita
+#' @details See description.
+"MinMAP"

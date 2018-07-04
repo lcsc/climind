@@ -1,1 +1,0 @@
-/mnt/dostb2/fuendetodos/DATOS/repositorio/spei/trunk/fergus/datos/paquete_sequia/NEWS.md
