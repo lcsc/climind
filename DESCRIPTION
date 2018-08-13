@@ -7,7 +7,10 @@ Authors@R: c(person("Reig Gracia", "Fergus", role = c("aut", "cre"), email = "fe
 Author: Reig Gracia Fergus [aut, cre]
 Maintainer: Reig Gracia Fergus <fergusrg@gmail.com>
 Depends: R (>= 1.8.0), SPEI, chron, weathermetrics
-Suggests: MASS
+Suggests: MASS,
+    knitr,
+    rmarkdown,
+    testthat
 Description: Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices.
 License: GPL (>= 3)
 URL: https://github.com/indecis-eu/indecis
@@ -16,3 +19,4 @@ Encoding: UTF-8
 NeedsCompilation: no
 Packaged: 2018-07-01 11:38:24 UTC; freig
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
