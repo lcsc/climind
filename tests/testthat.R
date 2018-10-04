@@ -48,6 +48,14 @@ test_that("wsd_calculate_29", {
   expect_equivalent(as.numeric(calculate_29(data)["2000"]), sum(data==28))
 })
 
+test_that("ogs10_calculate_32", {
+  data[1:length(data)] <- 0
+  data[as.character(seq(chron("01/15/00"), chron("01/27/00")))] <- 28
+  data[as.character(seq(chron("03/20/00"), chron("03/26/00")))] <- 28
+  data[as.character(seq(chron("05/20/00"), chron("05/24/00")))] <- 26
+  expect_equivalent(as.numeric(calculate_32(data)["2000"]), 15)
+})
+
 test_that("rx5day_calculate_50", {
   # Maximum consecutive 5-day precipitation
   data[1:length(data)] <- 0

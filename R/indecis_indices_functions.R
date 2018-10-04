@@ -26,6 +26,26 @@ library(chron)
 library(SPEI)
 library(weathermetrics)
 
+# Abreviaturas
+TMEAN = "tg" # daily mean temperature TG, ℃
+TMIN = "tn" # daily minimum temperature TN, ℃
+TMAX = "tx" # daily maximum temperature TX, ℃
+PRECIPITATION = "rr" # daily precipitation sum RR, mm
+LAT = "lat" # lat, degree
+
+# Necesitamos
+# mean radiation, W/m-2
+# eto
+## insolation sunshine duration
+## w average wind
+## lat latitude
+## tdew dew point
+## rh relative humidity
+
+# No usamos
+# daily averaged sea level pressure PP
+
+
 SPRING = "spring" #marzo, abril, mayo - 3, 4, 5
 SUMMER = "summer" #junio, julio, agosto - 6, 7, 8
 FALL = "fall" #septiembre, octubre, nobiembre - 9, 10, 11
@@ -86,6 +106,14 @@ calcf_data_ = function(data_names, data, operation, ...){
   return(average)
 }
 
+quantile_null = function(x, ...){
+  if(is.null(x)){
+    return(NULL)
+  }else{
+    return(quantile(x, ..., na.rm = TRUE))
+  }
+}
+
 #' Operation de data, agrupando los datos por valores de names
 #'
 #' @param data data
@@ -98,6 +126,12 @@ calcf_data_ = function(data_names, data, operation, ...){
 #' @examples
 #' calcf_data(data=data, extract_names=years, operation=meanf)
 calcf_data = function(data, date, extract_names, data_names, operation, ...){
+  if(missing(data) || is.null(data) || length(data)==0){
+    return(NULL)
+  }
+  if(!missing(...) && sum(sapply(list(...), is.null))>0){
+    return(NULL)
+  }
   if(missing(data_names) || is.null(data_names[1]) || is.na(data_names[1])){
     if(missing(date) || is.null(date[1]) || is.na(date[1])){
       date = chron(names(data))
@@ -251,12 +285,13 @@ td_to_vapor <- function(td){
 #' @param data maximum, minimum or medium temperature
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
 #' @return average temperature
 #' @export
 #' @examples
 #' average_temp(data=tmax.value)
-average_temp = function(data, data_names=NULL, time.scale=YEAR){
-  return(calcf_data(data, extract_names=select_time_function(time.scale), data_names=data_names, operation=meanf))
+average_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  return(calcf_data(data, extract_names=select_time_function(time.scale), data_names=data_names, operation=mean, na.rm = na.rm))
 }
 
 #' Maximum temperature
@@ -268,8 +303,8 @@ average_temp = function(data, data_names=NULL, time.scale=YEAR){
 #' @export
 #' @examples
 #' maximum_temp(data=tmax.value)
-maximum_temp = function(data, data_names=NULL, time.scale=YEAR){
-  return(calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=maxf))
+maximum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  return(calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=max, na.rm = na.rm))
 }
 
 #' Minimum temperature
@@ -281,8 +316,8 @@ maximum_temp = function(data, data_names=NULL, time.scale=YEAR){
 #' @export
 #' @examples
 #' minimum_temp(data=tmax.value)
-minimum_temp = function(data, data_names=NULL, time.scale=YEAR){
-  return(calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=minf))
+minimum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  return(calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=min, na.rm = na.rm))
 }
 
 #' SPI: Standardized Precipitation Index
@@ -291,17 +326,23 @@ minimum_temp = function(data, data_names=NULL, time.scale=YEAR){
 #' @param data precipitation
 #' @param data_names names of each period of time
 #' @param scale scale
+#' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return SPI
 #' @export
 #' @examples
-#' spi(data = pr.value)
-calc_spi = function(data, data_names=NULL, scale=3){
-  byMonths = calcf_data(data=data, extract_names=months_years, operation=sumf)
-  byMonths.vector = array(t(byMonths), dim=length(byMonths))
-  spi.vector = array(spi(byMonths.vector, scale=scale, na.rm = TRUE)$fitted[, 1])
+#' calc_spi(data = pr.value)
+calc_spi = function(data, data_names=NULL, scale=3, na.rm=FALSE){
+  if(is.null(data)) { return(NULL) }
+  byMonths = calcf_data(data=data, extract_names=months_years, operation=sum, na.rm=na.rm)
+  if(sum(is.na(byMonths))==0){
+    byMonths.vector = array(t(byMonths), dim=length(byMonths))
+    spi.vector = array(spi(byMonths.vector, scale=scale, na.rm = TRUE)$fitted[, 1])
+  }else{
+    spi.vector = NA
+  }
   spi.matrix = t(array(spi.vector, dim=c(dim(byMonths)[2], dim(byMonths)[1])))
-  colnames(spi.matrix)=colnames(spi.matrix)
-  rownames(spi.matrix)=rownames(spi.matrix)
+  colnames(spi.matrix)=colnames(byMonths)
+  rownames(spi.matrix)=rownames(byMonths)
   return(spi.matrix)
 }
 
@@ -312,18 +353,24 @@ calc_spi = function(data, data_names=NULL, scale=3){
 #' @param pr precipitation
 #' @param data_names names of each period of time
 #' @param scale scale
+#' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return SPEI
 #' @export
 #' @examples
-#' spei(eto = eto.value, pr = pr.value)
-calc_spei = function(eto, pr, data_names=NULL, scale=3){
+#' calc_spei(eto = eto.value, pr = pr.value)
+calc_spei = function(eto, pr, data_names=NULL, scale=3, na.rm=FALSE){
+  if(is.null(eto) | is.null(pr)) { return(NULL) }
   data = pr - eto 
-  byMonths = calcf_data(data=data, extract_names=months_years, operation=sumf)
-  byMonths.vector = array(t(byMonths), dim=length(byMonths))
-  spei.vector = array(spei(byMonths.vector, scale=scale, na.rm = TRUE)$fitted[, 1])
+  byMonths = calcf_data(data=data, extract_names=months_years, operation=sum, na.rm=na.rm)
+  if(sum(is.na(byMonths))==0){
+    byMonths.vector = array(t(byMonths), dim=length(byMonths))
+    spei.vector = array(spei(byMonths.vector, scale=scale, na.rm = TRUE)$fitted[, 1])
+  }else{
+    spei.vector = NA
+  }
   spei.matrix = t(array(spei.vector, dim=c(dim(byMonths)[2], dim(byMonths)[1])))
-  colnames(spei.matrix)=colnames(spei.matrix)
-  rownames(spei.matrix)=rownames(spei.matrix)
+  colnames(spei.matrix)=colnames(byMonths)
+  rownames(spei.matrix)=rownames(byMonths)
   return(spei.matrix)
 }
 
