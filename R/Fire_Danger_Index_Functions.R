@@ -79,17 +79,14 @@ calc_humid<-function(T,Dp){
       
 #DF Lookup Function for KBDI
 
-lookupDF<- function(DI,T,MAP){
-	kbdilookup <- read.csv(file.path("data", "kbdidata.csv"))
-	attach(kbdilookup)
+lookupDF<- function(DI,T,MAP,kbdilookup){
 	if(T<1){T<-1}
 	for(s in 1:length(MinMAP)){
-		if(T >= MinTemp[s] & T < MaxTemp[s]+1 & DI >= MinDI[s] & DI < MaxDI[s]+1 & MAP >= MinMAP[s] & MAP < MaxMAP[s]+1){
+		if(T >= kbdilookup$MinTemp[s] & T < kbdilookup$MaxTemp[s]+1 & DI >= kbdilookup$MinDI[s] & DI < kbdilookup$MaxDI[s]+1 & MAP >= kbdilookup$MinMAP[s] & MAP < kbdilookup$MaxMAP[s]+1){
    			idx<-DF[s]
 			break
 		}
 	}
-	detach(kbdilookup)
 	idx
 }
 
@@ -306,6 +303,10 @@ index_G4 <- function(Temperature, DewPoint,Wind){
 # Keetch-Byran Drought Index
 
 index_KBDI <- function(Temperature, Rain, MAP){
+
+	kbdilookup <- read.csv(file.path("data", "kbdidata.csv"))
+	# attach(kbdilookup)
+
 	MAP <- MAP / 25.4
 	Rain <- Rain / 25.4
 	KBDI <- 400.0
@@ -332,13 +333,14 @@ index_KBDI <- function(Temperature, Rain, MAP){
 				KBDI <- 0.0
 			}
 			FTemp <- (Temperature[day] * (9.0/5.0)) + 32.0
-			todayDF <- lookupDF(DI=KBDI,T=FTemp,MAP=MAP)
+			todayDF <- lookupDF(DI=KBDI,T=FTemp,MAP=MAP, kbdilookup)
 			KBDI <- KBDI + todayDF
 		}else{
 			KBDI = NA
 		}
 		KBDI_list <- append(KBDI_list,KBDI)
 	}
+	# detach(kbdilookup)
 	KBDI_list
 }
 

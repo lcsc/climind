@@ -10,17 +10,42 @@ dataTest <- function(){
   return(data)
 }
 data <- dataTest()
+# source(file.path("code", "indecis_indices.R"))
+# data <- data[1:365]
 
 test_that("gsl_calculate_16", {
   # Annual count of days between the first span of at least 6 days with Tmean >5ºC and first span after 1 July of 6 days with Tmean <5 ºC.
   data[1:length(data)] <- 0
-  data[as.character(seq(chron("01/20/00"), chron("01/27/00")))] <- 10:17
-  data[as.character(seq(chron("10/20/00"), chron("10/27/00")))] <- 10:17
-  return.length <- length(seq(chron("01/27/00"), chron("10/20/00")))-2
-
+  data[as.character(seq(chron("01/20/90"), chron("01/27/90")))] <- 10
+  data[as.character(seq(chron("07/01/90"), chron("12/31/90")))] <- 10
+  data[as.character(seq(chron("10/20/90"), chron("10/29/90")))] <- -1
+  # length(seq(chron("01/01/90"), chron("01/20/90")))
+  # length(seq(chron("01/01/90"), chron("10/19/90")))
+  return.length <- length(seq(chron("01/20/90"), chron("10/19/90")))
   value <- calculate_16(data)
-  expect_equivalent(value["2000"], return.length)
-  expect_success(expect_output(value["2001"], NA))
+  expect_equivalent(value["1990"], return.length)
+
+  data[1:length(data)] <- 0
+  data[as.character(seq(chron("01/20/90"), chron("01/27/90")))] <- 10
+  # length(seq(chron("01/01/90"), chron("01/20/90")))
+  # length(seq(chron("01/01/90"), chron("07/01/90")))
+  return.length3 <- length(seq(chron("01/20/90"), chron("07/01/90")))
+  value <- calculate_16(data)
+  expect_equivalent(value["1990"], return.length3)
+
+  data[1:length(data)] <- 0
+  data[as.character(seq(chron("01/20/90"), chron("12/31/90")))] <- 10
+  return.length2 <- length(seq(chron("01/20/90"), chron("12/31/90")))
+  value <- calculate_16(data)
+  expect_equivalent(value["1990"], return.length2)
+
+  data[1:length(data)] <- 10
+  value <- calculate_16(data)
+  expect_equivalent(value["1990"], 365)
+
+  data[1:length(data)] <- 0
+  value <- calculate_16(data)
+  expect_success(expect_output(value["1990"], NA))  
 })
 
 test_that("cfd_calculate_18", {
@@ -70,7 +95,16 @@ test_that("bio5_calculate_77", {
   data[as.character(seq(chron("01/01/00"), chron("01/31/00")))] <- 2
   data[as.character(seq(chron("03/01/00"), chron("03/31/00")))] <- 3
   data[as.character(seq(chron("05/20/01"), chron("05/24/01")))] <- 20
-  expect_equivalent(as.numeric(calculate_77(data)["2000"]), 3)
+  expect_equivalent(as.numeric(calculate_77(data, data)["2000"]), 3)
+})
+
+test_that("bio9_calculate_81", {
+  pr = taverage = data
+  pr[1:length(data)] <- 10
+  taverage[1:length(taverage)] <- 1
+  pr[as.character(seq(chron("05/01/00"), chron("08/31/00")))] <- 2
+  taverage[as.character(seq(chron("05/01/00"), chron("08/31/00")))] <- 4
+  expect_equivalent(as.numeric(calculate_81(pr, taverage)["2000"]), 4)
 })
 
 test_that("fpsc_calculate_111", {
@@ -90,11 +124,6 @@ test_that("lpsc_calculate_112", {
   data[as.character(seq(chron("01/02/00"), chron("01/12/00")))] <- 2 #31+29+31
   data[as.character(seq(chron("03/01/00"), chron("03/31/00")))] <- 3
   data[as.character(seq(chron("05/20/01"), chron("05/24/01")))] <- 20 #31+28+31+30+24
-
-  data <- dataTest()
-  data <- data[1:365]
-  calculate_112(data)
-
   expect_equivalent(as.numeric(calculate_112(data)["2000"]), 31+29+31)
 })
 

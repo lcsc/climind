@@ -77,7 +77,7 @@ DEC = "Dec"
 #' @param ... ...
 #' @return  operation
 #' @examples
-#' calcf_data__(years[12], years, max, maxf)
+#' calcf_data__(years[12], years, max, max)
 calcf_data__ = function(ok, oks, data, operation, ...){
   return(operation(data[oks==ok], ...))
 }
@@ -90,17 +90,19 @@ calcf_data__ = function(ok, oks, data, operation, ...){
 #' @param ... ...
 #' @return operation
 #' @examples
-#' calc = calcf_data_(names=months_years(chron(names(pr.value))), data=pr.value, operation=maxf)
+#' calc = calcf_data_(names=months_years(chron(names(pr.value))), data=pr.value, operation=max)
 calcf_data_ = function(data_names, data, operation, ...){
   average = sapply(unique(data_names), calcf_data__, oks=data_names, data=data, operation=operation, ...)
   average[average==Inf | average==-Inf] = NA
   names(average) = unique(data_names)
 
-  if(sumf(grepl(SPRING, names(average)))>0){
-    average = array(c(average[grepl(SPRING, names(average))], average[grepl(SUMMER, names(average))], average[grepl(FALL, names(average))], average[grepl(WINTER, names(average))]), dim=c(length(average)/4, 4), dimnames=list(unique(substr(names(average), nchar(names(average))-3, nchar(names(average)))), c(SPRING, SUMMER, FALL, WINTER)))
+  if(sum(grepl(SPRING, names(average)), na.rm = TRUE)>0 & length(average)>4){
+    average[1] = NA
+    average = average[-length(average)]
+    average = array(c(average[grepl(WINTER, names(average))], average[grepl(SPRING, names(average))], average[grepl(SUMMER, names(average))], average[grepl(FALL, names(average))]), dim=c(ceiling(length(average)/4), 4), dimnames=list(unique(substr(names(average), nchar(names(average))-3, nchar(names(average)))), c(WINTER, SPRING, SUMMER, FALL)))
   }else{
-    if(sumf(grepl(JAN, names(average)))>0){
-      average = array(c(average[grepl(JAN, names(average))], average[grepl(FEB, names(average))], average[grepl(MAR, names(average))], average[grepl(APR, names(average))], average[grepl(MAY, names(average))], average[grepl(JUN, names(average))], average[grepl(JUL, names(average))], average[grepl(AUG, names(average))], average[grepl(SEP, names(average))], average[grepl(OCT, names(average))],average[grepl(NOV, names(average))], average[grepl(DEC, names(average))]), dim=c(length(average)/12, 12), dimnames=list(unique(substr(names(average), nchar(names(average))-3, nchar(names(average)))), c(JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC)))
+    if(sum(grepl(JAN, names(average)), na.rm = TRUE)>0 & length(average)>12){
+      average = array(c(average[grepl(JAN, names(average))], average[grepl(FEB, names(average))], average[grepl(MAR, names(average))], average[grepl(APR, names(average))], average[grepl(MAY, names(average))], average[grepl(JUN, names(average))], average[grepl(JUL, names(average))], average[grepl(AUG, names(average))], average[grepl(SEP, names(average))], average[grepl(OCT, names(average))],average[grepl(NOV, names(average))], average[grepl(DEC, names(average))]), dim=c(ceiling(length(average)/12), 12), dimnames=list(unique(substr(names(average), nchar(names(average))-3, nchar(names(average)))), c(JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC)))
     }
   }
   return(average)
@@ -124,7 +126,7 @@ quantile_null = function(x, ...){
 #' @param ... ...
 #' @return result operation
 #' @examples
-#' calcf_data(data=data, extract_names=years, operation=meanf)
+#' calcf_data(data=data, extract_names=years, operation=mean)
 calcf_data = function(data, date, extract_names, data_names, operation, ...){
   if(missing(data) || is.null(data) || length(data)==0){
     return(NULL)
@@ -137,8 +139,14 @@ calcf_data = function(data, date, extract_names, data_names, operation, ...){
       date = chron(names(data))
     }
     data_names = extract_names(date)
+  }else{
+    if(length(data_names)!=length(data)){
+      stop("Name number")
+    }
   }
-  return(calcf_data_(data_names=data_names, data=data, operation=operation, ...))
+  data_calc = calcf_data_(data_names=data_names, data=data, operation=operation, ...)
+  data_calc[is.nan(data_calc)] = 0
+  return(data_calc)
 }
 
 #' Estación del año de una fecha dada
@@ -165,6 +173,39 @@ byMonths_chron = function(data){
   return(chron(gsub("_", "/", paste0("1", "_", names(data))), format=c(dates = "d/m/yy", times = "h:m:s"), out.format=c(dates = "m/d/y", times = "h:m:s")))
 }
 
+#' Select quarter days
+#'
+#' @param functionValues
+#' @param selectFunction
+#' @param selectValues
+#' @param na.rm
+#' @return quarter days
+#' @examples
+#' 
+months_quarter = function(functionValues, selectFunction, selectValues, na.rm = FALSE){
+  if(missing(selectValues)){
+    selectValues = functionValues
+  }
+  dataMonth <- function(n, functionValues){
+    return(functionValues[grepl(sprintf("%02d", n), substr(names(functionValues), 1, 2))])
+  }
+  sumMonth <- function(n, functionValues){
+    return(sum(dataMonth(n, functionValues)))
+  }
+  agregateMonth <- function(n, functionValues){
+    return(sum(functionValues[n:(n+2)]))
+  }
+  valueMonths <- sapply(1:12, sumMonth, functionValues)
+  valueMonths <- sapply(1:10, agregateMonth, valueMonths)
+  months = which(valueMonths==selectFunction(valueMonths, na.rm=na.rm), arr.ind = TRUE, useNames = TRUE)[1]
+  if(!is.na(months)){
+      selectValues = c(dataMonth(months, selectValues), dataMonth(months+1, selectValues), dataMonth(months+2, selectValues))
+  }else{
+    selectValues = NA
+  }
+  return(selectValues)
+}
+
 #' Seasonals
 #'
 #' @param time chron
@@ -173,7 +214,13 @@ byMonths_chron = function(data){
 #' seasonals(time=chron(names(tmax.value)))
 seasonals = function(time){
   # https://stackoverflow.com/questions/28030936/r-need-to-extract-month-and-assign-season
-  seasons <- factor(quarters(as.chron(time+31)), labels = c(WINTER, SPRING, SUMMER, FALL))
+  labelSeasons <- c(WINTER, SPRING, SUMMER, FALL)
+  qTime <- quarters(as.chron(time+31))
+  if(length(unique(qTime))>1){
+    seasons <- factor(qTime, labels = labelSeasons)
+  }else{
+    seasons <- labelSeasons[as.numeric(qTime)]
+  }
   return(seasons)
 }
 
@@ -184,7 +231,10 @@ seasonals = function(time){
 #' @examples
 #' seasonals_years(time=chron(names(tmax.value)))
 seasonals_years = function(time){
-  return(paste(seasonals(time), years(time), sep="_"))
+  changeMonths <- as.numeric(months(time))==12
+  timeNames <- paste(seasonals(time), years(time), sep="_")
+  timeNames[changeMonths] <- paste(seasonals(time[changeMonths]), as.numeric(as.character(years(time[changeMonths])))+1, sep="_")
+  return(timeNames)
 }
 
 #' Months by years
@@ -195,6 +245,37 @@ seasonals_years = function(time){
 #' months_years(time=chron(names(tmax.value)))
 months_years = function(time){
   return(paste(months(time), years(time), sep="_"))
+}
+
+#' Function to select all "time" data
+#' @param time.scale month, season or year
+#' @return function
+select_all_time_function = function(time.scale){
+  if(time.scale==MONTH){
+    extract_names = function(time)  { 
+      return(months(time))
+    }
+  }else{
+    if(time.scale==SEASON){
+      extract_names = function(time)  {
+       return(seasonals(time)) 
+     }
+    }else{ #time.scale==YEAR
+      extract_names = function(...) { 
+        return(YEAR) 
+      }
+    }
+  }
+  return(extract_names)
+}
+
+#' Name data station or month 
+#' @param data data 
+#' @param value value for month, season or year 
+#' @param time.scale month, season or year
+#' @return function
+select_value_for_data = function(data, value, time.scale){
+  return(value[select_all_time_function(time.scale)(chron(names(data)[1]))==names(value)])
 }
 
 #' Function to select data
@@ -227,12 +308,12 @@ select_time_function = function(time.scale){
 #' @examples
 #' calc_eto(tmin = tmin.value, tmax = tmax.value, 
 #' insolation = insolation.value, w = w.value, lat=lat, tdew = dew_point.value)
-calc_eto = function(tmin, tmax, insolation, w, lat, tdew, rh=NA){
+calc_eto = function(tmin, tmax, insolation, w, lat, tdew, rh=NA, na.rm=FALSE){
   time = chron(names(tmin))
   time1 = time[2:length(time)]
   time1 = c(time1, 
     time[length(time)] +
-    as.numeric(as.character(days(meanf(time1-time[-length(time)]))))
+    as.numeric(as.character(days(mean(time1-time[-length(time)], na.rm=na.rm))))
     )
 
   # Fao-56 Penman-Monteith

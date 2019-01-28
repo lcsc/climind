@@ -40,14 +40,14 @@
 #' @param snow_depth.value snow depth
 #' @param cloud_cover.value cloud cover
 #' @param cloud_cover_less_100.value cloud base below 100 meter
-#' @param radiation.value net radiation 
+#' @param radiation.value net radiation
 #' @param dew_point.value dew point
 #' @param toa.value toa
 #' @param lat latitude
 #' @return all indexes
 #' @export
 #' @examples
-#' calculate_all_scales(tmin.value=tmin.value, tmax.value=tmax.value, 
+#' calculate_all_scales(tmin.value=tmin.value, tmax.value=tmax.value,
 #' taverage.value=taverage.value, insolation.value=insolation.value,
 #' w.value=w.value, w_max.value=w_max.value, pr.value=pr.value,
 #' snow.value=snow.value, snow_depth.value=snow_depth.value,
@@ -77,7 +77,7 @@ allow_scale = function(name){
 #' @param name function name
 #' @return scales allow
 #' @examples
-#' allow_scale(name="spei_1")
+#' scale_name(name="spei_1")
 scale_name = function(name){
   if(allow_scale(name)){
     scales = c(YEAR, MONTH, SEASON)
@@ -103,12 +103,12 @@ scale_name = function(name){
 #' @param snow_depth.value snow depth
 #' @param cloud_cover.value cloud cover
 #' @param cloud_cover_less_100.value cloud base below 100 meter
-#' @param radiation.value net radiation 
+#' @param radiation.value net radiation
 #' @param dew_point.value dew point
 #' @param toa.value toa
 #' @param lat latitude
 #' @param time.scale month, season or year
-#' @param data_names names of each period of time  
+#' @param data_names names of each period of time
 #' @return all indexes
 #' @export
 #' @examples
@@ -124,7 +124,7 @@ scale_name = function(name){
 # tmin.value=NULL; tmax.value=NULL; taverage.value=NULL; pr.value=NULL
 # insolation.value=NULL; w.value=NULL; w_max.value=NULL; snow.value=NULL; snow_depth.value=NULL; cloud_cover.value=NULL; cloud_cover_less_100.value=NULL; radiation.value=NULL; dew_point.value=NULL; toa.value=NULL
 calculate_all = function(tmin.value=NULL, tmax.value=NULL, taverage.value=NULL, insolation.value=NULL, w.value=NULL, w_max.value=NULL, pr.value=NULL, snow.value=NULL, snow_depth.value=NULL, cloud_cover.value=NULL, cloud_cover_less_100.value=NULL, radiation.value=NULL, dew_point.value=NULL, toa.value=NULL, lat=NULL, time.scale=YEAR, data_names=NULL, index_result = c(1:138)){
-  
+
   vapor.value = rh.value = eto.value = taverage.value = tci.value = NULL
 
   if(!is.null(dew_point.value)){
@@ -142,6 +142,10 @@ calculate_all = function(tmin.value=NULL, tmax.value=NULL, taverage.value=NULL, 
 
  parameters = list(tn=tmin.value, tx=tmax.value, tg=taverage.value, insolation.value, w.value, w_max.value, rr=pr.value, snow.value, snow_depth.value, cloud_cover.value, cloud_cover_less_100.value, radiation.value, dew_point.value, toa.value, vapor.value, rh.value, tci.value)
 
+  #' Select no null parameters
+  #'
+  #' @return no null parameters
+  #' @examples
   no_null = function(){
     return(parameters[[which(!sapply(parameters, is.null))[1]]])
   }
@@ -155,30 +159,39 @@ calculate_all = function(tmin.value=NULL, tmax.value=NULL, taverage.value=NULL, 
 
   # Eliminamos funciones que no existen
   index_result = index_result[sapply(paste0("calculate_", index_result), exists)]
+
+  index_spei = c(122:129)
+  index_result.spei = index_spei[index_spei%in%index_result]
   # Eliminamos funciones que no permiten el parámetro time.scale si la escala no es anual; ya que esas funciones solo funcionan para el time.scale anual
-  if(time.scale!=YEAR){    
+  if(time.scale!=YEAR){
     index_result = index_result[sapply(paste0("calculate_", index_result), allow_scale)]
     if(time.scale==MONTH){
-      index_result = c(index_result, c(122:129))
+      index_result = c(index_result, index_result.spei)
     }
   }else{
-    index_result = index_result[!index_result %in%  c(122:129)]
+    index_result = index_result[!index_result %in% index_spei]
   }
 
   # source("indecis_indices.R")
-  calculate_index = function(n, parameters){
+  #' Calculate index
+  #'
+  #' @param n id index
+  #' @param parameters all parameters
+  #' @return calculate index
+  #' @examples
+  calculate_n_index = function(n, parameters){
     f = get(paste0("calculate_", n))
     if(is.null(attr(f, "data"))){
       stop(paste("calculate_index in calculate", n))
     }
     if(n%in%c(13, 14, 19, 30)){
-      return(f(max=tmax.value, min=tmin.value, data_names=data_names, time.scale=time.scale))
+      return(f(tmax=tmax.value, tmin=tmin.value, data_names=data_names, time.scale=time.scale))
     }
     if(n%in%c(74, 75, 80, 81, 96, 97, 100)){
       return(f(pr=pr.value, taverage=taverage.value, data_names=data_names, time.scale=time.scale))
     }
     if(n%in%c(77, 78, 79)){
-      return(f(data=taverage.value,max=tmax.value, min=tmin.value, data_names=data_names, time.scale=time.scale))
+      return(f(data=taverage.value, tmax=tmax.value, tmin=tmin.value, data_names=data_names, time.scale=time.scale))
     }
     if(n%in%c(98, 102)){
       return(f(data=parameters[[attr(f, "data")[1]]], data_names=data_names, time.scale=time.scale, value = lat))
@@ -235,19 +248,21 @@ calculate_all = function(tmin.value=NULL, tmax.value=NULL, taverage.value=NULL, 
     if(!is.na(attr(f, "data"))){
       return(f(data=parameters[[attr(f, "data")[1]]], data_names=data_names, time.scale=time.scale))
     }else{
-      warning(paste("calculate_index in calculate", n))            
+      warning(paste("calculate_index in calculate", n))
     }
     return(NULL)
   }
 
-  result_list = list()
-  length(result_list)<-length(index_result)
-  names(result_list) = index_names[index_result]
-  for (i in 1:length(index_result)){
-    n = index_result[i]
-    result_list[[index_names[n]]] = calculate_index(n, parameters=parameters)
+  result_list <- list()
+  if(length(index_result)>0){
+    length(result_list) <- length(index_result)
+    names(result_list) <- index_names[index_result]
+    i <- 1
+    for (i in 1:length(index_result)){
+      n <- index_result[i]
+      result_list[[index_names[n]]] <- calculate_n_index(n, parameters=parameters)
+    }
+    # index_result = which(index_names%in%names(result_list))
   }
-  # index_result = which(index_names%in%names(result_list))
-
   return(result_list)
 }

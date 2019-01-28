@@ -1,20 +1,29 @@
 # Support Functions
-# https://github.com/jbedia/fireDanger
+# https://github.com/SantanderMetGroup/fireDanger/blob/devel/R/kbdi.R
 
-kbdindex <- function (date, t, p, h, w, wrs = 150, start.date = NULL) { # requires date to compute mean annual precipitation
+#' 
+#' 
+#' @param date 
+#' @param t temperature ℃
+#' @param p precipitation mm
+#' @param wrs 
+#' @param start.date 
+#' @return KBDI
+#' @export
+#' @examples
+#' kbdindex(date, t, p, wrs = 150, start.date = NULL)
+kbdindex <- function (date, t, p, wrs = 5, start.date = NULL) { # requires date to compute mean annual precipitation
       d <- as.POSIXlt(date)
       # Data conversion to inches and fahrenheit
       t <- (t * (9 / 5)) + 32
       p <- p * .0393700787402
-      h <- h # relative humidity in percentage
-      w <- w # wind velocity (km/h)
       wrs <- wrs * .0393700787402
       start <- start.date
       # ----------------------------------------------------------------------
       if (length(t) != length(p)) {
             stop("Input time series of differing lengths")
       }
-      m <- matrix(data = c(t, h, p, w), ncol = 4)
+      m <- matrix(data = c(t, p), ncol = 2)
       if (any(is.na(m))) {
             warning("Missing values deleted from the input series")
             #             na <- unique(c(which(is.na(t)), which(is.na(p))))
@@ -23,8 +32,6 @@ kbdindex <- function (date, t, p, h, w, wrs = 150, start.date = NULL) { # requir
             t <- t[-na] 
             p <- p[-na] 
             d <- d[-na]
-            h <- h[-na]
-            w <- w[-na]
       }
       # mean annual precip (M) -----------------------------------------------
       yr <- d$year + 1900 
@@ -48,9 +55,7 @@ kbdindex <- function (date, t, p, h, w, wrs = 150, start.date = NULL) { # requir
             ind2 <- which(wks == unique(wks[ind]))[1]
             start <- which(p[ind2:length(p)] == 0)[1] + ind2 - 1 # first day after the wet spell leading to the wrs parameter
             print(paste("Index initialization on", as.Date(d[start]), "after a wet spell greater than", round(wrs / .0393700787402), "mm in a week"))
-      }
-      # Fixed start date (snow melt...)
-      else {
+      }else{# Fixed start date (snow melt...)
             start <- which(d == as.POSIXlt(start))
             if (length(start) == 0) {
                   start = 1
@@ -61,8 +66,6 @@ kbdindex <- function (date, t, p, h, w, wrs = 150, start.date = NULL) { # requir
       t <- t[start:length(t)]
       p <- p[start:length(p)] 
       d <- d[start:length(d)] 
-      h <- h[start:length(h)] 
-      w <- w[start:length(w)] 
       ## Wet spell counter --------------------------------------------------------------------------------
       w.spell <- c() # counter of consecutive rainy days
       n <- c()  # counter of days since last rain (N in Noble, 1980)
@@ -123,10 +126,6 @@ kbdindex <- function (date, t, p, h, w, wrs = 150, start.date = NULL) { # requir
       }
       Q[which(Q < 0)] <- 0
       Q <- (Q / 100) / .0393700787402
-      ## McArthur's components
-      D <- (.191*(Q + 104) * ((N + 1) ^ 1.5)) / ((3.52 * ((N + 1) ^ 1.5)) + (p / .0393700787402) - 1) # McArthur's Drought Factor 
-      FDI <- 2 * exp(-.45 + .987*log(D) - .0345 * h + .0338 * ((t - 32)*(5 / 9)) + .0234 * w)  # Forest Fire Danger
-      net.rain <- net.rain / .0393700787402 # conversion of net rainfall to mm
-      return(cbind.data.frame('date'=as.Date(d, origin = '1970-01-01'), 'net.precip'= net.rain, "KBDI" = Q, 'McArthurDF' = D, "FFDI"=FDI))
+      return(Q)
 }
 # End
