@@ -29,36 +29,15 @@
 
 #' Calculate all indexes for all time scales
 #'
-#' @param tmin.value minimum temperature
-#' @param tmax.value maximum temperature
-#' @param taverage.value medium temperature
-#' @param insolation.value sunshine duration
-#' @param w.value average wind
-#' @param w_max.value maximum wind gust
-#' @param pr.value precipitation
-#' @param snow.value snowfall
-#' @param snow_depth.value snow depth
-#' @param cloud_cover.value cloud cover
-#' @param cloud_cover_less_100.value cloud base below 100 meter
-#' @param radiation.value net radiation
-#' @param dew_point.value dew point
-#' @param toa.value toa
+#' @param data lista de datos de entrada para los cálculos
 #' @param lat latitude
 #' @return all indexes
 #' @export
 #' @examples
-#' calculate_all_scales(tmin.value=tmin.value, tmax.value=tmax.value,
-#' taverage.value=taverage.value, insolation.value=insolation.value,
-#' w.value=w.value, w_max.value=w_max.value, pr.value=pr.value,
-#' snow.value=snow.value, snow_depth.value=snow_depth.value,
-#' cloud_cover.value=cloud_cover.value,
-#' cloud_cover_less_100.value=cloud_cover_less_100.value,
-#' radiation.value=radiation.value, dew_point.value=dew_point.value,
-#' lat=lat)
-calculate_all_scales = function(tmin.value=NULL, tmax.value=NULL, taverage.value=NULL, insolation.value=NULL, w.value=NULL, w_max.value=NULL, pr.value=NULL, snow.value=NULL, snow_depth.value=NULL, cloud_cover.value=NULL, cloud_cover_less_100.value=NULL, radiation.value=NULL, dew_point.value=NULL, toa.value=NULL, lat=NULL){
-  data_year=calculate_all(tmin.value, tmax.value, taverage.value, insolation.value, w.value, w_max.value, pr.value, snow.value, snow_depth.value, cloud_cover.value, cloud_cover_less_100.value, radiation.value, dew_point.value, toa.value, lat, time.scale=YEAR)
-  data_month=calculate_all(tmin.value, tmax.value, taverage.value, insolation.value, w.value, w_max.value, pr.value, snow.value, snow_depth.value, cloud_cover.value, cloud_cover_less_100.value, radiation.value, dew_point.value, toa.value, lat, time.scale=MONTH)
-  data_season=calculate_all(tmin.value, tmax.value, taverage.value, insolation.value, w.value, w_max.value, pr.value, snow.value, snow_depth.value, cloud_cover.value, cloud_cover_less_100.value, radiation.value, dew_point.value, toa.value, lat, time.scale=SEASON)
+calculate_all_scales = function(data, lat=NULL){
+  data_year=calculate_all(data, lat, time.scale=YEAR)
+  data_month=calculate_all(data, lat, time.scale=MONTH)
+  data_season=calculate_all(data, lat, time.scale=SEASON)
   return(list(year=data_year, month=data_month, season=data_season))
 }
 
@@ -92,62 +71,73 @@ scale_name = function(name){
 
 #' Calculate all indexes
 #'
-#' @param tmin.value minimum temperature
-#' @param tmax.value maximum temperature
-#' @param taverage.value medium temperature
-#' @param insolation.value sunshine duration
-#' @param w.value average wind
-#' @param w_max.value maximum wind gust
-#' @param pr.value precipitation
-#' @param snow.value snowfall
-#' @param snow_depth.value snow depth
-#' @param cloud_cover.value cloud cover
-#' @param cloud_cover_less_100.value cloud base below 100 meter
-#' @param radiation.value net radiation
-#' @param dew_point.value dew point
-#' @param toa.value toa
+#' @param data lista de datos de entrada para los cálculos
 #' @param lat latitude
 #' @param time.scale month, season or year
 #' @param data_names names of each period of time
 #' @return all indexes
 #' @export
 #' @examples
-#' calculate_all(tmin.value=tmin.value, tmax.value=tmax.value,
-#' taverage.value=taverage.value, insolation.value=insolation.value,
-#' w.value=w.value, w_max.value=w_max.value, pr.value=pr.value,
-#' snow.value=snow.value, snow_depth.value=snow_depth.value,
-#' cloud_cover.value=cloud_cover.value,
-#' cloud_cover_less_100.value=cloud_cover_less_100.value,
-#' radiation.value=radiation.value, dew_point.value=dew_point.value,
-#' lat=lat)
+calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index_result = c(1:138)){
 
-# tmin.value=NULL; tmax.value=NULL; taverage.value=NULL; pr.value=NULL
-# insolation.value=NULL; w.value=NULL; w_max.value=NULL; snow.value=NULL; snow_depth.value=NULL; cloud_cover.value=NULL; cloud_cover_less_100.value=NULL; radiation.value=NULL; dew_point.value=NULL; toa.value=NULL
-calculate_all = function(tmin.value=NULL, tmax.value=NULL, taverage.value=NULL, insolation.value=NULL, w.value=NULL, w_max.value=NULL, pr.value=NULL, snow.value=NULL, snow_depth.value=NULL, cloud_cover.value=NULL, cloud_cover_less_100.value=NULL, radiation.value=NULL, dew_point.value=NULL, toa.value=NULL, lat=NULL, time.scale=YEAR, data_names=NULL, index_result = c(1:138)){
+  data[[LAT]] = lat
 
-  vapor.value = rh.value = eto.value = taverage.value = tci.value = NULL
-
-  if(!is.null(dew_point.value)){
-    vapor.value = td_to_vapor(dew_point.value)
+  if(!is.null(data[[SNOWDEPTH]])){
+    data[[SNOWDEPTHTHICKNESS]] = data[[SNOWDEPTH]]*0.312
   }
-  if(!is.null(tmax.value) & !is.null(tmin.value) & !is.null(dew_point.value)){
-    rh.value = td_to_rh(tmax=tmax.value, tmin=tmin.value, td=dew_point.value)
+  if(is.null(data[[VAPOUR]]) &  !is.null(data[[DEWPOINT]])){
+    data[[VAPOUR]] = td_to_vapor(data[[DEWPOINT]])
   }
-  if(!is.null(tmin.value) & !is.null(tmax.value) & !is.null(insolation.value) & !is.null(w.value) & !is.null(lat) & !is.null(dew_point.value)){
-    eto.value = calc_eto(tmin = tmin.value, tmax = tmax.value, insolation = insolation.value, w = w.value, lat=lat, tdew = dew_point.value)
+  if(is.null(data[[HUMIDITY]]) & !is.null(data[[TMAX]]) & !is.null(data[[TMIN]]) & !is.null(data[[DEWPOINT]])){
+    data[[HUMIDITY]] = td_to_rh(tmax=data[[TMAX]], tmin=data[[TMIN]], td=data[[DEWPOINT]])
   }
-  if(is.null(taverage.value) & !is.null(tmax.value) & !is.null(tmin.value)){
-    taverage.value = (tmax.value+tmin.value)/2
+  if(is.null(data[[TMEAN]]) & !is.null(data[[TMAX]]) & !is.null(data[[TMIN]])){
+    data[[TMEAN]] = (data[[TMAX]]+data[[TMIN]])/2
+  }
+  if(is.null(data[[INSOLATION]]) & !is.null(data[[RADIATION]]) & !is.null(data[[LAT]]) & !is.null(data[[MDE]])){
+    data[[INSOLATION]] = r_to_in(radiation=data[[RADIATION]], lat=data[[LAT]], mde=data[[MDE]])
+  }
+  if(is.null(data[[EVAPOTRANSPIRATION]]) & !is.null(data[[TMIN]]) & !is.null(data[[MDE]]) & !is.null(data[[TMAX]]) & (!is.null(data[[RADIATION]]) | !is.null(data[[INSOLATION]])) & !is.null(data[[WIND]]) & !is.null(data[LAT]) & !is.null(data[[DEWPOINT]])){
+    # tmin = data[[TMIN]]; tmax = data[[TMAX]]; radiation = data[[RADIATION]]; toa = data[[RADIATIONTOA]]; w = data[[WIND]]; lat=data[[LAT]]; tdew = data[[DEWPOINT]]; mde=data[[MDE]]; rh=data[[HUMIDITY]]
+    # data[[EVAPOTRANSPIRATION]] = calc_eto(tmin = data[[TMIN]], tmax = data[[TMAX]], radiation = data[[RADIATION]], insolation=data[[INSOLATION]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], rh=data[[HUMIDITY]])
+    data[[EVAPOTRANSPIRATION]] = calc_eto(tmin = data[[TMIN]], tmax = data[[TMAX]], radiation = data[[RADIATION]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], rh=data[[HUMIDITY]])
   }
 
- parameters = list(tn=tmin.value, tx=tmax.value, tg=taverage.value, insolation.value, w.value, w_max.value, rr=pr.value, snow.value, snow_depth.value, cloud_cover.value, cloud_cover_less_100.value, radiation.value, dew_point.value, toa.value, vapor.value, rh.value, tci.value)
-
+  # Comprobación de valores
+  if(sum(data[[TMAX]]<data[[TMIN]], na.rm = TRUE)>0){
+    warning("TMAX < TMIN")
+  }
+  if(sum(data[[TMAX]]<data[[TMEAN]], na.rm = TRUE)>0){
+    warning("TMAX < TMEAN")
+  }
+  if(sum(data[[TMEAN]]<data[[TMIN]], na.rm = TRUE)>0){
+    warning("TMEAN < TMIN")
+  }
+  if(sum(data[[PRECIPITATION]]<0, na.rm = TRUE)>0){
+    warning(paste("PRECIPITATION < 0", sum(data[[PRECIPITATION]]<0, na.rm = TRUE)))
+    data[[PRECIPITATION]][data[[PRECIPITATION]]<0] = 0
+  }
+  if(sum(data[[WIND]]<0, na.rm = TRUE)>0){
+    warning("WIND < 0")
+  }
+  if(sum(data[[WINDGUST]]<0, na.rm = TRUE)>0){
+    warning("WINDGUST < 0")
+  }
+  if(sum(data[[HUMIDITY]]>100, na.rm = TRUE)>0){
+    warning("HUMIDITY > 100")
+  }
+  if(sum(data[[CLOUD]]>100, na.rm = TRUE)>0){
+    warning("CLOUD > 100")
+  }
+  if(sum(data[[CLOUD100]]>100, na.rm = TRUE)>0){
+    warning("CLOUD100 > 100")
+  }
   #' Select no null parameters
   #'
   #' @return no null parameters
   #' @examples
   no_null = function(){
-    return(parameters[[which(!sapply(parameters, is.null))[1]]])
+    return(data[[which(!sapply(data, is.null))[1]]])
   }
 
   if(is.null(data_names)){
@@ -176,77 +166,40 @@ calculate_all = function(tmin.value=NULL, tmax.value=NULL, taverage.value=NULL, 
   #' Calculate index
   #'
   #' @param n id index
-  #' @param parameters all parameters
+  #' @param data all parameters
   #' @return calculate index
   #' @examples
-  calculate_n_index = function(n, parameters){
+  calculate_n_index = function(n, data){
     f = get(paste0("calculate_", n))
     if(is.null(attr(f, "data"))){
       stop(paste("calculate_index in calculate", n))
     }
-    if(n%in%c(13, 14, 19, 30)){
-      return(f(tmax=tmax.value, tmin=tmin.value, data_names=data_names, time.scale=time.scale))
-    }
-    if(n%in%c(74, 75, 80, 81, 96, 97, 100)){
-      return(f(pr=pr.value, taverage=taverage.value, data_names=data_names, time.scale=time.scale))
-    }
-    if(n%in%c(77, 78, 79)){
-      return(f(data=taverage.value, tmax=tmax.value, tmin=tmin.value, data_names=data_names, time.scale=time.scale))
-    }
-    if(n%in%c(98, 102)){
-      return(f(data=parameters[[attr(f, "data")[1]]], data_names=data_names, time.scale=time.scale, value = lat))
-    }
-    if(n%in%c(126, 127, 128, 129)){ # SPEI
-      if(!is.null(eto.value)){
-        return(f(eto=eto.value, pr=pr.value, data_names=data_names, time.scale= time.scale))
+    if(!is.na(attr(f, "data")[1])){
+      if(length(attr(f, "data"))==1){
+        return(f(data=data[[attr(f, "data")[1]]], data_names=data_names, time.scale=time.scale))
+      }else if(length(attr(f, "data"))==2){
+        return(f(data[[attr(f, "data")[1]]], data[[attr(f, "data")[2]]], data_names=data_names, time.scale=time.scale))
+      }else if(length(attr(f, "data"))==3){
+        return(f(data[[attr(f, "data")[1]]], data[[attr(f, "data")[2]]], data[[attr(f, "data")[3]]], data_names=data_names, time.scale=time.scale))
+      }else if(length(attr(f, "data"))==4){
+        return(f(data[[attr(f, "data")[1]]], data[[attr(f, "data")[2]]], data[[attr(f, "data")[3]]], data[[attr(f, "data")[4]]], data_names=data_names, time.scale=time.scale))
+      }else if(length(attr(f, "data"))==5){
+        return(f(data[[attr(f, "data")[1]]], data[[attr(f, "data")[2]]], data[[attr(f, "data")[3]]], data[[attr(f, "data")[4]]], data[[attr(f, "data")[5]]], data_names=data_names, time.scale=time.scale))
+      }else if(length(attr(f, "data"))==6){
+        return(f(data[[attr(f, "data")[1]]], data[[attr(f, "data")[2]]], data[[attr(f, "data")[3]]], data[[attr(f, "data")[4]]], data[[attr(f, "data")[5]]], data[[attr(f, "data")[6]]], data_names=data_names, time.scale=time.scale))
+      }else if(length(attr(f, "data"))==7){
+        return(f(data[[attr(f, "data")[1]]], data[[attr(f, "data")[2]]], data[[attr(f, "data")[3]]], data[[attr(f, "data")[4]]], data[[attr(f, "data")[5]]], data[[attr(f, "data")[6]]], data[[attr(f, "data")[7]]], data_names=data_names, time.scale=time.scale))
+      }else if(length(attr(f, "data"))==8){
+        return(f(data[[attr(f, "data")[1]]], data[[attr(f, "data")[2]]], data[[attr(f, "data")[3]]], data[[attr(f, "data")[4]]], data[[attr(f, "data")[5]]], data[[attr(f, "data")[6]]], data[[attr(f, "data")[7]]], data[[attr(f, "data")[8]]], data_names=data_names, time.scale=time.scale))
+      }else if(length(attr(f, "data"))==9){
+        return(f(data[[attr(f, "data")[1]]], data[[attr(f, "data")[2]]], data[[attr(f, "data")[3]]], data[[attr(f, "data")[4]]], data[[attr(f, "data")[5]]], data[[attr(f, "data")[6]]], data[[attr(f, "data")[7]]], data[[attr(f, "data")[8]]], data[[attr(f, "data")[9]]], data_names=data_names, time.scale=time.scale))
+      }else if(length(attr(f, "data"))==10){
+        return(f(data[[attr(f, "data")[1]]], data[[attr(f, "data")[2]]], data[[attr(f, "data")[3]]], data[[attr(f, "data")[4]]], data[[attr(f, "data")[5]]], data[[attr(f, "data")[6]]], data[[attr(f, "data")[7]]], data[[attr(f, "data")[8]]], data[[attr(f, "data")[9]]], data[[attr(f, "data")[10]]], data_names=data_names, time.scale=time.scale))
+      }else if(length(attr(f, "data"))==11){
+        return(f(data[[attr(f, "data")[1]]], data[[attr(f, "data")[2]]], data[[attr(f, "data")[3]]], data[[attr(f, "data")[4]]], data[[attr(f, "data")[5]]], data[[attr(f, "data")[6]]], data[[attr(f, "data")[7]]], data[[attr(f, "data")[8]]], data[[attr(f, "data")[9]]], data[[attr(f, "data")[10]]], data[[attr(f, "data")[11]]], data_names=data_names, time.scale=time.scale))
       }else{
-        return(NULL)
+        print("Más valores de entrada de los permitidos.")
       }
-    }
-    if(n%in%c(130)){
-      if(!is.null(dew_point.value)){
-        return(f(rh=rh.value, w=w.value, dew_point=dew_point.value, taverage=taverage.value, pr=pr.value, lat=lat, data_names=data_names, time.scale= time.scale))
-      }else{
-        return(NULL)
-      }
-    }
-    if(n%in%c(131, 132)){
-      if(!is.null(rh.value)){
-        return(f(rh=rh.value, w=w.value, taverage=taverage.value, pr=pr.value, data_names=data_names, time.scale= time.scale))
-      }else{
-        return(NULL)
-      }
-    }
-    if(n%in%c(133)){
-      if(!is.null(dew_point.value)){
-        return(f(rh=rh.value, dew_point=dew_point.value, taverage=taverage.value, pr=pr.value, data_names=data_names, time.scale= time.scale))
-      }else{
-        return(NULL)
-      }
-    }
-    if(n%in%c(134)){
-      if(!is.null(toa.value)){
-        return(f(data = radiation.value, toa=toa.value, data_names=data_names, time.scale= time.scale))
-      }else{
-        return(NULL)
-      }
-    }
-    if(n%in%c(135)){
-      if(!is.null(toa.value)){
-        return(f(w = w.value, pr = pr.value, data_names=data_names, time.scale= time.scale))
-      }else{
-        return(NULL)
-      }
-    }
-    if(n%in%c(136)){
-      if(!is.null(radiation.value)){
-        return(f(data=pr.value, sunshine=radiation.value, w=w.value, data_names=data_names, time.scale= time.scale))
-      }else{
-        return(NULL)
-      }
-    }
-    if(!is.na(attr(f, "data"))){
-      return(f(data=parameters[[attr(f, "data")[1]]], data_names=data_names, time.scale=time.scale))
     }else{
       warning(paste("calculate_index in calculate", n))
     }
@@ -257,12 +210,17 @@ calculate_all = function(tmin.value=NULL, tmax.value=NULL, taverage.value=NULL, 
   if(length(index_result)>0){
     length(result_list) <- length(index_result)
     names(result_list) <- index_names[index_result]
-    i <- 1
-    for (i in 1:length(index_result)){
+    start <- 1
+    i <- 1 
+    for (i in start:length(index_result)){
       n <- index_result[i]
-      result_list[[index_names[n]]] <- calculate_n_index(n, parameters=parameters)
+      print(paste("Calcular", "función", n, "i", i))
+      result_list[[index_names[n]]] <- calculate_n_index(n, data=data)
     }
-    # index_result = which(index_names%in%names(result_list))
+    # Eliminados: 47 48
+    # Devuelven NULL porque no sabemos como funcionan 135 136 137 138
+    # index_result_yes = which(index_names%in%names(result_list))
+    # index_result_no = which(!(index_names%in%names(result_list)))
   }
   return(result_list)
 }

@@ -1,12 +1,15 @@
+
+# Ej. en penman_fao_period en /mnt/dostb2/fuendetodos/DATOS/repositorio/spei/trunk/fergus/datos/code_web_maps/penman_fao_raster.R
+
 #' FAO-56 Penman-Monteith reference evapotranspiration (ET_0)
 #' 
 #' @param Tmin minimum temperature, Celsius
 #' @param Tmax maximum temperature, Celsius
 #' @param U2 average wind, m/s at 2m
 #' @param J day of the year
-#' @param Ra radiation, MJ/m2
+#' @param Ra radiation, W/m2
 #' @param lat latitude, degrees, CRS('+proj=longlat +ellps=WGS84 +datum=WGS84')
-#' @param Rs daily incoming solar radiation (MJ m-2 d-1)
+#' @param Rs daily incoming solar radiation (J m-2 d-1)
 #' @param tsun sunshine duration, hours
 #' @param CC CC
 #' @param ed actual vapour pressure
@@ -14,13 +17,13 @@
 #' @param RH relative humidity, percentage
 #' @param P atmospheric pressure, kPa
 #' @param P0 P0
-#' @param z z
+#' @param z mde
 #' @param crop "short" short reference crop or "tail" tail reference crop
 #' @param na.rm na.rm
 #' @return et0, mm/day
 penman_fao_diario <-
   function(Tmin, Tmax, U2, J, Ra=NA, lat=NA, Rs=NA, tsun=NA, CC=NA, ed=NA, Tdew=NA, RH=NA, P=NA, P0=NA, z=NA, crop='short', na.rm=FALSE) {
-        
+    
     ET0 <- Tmin*NA
     
     n <- length(Tmin)
@@ -36,8 +39,16 @@ penman_fao_diario <-
     # 3. Psychrometric constant, gamma (eq. 1.4)
     # 4. P: atmospheric pressure, kPa
     # if(is.na(P0)){ P0  <- matrix(101.3,nrow=nrow(T),ncol=ncol(T)) }
-    if(is.na(P0)){ P0  <- array(101.3,dim=dim(T)) }
-    if(is.na(P)){ P <- P0*(((293-0.0065*z)/293)^5.26) }
+    if(is.na(P0)){ 
+        dim = dim(T)
+        if(is.null(dim)){
+            dim = length(T) 
+        }
+        P0  <- array(101.3, dim=dim) 
+    }
+    if(is.na(P)){ 
+        P <- P0*(((293-0.0065*z)/293)^5.26) 
+    }
         
     ## FAO
     gamma <- 0.665e-3*P
@@ -63,7 +74,7 @@ penman_fao_diario <-
     #Delta <- 2504*exp((12.27*T)/(T+237.3))/(T+237.3)^2
     
     # 7. Actual vapour pressure, ed
-    if(length(ed)!=n) {
+    if(length(ed)!=n | sum(!is.na(ed))==0) {
       if (length(Tdew)==n) {
         # (eq. 1.12, p. 67)
         ed <- 0.611*exp((17.27*Tdew)/(Tdew+237.3))
@@ -110,8 +121,10 @@ penman_fao_diario <-
     
     # 9. Extraterrestrial radiation, Ra (MJ m-2 d-1)
     
-    # Estimate Ra (eq. 1.22)    
-    Ra <- 37.6*dr*(omegas*sin(latr)*sin(delta)+cos(latr)*cos(delta)*sin(omegas))
+    # Estimate Ra (eq. 1.22)
+    if(sum(!is.na(Ra))==0){    
+        Ra <- 37.6*dr*(omegas*sin(latr)*sin(delta)+cos(latr)*cos(delta)*sin(omegas))
+    }
     ##Ra <- ifelse(values(Ra)<0,0,Ra)
     
     # 11. Net radiation, Rn (MJ m-2 d-1)
@@ -136,7 +149,7 @@ penman_fao_diario <-
     # Rso: clear-sky solar radiation (eq. 1.40)
     # Note: mostly valid for z<6000 m and low air turbidity
     #if (ncol(as.matrix(z))==ncol(as.matrix(Tmin))) {
-    if (exists('z')) {
+    if (exists('z') & sum(!is.na(z))>0) {
       Rso <- (0.75+2e-5*z)* Ra
     } else {
       Rso <- (0.75+2e-5*840) * Ra
@@ -146,8 +159,7 @@ penman_fao_diario <-
     # Reference crop albedo
     alb <- 0.23
     # Rn, MJ m-2 d-1 (eq. 1.53)
-    Rn <- (1-alb)*Rs - (ac*Rs/Rso+bc) * (a1+b1*sqrt(ed)) * 4.9e-9 *
-      ((273.15+Tmax)^4+(273.15+Tmin)^4)/2	
+    Rn <- (1-alb)*Rs - (ac*Rs/Rso+bc) * (a1+b1*sqrt(ed)) * 4.9e-9 * ((273.15+Tmax)^4+(273.15+Tmin)^4)/2	
     Rn[Rs==0] <- 0
     
     # Soil heat flux density, G
@@ -166,7 +178,70 @@ penman_fao_diario <-
     ET0 <- (0.408*Delta*(Rn-G) + gamma*(c1/(T+273))*U2*(ea-ed)) /
       (Delta + gamma*(1+c2*U2))
     
-    #return(Rn)
     return(ET0)
 }
 
+#' Transforma datos de in en r o al revés
+#'
+#' @param J Días de inicio de cada semana del año, partiendo desde 0 ¿?
+#' @param lat latitud en grados en spTransform(coordenadas,CRS(crslonlat))
+#' @param tsun Insolación en horas de sol o radiación en ¿MJ/m2?
+#' @param z mde, modelo de elevación digital del terreno
+#' @param ret Que hacer, calcular in desde r o al contrario
+#'
+#' @return insolación en horas de sol o radiación en ¿MJ/m2?
+#' @export
+#'
+#' @examples
+penman_rs <- function(J,
+           lat = NA,
+           tsun = NA,
+           z = NA,
+           ret = RADIATION) {
+    # delta: solar declination, rad (1 rad = 57.2957795 deg) (eq. 1.25)
+    delta <- 0.409 * sin(0.0172 * J - 1.39)
+
+    # dr: relative distance Earth-Sun, [] (eq. 1.24)
+    dr <- 1 + 0.033 * cos(0.0172 * J)
+
+    # omegas: sunset hour angle, rad (eq. 1.23)
+    latr <- lat / 57.2957795
+
+    ### FINS AQUI FUNCIONA ###
+    sset <- -tan(latr) * tan(delta)
+
+    omegas <- sset * 0
+    omegas[sset >= {
+      -1
+    } & sset <= 1] <- acos(sset[sset >= {
+      -1
+    } & sset <= 1])
+    # correction for high latitudes
+    omegas[sset < {
+      -1
+    }] <- max(omegas)
+
+    # 9. Extraterrestrial radiation, Ra (MJ m-2 d-1)
+
+    # Estimate Ra (eq. 1.22)
+    Ra <-
+      37.6 * dr * (omegas * sin(latr) * sin(delta) + cos(latr) * cos(delta) *
+                     sin(omegas))
+
+    # Based on sunshine hours
+    # 10. Potential daylight hours (day length, h), N (eq. 1.34)
+    N <- 7.64 * omegas
+
+    # (eq. 1.37)
+    as <- 0.25
+    bs <- 0.5
+
+    if (ret == RADIATION) {
+      # Devolvemos C_R
+      Rs <- (as + bs * (tsun / N)) * Ra
+    } else{
+      # Devolvemos C_IN
+      Rs = N * (tsun / Ra - as) / bs
+    }
+    return(Rs)
+}

@@ -54,7 +54,7 @@ index_names = array(NA, dim=c(138))
 #' @return average temperature
 #' @export
 #' @examples
-#' gtx(data=tmax.value)
+#' gtx(data=data_all[[TMEAN]], time.scale=HYDROYEAR)
 gtx = calculate_1 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(average_temp(data=data, data_names=data_names, time.scale=time.scale, na.rm = na.rm))
 }
@@ -308,7 +308,7 @@ dtr = calculate_13 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.r
 index_units[13] = C_degrees
 index_titles[13] = "Diurnal temperature range"
 index_names[13] = "dtr"
-attr(calculate_13, "data") <- c(NA)
+attr(calculate_13, "data") <- c(TMAX, TMIN)
 
 #' 14. vDTR: Mean daily difference DTR
 #' Mean absolute day-to-day difference in DTR
@@ -334,7 +334,7 @@ vdtr = calculate_14 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.
 index_units[14] = C_degrees
 index_titles[14] = "Mean daily difference DTR"
 index_names[14] = "vdtr"
-attr(calculate_14, "data") <- c(NA)
+attr(calculate_14, "data") <- c(TMAX, TMIN)
 
 #' 15. FD: Frost days
 #' Number of days with minimum temperature <0ºC.
@@ -494,7 +494,7 @@ etr = calculate_19 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.r
 index_units[19] = C_degrees
 index_titles[19] = "Extreme temperature range"
 index_names[19] = "etr"
-attr(calculate_19, "data") <- c(NA)
+attr(calculate_19, "data") <- c(TMAX, TMIN)
 
 #' 20. SUD: Summer days
 #' Number of days with maximum temperature >25ºC.
@@ -633,7 +633,8 @@ attr(calculate_24, "data") <- c(TMEAN)
 #' @return Very cold days
 #' @export
 #' @examples
-#' vcd(data=tmin.value)
+#' vcd(data=data_all[[TMIN]], time.scale=YEAR)
+#' vcd(data=data_all[[TMIN]], time.scale=HYDROYEAR)
 vcd = calculate_25 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.01))
 
@@ -780,7 +781,7 @@ zcd = calculate_30 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.r
 index_units[30] = C_days
 index_titles[30] = "Zero crossing days"
 index_names[30] = "zcd"
-attr(calculate_30, "data") <- c(NA)
+attr(calculate_30, "data") <- c(TMAX, TMIN)
 
 #' 31. OGS6: Onset of growing season 6 days
 #' The start of the first span with at least 6 days with Tmean >5ºC
@@ -1282,8 +1283,8 @@ attr(calculate_52, "data") <- c(PRECIPITATION)
 #' 53. EP: Effective precipitation
 #' Precipitation minus evapotranspiration
 #' 
-#' @param pr precipitation
 #' @param eto et0
+#' @param pr precipitation
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
@@ -1291,7 +1292,7 @@ attr(calculate_52, "data") <- c(PRECIPITATION)
 #' @export
 #' @examples
 #' ep(pr = pr.value, eto = eto.value)
-ep = calculate_53 = function(pr, eto, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+ep = calculate_53 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(pr, eto){
     return(sum(pr-eto[names(pr)], na.rm = na.rm))
   }
@@ -1301,7 +1302,7 @@ ep = calculate_53 = function(pr, eto, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[53] = C_precipitation
 index_titles[53] = "Precipitation minus evapotranspiration"
 index_names[53] = "ep"
-attr(calculate_53, "data") <- c(NA)
+attr(calculate_53, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
 #' 54. LDP: Longest dry period
 #' Maximum length of consecutive dry days (RR<1)
@@ -1814,7 +1815,7 @@ bio18 = calculate_74 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ..
 index_units[74] = C_precipitation
 index_titles[74] = "Precipitation warmest quarter"
 index_names[74] = "bio18"
-attr(calculate_74, "data") <- c(NA)
+attr(calculate_74, "data") <- c(PRECIPITATION, TMEAN)
 
 #' 75. BIO19: Precipitation coldest quarter
 #' 
@@ -1837,7 +1838,7 @@ bio19 = calculate_75 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ..
 index_units[75] = C_precipitation
 index_titles[75] = "Precipitation coldest quarter"
 index_names[75] = "bio19"
-attr(calculate_75, "data") <- c(NA)
+attr(calculate_75, "data") <- c(PRECIPITATION, TMEAN)
 
 #' 76. BIO4: Temperature seasonality
 #' Standard deviation temperature *100
@@ -1883,7 +1884,7 @@ bio5 = calculate_77 = function(data, tmax, data_names=NULL, na.rm = FALSE, ...){
 index_units[77] = C_degrees
 index_titles[77] = "TX warmest month"
 index_names[77] = "bio5"
-attr(calculate_77, "data") <- c(TMAX)
+attr(calculate_77, "data") <- c(TMEAN, TMAX)
 
 #' 78. BIO6: TN of coldest month
 #' 
@@ -1907,7 +1908,7 @@ bio6 = calculate_78 = function(data, tmin, data_names=NULL, na.rm = FALSE, ...){
 index_units[78] = C_degrees
 index_titles[78] = "TN of coldest month"
 index_names[78] = "bio6"
-attr(calculate_78, "data") <- c(TMIN)
+attr(calculate_78, "data") <- c(TMEAN, TMIN)
 
 #' 79. BIO7: Difference warmest/coldest month
 #' Temperature Annual Range (BIO5-BIO6)
@@ -1928,7 +1929,7 @@ bio7 = calculate_79 = function(data, tmin, tmax, data_names=NULL, na.rm = FALSE,
 index_units[79] = C_index
 index_titles[79] = "Difference warmest/coldest month"
 index_names[79] = "bio7"
-attr(calculate_79, "data") <- c(TMEAN)
+attr(calculate_79, "data") <- c(TMEAN, TMIN, TMAX)
 
 #' 80. BIO8: TG of wettest quarter
 #' 
@@ -1951,7 +1952,7 @@ bio8 = calculate_80 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...
 index_units[80] = C_degrees
 index_titles[80] = "TG of wettest quarter"
 index_names[80] = "bio8"
-attr(calculate_80, "data") <- c(NA)
+attr(calculate_80, "data") <- c(PRECIPITATION, TMEAN)
 
 #' 81. BIO9: TG of driest quarter
 #' 
@@ -1974,10 +1975,10 @@ bio9 = calculate_81 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...
 index_units[81] = C_degrees
 index_titles[81] = "TG of driest quarter"
 index_names[81] = "bio9"
-attr(calculate_81, "data") <- c(NA)
+attr(calculate_81, "data") <- c(PRECIPITATION, TMEAN)
 
-#' 82. BIO20: Mean radiation (W m-2)
-#' https://www.edenextdata.com/?q=content/climond-bioclimatic-variables-2030 
+#' 82. BIO20: Mean radiation 
+#' https://www.edenextdata.com/?q=content/climond-bioclimatic-variables-2030 (W m-2)
 #' 
 #' @param data radiation
 #' @param data_names names of each period of time
@@ -1986,14 +1987,14 @@ attr(calculate_81, "data") <- c(NA)
 #' @return BIO20
 #' @export
 #' @examples
-#' bio20(data = radiation.value)
+#' bio20(data = data[[RADIATION]])
 bio20 = calculate_82 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(average_temp(data=data, data_names=data_names, time.scale=time.scale, na.rm=na.rm))
 }
 index_units[82] = C_radiation
-index_titles[82] = "Mean radiation (W m-2)"
+index_titles[82] = "Mean radiation"
 index_names[82] = "bio20"
-attr(calculate_82, "data") <- c(NA)
+attr(calculate_82, "data") <- c(RADIATION)
 
 #' 83. UTCI: Universal thermal climate index
 #' UTCI (Blazejczyk et all, 2012) (Air temperature, Humidity, Wind)
@@ -2004,28 +2005,32 @@ attr(calculate_82, "data") <- c(NA)
 #' 
 #'Given air temperature (Celsius), relative humidity (%), wind velocity (m/sec) and mean radiant temperature ( tmrt in Celsius degree) gives the Universal Thermal Climate Index in Celsius.
 #' @param ta medium temperature
-#' @param rh dew point
+#' @param rh humidity
 #' @param wind average wind
-#' @param tmrt radiation
+#' @param tmrt radiation temperature
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
 #' @return UTCI
 #' @export
 #' @examples
-#' utci(ta = taverage.value, rh = dew_point.value, wind = w.value, tmrt = radiation.value)
+#' utci(ta = data[[TMEAN]], rh = data[[DEWPOINT]], wind = data[[WIND]], tmrt = data[["RADIATIONTEMPERATURE"]])
 utci = calculate_83 = function(ta, rh, wind, tmrt, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-    if(is.null(ta) | is.null(rh) | is.null(wind) | is.null(tmrt)) {
+    if(is.null(ta) | is.null(rh) | is.null(wind)) {
       return(NULL) 
     }
 
     e = ta/10 # e = es(ta)/10; # use vapour pressure in kPa 
-    pa = (e*rh/100.0); 
+    pa = (e*rh/100.0)
     va = wind;
     va[va < 0.51] = 0.5
     va[va > 17] = 17
 
-    dtm = tmrt - ta;
+    if(!is.null(tmrt)){
+      dtm = tmrt - ta
+    }else{
+      dtm = 0
+    }
 
     utci = array(NA, dim=c(length(ta), 211));
     
@@ -2242,12 +2247,13 @@ utci = calculate_83 = function(ta, rh, wind, tmrt, data_names=NULL, time.scale=Y
     utci[, 210]=1.48348065E-03*pa*pa*pa*pa*pa*pa;            
     
     data = apply(utci, c(1), sum, na.rm=na.rm)
+    names(data) = names(ta)
     return(average_temp(data=data, data_names=data_names, time.scale=time.scale, na.rm=na.rm))
 }
 index_units[83] = C_index
 index_titles[83] = "Universal thermal climate index"
 index_names[83] = "utci"
-attr(calculate_83, "data") <- c(NA)
+attr(calculate_83, "data") <- c(TMEAN, DEWPOINT, WIND, "RADIATIONTEMPERATURE")
 
 #' 84. MI: Mould index
 #' Number of days with  a relative humidity over 90\% in combination with temperatures above 10°C 
@@ -2260,7 +2266,7 @@ attr(calculate_83, "data") <- c(NA)
 #' @return Mould index
 #' @export
 #' @examples
-#' mi(taverage = taverage.value, rh = rh.value)
+#' mi(taverage = data[[TMEAN]], rh = data[[HUMIDITY]])
 mi = calculate_84 = function(taverage, rh, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data = taverage>10 & rh>90
   function_ = function(data){    
@@ -2272,7 +2278,7 @@ mi = calculate_84 = function(taverage, rh, data_names=NULL, time.scale=YEAR, na.
 index_units[84] = C_days
 index_titles[84] = "Mould index"
 index_names[84] = "mi"
-attr(calculate_84, "data") <- c(NA)
+attr(calculate_84, "data") <- c(TMEAN, HUMIDITY)
 
 #' 85. HI: Heat Index
 #' Temperature + humidity 
@@ -2287,7 +2293,7 @@ attr(calculate_84, "data") <- c(NA)
 #' @return Heat Index
 #' @export
 #' @examples
-#' hi(taverage = taverage.value, rh = rh.value)
+#' hi(taverage = data_all[[TMEAN]], rh = data_all[[HUMIDITY]])
 hi = calculate_85 = function(taverage, rh, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   if( is.null(taverage) | is.null(rh) ) { return(NULL) }
   data = heat.index(t = taverage, rh = rh, temperature.metric = "celsius")
@@ -2300,13 +2306,13 @@ hi = calculate_85 = function(taverage, rh, data_names=NULL, time.scale=YEAR, na.
 index_units[85] = C_index
 index_titles[85] = "Heat Index"
 index_names[85] = "hi"
-attr(calculate_85, "data") <- c(NA)
+attr(calculate_85, "data") <- c(TMEAN, HUMIDITY)
 
 #' 86. WCI: Wind chill index
 #' Temperature + wind 
 #' Osczevski, R. & Bleustein, M. 2005, Bull. Amer. Meteor. Soc., 86, 1453, doi:10.1175/BAMS-86-10-1453 
 #' https://journals.ametsoc.org/doi/abs/10.1175/BAMS-86-10-1453
-#' Ta = air temperature; in ºC ; v = wind speed in km/h  
+#' Ta = air temperature; in ºC ; v = wind speed in m/s (original: km/h)
 #' http://www.calculator.net/wind-chill-calculator.html
 #' WCI = 13.12 + 0.6215*T - 11.37*V + 0.3965*T*V
 #' 
@@ -2318,9 +2324,11 @@ attr(calculate_85, "data") <- c(NA)
 #' @return WCI
 #' @export
 #' @examples
-#' wci(taverage = taverage.value, w = w.value)
+#' wci(taverage = data_all[[TMEAN]], w = data_all[[WIND]])
 wci = calculate_86 = function(taverage, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  data = 13.12 + 0.6215*taverage - 11.37*w^0.16 + 0.3965*taverage*w^0.16
+  # data = 13.12 + 0.6215*taverage - (3600/1000)*11.37*w^0.16 + 0.3965*taverage*w^0.16
+  data = 13.12 + 0.6215*taverage - (3600/1000)*11.37*w + 0.3965*taverage*w
+  data[is.na(taverage) | is.na(w)] = NA
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
@@ -2330,7 +2338,7 @@ wci = calculate_86 = function(taverage, w, data_names=NULL, time.scale=YEAR, na.
 index_units[86] = C_index
 index_titles[86] = "Wind chill index"
 index_names[86] = "wci"
-attr(calculate_86, "data") <- c(NA)
+attr(calculate_86, "data") <- c(TMEAN, WIND)
 
 #' 87. AT: Apparent Temperature
 #' AT = Ta + 0.33e -0.70v -4.00; Ta = air temperature in ºC ; v = wind speed in m/s; e= water vapour pressure in hPa  
@@ -2344,10 +2352,11 @@ attr(calculate_86, "data") <- c(NA)
 #' @return AT
 #' @export
 #' @examples
-#' at(taverage = taverage.value, w = w.value, vapor = vapor.value)
+#' at(taverage = data_all[[TMEAN]], w = data_all[[WIND]], vapor = data_all[[VAPOUR]])
 at = calculate_87 = function(taverage, w, vapor, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   e = 6.015*exp(17.2*taverage/(237.7+taverage))*vapor/100
   data = taverage + 0.33 * e - 0.70 * w - 4.00
+  data[is.na(taverage) | is.na(vapor) | is.na(w)] = NA
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
@@ -2357,7 +2366,7 @@ at = calculate_87 = function(taverage, w, vapor, data_names=NULL, time.scale=YEA
 index_units[87] = C_index
 index_titles[87] = "Apparent Temperature"
 index_names[87] = "at"
-attr(calculate_87, "data") <- c(NA)
+attr(calculate_87, "data") <- c(TMEAN, WIND, VAPOUR)
 
 ####wind-based
 #' 88. DFx21: Days wind gusts above 21 m/s
@@ -2369,7 +2378,7 @@ attr(calculate_87, "data") <- c(NA)
 #' @return Gustmax
 #' @export
 #' @examples
-#' dfx21(data = w.value)
+#' dfx21(data = data_all[[WIND]])
 dfx21 = calculate_88 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data>21, na.rm=na.rm))
@@ -2380,7 +2389,7 @@ dfx21 = calculate_88 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[88] = C_days
 index_titles[88] = "Days wind gusts above 21 m/s"
 index_names[88] = "dfx21"
-attr(calculate_88, "data") <- c(NA)
+attr(calculate_88, "data") <- c(WIND)
 
 #' 89. FXx: Daily maximum wind gust
 #' Maximun value of daily maximum wind gust (m/s), ECA&D standard
@@ -2392,7 +2401,7 @@ attr(calculate_88, "data") <- c(NA)
 #' @return FXx
 #' @export
 #' @examples
-#' fxx(data = w_max.value)
+#' fxx(data = data_all[[WINDGUST]])
 fxx = calculate_89 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(max(data, na.rm=na.rm))
@@ -2403,7 +2412,7 @@ fxx = calculate_89 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[89] = C_wind
 index_titles[89] = "Daily maximum wind gust"
 index_names[89] = "fxx"
-attr(calculate_89, "data") <- c(NA)
+attr(calculate_89, "data") <- c(WINDGUST)
 
 #' 90. FG: Mean of daily mean wind strength
 #' Mean of daily mean wind strength (m/s), ECA&D standard
@@ -2415,7 +2424,7 @@ attr(calculate_89, "data") <- c(NA)
 #' @return FG
 #' @export
 #' @examples
-#' fg(data = w.value)
+#' fg(data = data_all[[WIND]])
 fg = calculate_90 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
@@ -2426,10 +2435,10 @@ fg = calculate_90 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[90] = C_wind
 index_titles[90] = "Mean of daily mean wind strength"
 index_names[90] = "fg"
-attr(calculate_90, "data") <- c(NA)
+attr(calculate_90, "data") <- c(WIND)
 
 #' 91. FGcalm: Calm days
-#' Calm days (FG <= 2 m/s) (days), ECA&D standard
+#' Calm days (average wind FG <= 2 m/s) (days), ECA&D standard
 #' 
 #' @param data wind
 #' @param data_names names of each period of time
@@ -2438,7 +2447,7 @@ attr(calculate_90, "data") <- c(NA)
 #' @return FGcalm
 #' @export
 #' @examples
-#' fgcalm(data = w.value)
+#' fgcalm(data = data_all[[WIND]])
 fgcalm = calculate_91 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data<=2, na.rm=na.rm))
@@ -2449,7 +2458,7 @@ fgcalm = calculate_91 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[91] = C_days
 index_titles[91] = "Calm days2"
 index_names[91] = "fgcalm"
-attr(calculate_91, "data") <- c(NA)
+attr(calculate_91, "data") <- c(WIND)
 
 #' 92. FG6Bft: Days daily averaged wind above 10.8m/s
 #' Days with daily averaged wind >= 6 Bft (10.8 m/s) (days), ECA&D standard
@@ -2461,7 +2470,7 @@ attr(calculate_91, "data") <- c(NA)
 #' @return FG6Bft
 #' @export
 #' @examples
-#' fg6bft(data = w.value)
+#' fg6bft(data = data_all[[WIND]])
 fg6bft = calculate_92 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data>=10.8, na.rm=na.rm))
@@ -2472,23 +2481,31 @@ fg6bft = calculate_92 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[92] = C_days
 index_titles[92] = "Days daily averaged wind above 10.8m/s"
 index_names[92] = "fg6bft"
-attr(calculate_92, "data") <- c(NA)
+attr(calculate_92, "data") <- c(WIND)
 
 ####aridity/continentality-indices
 #' 93. Eto: Reference evapotranspiration
 #' If data available using Fao-56 Penman-Monteith, if not using the Hargreaves & Samani method.
 #' 
-#' @param data Eto
+#' @param tmin tmin
+#' @param tmax tmax
+#' @param w w
+#' @param lat lat
+#' @param tdew tdew
+#' @param mde mde
+#' @param radiation radiation
+#' @param insolation insolation
+#' @param rh relative humidity
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return Eto
 #' @export
 #' @examples
-#' eto(data = eto.value)
-eto = calculate_93 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' eto(tmin = data[[TMIN]], tmax = data[[TMAX]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], radiation = data[[RADIATION]], insolation=data[[INSOLATION]], rh = data[[HUMIDITY]])
+eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, insolation=NA, rh=NA, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 
-  # data = hsPET(date, lat=42, t.min, t.max)
+  data = calc_eto(tmin = tmin, tmax = tmax, radiation = radiation, insolation=insolation, toa = toa, w = w, lat=lat, tdew = tdew, mde=mde, rh = rh)
 
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
@@ -2499,21 +2516,20 @@ eto = calculate_93 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[93] = C_index
 index_titles[93] = "Reference evapotranspiration"
 index_names[93] = "eto"
-attr(calculate_93, "data") <- c(NA)
+attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, RADIATION, MDE, DEWPOINT, INSOLATION, HUMIDITY)
 
 #' 94. UAI: UNEP Aridity Index
 #' P/Eto
 #' 
 #' @param eto et0
 #' @param pr precipitation
-#' @param taverage taverage
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return iUNEP
 #' @export
 #' @examples
-#' uai(eto = eto.value, pr = pr.value)
+#' uai(eto = data[[EVAPOTRANSPIRATION]], pr = data[[PRECIPITATION]])
 uai = calculate_94 = function(eto, pr, taverage, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data = pr/eto
   function_ = function(data){
@@ -2525,21 +2541,20 @@ uai = calculate_94 = function(eto, pr, taverage, data_names=NULL, time.scale=YEA
 index_units[94] = C_index
 index_titles[94] = "UNEP Aridity Index"
 index_names[94] = "uai"
-attr(calculate_94, "data") <- c(NA)
+attr(calculate_94, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
 #' 95. CMD: Climatic moisture deficit
 #' ETo - Effective precipitation
 #' 
 #' @param eto et0
 #' @param pr precipitation
-#' @param taverage taverage 
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return CMD
 #' @export
 #' @examples
-#' cmd(eto = eto.value, pr = pr.value)
+#' cmd(eto = data[[EVAPOTRANSPIRATION]], pr = data[[PRECIPITATION]])
 cmd = calculate_95 = function(eto, pr, taverage, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data = eto-pr
   function_ = function(data){
@@ -2551,7 +2566,7 @@ cmd = calculate_95 = function(eto, pr, taverage, data_names=NULL, time.scale=YEA
 index_units[95] = C_index
 index_titles[95] = "Climatic moisture deficit"
 index_names[95] = "cmd"
-attr(calculate_95, "data") <- c(NA)
+attr(calculate_95, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
 #' 96. MAI: De Martonne aridity index
 #' Annual rainfall/(Annual TG+10)
@@ -2564,7 +2579,7 @@ attr(calculate_95, "data") <- c(NA)
 #' @return Martonne Aridity Index
 #' @export
 #' @examples
-#' mai(pr = pr.value, taverage = taverage.value)
+#' mai(pr = data[[PRECIPITATION]], taverage = data[[TMEAN]])
 mai = calculate_96 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, taverage){
     taverage = taverage[names(data)]
@@ -2578,19 +2593,19 @@ mai = calculate_96 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...)
 index_units[96] = C_index
 index_titles[96] = "De Martonne aridity index"
 index_names[96] = "mai"
-attr(calculate_96, "data") <- c(NA)
+attr(calculate_96, "data") <- c(PRECIPITATION, TMEAN)
 
 #' 97. EAI: Emberger aridity index
 #' (100*annual rainfall)/(TGhottest month2-TG coldest month2)
 #' 
-#' @param taverage medium temperature
 #' @param pr precipitation
+#' @param taverage medium temperature
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return Emberger Aridity Index
 #' @export
 #' @examples
-#' eai(pr = pr.value, taverage = taverage.value)
+#' eai(pr = data[[PRECIPITATION]], taverage = data[[TMEAN]])
 eai = calculate_97 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, pr){
     byMonths = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
@@ -2603,7 +2618,7 @@ eai = calculate_97 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...)
 index_units[97] = C_index
 index_titles[97] = "Emberger aridity index"
 index_names[97] = "eai"
-attr(calculate_97, "data") <- c(NA)
+attr(calculate_97, "data") <- c(PRECIPITATION, TMEAN)
 
 #' 98. JCI: Johansson Continentality Index
 #' (1.7E/sinf)-20.4 where E (in8C) is the annual range of mean monthly air temperatures and f is the geographical latitude of the station
@@ -2616,7 +2631,7 @@ attr(calculate_97, "data") <- c(NA)
 #' @return JCI
 #' @export
 #' @examples
-#' jci(data = taverage.value, value = lat)
+#' jci(data = data_all[[TMEAN]], value = data_all[[LAT]])
 jci = calculate_98 = function(data, data_names=NULL, value, na.rm = FALSE, ...){
   function_ = function(data, value){  
     data = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
@@ -2628,7 +2643,7 @@ jci = calculate_98 = function(data, data_names=NULL, value, na.rm = FALSE, ...){
 index_units[98] = C_index
 index_titles[98] = "Johansson Continentality Index"
 index_names[98] = "jci"
-attr(calculate_98, "data") <- c(TMEAN)
+attr(calculate_98, "data") <- c(TMEAN, LAT)
 
 #' 99. KOI: Kerner Oceanity Index
 #' (100*(To-Ta))/E where To and Ta are the October and April mean values of TG respectively and E is the annual range of monthly mean air temperatures, in°C.
@@ -2678,7 +2693,7 @@ pici = calculate_100 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ..
 index_units[100] = C_index
 index_titles[100] = "Pinna Combinative index"
 index_names[100] = "pici"
-attr(calculate_100, "data") <- c(NA)
+attr(calculate_100, "data") <- c(PRECIPITATION, TMEAN)
 
 #' 101. BI: Budyko Index
 #' (Rn/L*P)*100, where Rn is the mean annual net radiation (also known as the net radiation balance), P is the mean annual precipitation, and L is the latent heat of vaporization for water
@@ -2692,7 +2707,7 @@ attr(calculate_100, "data") <- c(NA)
 #' @return Budyko Index
 #' @export
 #' @examples
-#' bi(data = radiation.value, pr = pr.value)
+#' bi(data = data_all[[RADIATION]], pr = data_all[[PRECIPITATION]])
 bi = calculate_101 = function(data, pr, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, pr){
     pr = pr[names(data)]
@@ -2707,7 +2722,7 @@ bi = calculate_101 = function(data, pr, data_names=NULL, na.rm = FALSE, ...){
 index_units[101] = C_index
 index_titles[101] = "Budyko Index"
 index_names[101] = "bi"
-attr(calculate_101, "data") <- c(NA)
+attr(calculate_101, "data") <- c(RADIATION, PRECIPITATION)
 
 #' 102. MOI: Marsz Oceanity Index
 #'  MOI = ( 0.731 * geographic latitude grados + 1.767 ) / the annual range of monthly mean air temperatures grados
@@ -2731,7 +2746,7 @@ moi = calculate_102 = function(data, value, data_names=NULL, na.rm = FALSE, ...)
 index_units[102] = C_index
 index_titles[102] = "Marsz Oceanity Index"
 index_names[102] = "moi"
-attr(calculate_102, "data") <- c(TMEAN)
+attr(calculate_102, "data") <- c(TMEAN, LAT)
 
 ####snow-based
 #' 103. SS: Snowfall sum
@@ -2743,7 +2758,7 @@ attr(calculate_102, "data") <- c(TMEAN)
 #' @return n0to10
 #' @export
 #' @examples
-#' ss(data = snow.value)
+#' ss(data = data_all[[SNOWFALL]])
 ss = calculate_103 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=sum, data_names=data_names, na.rm=na.rm)
   return(byYears)
@@ -2751,7 +2766,7 @@ ss = calculate_103 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[103] = C_snow
 index_titles[103] = "Snowfall sum"
 index_names[103] = "ss"
-attr(calculate_103, "data") <- c(NA)
+attr(calculate_103, "data") <- c(SNOWFALL)
 
 #' 104. SD0_10: Snow depth 0-10
 #' The number of days with snow depth in the range 1-10 cm
@@ -2763,10 +2778,10 @@ attr(calculate_103, "data") <- c(NA)
 #' @return SD0_10
 #' @export
 #' @examples
-#' sd0_10(data = snow_depth.value)
+#' sd0_10(data = data_all[[SNOWDEPTHTHICKNESS]])
 sd0_10 = calculate_104 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data>=1 & data<=10, na.rm=na.rm))
+    return(sum(data>=1/100 & data<=10/100, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
@@ -2774,7 +2789,7 @@ sd0_10 = calculate_104 = function(data, data_names=NULL, time.scale=YEAR, na.rm 
 index_units[104] = C_days
 index_titles[104] = "Snow depth 0-10"
 index_names[104] = "sd0_10"
-attr(calculate_104, "data") <- c(NA)
+attr(calculate_104, "data") <- c(SNOWDEPTHTHICKNESS)
 
 #' 105. SD10_20: Snow depth 10-20
 #' The number of days with snow depth of 10-20 cm
@@ -2786,10 +2801,10 @@ attr(calculate_104, "data") <- c(NA)
 #' @return SD10_20
 #' @export
 #' @examples
-#' sd10_20(data = snow_depth.value)
+#' sd10_20(data = data_all[[SNOWDEPTHTHICKNESS]])
 sd10_20 = calculate_105 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data>=10 & data<=20, na.rm=na.rm))
+    return(sum(data>=10/100 & data<=20/100, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
@@ -2797,7 +2812,7 @@ sd10_20 = calculate_105 = function(data, data_names=NULL, time.scale=YEAR, na.rm
 index_units[105] = C_days
 index_titles[105] = "Snow depth 10-20"
 index_names[105] = "sd10_20"
-attr(calculate_105, "data") <- c(NA)
+attr(calculate_105, "data") <- c(SNOWDEPTHTHICKNESS)
 
 #' 106. SnD: Snow depth
 #' Mean of daily snow depth
@@ -2809,7 +2824,7 @@ attr(calculate_105, "data") <- c(NA)
 #' @return snow depth
 #' @export
 #' @examples
-#' snd(data = snow_depth.value)
+#' snd(data = data_all[[SNOWDEPTHTHICKNESS]])
 snd = calculate_106 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm=na.rm)
   return(byYears)
@@ -2817,7 +2832,7 @@ snd = calculate_106 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[106] = C_snow
 index_titles[106] = "Snow depth"
 index_names[106] = "snd"
-attr(calculate_106, "data") <- c(NA)
+attr(calculate_106, "data") <- c(SNOWDEPTHTHICKNESS)
 
 #' 107. FSD: Frequency of snow days
 #' number of snow days
@@ -2829,7 +2844,7 @@ attr(calculate_106, "data") <- c(NA)
 #' @return freq. of snow days
 #' @export
 #' @examples
-#' fsd(data = snow.value)
+#' fsd(data = data_all[[SNOWFALL]])
 fsd = calculate_107 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data>0, na.rm=na.rm))
@@ -2840,7 +2855,7 @@ fsd = calculate_107 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[107] = C_days
 index_titles[107] = "Frequency of snow days"
 index_names[107] = "fsd"
-attr(calculate_107, "data") <- c(NA)
+attr(calculate_107, "data") <- c(SNOWFALL)
 
 #' 108. MSD: Mild snowy days
 #' Annual number of days with snow depth more than 5 cm.
@@ -2852,10 +2867,10 @@ attr(calculate_107, "data") <- c(NA)
 #' @return mild snowy days
 #' @export
 #' @examples
-#' msd(data = snow_depth.value)
+#' msd(data = data_all[[SNOWDEPTHTHICKNESS]])
 msd = calculate_108 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data>5, na.rm=na.rm))
+    return(sum(data>5/100, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
@@ -2863,7 +2878,7 @@ msd = calculate_108 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[108] = C_days
 index_titles[108] = "Mild snowy days"
 index_names[108] = "msd"
-attr(calculate_108, "data") <- c(NA)
+attr(calculate_108, "data") <- c(SNOWDEPTHTHICKNESS)
 
 #' 109. HSD: Heavy snowy days
 #' Annual number of days with snow depth more than 50 cm.
@@ -2875,10 +2890,10 @@ attr(calculate_108, "data") <- c(NA)
 #' @return heavy snowy days
 #' @export
 #' @examples
-#' hsd(data = snow_depth.value)
+#' hsd(data = data_all[[SNOWDEPTHTHICKNESS]])
 hsd = calculate_109 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data>50, na.rm=na.rm))
+    return(sum(data>50/100, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
@@ -2886,7 +2901,7 @@ hsd = calculate_109 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[109] = C_days
 index_titles[109] = "Heavy snowy days"
 index_names[109] = "hsd"
-attr(calculate_109, "data") <- c(NA)
+attr(calculate_109, "data") <- c(SNOWDEPTHTHICKNESS)
 
 #' 110. FSC: Date of first snow cover
 #' First day when there is measurable snow cover
@@ -2897,21 +2912,25 @@ attr(calculate_109, "data") <- c(NA)
 #' @return first snowcover
 #' @export
 #' @examples
-#' fsc(data = snow_depth.value)
+#' fsc(data = data_all[[SNOWDEPTH]])
 fsc = calculate_110 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     if(na.rm | sum(is.na(data))==0){
-      return(which(data>0)[1])
+      value = which(data>0)[1]
+      if(is.na(value)){
+        value = 0
+      }
+      return(value)
     }
     return(NA)
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, extract_names=select_time_function(HYDROYEAR), operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[110] = C_date
 index_titles[110] = "Date of first snow cover"
 index_names[110] = "fsc"
-attr(calculate_110, "data") <- c(NA)
+attr(calculate_110, "data") <- c(SNOWDEPTH)
 
 #' 111. FPSC: Date of first permanent snow cover 
 #' First day of the longest period with consecutive snow cover day.
@@ -2922,30 +2941,33 @@ attr(calculate_110, "data") <- c(NA)
 #' @return first permanent snowcover
 #' @export
 #' @examples
-#' fpsc(data = snow_depth.value)
+#' fpsc(data = data_all[[SNOWDEPTH]])
 fpsc = calculate_111 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     data = as.numeric(data>0)
     data.rle = rle(as.numeric(data))
     data.i = which(data.rle$lengths>1 & data.rle$values>0, arr.ind = TRUE, useNames = TRUE)
-    if(length(data.i)>0 & (na.rm | sum(is.na(data))==0)){
+    if(na.rm | sum(is.na(data))==0){
+      if(length(data.i)==0){
+        return(0)
+      }
       data.i = data.i[which(max(data.rle$length[data.i])==data.rle$length[data.i])[1]]
       if(is.na(data.i) | data.i==1){
         return(data.i)
       }else{
-          return(sum(1, data.rle$lengths[1:(data.i-1)]), na.rm = na.rm)
+        return(sum(1, data.rle$lengths[1:(data.i-1)], na.rm = na.rm))
       }
     }else{
       return(NA)
     }
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, extract_names=select_time_function(HYDROYEAR), operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[111] = C_date
 index_titles[111] = "Date of first permanent snow cover "
 index_names[111] = "fpsc"
-attr(calculate_111, "data") <- c(NA)
+attr(calculate_111, "data") <- c(SNOWDEPTH)
 
 #' 112. LPSC: Date of last permanent snow cover
 #' Last day of the longest period with consecutive snow cover day.
@@ -2956,13 +2978,16 @@ attr(calculate_111, "data") <- c(NA)
 #' @return last permanent snowcover
 #' @export
 #' @examples
-#' lpsc(data = snow_depth.value)
+#' lpsc(data = data_all[[SNOWDEPTH]])
 lpsc = calculate_112 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     data = as.numeric(data>0)
     data.rle = rle(as.numeric(data))
     data.i = which(data.rle$lengths>1 & data.rle$values>0, arr.ind = TRUE, useNames = TRUE)
-    if(length(data.i)>0 & (na.rm | sum(is.na(data))==0)){
+    if(na.rm | sum(is.na(data))==0){
+      if(length(data.i)==0){
+        return(0)
+      }
       data.i = data.i[which(max(data.rle$length[data.i])==data.rle$length[data.i])[1]]
       if(is.na(data.i) | data.i==1){
         return(data.i)
@@ -2973,13 +2998,13 @@ lpsc = calculate_112 = function(data, data_names=NULL, na.rm = FALSE, ...){
       return(NA)
     }
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, extract_names=select_time_function(HYDROYEAR), operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[112] = C_date
 index_titles[112] = "Date of last permanent snow cover"
 index_names[112] = "lpsc"
-attr(calculate_112, "data") <- c(NA)
+attr(calculate_112, "data") <- c(SNOWDEPTH)
 
 #' 113. ASD: Average snow depth
 #' 
@@ -2990,7 +3015,7 @@ attr(calculate_112, "data") <- c(NA)
 #' @return average snow depth
 #' @export
 #' @examples
-#' asd(data = snow_depth.value)
+#' asd(data = data_all[[SNOWDEPTHTHICKNESS]])
 asd = calculate_113 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm=na.rm)
   return(byYears)
@@ -2998,7 +3023,7 @@ asd = calculate_113 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[113] = C_snow
 index_titles[113] = "Average snow depth"
 index_names[113] = "asd"
-attr(calculate_113, "data") <- c(NA)
+attr(calculate_113, "data") <- c(SNOWDEPTHTHICKNESS)
 
 #' 114. SCD: Amount of snow covered days
 #' 
@@ -3009,7 +3034,7 @@ attr(calculate_113, "data") <- c(NA)
 #' @return snow covered days
 #' @export
 #' @examples
-#' scd(data = snow_depth.value)
+#' scd(data = data_all[[SNOWDEPTH]])
 scd = calculate_114 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){    
     return(sum(data>0, na.rm=na.rm))
@@ -3020,7 +3045,7 @@ scd = calculate_114 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[114] = C_days
 index_titles[114] = "Amount of snow covered days"
 index_names[114] = "scd"
-attr(calculate_114, "data") <- c(NA)
+attr(calculate_114, "data") <- c(SNOWDEPTH)
 
 #' 115. MS: Maximum snow depth
 #' 
@@ -3031,7 +3056,7 @@ attr(calculate_114, "data") <- c(NA)
 #' @return maximum snow depth
 #' @export
 #' @examples
-#' ms(data = snow_depth.value)
+#' ms(data = data_all[[SNOWDEPTHTHICKNESS]])
 ms = calculate_115 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=max, data_names=data_names, na.rm=na.rm)
   return(byYears)
@@ -3039,7 +3064,7 @@ ms = calculate_115 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[115] = C_snow
 index_titles[115] = "Maximum snow depth"
 index_names[115] = "ms"
-attr(calculate_115, "data") <- c(NA)
+attr(calculate_115, "data") <- c(SNOWDEPTHTHICKNESS)
 
 ####Cloud/radiation-based
 #' 116. SSD: Sum of sunshine duration
@@ -3051,7 +3076,7 @@ attr(calculate_115, "data") <- c(NA)
 #' @return SSD, h
 #' @export
 #' @examples
-#' ssd(data = insolation.value)
+#' ssd(data = data_all[[INSOLATION]])
 ssd = calculate_116 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=sum, data_names=data_names, na.rm=na.rm)
   return(byYears)
@@ -3059,7 +3084,7 @@ ssd = calculate_116 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[116] = C_sunshine
 index_titles[116] = "Sum of sunshine duration"
 index_names[116] = "ssd"
-attr(calculate_116, "data") <- c(NA)
+attr(calculate_116, "data") <- c(INSOLATION)
 
 #' 117. SND: Sunny days
 #' Days with mean cloud cover less than 10\%.
@@ -3071,7 +3096,7 @@ attr(calculate_116, "data") <- c(NA)
 #' @return SND
 #' @export
 #' @examples
-#' snd(data = cloud_cover.value)
+#' snd(data = data_all[[CLOUD]])
 snd = calculate_117 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){    
     return(sum(data<10, na.rm=na.rm))
@@ -3082,7 +3107,7 @@ snd = calculate_117 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[117] = C_days
 index_titles[117] = "Sunny days"
 index_names[117] = "snd"
-attr(calculate_117, "data") <- c(NA)
+attr(calculate_117, "data") <- c(CLOUD)
 
 #' 118. ClD: Cloudy days
 #' Number of days with cloud base below 100 meter.
@@ -3094,7 +3119,7 @@ attr(calculate_117, "data") <- c(NA)
 #' @return cloudy days
 #' @export
 #' @examples
-#' cld(data = cloud_cover_less_100.value)
+#' cld(data = data_all[[CLOUD100]])
 cld = calculate_118 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){    
     return(sum(data>0, na.rm=na.rm))
@@ -3105,7 +3130,7 @@ cld = calculate_118 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[118] = C_days
 index_titles[118] = "Cloudy days"
 index_names[118] = "cld"
-attr(calculate_118, "data") <- c(NA)
+attr(calculate_118, "data") <- c(CLOUD100)
 
 #' 119. CC: Mean daily cloud cover
 #' 
@@ -3116,7 +3141,7 @@ attr(calculate_118, "data") <- c(NA)
 #' @return mean CC
 #' @export
 #' @examples
-#' cc(data = cloud_cover.value)
+#' cc(data = data_all[[CLOUD]])
 cc = calculate_119 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm=na.rm)
   return(byYears)
@@ -3124,7 +3149,7 @@ cc = calculate_119 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[119] = C_cloud
 index_titles[119] = "Mean daily cloud cover"
 index_names[119] = "cc"
-attr(calculate_119, "data") <- c(NA)
+attr(calculate_119, "data") <- c(CLOUD)
 
 #' 120. SSp: Sunshine duration fraction
 #' Sunshine duration fraction with respect to day length (%), standard ECA&D: 100*(SS/SSmax) SS: sum of sunshine duration, SSmax: maximun daylight hours 
@@ -3136,7 +3161,7 @@ attr(calculate_119, "data") <- c(NA)
 #' @return SSp
 #' @export
 #' @examples
-#' ssp(data = insolation.value)
+#' ssp(data = data_all[[INSOLATION]])
 ssp = calculate_120 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){    
     return(100*mean(data, na.rm=na.rm)/24)
@@ -3147,7 +3172,7 @@ ssp = calculate_120 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[120] = C_index
 index_titles[120] = "Sunshine duration fraction"
 index_names[120] = "ssp"
-attr(calculate_120, "data") <- c(NA)
+attr(calculate_120, "data") <- c(INSOLATION)
 
 #' 121. ACI: Atmospheric Clarity Index
 #' Ratio between solar radiation at surface and solar radiation at TOA (alt top of the atmosphere empirically obtained)
@@ -3162,7 +3187,7 @@ attr(calculate_120, "data") <- c(NA)
 #' @return ACI
 #' @export
 #' @examples
-#' aci(data = radiation.value, toa=toa.value)
+#' aci(data = data_all[[RADIATION]], toa = data_all[[RADIATIONTOA]])
 aci = calculate_121 = function(data, toa, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data, toa){
     toa = toa[names(data)]
@@ -3174,7 +3199,7 @@ aci = calculate_121 = function(data, toa, data_names=NULL, time.scale=YEAR, na.r
 index_units[121] = C_index
 index_titles[121] = "Atmospheric Clarity Index"
 index_names[121] = "aci"
-attr(calculate_121, "data") <- c(NA)
+attr(calculate_121, "data") <- c(RADIATION, RADIATIONTOA)
 
 ####Drought indices
 #' 122. SPI1: Standardized precipitation index 1
@@ -3185,7 +3210,7 @@ attr(calculate_121, "data") <- c(NA)
 #' @return SPI
 #' @export
 #' @examples
-#' spi1(data = pr.value)
+#' spi1(data = data_all[[PRECIPITATION]])
 spi1 = calculate_122 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(calc_spi(data, data_names, scale=1, na.rm=na.rm))
 }
@@ -3202,7 +3227,7 @@ attr(calculate_122, "data") <- c(PRECIPITATION)
 #' @return SPI
 #' @export
 #' @examples
-#' spi3(data = pr.value)
+#' spi3(data = data_all[[PRECIPITATION]])
 spi3 = calculate_123 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(calc_spi(data, data_names, scale=3, na.rm=na.rm))
 }
@@ -3219,7 +3244,7 @@ attr(calculate_123, "data") <- c(PRECIPITATION)
 #' @return SPI
 #' @export
 #' @examples
-#' spi6(data = pr.value)
+#' spi6(data = data_all[[PRECIPITATION]])
 spi6 = calculate_124 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(calc_spi(data, data_names, scale=6, na.rm=na.rm))
 }
@@ -3236,7 +3261,7 @@ attr(calculate_124, "data") <- c(PRECIPITATION)
 #' @return SPI
 #' @export
 #' @examples
-#' spi12(data = pr.value)
+#' spi12(data = data_all[[PRECIPITATION]])
 spi12 = calculate_125 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(calc_spi(data, data_names, scale=12, na.rm=na.rm))
 }
@@ -3254,14 +3279,14 @@ attr(calculate_125, "data") <- c(PRECIPITATION)
 #' @return SPEI
 #' @export
 #' @examples
-#' spei1(eto = eto.value, pr = pr.value)
+#' spei1(eto = data_all[[EVAPOTRANSPIRATION]], pr = data_all[[PRECIPITATION]])
 spei1 = calculate_126 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
   return(calc_spei(eto, pr, data_names, scale=1, na.rm=na.rm))  
 }
 index_units[126] = C_index
 index_titles[126] = "Standardised Precipitation-Evapotranspiration Index 1"
 index_names[126] = "spei1"
-attr(calculate_126, "data") <- c(NA)
+attr(calculate_126, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
 #' 127. SPEI3: Standardised Precipitation-Evapotranspiration Index 3
 #' 
@@ -3272,14 +3297,14 @@ attr(calculate_126, "data") <- c(NA)
 #' @return SPEI
 #' @export
 #' @examples
-#' spei3(eto = eto.value, pr = pr.value)
+#' spei3(eto = data_all[[EVAPOTRANSPIRATION]], pr = data_all[[PRECIPITATION]])
 spei3 = calculate_127 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
   return(calc_spei(eto, pr, data_names, scale=3, na.rm=na.rm))
 }
 index_units[127] = C_index
 index_titles[127] = "Standardised Precipitation-Evapotranspiration Index 3"
 index_names[127] = "spei3"
-attr(calculate_127, "data") <- c(NA)
+attr(calculate_127, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
 #' 128. SPEI6: Standardised Precipitation-Evapotranspiration Index 6
 #' 
@@ -3290,14 +3315,14 @@ attr(calculate_127, "data") <- c(NA)
 #' @return SPEI
 #' @export
 #' @examples
-#' spei6(eto = eto.value, pr = pr.value)
+#' spei6(eto = data_all[[EVAPOTRANSPIRATION]], pr = data_all[[PRECIPITATION]])
 spei6 = calculate_128 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
     return(calc_spei(eto, pr, data_names, scale=6, na.rm=na.rm))
 }
 index_units[128] = C_index
 index_titles[128] = "Standardised Precipitation-Evapotranspiration Index 6"
 index_names[128] = "spei6"
-attr(calculate_128, "data") <- c(NA)
+attr(calculate_128, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
 #' 129. SPEI12: Standardised Precipitation-Evapotranspiration Index 12
 #' 
@@ -3308,14 +3333,14 @@ attr(calculate_128, "data") <- c(NA)
 #' @return SPEI
 #' @export
 #' @examples
-#' spei12(eto = eto.value, pr = pr.value)
+#' spei12(eto = data_all[[EVAPOTRANSPIRATION]], pr = data_all[[PRECIPITATION]])
 spei12 = calculate_129 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
    return(calc_spei(eto, pr, data_names, scale=12, na.rm=na.rm))
 }
 index_units[129] = C_index
 index_titles[129] = "Standardised Precipitation-Evapotranspiration Index 12"
 index_names[129] = "spei12"
-attr(calculate_129, "data") <- c(NA)
+attr(calculate_129, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
 ####Fire-based
 #' 130. FWI: Canadian Fire Weather Index
@@ -3335,7 +3360,7 @@ attr(calculate_129, "data") <- c(NA)
 #' @return FWI
 #' @export
 #' @examples
-#' fwi(taverage=taverage.value, rh = rh.value, w = w.value, pr = pr.value, lat = lat, dew_point=dew_point.value)
+#' fwi(taverage=data_all[[TMEAN]], rh = data_all[[HUMIDITY]], w = data_all[[WIND]], pr = data_all[[PRECIPITATION]], dew_point=data_all[[DEWPOINT]], lat = data_all[[LAT]])
 fwi = calculate_130 = function(taverage, rh, w, pr, dew_point, lat, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   if(is.null(taverage) | is.null(rh) | is.null(w) | is.null(pr) | is.null(dew_point) | is.null(lat)) { 
     return(NULL) 
@@ -3343,9 +3368,10 @@ fwi = calculate_130 = function(taverage, rh, w, pr, dew_point, lat, data_names=N
 
   # # fergus: Comparar las 2 funciones
   # dayLength = DayLengths(lat)
-  # data = index_CFWI(Month=as.numeric(months(names(taverage))),Days=as.POSIXlt(chron(names(taverage)))$yday+1,Temp=taverage, Dew = dew_point, WS = w, Rain = pr, daylist=dayLength)
+  # data = index_CFWI(Month=as.numeric(months(names(taverage))), Days=as.POSIXlt(chron(names(taverage)))$yday+1, Temp=taverage, Dew = dew_point, WS = w, Rain = pr, daylist = dayLength)
   # names(data) = names(taverage)
 
+  # fireDanger
   missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(rh) | is.na(pr) | is.na(w)
   data.nas = fwi1D(months=as.numeric(months(names(taverage[!missing.values]))), Tm=taverage[!missing.values], H=rh[!missing.values], r=pr[!missing.values], W=w[!missing.values], lat = lat)
   data = taverage
@@ -3357,7 +3383,7 @@ fwi = calculate_130 = function(taverage, rh, w, pr, dew_point, lat, data_names=N
 index_units[130] = C_index
 index_titles[130] = "Canadian Fire Weather Index"
 index_names[130] = "fwi"
-attr(calculate_130, "data") <- c(NA)
+attr(calculate_130, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, DEWPOINT, LAT)
 
 #' 131. KBDI: Keetch-Byran Drought Index
 #' Combination of daily maximum in temperature and precipitation
@@ -3373,7 +3399,7 @@ attr(calculate_130, "data") <- c(NA)
 #' @return KBDI
 #' @export
 #' @examples
-#' kbdi(taverage = taverage.value, pr=pr.value)
+#' kbdi(taverage = data_all[[TMEAN]], pr=data_all[[PRECIPITATION]])
 kbdi = calculate_131 = function(taverage, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   if(is.null(taverage) | is.null(pr)) { 
     return(NULL) 
@@ -3383,24 +3409,27 @@ kbdi = calculate_131 = function(taverage, pr, data_names=NULL, time.scale=YEAR, 
 # daily maximum temperature T
 # mean annual rainfall R
 
+  # # fergus: Comparar las 2 funciones
+  # byYears = calcf_data(data=pr, extract_names=select_time_function(time.scale), operation=sum, na.rm = na.rm)
+  # map = mean(byYears, na.rm=TRUE)
+  # data.all = index_KBDI(Temperature=taverage, Rain=pr, MAP=map)
+  # names(data.all) = names(taverage)
 
+  # # fireDanger
+  # missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(pr)
+  # data.nas = kbdindex(date=chron(names(taverage[!missing.values])), t=taverage[!missing.values], p=pr[!missing.values])
+  # data.all = taverage
+  # data.all[] = NA
+  # data.all[!missing.values] = data.nas[!missing.values] #fergus: corregir [!missing.values]
 
-  # fergus: Comparar las 2 funciones
-  byYears = calcf_data(data=pr, extract_names=select_time_function(time.scale), operation=sum, na.rm = na.rm)
-  map = mean(byYears, na.rm=na.rm)
-  data = index_KBDI(Temperature=taverage, Rain=pr, MAP=map)
-  names(data) = names(taverage)
-
-  missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(pr)
-  data.nas = kbdindex(date=chron(names(taverage[!missing.values])), t=taverage[!missing.values], p=pr[!missing.values])
-  names(data.nas) = names(taverage)
-  byYears = calcf_data(data=data.nas, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
+  # byYears = calcf_data(data=data.all, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
+  byYears = NULL
   return(byYears)
 }
 index_units[131] = C_index
 index_titles[131] = "Keetch-Byran Drought Index"
 index_names[131] = "kbdi"
-attr(calculate_131, "data") <- c(NA)
+attr(calculate_131, "data") <- c(TMEAN, PRECIPITATION)
 
 #' 132. FFDI: McArthur Forest Fire Danger Index
 #' Combination of temperature, relative humidity, surface wind speed and KBDI
@@ -3416,24 +3445,25 @@ attr(calculate_131, "data") <- c(NA)
 #' @return FFDI
 #' @export
 #' @examples
-#' ffdi(taverage = taverage.value, pr=pr.value, rh=rh.value, w=w.value)
+#' ffdi(taverage = data_all[[TMEAN]], pr=data_all[[PRECIPITATION]], rh=data_all[[HUMIDITY]], w=data_all[[WIND]])
 ffdi = calculate_132 = function(taverage, pr, rh, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   if(is.null(taverage) | is.null(pr) | is.null(rh) | is.null(w)) { 
     return(NULL) 
   }
 
-  byYears = calcf_data(data=pr, extract_names=select_time_function(time.scale), operation=sum, na.rm = na.rm)
-  map = mean(byYears, na.rm=na.rm)
-  kdbiData = index_KBDI(Temperature=taverage, Rain=pr, MAP=map)
-  data = index_MA(Temperature=taverage, Rain=pr, DewPoint=rh, MAP=map, Wind=w, KBDI=kdbiData)
-  names(data) = names(taverage)
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
+  # byYears = calcf_data(data=pr, extract_names=select_time_function(time.scale), operation=sum, na.rm = na.rm)
+  # map = mean(byYears, na.rm=TRUE)
+  # kdbiData = index_KBDI(Temperature=taverage, Rain=pr, MAP=map)
+  # data = index_MA(Temperature=taverage, Rain=pr, DewPoint=rh, MAP=map, Wind=w, KBDI=kdbiData)
+  # names(data) = names(taverage)
+  # byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
+  byYears = NULL
   return(byYears)
 }
 index_units[132] = C_index
 index_titles[132] = "McArthur Forest Fire Danger Index"
 index_names[132] = "ffdi"
-attr(calculate_132, "data") <- c(NA)
+attr(calculate_132, "data") <- c(TMEAN, PRECIPITATION, HUMIDITY, WIND)
 
 #' 133. MNI: Modified Nesterov Index
 #' Cummulative function of temperature and dew point deficit
@@ -3449,7 +3479,7 @@ attr(calculate_132, "data") <- c(NA)
 #' @return MNI
 #' @export
 #' @examples
-#' mni(dew_point=dew_point.value, rh=rh.value, taverage=taverage.value, pr=pr.value)
+#' mni(dew_point=data_all[[DEWPOINT]], taverage=data_all[[TMEAN]], rh=data_all[[HUMIDITY]], pr=data_all[[PRECIPITATION]])
 mni = calculate_133 = function(dew_point, taverage, rh, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   if(is.null(dew_point) | is.null(taverage) | is.null(rh) | is.null(pr)) { return(NULL) 
   }
@@ -3473,6 +3503,7 @@ mni = calculate_133 = function(dew_point, taverage, rh, pr, data_names=NULL, tim
   data = index_MMI(DewPoint=dew_point, Temperature=taverage, Rain=pr)
   names(data) = names(taverage)
 
+  # fireDanger
   data = nesterovIndex(t=taverage, rh=rh, p=pr)
   names(data) = names(taverage)
 
@@ -3482,7 +3513,7 @@ mni = calculate_133 = function(dew_point, taverage, rh, pr, data_names=NULL, tim
 index_units[133] = C_index
 index_titles[133] = "Modified Nesterov Index"
 index_names[133] = "mni"
-attr(calculate_133, "data") <- c(NA)
+attr(calculate_133, "data") <- c(DEWPOINT, TMEAN, HUMIDITY, PRECIPITATION)
 
 #' 134. FFFI: Finnish Forest Fire Index
 #' Combination of temperature, relative humidity, wind speed, radiation and precipitation (package fireDanger)
@@ -3498,11 +3529,11 @@ attr(calculate_133, "data") <- c(NA)
 #' @return FFFI
 #' @export
 #' @examples
-#' fffi(data = radiation.value, toa=toa.value)
+#' fffi(data = data_all[[RADIATION]], toa=data_all[[RADIATIONTOA]])
 fffi = calculate_134 = function(data, toa, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data, toa){
     toa  = toa[names(data)]
-    return(data/toa)
+    return(meanf(data/toa))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, toa=toa, data_names=data_names)
   return(byYears)
@@ -3510,7 +3541,7 @@ fffi = calculate_134 = function(data, toa, data_names=NULL, time.scale=YEAR, na.
 index_units[134] = C_index
 index_titles[134] = "Finnish Forest Fire Index"
 index_names[134] = "fffi"
-attr(calculate_134, "data") <- c(NA)
+attr(calculate_134, "data") <- c(RADIATION, RADIATIONTOA)
 
 ####Tourism
 #' 135. HCIU: Holliday Climate Index Urban
@@ -3524,7 +3555,7 @@ attr(calculate_134, "data") <- c(NA)
 #' @return HCIU
 #' @export
 #' @examples
-#' hciu(pr = pr.value, w=w.value)
+#' hciu(pr = data_all[[PRECIPITATION]], w=data_all[[WIND]])
 hciu = calculate_135 = function(pr, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   #tc: thermal comfort 
   # data = 4*tc + 2*cloud_cover + 3*pr + w
@@ -3537,7 +3568,7 @@ hciu = calculate_135 = function(pr, w, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[135] = C_index
 index_titles[135] = "Holliday Climate Index Urban"
 index_names[135] = "hciu"
-attr(calculate_135, "data") <- c(NA)
+attr(calculate_135, "data") <- c(PRECIPITATION, WIND)
 
 #' 136. TCI: Tourism Climatic Index
 #' Standard index computed by ECA&D; Described at Miezkowski (1985), conceptual formula: TCI = 4cid + cia + 2R + 2S + W, where CId is a daytime comfort index, CIa a daily comfort index, R is cumulated rainfall, S the daily sunshine hours and W wind speed
@@ -3565,12 +3596,14 @@ tci = calculate_136 = function(data, sunshine, w, data_names=NULL, time.scale=YE
 index_units[136] = C_index
 index_titles[136] = "Tourism Climatic Index"
 index_names[136] = "tci"
-attr(calculate_136, "data") <- c(NA)
+attr(calculate_136, "data") <- c(PRECIPITATION, RADIATION, WIND)
 
 #' 137. TCI60: Good tourism days TCI>60
 #' Number of days TCI>60 , standard ECA&D
 #' 
-#' @param data Tourism Climatic Index
+#' @param data precipitation
+#' @param sunshine net radiation 
+#' @param w average wind
 #' @param time.scale month, season or year
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
@@ -3578,7 +3611,8 @@ attr(calculate_136, "data") <- c(NA)
 #' @export
 #' @examples
 #' tci60(data = tci.value)
-tci60 = calculate_137 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+tci60 = calculate_137 = function(data, sunshine, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  data = tci(data=pr.value, sunshine=radiation.value, w=w.value, data_names=data_names, time.scale=time.scale, na.rm = na.rm)
   function_ = function(data){
     return(sum(data>60, na.rm = na.rm))
   }
@@ -3588,12 +3622,14 @@ tci60 = calculate_137 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[137] = C_days
 index_titles[137] = "Good tourism days TCI>60"
 index_names[137] = "tci60"
-attr(calculate_137, "data") <- c(NA)
+attr(calculate_137, "data") <- c(PRECIPITATION, RADIATION, WIND)
 
 #' 138. TCI80: Excellent tourism days TCI>80
 #' Number of days TCI>80, standard ECA&D
 #' 
-#' @param data Tourism Climatic Index
+#' @param data precipitation
+#' @param sunshine net radiation 
+#' @param w average wind
 #' @param time.scale month, season or year
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
@@ -3601,7 +3637,8 @@ attr(calculate_137, "data") <- c(NA)
 #' @export
 #' @examples
 #' tci80(data = tci.value)
-tci80 = calculate_138 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){ 
+tci80 = calculate_138 = function(data, sunshine, w,  data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  data = tci(data=pr.value, sunshine=radiation.value, w=w.value, data_names=data_names, time.scale=time.scale, na.rm = na.rm)
   function_ = function(data){
     return(sum(data>80, na.rm = na.rm))
   }
@@ -3611,7 +3648,7 @@ tci80 = calculate_138 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[138] = C_days
 index_titles[138] = "Excellent tourism days TCI>80"
 index_names[138] = "tci80"
-attr(calculate_138, "data") <- c(NA)
+attr(calculate_138, "data") <- c(PRECIPITATION, RADIATION, WIND)
 
 i = 1
 for (i in 1:length(index_tipes)){

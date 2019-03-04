@@ -81,9 +81,9 @@ calc_humid<-function(T,Dp){
 
 lookupDF<- function(DI,T,MAP,kbdilookup){
 	if(T<1){T<-1}
-	for(s in 1:length(MinMAP)){
+	for(s in 1:length(kbdilookup$MinMAP)){
 		if(T >= kbdilookup$MinTemp[s] & T < kbdilookup$MaxTemp[s]+1 & DI >= kbdilookup$MinDI[s] & DI < kbdilookup$MaxDI[s]+1 & MAP >= kbdilookup$MinMAP[s] & MAP < kbdilookup$MaxMAP[s]+1){
-   			idx<-DF[s]
+   			idx<-kbdilookup$DF[s]
 			break
 		}
 	}

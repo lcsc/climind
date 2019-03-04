@@ -32,6 +32,21 @@ TMIN = "tn" # daily minimum temperature TN, ℃
 TMAX = "tx" # daily maximum temperature TX, ℃
 PRECIPITATION = "rr" # daily precipitation sum RR, mm
 LAT = "lat" # lat, degree
+RADIATION = "radiation" # net radiation, W/m2
+DEWPOINT = "dewpoint" #dew point, ℃
+WIND = "wind" #average wind, m/s
+HUMIDITY = "humidity" #relative humidity, %
+VAPOUR = "vapour" #water vapour pressure, hPa
+WINDGUST = "windgust" #maximum wind gust, m/s
+EVAPOTRANSPIRATION = "evapotranspiration" #Evapotranspiration et0 -> MAL
+SNOWFALL = "snowfall" # snowfall, m of water equivalent
+SNOWDEPTH = "snowdepth" #snowdepth, m of water equivalent
+INSOLATION = "insolation" #insolation, hours of sun -> MAL
+CLOUD = "cloud" # cloud, %
+CLOUD100 = "cloud100" #cloud base below 100 meter, %
+RADIATIONTOA = "radiationtoa" #solar radiation at TOA (alt top of the atmosphere empirically obtained), W/m2
+MDE = "mde"
+SNOWDEPTHTHICKNESS = "snowdepththickness"
 
 # Necesitamos
 # mean radiation, W/m-2
@@ -54,6 +69,7 @@ WINTER = "winter" # diciembre, enero, febrero - 12, 1, 2
 MONTH = "month"
 YEAR = "year"
 SEASON = "season"
+HYDROYEAR = "hydrological_years"
 
 JAN = "Jan"
 FEB = "Feb"
@@ -224,6 +240,19 @@ seasonals = function(time){
   return(seasons)
 }
 
+#' Hydrological years
+#'
+#' @param time chron
+#' @return seasonals by years
+#' @examples
+#' hydrological_years(time=chron(names(tmax.value)))
+hydrological_years = function(time){
+  changeMonths <- as.numeric(months(time))%in%c(10, 11, 12)
+  timeNames <- as.numeric(as.character(years(time)))
+  timeNames[changeMonths] <- timeNames[changeMonths] + 1
+  return(timeNames)
+}
+
 #' Seasonals by years
 #'
 #' @param time chron
@@ -260,9 +289,15 @@ select_all_time_function = function(time.scale){
       extract_names = function(time)  {
        return(seasonals(time)) 
      }
-    }else{ #time.scale==YEAR
-      extract_names = function(...) { 
-        return(YEAR) 
+    }else{ 
+      if(time.scale==HYDROYEAR){
+        extract_names = function(time)  {
+          return(YEAR) 
+        }
+      }else{ #time.scale==YEAR
+        extract_names = function(...) { 
+          return(YEAR) 
+        }
       }
     }
   }
@@ -287,8 +322,12 @@ select_time_function = function(time.scale){
   }else{
     if(time.scale==SEASON){
       extract_names = seasonals_years
-    }else{ #time.scale==YEAR
-      extract_names = years
+    }else{
+      if(time.scale==HYDROYEAR){
+        extract_names = hydrological_years
+      }else{ #time.scale==YEAR
+        extract_names = years
+      }
     }
   }
   return(extract_names)
@@ -298,17 +337,23 @@ select_time_function = function(time.scale){
 #'
 #' @param tmin minimum temperature
 #' @param tmax maximum temperature
-#' @param insolation sunshine duration
+#' @param toa radiation toa
 #' @param w average wind
 #' @param lat latitude
 #' @param tdew dew point
+#' @param radiation radiation
+#' @param insolation insolation
 #' @param rh relative humidity
 #' @return et0
 #' @export
 #' @examples
 #' calc_eto(tmin = tmin.value, tmax = tmax.value, 
 #' insolation = insolation.value, w = w.value, lat=lat, tdew = dew_point.value)
-calc_eto = function(tmin, tmax, insolation, w, lat, tdew, rh=NA, na.rm=FALSE){
+calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation=NA, rh=NA, na.rm=FALSE){
+
+  toa = toa/1000000
+  radiation = radiation/1000000
+
   time = chron(names(tmin))
   time1 = time[2:length(time)]
   time1 = c(time1, 
@@ -316,13 +361,74 @@ calc_eto = function(tmin, tmax, insolation, w, lat, tdew, rh=NA, na.rm=FALSE){
     as.numeric(as.character(days(mean(time1-time[-length(time)], na.rm=na.rm))))
     )
 
+#   mde_ori=mde
+#   dat_msum_ori=dat_msum
+#   load("/home/daily/update_year_old/prueba_penman.RData")
+#   prueba_penman2 = penman_fao_diario(
+#         Tmin = dat_tmin[!is.na(dat_tmin)],
+#         Tmax = dat_tmax[!is.na(dat_tmin)],
+#         U2 = dat_w[!is.na(dat_tmin)],
+#         lat = rep(50, length(lat[!is.na(dat_tmin)])),#lat = lat[!is.na(dat_tmin)], # 36 - 43
+#         Rs = dat_rs[!is.na(dat_tmin)],
+#         tsun = dat_ins[!is.na(dat_tmin)],
+#         Tdew = dat_td[!is.na(dat_tmin)],
+#         z = mde[!is.na(dat_tmin)],
+#         J = dat_msum,
+#         Ra = NA,
+#         CC = NA,
+#         ed = NA,
+#         RH = NA,
+#         P = NA,
+#         P0 = NA,
+#         crop = 'short',
+#         na.rm = FALSE
+#       )
+#  a = prueba_penman2;minf(a); maxf(a); meanf(a)
+
+# aMin = which(minf(prueba_penman2)==prueba_penman2)
+# dat_tmin[!is.na(dat_tmin)][aMin]
+# dat_tmax[!is.na(dat_tmin)][aMin]
+# dat_w[!is.na(dat_tmin)][aMin]
+# dat_rs[!is.na(dat_tmin)][aMin]
+# dat_ins[!is.na(dat_tmin)][aMin]
+# dat_td[!is.na(dat_tmin)][aMin]
+# mde[!is.na(dat_tmin)][aMin]
+# dat_msum
+
+# penman_fao_diario(
+#         Tmin = 8, # dat_tmin[!is.na(dat_tmin)][aMin],
+#         Tmax = 12, #dat_tmax[!is.na(dat_tmin)][aMin],
+#         U2 = 1, # dat_w[!is.na(dat_tmin)][aMin],
+#         lat = 50, # rep(50, length(lat[!is.na(dat_tmin)]))[aMin],#lat = lat[!is.na(dat_tmin)], # 36 - 43
+#         Rs = 9, # dat_rs[!is.na(dat_tmin)][aMin],
+#         tsun = NA,
+#         Tdew = 10, # dat_td[!is.na(dat_tmin)][aMin],
+#         z = 100, #mde[!is.na(dat_tmin)][aMin],
+#         J = 4, #dat_msum,
+#         Ra = NA,
+#         CC = NA,
+#         ed = NA,
+#         RH = NA,
+#         P = NA,
+#         P0 = NA,
+#         crop = 'short',
+#         na.rm = FALSE
+#       )
+#  a = dat_rs;minf(a); maxf(a); meanf(a)
+
+#   lat = data_all[[LAT]]
+#   mde = mde_ori
+
   # Fao-56 Penman-Monteith
   dat_mlen = time1 - time
   dat_msum = as.POSIXlt(time)$yday + round(dat_mlen/2)
-  data <- penman_fao_diario(Tmin=tmin, Tmax=tmax, U2=w, J=dat_msum, lat=lat, Rs=NA, tsun=insolation, ed=NA, Tdew=tdew, RH=rh, P=NA, P0=NA, z=NA, crop="short")
-  data <- data*dat_mlen
-
-  data=tmin
+  # Tmin=tmin; Tmax=tmax; Ra=toa; Rs=radiation; tsun=insolation; U2=w; J=dat_msum; lat=lat; ed=NA; Tdew=tdew; RH=rh; P=NA; P0=NA; z=mde; crop="short"
+  # Tmin=tmin[20000]; Tmax=tmax[20000]; Ra=toa[20000]; Rs=radiation[20000]; tsun=insolation[20000]; U2=w[20000]; J=dat_msum[20000]; lat=lat; ed=NA; Tdew=tdew[20000]; RH=rh[20000]; P=NA; P0=NA; z=mde; crop="short"
+  # penman_fao_diario(Tmin=tmin[20000], Tmax=tmax[20000], Ra=toa[20000], Rs=radiation[20000], tsun=insolation[20000], U2=w[20000], J=dat_msum[20000], lat=lat, ed=NA, Tdew=tdew[20000], RH=rh[20000], P=NA, P0=NA, z=mde, crop="short")
+  data <- penman_fao_diario(Tmin=tmin, Tmax=tmax, Ra=toa, Rs=radiation, tsun=insolation, U2=w, J=dat_msum, lat=lat, ed=NA, Tdew=tdew, RH=rh, P=NA, P0=NA, z=mde, crop="short")
+  data <- array(data*dat_mlen)
+  names(data) <- names(tmin)
+  data[data<0] = 0
   return(data)
 }
 
@@ -359,6 +465,124 @@ td_to_vapor <- function(td){
   td = td + 273.15 # Pasamos la temperatus a Kelvin
   r = e * exp((l/r) * (1/t - 1/td))
   return(r)
+}
+
+#' Transforma radiancia en insolación
+#'
+#' @param radiation
+#' @param lat
+#' @param mde
+#'
+#' @return insolación en horas
+#' @export
+#'
+#' @examples
+#' data[[INSOLATION]] = r_to_in(radiation=data[[RADIATION]], lat=data[[LAT]], mde=data[[MDE]])
+r_to_in = function(radiation, lat, mde) {
+  series = radiation
+  time.chron = chron(names(radiation))
+  t = 20111
+  for (t in 1:length(time.chron)) {
+    # dat_mlen = as.POSIXlt(time.chron[t + 1])$yday - as.POSIXlt(time.chron[t])$yday
+    # if (is.na(dat_mlen) | dat_mlen < 0) {
+    #   dat_mlen = 9   
+    # }
+    dat_mlen = 1
+    dat_msum = as.POSIXlt(time.chron[t])$yday + round(dat_mlen / 2)
+    series[t] = penman_rs(J = dat_msum, lat = lat, tsun = radiation[t]/1000000, z = mde, ret = INSOLATION) #MJ/m2
+
+    # series[t] = insolation(zenith=lat, jd = dat_msum, height = mde, visibility, RH, tempK, O3, alphag)
+
+  }
+
+# plot(radiation*(24*60*60)/(1000000), type="l")
+# plot(series, type="l")
+
+# # a=nc_open("descargas/mean_surface_downward_short_wave_radiation_flux_2009.nc")
+# a=nc_open("descargas/surface_solar_radiation_downwards_2009.nc")
+# # a=nc_open("descargas/maximum_2m_temperature_since_previous_post_processing_2009.nc")
+# a=nc_open("descargas/total_precipitation_2009.nc")
+# aa=ncvar_get(a, a$var[[1]]$name, c(1,1,1), c(-1,-1,48))
+# aa[90,,1]=270
+# aa[,135,1]=270
+# image(aa[,163:1,1])
+# bb1=apply(aa[,,1:12], c(1,2), sumf)*3600
+# bb2=apply(aa[,,13:24], c(1,2), sumf)*3600
+# bb2[,121] = -1000
+# image(bb2)
+
+# aa=ncvar_get(a, a$var[[1]]$name, c(90,135,1), c(1,1,-1))
+# aaTime=ncvar_get(a, "time") #hours since 1900-01-01 00:00:00.0
+# aaTime=chron(aaTime/24, origin=c(month=1, day=1, year=1900))
+
+# bb = aa[seq(1, length(aa), 24)]
+# for(i in 1:23){
+#   print(seq(1, length(aa), 24)[1]+i)
+#   bb = bb+aa[seq(1, length(aa), 24)+i]
+# }
+# # bb = bb*3600
+
+# plot(bb/1000000, type="l")
+
+# meanf(bb)
+
+
+  # series = series/10
+  series[series < 0] <- 0
+  series[series == Inf] <- NA
+  series[series == -Inf] <- NA
+
+  # #' Correción de insolación
+  # #'
+  # #' @param data.week datos
+  # #' @param g latitud en grados
+  # #'
+  # #' @return datos corregidos
+  # #' @export
+  # #'
+  # #' @examples
+  # #' Tenemos un test: test_in_final_correction
+  # in_final_correction =  function(data.week, g) {
+
+  #   #' Valores in, día juliano, latitud en grados de los puntos de los que se extraen los valores de in
+  #   #'
+  #   #' @param inmax datos
+  #   #' @param ji fecha a calcular
+  #   #' @param g latitud den grados (mismo orden y número de datos que inmax)
+  #   #'
+  #   #' @return datos corregidos
+  #   #' @export
+  #   #'
+  #   #' @examples
+  #   in_final_correction_t = function(inmax, ji, g) {
+  #     inmax[inmax < 0] = 0
+  #     inmax[inmax == Inf] = NA
+  #     inmax[inmax == -Inf] = NA
+  #     a <- 0.409 * sin(yday(ji) * 2 * pi / 365 - 1.39)
+  #     w <- acos(-tan(g) * tan(a))
+  #     n <- w * 24 / pi
+  #     n.ok <- inmax > n && !is.na(inmax)
+  #     inmax[n.ok] <- n[n.ok]
+  #     return(inmax)
+  #   }
+
+  #   t = rownames(data.week)[1]
+
+  #   inmax.name <- colnames(data.week[t,])
+  #   if(is.null(inmax.name)){
+  #     inmax.name <- names(data.week[t,])
+  #   }
+  #   g <- g[inmax.name]
+
+  #   for (t in rownames(data.week)) {
+  #     chron.t = chronf(t)
+  #     data.week[t,] = in_final_correction_t(inmax = data.week[t,], ji = chron.t, g=g)
+  #   }
+  #   return(data.week)
+  # }
+
+  # data_siar = in_final_correction(data.week=data_siar, g=geo$g)
+  return(series)
 }
 
 #' Average temperature
@@ -415,6 +639,7 @@ minimum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 calc_spi = function(data, data_names=NULL, scale=3, na.rm=FALSE){
   if(is.null(data)) { return(NULL) }
   byMonths = calcf_data(data=data, extract_names=months_years, operation=sum, na.rm=na.rm)
+  # byMonths = byMonths[as.character(1979:2017), ]
   if(sum(is.na(byMonths))==0){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
     spi.vector = array(spi(byMonths.vector, scale=scale, na.rm = TRUE)$fitted[, 1])

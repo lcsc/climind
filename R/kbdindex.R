@@ -54,13 +54,13 @@ kbdindex <- function (date, t, p, wrs = 5, start.date = NULL) { # requires date 
             }
             ind2 <- which(wks == unique(wks[ind]))[1]
             start <- which(p[ind2:length(p)] == 0)[1] + ind2 - 1 # first day after the wet spell leading to the wrs parameter
-            print(paste("Index initialization on", as.Date(d[start]), "after a wet spell greater than", round(wrs / .0393700787402), "mm in a week"))
+            # print(paste("Index initialization on", as.Date(d[start]), "after a wet spell greater than", round(wrs / .0393700787402), "mm in a week"))
       }else{# Fixed start date (snow melt...)
             start <- which(d == as.POSIXlt(start))
             if (length(start) == 0) {
                   start = 1
             }
-            print(paste("Start date of the index set to", as.Date(d[start])))
+            # print(paste("Start date of the index set to", as.Date(d[start])))
       }
       # Data filtering, starts after heavy rain----------------------------------------------
       t <- t[start:length(t)]
