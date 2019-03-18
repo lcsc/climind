@@ -75,6 +75,7 @@ fwi1D <- function(dates,
     non.na.ind <- setdiff(1:length(months), rm.ind)
     if (length(rm.ind) > 0) {
         warning("Missing values were removed from the time series before computation")
+        dates <- dates[-rm.ind]
         mes <- mes[-rm.ind]
         Tm <- Tm[-rm.ind]
         H <- H[-rm.ind]
@@ -234,6 +235,7 @@ fwi1D <- function(dates,
     }
     aux <- NULL
     if (spin.up > 0) out[1:spin.up,] <- NA
+    rownames(out) <- dates
     return(out)
 }
 # End
