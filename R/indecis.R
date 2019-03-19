@@ -82,7 +82,7 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
 
   data[[LAT]] = lat
 
-  if(!is.null(data[[SNOWDEPTH]])){
+  if(is.null(data[[SNOWDEPTHTHICKNESS]]) & !is.null(data[[SNOWDEPTH]])){
     data[[SNOWDEPTHTHICKNESS]] = data[[SNOWDEPTH]]*0.312
   }
   if(is.null(data[[VAPOUR]]) &  !is.null(data[[DEWPOINT]])){
@@ -100,7 +100,7 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
   if(is.null(data[[EVAPOTRANSPIRATION]]) & !is.null(data[[TMIN]]) & !is.null(data[[MDE]]) & !is.null(data[[TMAX]]) & (!is.null(data[[RADIATION]]) | !is.null(data[[INSOLATION]])) & !is.null(data[[WIND]]) & !is.null(data[LAT]) & !is.null(data[[DEWPOINT]])){
     # tmin = data[[TMIN]]; tmax = data[[TMAX]]; radiation = data[[RADIATION]]; toa = data[[RADIATIONTOA]]; w = data[[WIND]]; lat=data[[LAT]]; tdew = data[[DEWPOINT]]; mde=data[[MDE]]; rh=data[[HUMIDITY]]
     # data[[EVAPOTRANSPIRATION]] = calc_eto(tmin = data[[TMIN]], tmax = data[[TMAX]], radiation = data[[RADIATION]], insolation=data[[INSOLATION]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], rh=data[[HUMIDITY]])
-    data[[EVAPOTRANSPIRATION]] = calc_eto(tmin = data[[TMIN]], tmax = data[[TMAX]], radiation = data[[RADIATION]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], rh=data[[HUMIDITY]])
+    data[[EVAPOTRANSPIRATION]] = calc_eto(tmin = data[[TMIN]], tmax = data[[TMAX]], radiation = data[[RADIATION]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], rh=data[[HUMIDITY]], insolation=data[[INSOLATION]])
   }
 
   # Comprobación de valores
@@ -132,6 +132,8 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
   if(sum(data[[CLOUD100]]>100, na.rm = TRUE)>0){
     warning("CLOUD100 > 100")
   }
+  # data_all=data
+
   #' Select no null parameters
   #'
   #' @return no null parameters

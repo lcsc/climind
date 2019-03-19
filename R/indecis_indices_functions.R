@@ -351,8 +351,8 @@ select_time_function = function(time.scale){
 #' insolation = insolation.value, w = w.value, lat=lat, tdew = dew_point.value)
 calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation=NA, rh=NA, na.rm=FALSE){
 
-  toa = toa/1000000
-  radiation = radiation/1000000
+  toaMj = toa/1000000
+  radiationMj = radiation/1000000
 
   time = chron(names(tmin))
   time1 = time[2:length(time)]
@@ -361,73 +361,14 @@ calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation
     as.numeric(as.character(days(mean(time1-time[-length(time)], na.rm=na.rm))))
     )
 
-#   mde_ori=mde
-#   dat_msum_ori=dat_msum
-#   load("/home/daily/update_year_old/prueba_penman.RData")
-#   prueba_penman2 = penman_fao_diario(
-#         Tmin = dat_tmin[!is.na(dat_tmin)],
-#         Tmax = dat_tmax[!is.na(dat_tmin)],
-#         U2 = dat_w[!is.na(dat_tmin)],
-#         lat = rep(50, length(lat[!is.na(dat_tmin)])),#lat = lat[!is.na(dat_tmin)], # 36 - 43
-#         Rs = dat_rs[!is.na(dat_tmin)],
-#         tsun = dat_ins[!is.na(dat_tmin)],
-#         Tdew = dat_td[!is.na(dat_tmin)],
-#         z = mde[!is.na(dat_tmin)],
-#         J = dat_msum,
-#         Ra = NA,
-#         CC = NA,
-#         ed = NA,
-#         RH = NA,
-#         P = NA,
-#         P0 = NA,
-#         crop = 'short',
-#         na.rm = FALSE
-#       )
-#  a = prueba_penman2;minf(a); maxf(a); meanf(a)
-
-# aMin = which(minf(prueba_penman2)==prueba_penman2)
-# dat_tmin[!is.na(dat_tmin)][aMin]
-# dat_tmax[!is.na(dat_tmin)][aMin]
-# dat_w[!is.na(dat_tmin)][aMin]
-# dat_rs[!is.na(dat_tmin)][aMin]
-# dat_ins[!is.na(dat_tmin)][aMin]
-# dat_td[!is.na(dat_tmin)][aMin]
-# mde[!is.na(dat_tmin)][aMin]
-# dat_msum
-
-# penman_fao_diario(
-#         Tmin = 8, # dat_tmin[!is.na(dat_tmin)][aMin],
-#         Tmax = 12, #dat_tmax[!is.na(dat_tmin)][aMin],
-#         U2 = 1, # dat_w[!is.na(dat_tmin)][aMin],
-#         lat = 50, # rep(50, length(lat[!is.na(dat_tmin)]))[aMin],#lat = lat[!is.na(dat_tmin)], # 36 - 43
-#         Rs = 9, # dat_rs[!is.na(dat_tmin)][aMin],
-#         tsun = NA,
-#         Tdew = 10, # dat_td[!is.na(dat_tmin)][aMin],
-#         z = 100, #mde[!is.na(dat_tmin)][aMin],
-#         J = 4, #dat_msum,
-#         Ra = NA,
-#         CC = NA,
-#         ed = NA,
-#         RH = NA,
-#         P = NA,
-#         P0 = NA,
-#         crop = 'short',
-#         na.rm = FALSE
-#       )
-#  a = dat_rs;minf(a); maxf(a); meanf(a)
-
-#   lat = data_all[[LAT]]
-#   mde = mde_ori
-
   # Fao-56 Penman-Monteith
   dat_mlen = time1 - time
   dat_msum = as.POSIXlt(time)$yday + round(dat_mlen/2)
-  # Tmin=tmin; Tmax=tmax; Ra=toa; Rs=radiation; tsun=insolation; U2=w; J=dat_msum; lat=lat; ed=NA; Tdew=tdew; RH=rh; P=NA; P0=NA; z=mde; crop="short"
-  # Tmin=tmin[20000]; Tmax=tmax[20000]; Ra=toa[20000]; Rs=radiation[20000]; tsun=insolation[20000]; U2=w[20000]; J=dat_msum[20000]; lat=lat; ed=NA; Tdew=tdew[20000]; RH=rh[20000]; P=NA; P0=NA; z=mde; crop="short"
-  # penman_fao_diario(Tmin=tmin[20000], Tmax=tmax[20000], Ra=toa[20000], Rs=radiation[20000], tsun=insolation[20000], U2=w[20000], J=dat_msum[20000], lat=lat, ed=NA, Tdew=tdew[20000], RH=rh[20000], P=NA, P0=NA, z=mde, crop="short")
-  data <- penman_fao_diario(Tmin=tmin, Tmax=tmax, Ra=toa, Rs=radiation, tsun=insolation, U2=w, J=dat_msum, lat=lat, ed=NA, Tdew=tdew, RH=rh, P=NA, P0=NA, z=mde, crop="short")
+  # Tmin=tmin; Tmax=tmax; Ra=toaMj; Rs=radiationMj; tsun=insolation; U2=w; J=dat_msum; lat=lat; ed=NA; Tdew=tdew; RH=rh; P=NA; P0=NA; z=mde; crop="short"
+  data <- penman_fao_diario(Tmin=tmin, Tmax=tmax, Ra=toaMj, Rs=radiationMj, tsun=insolation, U2=w, J=dat_msum, lat=lat, ed=NA, Tdew=tdew, RH=rh, P=NA, P0=NA, z=mde, crop="short")
   data <- array(data*dat_mlen)
   names(data) <- names(tmin)
+  print(paste("Values < 0:", sum(data<0, na.rm=TRUE)))
   data[data<0] = 0
   return(data)
 }
