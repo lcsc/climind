@@ -1933,14 +1933,14 @@ attr(calculate_79, "data") <- c(TMEAN, TMIN, TMAX)
 
 #' 80. BIO8: TG of wettest quarter
 #' 
-#' @param taverage medium temperature
 #' @param pr precipitation
+#' @param taverage medium temperature
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
 #' @return BIO8
 #' @export
 #' @examples
-#' bio8(pr = pr.value, taverage = taverage.value)
+#' bio8(pr = data_all[[PRECIPITATION]], taverage = data_all[[TMEAN]])
 bio8 = calculate_80 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, pr){
     byMonths = months_quarter(functionValues=pr[names(data)], selectFunction=max, selectValues=data, na.rm=na.rm)
@@ -1956,14 +1956,14 @@ attr(calculate_80, "data") <- c(PRECIPITATION, TMEAN)
 
 #' 81. BIO9: TG of driest quarter
 #' 
-#' @param taverage medium temperature 
 #' @param pr precipitation
+#' @param taverage medium temperature 
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
 #' @return BIO9
 #' @export
 #' @examples
-#' bio9(pr = pr.value, taverage = taverage.value)
+#' bio9(pr = data_all[[PRECIPITATION]], taverage =  data_all[[TMEAN]])
 bio9 = calculate_81 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, pr){
     byMonths = months_quarter(functionValues=pr[names(data)], selectFunction=min, selectValues=data, na.rm=na.rm)
@@ -1980,21 +1980,21 @@ attr(calculate_81, "data") <- c(PRECIPITATION, TMEAN)
 #' 82. BIO20: Mean radiation 
 #' https://www.edenextdata.com/?q=content/climond-bioclimatic-variables-2030 (W m-2)
 #' 
-#' @param data radiation
+#' @param data radiation en w/m2
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
 #' @return BIO20
 #' @export
 #' @examples
-#' bio20(data = data[[RADIATION]])
+#' bio20(data = data[[RADIATION_W]])
 bio20 = calculate_82 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(average_temp(data=data, data_names=data_names, time.scale=time.scale, na.rm=na.rm))
 }
 index_units[82] = C_radiation
 index_titles[82] = "Mean radiation"
 index_names[82] = "bio20"
-attr(calculate_82, "data") <- c(RADIATION)
+attr(calculate_82, "data") <- c(RADIATION_W)
 
 #' 83. UTCI: Universal thermal climate index
 #' UTCI (Blazejczyk et all, 2012) (Air temperature, Humidity, Wind)
@@ -2326,8 +2326,8 @@ attr(calculate_85, "data") <- c(TMEAN, HUMIDITY)
 #' @examples
 #' wci(taverage = data_all[[TMEAN]], w = data_all[[WIND]])
 wci = calculate_86 = function(taverage, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  # data = 13.12 + 0.6215*taverage - (3600/1000)*11.37*w^0.16 + 0.3965*taverage*w^0.16
-  data = 13.12 + 0.6215*taverage - (3600/1000)*11.37*w + 0.3965*taverage*w
+  w = w*(3600/1000)
+  data = 13.12 + 0.6215*taverage - 11.37*w + 0.3965*taverage*w
   data[is.na(taverage) | is.na(w)] = NA
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
@@ -2502,7 +2502,8 @@ attr(calculate_92, "data") <- c(WIND)
 #' @return Eto
 #' @export
 #' @examples
-#' eto(tmin = data[[TMIN]], tmax = data[[TMAX]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], radiation = data[[RADIATION]], insolation=data[[INSOLATION]], rh = data[[HUMIDITY]])
+#' tmin = data_all[[TMIN]]; tmax = data_all[[TMAX]]; toa = data_all[[RADIATIONTOA]]; w = data_all[[WIND]]; lat=data_all[[LAT]]; tdew = data_all[[DEWPOINT]]; mde=data_all[[MDE]]; radiation = data_all[[RADIATION]]; insolation=data_all[[INSOLATION]]; rh = data_all[[HUMIDITY]]
+#' calculate_93(tmin = data_all[[TMIN]], tmax = data_all[[TMAX]], toa = data_all[[RADIATIONTOA]], w = data_all[[WIND]], lat=data_all[[LAT]], tdew = data_all[[DEWPOINT]], mde=data_all[[MDE]], radiation = data_all[[RADIATION]], insolation=data_all[[INSOLATION]], rh = data_all[[HUMIDITY]])
 eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, insolation=NA, rh=NA, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 
   data = calc_eto(tmin = tmin, tmax = tmax, radiation = radiation, insolation=insolation, toa = toa, w = w, lat=lat, tdew = tdew, mde=mde, rh = rh)
@@ -2554,7 +2555,7 @@ attr(calculate_94, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @return CMD
 #' @export
 #' @examples
-#' cmd(eto = data[[EVAPOTRANSPIRATION]], pr = data[[PRECIPITATION]])
+#' cmd(eto = data_all[[EVAPOTRANSPIRATION]], pr = data_all[[PRECIPITATION]])
 cmd = calculate_95 = function(eto, pr, taverage, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data = eto-pr
   function_ = function(data){
@@ -2579,7 +2580,7 @@ attr(calculate_95, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @return Martonne Aridity Index
 #' @export
 #' @examples
-#' mai(pr = data[[PRECIPITATION]], taverage = data[[TMEAN]])
+#' mai(pr = data_all[[PRECIPITATION]], taverage = data_all[[TMEAN]])
 mai = calculate_96 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, taverage){
     taverage = taverage[names(data)]
@@ -2711,10 +2712,11 @@ attr(calculate_100, "data") <- c(PRECIPITATION, TMEAN)
 bi = calculate_101 = function(data, pr, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, pr){
     pr = pr[names(data)]
-    r = 0.8 * mean(data, na.rm=na.rm)
+    r = 0.8 * mean(data, na.rm=na.rm)/1000
     pp = mean(pr, na.rm=na.rm)
     l = 2257
-    return(100*pp/(l*r))
+    # return(100*pp/(l*r))
+    return(r/(pp*l))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), operation=function_, data_names=data_names, pr=pr)
   return(byYears)
@@ -2758,7 +2760,7 @@ attr(calculate_102, "data") <- c(TMEAN, LAT)
 #' @return n0to10
 #' @export
 #' @examples
-#' ss(data = data_all[[SNOWFALL]])
+#' ss(data = data_all[[SNOWFALLMM]])
 ss = calculate_103 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=sum, data_names=data_names, na.rm=na.rm)
   return(byYears)
@@ -2766,9 +2768,9 @@ ss = calculate_103 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[103] = C_snow
 index_titles[103] = "Snowfall sum"
 index_names[103] = "ss"
-attr(calculate_103, "data") <- c(SNOWFALL)
+attr(calculate_103, "data") <- c(SNOWFALLMM)
 
-#' 104. SD0_10: Snow depth 0-10
+#' 104. SD0_10: Snow depth 1-10
 #' The number of days with snow depth in the range 1-10 cm
 #' 
 #' @param data snow depth
@@ -2781,8 +2783,9 @@ attr(calculate_103, "data") <- c(SNOWFALL)
 #' sd0_10(data = data_all[[SNOWDEPTHTHICKNESS]])
 sd0_10 = calculate_104 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data>=1/100 & data<=10/100, na.rm=na.rm))
+    return(sum(data>=1 & data<=10, na.rm=na.rm))
   }
+  data = data/10
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
 }
@@ -2804,8 +2807,9 @@ attr(calculate_104, "data") <- c(SNOWDEPTHTHICKNESS)
 #' sd10_20(data = data_all[[SNOWDEPTHTHICKNESS]])
 sd10_20 = calculate_105 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data>=10/100 & data<=20/100, na.rm=na.rm))
+    return(sum(data>=10 & data<=20, na.rm=na.rm))
   }
+  data = data/10
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
 }
@@ -3372,8 +3376,17 @@ fwi = calculate_130 = function(taverage, rh, w, pr, dew_point, lat, data_names=N
   # names(data) = names(taverage)
 
   # fireDanger
-  missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(rh) | is.na(pr) | is.na(w)
-  data.nas = fwi1D(months=as.numeric(months(names(taverage[!missing.values]))), Tm=taverage[!missing.values], H=rh[!missing.values], r=pr[!missing.values], W=w[!missing.values], lat = lat)
+  # missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(rh) | is.na(pr) | is.na(w)
+  # data.nas = fwi1D(months=as.numeric(months(names(taverage[!missing.values]))), Tm=taverage[!missing.values], H=rh[!missing.values], r=pr[!missing.values], W=w[!missing.values], lat = lat)
+
+
+
+# Ej. fwi1D(dates, Tm, H, r, W, lat = 46, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
+# dates=names(taverage); Tm=taverage; H=rh; r=pr; W=w; lat = lat; what = "FWI"; init.pars = c(85, 6, 15); spin.up = 0
+fwi1D(dates=names(taverage), Tm=taverage, H=rh, r=pr, W=w, lat = lat, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
+
+
+
   data = taverage
   data[!missing.values] = data.nas
 
@@ -3416,6 +3429,10 @@ kbdi = calculate_131 = function(taverage, pr, data_names=NULL, time.scale=YEAR, 
   # names(data.all) = names(taverage)
 
   # # fireDanger
+
+  # data.nas = kbdindex(dates=names(taverage), t=taverage, p=pr, wrs = 5, start.date = NULL)
+
+
   # missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(pr)
   # data.nas = kbdindex(date=chron(names(taverage[!missing.values])), t=taverage[!missing.values], p=pr[!missing.values])
   # data.all = taverage

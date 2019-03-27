@@ -81,12 +81,25 @@ scale_name = function(name){
 calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index_result = c(1:138)){
 
   data[[LAT]] = lat
-
+  if(!is.null(data[[SNOWFALL]])){
+    data[[SNOWFALL]][data[[SNOWFALL]]<0.0001] = 0
+  }
+  if(is.null(data[[SNOWFALLMM]]) & !is.null(data[[SNOWFALL]])){
+    data[[SNOWFALLMM]] = data[[SNOWFALL]]*1000
+  }
   if(is.null(data[[SNOWDEPTHTHICKNESS]]) & !is.null(data[[SNOWDEPTH]])){
-    data[[SNOWDEPTHTHICKNESS]] = data[[SNOWDEPTH]]*0.312
+    data[[SNOWDEPTHTHICKNESS]] = data[[SNOWDEPTH]]/312
   }
   if(is.null(data[[VAPOUR]]) &  !is.null(data[[DEWPOINT]])){
     data[[VAPOUR]] = td_to_vapor(data[[DEWPOINT]])
+  }
+  if(is.null(data[[RADIATION_W]]) & !is.null(data[[RADIATION]])){
+    # J/m2 -> W/M2
+    data[[RADIATION_W]] = data[[RADIATION]] / (24*60*60)
+  }
+  if(is.null(data[[RADIATION]]) & !is.null(data[[RADIATION_W]])){
+    # W/M2 -> J/m2 
+    data[[RADIATION]] = data[[RADIATION_W]] * (24*60*60)
   }
   if(is.null(data[[HUMIDITY]]) & !is.null(data[[TMAX]]) & !is.null(data[[TMIN]]) & !is.null(data[[DEWPOINT]])){
     data[[HUMIDITY]] = td_to_rh(tmax=data[[TMAX]], tmin=data[[TMIN]], td=data[[DEWPOINT]])
@@ -114,22 +127,42 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
     warning("TMEAN < TMIN")
   }
   if(sum(data[[PRECIPITATION]]<0, na.rm = TRUE)>0){
-    warning(paste("PRECIPITATION < 0", sum(data[[PRECIPITATION]]<0, na.rm = TRUE)))
     data[[PRECIPITATION]][data[[PRECIPITATION]]<0] = 0
+    warning(paste("PRECIPITATION < 0", sum(data[[PRECIPITATION]]<0, na.rm = TRUE)))    
+  }
+  if(sum(data[[RADIATION]]<0, na.rm = TRUE)>0){
+    data[[RADIATION]][data[[RADIATION]]<0] = 0
+    warning("RADIATION < 0")
+  }
+  if(sum(data[[RADIATIONTOA]]<0, na.rm = TRUE)>0){
+    data[[RADIATIONTOA]][data[[RADIATIONTOA]]<0] = 0
+    warning("RADIATIONTOA < 0")
+  }
+  if(sum(data[[RADIATION_W]]<0, na.rm = TRUE)>0){
+    data[[RADIATION_W]][data[[RADIATION_W]]<0] = 0
+    warning("RADIATION_W < 0")
   }
   if(sum(data[[WIND]]<0, na.rm = TRUE)>0){
+    data[[WIND]][data[[WIND]]<0] = 0
     warning("WIND < 0")
-  }
+  }  
   if(sum(data[[WINDGUST]]<0, na.rm = TRUE)>0){
+    data[[WINDGUST]][data[[WINDGUST]]<0] = 0
     warning("WINDGUST < 0")
   }
   if(sum(data[[HUMIDITY]]>100, na.rm = TRUE)>0){
+    data[[HUMIDITY]][data[[HUMIDITY]]>100] = 100
+    data[[HUMIDITY]][data[[HUMIDITY]]<0] = 0
     warning("HUMIDITY > 100")
   }
   if(sum(data[[CLOUD]]>100, na.rm = TRUE)>0){
+    data[[CLOUD]][data[[CLOUD]]>100] = 100
+    data[[CLOUD]][data[[CLOUD]]<0] = 0
     warning("CLOUD > 100")
   }
   if(sum(data[[CLOUD100]]>100, na.rm = TRUE)>0){
+    data[[CLOUD100]][data[[CLOUD100]]>100] = 100
+    data[[CLOUD100]][data[[CLOUD100]]<0] = 0
     warning("CLOUD100 > 100")
   }
   # data_all=data

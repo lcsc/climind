@@ -243,5 +243,6 @@ penman_rs <- function(J,
       # Devolvemos C_IN
       Rs = N * (tsun / Ra - as) / bs
     }
+    Rs[Rs<0] = 0
     return(Rs)
 }

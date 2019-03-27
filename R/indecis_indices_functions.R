@@ -32,7 +32,8 @@ TMIN = "tn" # daily minimum temperature TN, ℃
 TMAX = "tx" # daily maximum temperature TX, ℃
 PRECIPITATION = "rr" # daily precipitation sum RR, mm
 LAT = "lat" # lat, degree
-RADIATION = "radiation" # net radiation, W/m2
+RADIATION = "radiation" # net radiation, J/m2
+RADIATION_W = "radiation_w" # net radiation, W/m2
 DEWPOINT = "dewpoint" #dew point, ℃
 WIND = "wind" #average wind, m/s
 HUMIDITY = "humidity" #relative humidity, %
@@ -40,13 +41,14 @@ VAPOUR = "vapour" #water vapour pressure, hPa
 WINDGUST = "windgust" #maximum wind gust, m/s
 EVAPOTRANSPIRATION = "evapotranspiration" #Evapotranspiration et0 -> MAL
 SNOWFALL = "snowfall" # snowfall, m of water equivalent
+SNOWFALLMM = "snowfallmm" # snowfall, mm of water equivalent
 SNOWDEPTH = "snowdepth" #snowdepth, m of water equivalent
 INSOLATION = "insolation" #insolation, hours of sun -> MAL
 CLOUD = "cloud" # cloud, %
 CLOUD100 = "cloud100" #cloud base below 100 meter, %
 RADIATIONTOA = "radiationtoa" #solar radiation at TOA (alt top of the atmosphere empirically obtained), W/m2
 MDE = "mde"
-SNOWDEPTHTHICKNESS = "snowdepththickness"
+SNOWDEPTHTHICKNESS = "snowdepththickness" #snowdepth, mm snow
 
 # Necesitamos
 # mean radiation, W/m-2
@@ -335,25 +337,27 @@ select_time_function = function(time.scale){
 
 #' Et0
 #'
-#' @param tmin minimum temperature
-#' @param tmax maximum temperature
-#' @param toa radiation toa
-#' @param w average wind
+#' @param tmin minimum temperature, Celsius
+#' @param tmax maximum temperature, Celsius
+#' @param toa radiation toa, J/m2
+#' @param w average wind, m/s at 10m
 #' @param lat latitude
-#' @param tdew dew point
-#' @param radiation radiation
-#' @param insolation insolation
-#' @param rh relative humidity
+#' @param tdew dew point, Celsius
+#' @param radiation radiation, J m-2 
+#' @param insolation insolation, hours
+#' @param rh relative humidity, percentage
 #' @return et0
 #' @export
 #' @examples
 #' calc_eto(tmin = tmin.value, tmax = tmax.value, 
 #' insolation = insolation.value, w = w.value, lat=lat, tdew = dew_point.value)
 calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation=NA, rh=NA, na.rm=FALSE){
+  # toa = toa/(24*60*60)
 
-  toaMj = toa/1000000
-  radiationMj = radiation/1000000
+  radiation = radiation/1000000
+  toa = toa/1000000
 
+  w = 0.75*w # De 10 metros a 2 metros de altura
   time = chron(names(tmin))
   time1 = time[2:length(time)]
   time1 = c(time1, 
@@ -364,8 +368,9 @@ calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation
   # Fao-56 Penman-Monteith
   dat_mlen = time1 - time
   dat_msum = as.POSIXlt(time)$yday + round(dat_mlen/2)
-  # Tmin=tmin; Tmax=tmax; Ra=toaMj; Rs=radiationMj; tsun=insolation; U2=w; J=dat_msum; lat=lat; ed=NA; Tdew=tdew; RH=rh; P=NA; P0=NA; z=mde; crop="short"
-  data <- penman_fao_diario(Tmin=tmin, Tmax=tmax, Ra=toaMj, Rs=radiationMj, tsun=insolation, U2=w, J=dat_msum, lat=lat, ed=NA, Tdew=tdew, RH=rh, P=NA, P0=NA, z=mde, crop="short")
+  # Tmin=tmin; Tmax=tmax; Ra=toa; Rs=radiation; tsun=insolation; U2=w; J=dat_msum; lat=lat; ed=NA; Tdew=tdew; RH=rh; P=NA; P0=NA; z=mde; crop="short"
+  data <- penman_fao_diario(Tmin=tmin, Tmax=tmax, Ra=toa, Rs=radiation, tsun=NA, U2=w, J=dat_msum, lat=lat, ed=NA, Tdew=tdew, RH=rh, P=NA, P0=NA, z=mde, crop="short")
+  # data2 <- penman_fao_diario(Tmin=tmin, Tmax=tmax, Ra=NA, Rs=NA, tsun=insolation, U2=w, J=dat_msum, lat=lat, ed=NA, Tdew=tdew, RH=rh, P=NA, P0=NA, z=mde, crop="short")
   data <- array(data*dat_mlen)
   names(data) <- names(tmin)
   print(paste("Values < 0:", sum(data<0, na.rm=TRUE)))
@@ -431,9 +436,8 @@ r_to_in = function(radiation, lat, mde) {
     dat_mlen = 1
     dat_msum = as.POSIXlt(time.chron[t])$yday + round(dat_mlen / 2)
     series[t] = penman_rs(J = dat_msum, lat = lat, tsun = radiation[t]/1000000, z = mde, ret = INSOLATION) #MJ/m2
-
+    # series2 = penman_rs(J = dat_msum, lat = lat, tsun = series[t], z = mde, ret = RADIATION)*1000000
     # series[t] = insolation(zenith=lat, jd = dat_msum, height = mde, visibility, RH, tempK, O3, alphag)
-
   }
 
 # plot(radiation*(24*60*60)/(1000000), type="l")
