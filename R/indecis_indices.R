@@ -2378,7 +2378,7 @@ attr(calculate_87, "data") <- c(TMEAN, WIND, VAPOUR)
 #' @return Gustmax
 #' @export
 #' @examples
-#' dfx21(data = data_all[[WIND]])
+#' dfx21(data = data_all[[WINDGUST]])
 dfx21 = calculate_88 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data>21, na.rm=na.rm))
@@ -2389,7 +2389,7 @@ dfx21 = calculate_88 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[88] = C_days
 index_titles[88] = "Days wind gusts above 21 m/s"
 index_names[88] = "dfx21"
-attr(calculate_88, "data") <- c(WIND)
+attr(calculate_88, "data") <- c(WINDGUST)
 
 #' 89. FXx: Daily maximum wind gust
 #' Maximun value of daily maximum wind gust (m/s), ECA&D standard

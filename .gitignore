@@ -1,5 +1,4 @@
 inst/doc
 revdep/*
 vignettes/*
-.travis.yml
 man/*
