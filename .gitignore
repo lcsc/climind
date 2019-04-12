@@ -2,3 +2,4 @@ inst/doc
 revdep/*
 vignettes/*
 man/*
+*.tar.gz
