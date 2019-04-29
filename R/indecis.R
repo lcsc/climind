@@ -127,8 +127,8 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
     warning("TMEAN < TMIN")
   }
   if(sum(data[[PRECIPITATION]]<0, na.rm = TRUE)>0){
-    data[[PRECIPITATION]][data[[PRECIPITATION]]<0] = 0
-    warning(paste("PRECIPITATION < 0", sum(data[[PRECIPITATION]]<0, na.rm = TRUE)))    
+    warning(paste("PRECIPITATION < 0", sum(data[[PRECIPITATION]]<0, na.rm = TRUE)))
+    data[[PRECIPITATION]][data[[PRECIPITATION]]<0] = 0 
   }
   if(sum(data[[RADIATION]]<0, na.rm = TRUE)>0){
     data[[RADIATION]][data[[RADIATION]]<0] = 0

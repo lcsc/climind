@@ -3383,9 +3383,7 @@ fwi = calculate_130 = function(taverage, rh, w, pr, dew_point, lat, data_names=N
 
 # Ej. fwi1D(dates, Tm, H, r, W, lat = 46, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
 # dates=names(taverage); Tm=taverage; H=rh; r=pr; W=w; lat = lat; what = "FWI"; init.pars = c(85, 6, 15); spin.up = 0
-fwi1D(dates=names(taverage), Tm=taverage, H=rh, r=pr, W=w, lat = lat, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
-
-
+  # data = fwi1D(dates=names(taverage), Tm=taverage, H=rh, r=pr, W=w, lat = lat, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
 
   data = taverage
   data[!missing.values] = data.nas
@@ -3428,19 +3426,14 @@ kbdi = calculate_131 = function(taverage, pr, data_names=NULL, time.scale=YEAR, 
   # data.all = index_KBDI(Temperature=taverage, Rain=pr, MAP=map)
   # names(data.all) = names(taverage)
 
-  # # fireDanger
+  # fireDanger
+  missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(pr)
+  data.nas = kbdindex(dates=names(taverage)[!missing.values], t=taverage[!missing.values], p=pr[!missing.values], wrs = 5, start.date = NULL)
+  data.all = taverage
+  data.all[] = NA
+  data.all[names(data.nas)] = data.nas
 
-  # data.nas = kbdindex(dates=names(taverage), t=taverage, p=pr, wrs = 5, start.date = NULL)
-
-
-  # missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(pr)
-  # data.nas = kbdindex(date=chron(names(taverage[!missing.values])), t=taverage[!missing.values], p=pr[!missing.values])
-  # data.all = taverage
-  # data.all[] = NA
-  # data.all[!missing.values] = data.nas[!missing.values] #fergus: corregir [!missing.values]
-
-  # byYears = calcf_data(data=data.all, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
-  byYears = NULL
+  byYears = calcf_data(data=data.all, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
   return(byYears)
 }
 index_units[131] = C_index
@@ -3474,6 +3467,14 @@ ffdi = calculate_132 = function(taverage, pr, rh, w, data_names=NULL, time.scale
   # data = index_MA(Temperature=taverage, Rain=pr, DewPoint=rh, MAP=map, Wind=w, KBDI=kdbiData)
   # names(data) = names(taverage)
   # byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
+  
+  missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(pr)
+  data.nas = kbdindex(dates=names(taverage)[!missing.values], t=taverage[!missing.values], p=pr[!missing.values], wrs = 5, start.date = NULL)
+  data.ffdi = ffdiIndex(madf = data.nas, t = taverage[names(data.nas)], h = rh[names(data.nas)], w = w[names(data.nas)])
+  data.all = taverage
+  data.all[] = NA
+  data.all[names(data.ffdi)] = data.ffdi
+
   byYears = NULL
   return(byYears)
 }
@@ -3517,11 +3518,11 @@ mni = calculate_133 = function(dew_point, taverage, rh, pr, data_names=NULL, tim
   # data[pr>3.0] = 0.0
 
   # fergus: Comparar las 2 funciones
-  data = index_MMI(DewPoint=dew_point, Temperature=taverage, Rain=pr)
-  names(data) = names(taverage)
+  # data = index_MMI(DewPoint=dew_point, Temperature=taverage, Rain=pr)
+  # names(data) = names(taverage)
 
   # fireDanger
-  data = nesterovIndex(t=taverage, rh=rh, p=pr)
+  data = nesterovIndex(t = taverage, rh = rh, p = pr, modified = FALSE)
   names(data) = names(taverage)
 
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
@@ -3538,27 +3539,27 @@ attr(calculate_133, "data") <- c(DEWPOINT, TMEAN, HUMIDITY, PRECIPITATION)
 #' P-eto+-f1
 #' https://github.com/SantanderMetGroup/fireDanger
 #' 
-#' @param data net radiation 
-#' @param toa solar radiation at TOA
+#' @param data precipitation
+#' @param evap potential evapotranspiration
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return FFFI
 #' @export
 #' @examples
-#' fffi(data = data_all[[RADIATION]], toa=data_all[[RADIATIONTOA]])
-fffi = calculate_134 = function(data, toa, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  function_ = function(data, toa){
-    toa  = toa[names(data)]
-    return(meanf(data/toa))
-  }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, toa=toa, data_names=data_names)
+#' fffi(data = data_all[[PRECIPITATION]], evap=data_all[[EVAPOTRANSPIRATION]])
+fffi = calculate_134 = function(data, evap, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  data = fffdi(pr=data, pet = evap, Wvol.init = 0.5, z = 60)
+  data.all = evap
+  data.all[] = NA
+  data.all[names(data)] = data
+  byYears = calcf_data(data = data.all, extract_names=select_time_function(time.scale), operation = mean, data_names = data_names, na.rm = na.rm)
   return(byYears)
 }
 index_units[134] = C_index
 index_titles[134] = "Finnish Forest Fire Index"
 index_names[134] = "fffi"
-attr(calculate_134, "data") <- c(RADIATION, RADIATIONTOA)
+attr(calculate_134, "data") <- c(PRECIPITATION, EVAPOTRANSPIRATION)
 
 ####Tourism
 #' 135. HCIU: Holliday Climate Index Urban
