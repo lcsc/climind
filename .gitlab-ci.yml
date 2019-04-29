@@ -2,4 +2,5 @@ image: r-base
 
 test:
   script:
+  - R CMD check .  
   - R CMD build . --no-build-vignettes --no-manual
