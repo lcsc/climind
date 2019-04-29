@@ -63,16 +63,16 @@ fwi1D <- function(dates,
                   what = "FWI",
                   init.pars = c(85, 6, 15) ,
                   spin.up = 0) {
-    if (any(c(length(Tm), length(H), length(r), length(W)) != length(months))) {
+    if (any(c(length(Tm), length(H), length(r), length(W)) != length(dates))) {
         stop("Input vector lengths differ")
     }
     what <- match.arg(arg = what,
                       choices = c("FFMC", "DMC", "DC", "ISI", "BUI", "FWI", "DSR"),
                       several.ok = TRUE)
     mes <- as.integer(substr(dates, start = 1, stop = 2)) # Extrae el mes --valor entero de 1 a 12-- del string de fechas en formato "indecis wp4" 
-    out <- matrix(nrow = length(months), ncol = length(what), dimnames = list(NULL, what))      
+    out <- matrix(nrow = length(mes), ncol = length(what), dimnames = list(NULL, what))      
     rm.ind <- which(!complete.cases(Tm, H, r, W))
-    non.na.ind <- setdiff(1:length(months), rm.ind)
+    non.na.ind <- setdiff(1:length(mes), rm.ind)
     if (length(rm.ind) > 0) {
         warning("Missing values were removed from the time series before computation")
         dates <- dates[-rm.ind]
