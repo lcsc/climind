@@ -1,4 +1,4 @@
-Package: indecis
+Package: ClimInd
 Type: Package
 Version: 0.1-1
 Date: 2018-07-01
@@ -6,7 +6,7 @@ Title: Climate Indices
 Authors@R: c(person("Reig Gracia", "Fergus", role = c("aut", "cre"), email = "fergusrg@gmail.com"))
 Author: Reig Gracia Fergus [aut, cre]
 Maintainer: Reig Gracia Fergus <fergusrg@gmail.com>
-Depends: R (>= 1.8.0), SPEI, chron, weathermetrics
+Depends: R (>= 2.10), SPEI, chron, weathermetrics
 Suggests: MASS,
     knitr,
     rmarkdown,
@@ -18,6 +18,21 @@ LazyLoad: no
 Encoding: UTF-8
 NeedsCompilation: no
 Packaged: 2018-07-01 11:38:24 UTC; freig
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 ByteCompile: true
+Collate:
+  'data.R'
+  'indecis_indices_functions.R'
+  'Fire_Danger_Index_Functions.R'
+  'penman_fao_dia.R'
+  'indecis_indices.R'
+  'fwi1D.R'
+  'kbdindex.R'
+  'nesterovIndex.R'
+  'custom_functions.R'
+  'ffdi.R'
+  'ClimInd-package.R'
+  'indecis.R'
+  'ClimIndNews.R'  
+  'macArthurFFDI.R'

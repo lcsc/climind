@@ -154,6 +154,9 @@ kbdindex <- function(dates, t, p, wrs = 5, start.date = NULL, what = "kbdi") { #
         out <- D
     }
     ## Add dates attribute
-    names(out) <- as.character(out)
+    # names(out) <- as.character(out)
+    names(out) <- names(t)
+
+    return(out)
 }
 # End

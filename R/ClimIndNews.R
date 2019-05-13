@@ -1,12 +1,12 @@
-#' @title indecisNews
+#' @title ClimIndNews
 #' 
-#' @description Show the NEWS file of the \pkg{indecis} package.
+#' @description Show the NEWS file of the \pkg{ClimInd} package.
 #'
 #' @details (See description)
 #' 
 #' @export
 #' 
-indecisNews <- function() {
-    file <- file.path(system.file(package="indecis"), "NEWS.md")
+ClimIndNews <- function() {
+    file <- file.path(system.file(package="ClimInd"), "NEWS.md")
     file.show(file)
 }

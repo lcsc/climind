@@ -1,18 +1,11 @@
 #' @name Datasets
 
-#' @title radiation.value
-#' @rdname Datasets
-#' @description Data used in the examples
-#' @details See description.
-#' @usage data(radiation.value)
-"radiation.value"
-
-#' @title toa.value
+#' @title data_all
 #' @rdname Datasets
 #' @description See wichita
 #' @details See description.
-#' @usage data(toa.value)
-"toa.value"
+#' @usage data(data_all)
+"data_all"
 
 # #' @title MinMAP
 # #' @rdname Datasets

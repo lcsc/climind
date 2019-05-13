@@ -94,8 +94,6 @@ DEC = "Dec"
 #' @param operation operation
 #' @param ... ...
 #' @return  operation
-#' @examples
-#' calcf_data__(years[12], years, max, max)
 calcf_data__ = function(ok, oks, data, operation, ...){
   return(operation(data[oks==ok], ...))
 }
@@ -107,8 +105,6 @@ calcf_data__ = function(ok, oks, data, operation, ...){
 #' @param operation operation
 #' @param ... ...
 #' @return operation
-#' @examples
-#' calc = calcf_data_(names=months_years(chron(names(pr.value))), data=pr.value, operation=max)
 calcf_data_ = function(data_names, data, operation, ...){
   average = sapply(unique(data_names), calcf_data__, oks=data_names, data=data, operation=operation, ...)
   average[average==Inf | average==-Inf] = NA
@@ -126,6 +122,11 @@ calcf_data_ = function(data_names, data, operation, ...){
   return(average)
 }
 
+#' quantile null
+#'
+#' @param x x
+#' @param ... ...
+#' @return operation
 quantile_null = function(x, ...){
   if(is.null(x)){
     return(NULL)
@@ -143,8 +144,6 @@ quantile_null = function(x, ...){
 #' @param data_names names of each period of time
 #' @param ... ...
 #' @return result operation
-#' @examples
-#' calcf_data(data=data, extract_names=years, operation=mean)
 calcf_data = function(data, date, extract_names, data_names, operation, ...){
   if(missing(data) || is.null(data) || length(data)==0){
     return(NULL)
@@ -176,30 +175,25 @@ calcf_data = function(data, date, extract_names, data_names, operation, ...){
 #' @param operation Main operation
 #' @param ... ...
 #' @return result operation
-#' @examples
-#' calcf_data_max_min_mean(time)
 calcf_data_max_min_mean = function(max, min, mean, extract_names, operation, ...){
   return(data.frame(max=calcf_data(max, extract_names, operation, ...), min=calcf_data(min, extract_names, operation, ...), mean=calcf_data(mean, extract_names, operation, ...)))
 }
 
 #' Data with months and years in names 
+#'
 #' @param data data
 #' @return dates
-#' @examples
-#' byMonths_chron(data=tmax.value)
 byMonths_chron = function(data){
   return(chron(gsub("_", "/", paste0("1", "_", names(data))), format=c(dates = "d/m/yy", times = "h:m:s"), out.format=c(dates = "m/d/y", times = "h:m:s")))
 }
 
 #' Select quarter days
 #'
-#' @param functionValues
-#' @param selectFunction
-#' @param selectValues
-#' @param na.rm
+#' @param functionValues functionValues
+#' @param selectFunction selectFunction
+#' @param selectValues selectValues
+#' @param na.rm na.rm
 #' @return quarter days
-#' @examples
-#' 
 months_quarter = function(functionValues, selectFunction, selectValues, na.rm = FALSE){
   if(missing(selectValues)){
     selectValues = functionValues
@@ -228,8 +222,6 @@ months_quarter = function(functionValues, selectFunction, selectValues, na.rm = 
 #'
 #' @param time chron
 #' @return seasonals
-#' @examples
-#' seasonals(time=chron(names(tmax.value)))
 seasonals = function(time){
   # https://stackoverflow.com/questions/28030936/r-need-to-extract-month-and-assign-season
   labelSeasons <- c(WINTER, SPRING, SUMMER, FALL)
@@ -246,8 +238,6 @@ seasonals = function(time){
 #'
 #' @param time chron
 #' @return seasonals by years
-#' @examples
-#' hydrological_years(time=chron(names(tmax.value)))
 hydrological_years = function(time){
   changeMonths <- as.numeric(months(time))%in%c(10, 11, 12)
   timeNames <- as.numeric(as.character(years(time)))
@@ -259,8 +249,6 @@ hydrological_years = function(time){
 #'
 #' @param time chron
 #' @return seasonals by years
-#' @examples
-#' seasonals_years(time=chron(names(tmax.value)))
 seasonals_years = function(time){
   changeMonths <- as.numeric(months(time))==12
   timeNames <- paste(seasonals(time), years(time), sep="_")
@@ -272,8 +260,6 @@ seasonals_years = function(time){
 #'
 #' @param time chron 
 #' @return months by years
-#' @examples
-#' months_years(time=chron(names(tmax.value)))
 months_years = function(time){
   return(paste(months(time), years(time), sep="_"))
 }
@@ -283,27 +269,26 @@ months_years = function(time){
 #' @return function
 select_all_time_function = function(time.scale){
   if(time.scale==MONTH){
-    extract_names = function(time)  { 
+    return(function(time)  { 
       return(months(time))
-    }
+    })
   }else{
     if(time.scale==SEASON){
-      extract_names = function(time)  {
+     return(function(time)  {
        return(seasonals(time)) 
-     }
+     })
     }else{ 
       if(time.scale==HYDROYEAR){
-        extract_names = function(time)  {
+        return(function(time)  {
           return(YEAR) 
-        }
+        })
       }else{ #time.scale==YEAR
-        extract_names = function(...) { 
+        return(function(...) { 
           return(YEAR) 
-        }
+        })
       }
     }
   }
-  return(extract_names)
 }
 
 #' Name data station or month 
@@ -341,16 +326,14 @@ select_time_function = function(time.scale){
 #' @param tmax maximum temperature, Celsius
 #' @param toa radiation toa, J/m2
 #' @param w average wind, m/s at 10m
+#' @param mde mde
 #' @param lat latitude
 #' @param tdew dew point, Celsius
 #' @param radiation radiation, J m-2 
 #' @param insolation insolation, hours
 #' @param rh relative humidity, percentage
+#' @param na.rm na.rm
 #' @return et0
-#' @export
-#' @examples
-#' calc_eto(tmin = tmin.value, tmax = tmax.value, 
-#' insolation = insolation.value, w = w.value, lat=lat, tdew = dew_point.value)
 calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation=NA, rh=NA, na.rm=FALSE){
   # toa = toa/(24*60*60)
 
@@ -384,9 +367,6 @@ calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation
 #' @param tmin minimum temperature
 #' @param td dew point
 #' @return rh
-#' @export
-#' @examples
-#' td_to_rh(tmax = tmax.value, tmin = tmin.value, td = dew_point.value)
 td_to_rh <- function(tmax, tmin, td){
   t <- (tmax+tmin)/2
   b <- 17.625*t/(243.04+t)
@@ -400,9 +380,6 @@ td_to_rh <- function(tmax, tmin, td){
 #' Dew point to water vapour pressure
 #' @param td dew point
 #' @return vapor
-#' @export 
-#' @examples
-#' td_to_vapor(td = dew_point.value)
 td_to_vapor <- function(td){
   l = 2420000 # J/Kg Calor latente de vaporización del agua
   r = 461 #J/(K*Kg) Constante de los gases ideales de vapor de agua
@@ -415,15 +392,10 @@ td_to_vapor <- function(td){
 
 #' Transforma radiancia en insolación
 #'
-#' @param radiation
-#' @param lat
-#' @param mde
-#'
+#' @param radiation radiation
+#' @param lat lat
+#' @param mde mde
 #' @return insolación en horas
-#' @export
-#'
-#' @examples
-#' data[[INSOLATION]] = r_to_in(radiation=data[[RADIATION]], lat=data[[LAT]], mde=data[[MDE]])
 r_to_in = function(radiation, lat, mde) {
   series = radiation
   time.chron = chron(names(radiation))
@@ -535,11 +507,8 @@ r_to_in = function(radiation, lat, mde) {
 #' @param data maximum, minimum or medium temperature
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return average temperature
-#' @export
-#' @examples
-#' average_temp(data=tmax.value)
 average_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(calcf_data(data, extract_names=select_time_function(time.scale), data_names=data_names, operation=mean, na.rm = na.rm))
 }
@@ -548,11 +517,9 @@ average_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 #' 
 #' @param data maximum, minimum or medium temperature
 #' @param data_names names of each period of time
-#' @param time.scale month, season or year  
+#' @param time.scale month, season or year
+#' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return maximum temperature
-#' @export
-#' @examples
-#' maximum_temp(data=tmax.value)
 maximum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=max, na.rm = na.rm))
 }
@@ -562,10 +529,8 @@ maximum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 #' @param data maximum, minimum or medium temperature
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
+#' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return minimum temperature
-#' @export
-#' @examples
-#' minimum_temp(data=tmax.value)
 minimum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=min, na.rm = na.rm))
 }
@@ -578,9 +543,6 @@ minimum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 #' @param scale scale
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return SPI
-#' @export
-#' @examples
-#' calc_spi(data = pr.value)
 calc_spi = function(data, data_names=NULL, scale=3, na.rm=FALSE){
   if(is.null(data)) { return(NULL) }
   byMonths = calcf_data(data=data, extract_names=months_years, operation=sum, na.rm=na.rm)
@@ -606,9 +568,6 @@ calc_spi = function(data, data_names=NULL, scale=3, na.rm=FALSE){
 #' @param scale scale
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @return SPEI
-#' @export
-#' @examples
-#' calc_spei(eto = eto.value, pr = pr.value)
 calc_spei = function(eto, pr, data_names=NULL, scale=3, na.rm=FALSE){
   if(is.null(eto) | is.null(pr)) { return(NULL) }
   data = pr - eto 

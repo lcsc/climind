@@ -191,8 +191,6 @@ penman_fao_diario <-
 #'
 #' @return insolación en horas de sol o radiación en ¿MJ/m2?
 #' @export
-#'
-#' @examples
 penman_rs <- function(J,
            lat = NA,
            tsun = NA,

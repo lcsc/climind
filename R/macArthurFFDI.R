@@ -2,6 +2,7 @@
 #' @title Mac Arthur Forest Fire Danger Index
 #' @description Implementation of the Mac Arthur's Forest Fire Danger Index (FFDI)
 #' @param madf Mac Arthur's Drought Index. This is the output of the \code{\link{kbdindex}} function, using the option \code{what = "madf"}.
+#' @param t t
 #' @param h Vector of relative humidity data (in percentage)
 #' @param w Vector of wind velocity records (in km/h)
 #' @return A vector of (daily) FFDI data

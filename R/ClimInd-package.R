@@ -1,5 +1,5 @@
-#' indecis
-#' @name indecis
+#' ClimInd
+#' @name ClimInd
 #' @docType package
 #' @description  
 #' indecis
