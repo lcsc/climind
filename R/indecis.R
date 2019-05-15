@@ -19,7 +19,9 @@
 # load("main.R")
 # load("custom_functions.R")
 
-# source("R/Fire_Danger_Index_Functions.R")
+#' @include indecis_indices.R
+NULL
+
 # source("R/penman_fao_dia.R")
 # source("R/indecis_indices.R")
 # source("R/indecis_indices_functions.R")
@@ -31,6 +33,7 @@
 #'
 #' @param name function name
 #' @return allow or not allow
+#' @keywords internal
 allow_scale = function(name){
   return("time.scale"%in%names(formals(name)))
 }
@@ -39,6 +42,7 @@ allow_scale = function(name){
 #'
 #' @param name function name
 #' @return scales allow
+#' @keywords internal
 scale_name = function(name){
   if(allow_scale(name)){
     scales = c(YEAR, MONTH, SEASON)
@@ -51,7 +55,8 @@ scale_name = function(name){
   return(scales)
 }
 
-#' Calculate all indexes
+#' @title Calculate all indexes
+#' @description - 
 #'
 #' @param data data list
 #' @param lat latitude
@@ -155,6 +160,7 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
   ## Select no empty parameters
   ##
   ## @return no empty parameters
+  ## @keywords internal
   no_null = function(){
     return(data[[which(!sapply(data, is.null))[1]]])
   }
@@ -186,6 +192,7 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
   ## @param n id index
   ## @param data all parameters
   ## @return calculate index
+  ## @keywords internal
   calculate_n_index = function(n, data){
     # f = get(paste0("calculate_", n)) #, pos = -1
     # print(index_names[n])   
@@ -247,7 +254,8 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
   return(result_list)
 }
 
-#' Calculate all indexes for all time scales
+#' @title Calculate all indexes for all time scales
+#' @description -
 #'
 #' @param data data list
 #' @param lat latitude

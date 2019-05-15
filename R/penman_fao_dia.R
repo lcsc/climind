@@ -21,6 +21,7 @@
 #' @param crop "short" short reference crop or "tail" tail reference crop
 #' @param na.rm na.rm
 #' @return et0, mm/day
+#' @keywords internal
 penman_fao_diario <-
   function(Tmin, Tmax, U2, J, Ra=NA, lat=NA, Rs=NA, tsun=NA, CC=NA, ed=NA, Tdew=NA, RH=NA, P=NA, P0=NA, z=NA, crop='short', na.rm=FALSE) {
     
@@ -190,7 +191,7 @@ penman_fao_diario <-
 #' @param ret Que hacer, calcular in desde r o al contrario
 #'
 #' @return insolación en horas de sol o radiación en ¿MJ/m2?
-#' @export
+#' @keywords internal
 penman_rs <- function(J,
            lat = NA,
            tsun = NA,

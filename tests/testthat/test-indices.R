@@ -1,5 +1,5 @@
 
-context("Indecis Indices")
+context("ClimInd Indices")
 
 dataTest <- function(){
   data.names <- seq(chron("1/1/1990", out.format=c(dates = "m/d/y", times = "h:m:s")), chron("12/31/2010", out.format=c(dates = "m/d/y", times = "h:m:s")))

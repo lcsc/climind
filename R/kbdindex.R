@@ -28,7 +28,7 @@
 #'  reason both indices are calculated by the same function.   
 #' @note The original equations of the code presented by Keetch and Byram (1968) were later corrected for two significant typographical errors
 #'  affecting the index output Alexander (1990).
-#' @export
+## @export
 #' @importFrom chron chron years
 #' @references 
 #' \itemize{
@@ -37,8 +37,7 @@
 #' \item Dennison, P.E., Roberts, D.A., Thorgusen, S.R., Regelbrugge, J.C., Weise, D., Christopher, L., 2003. Modeling seasonal changes in live fuel moisture and equivalent water thickness using a cumulative water balance index. Remote Sensing of the Environment 88, 442–452.
 #' }
 #' @author J. Bedia
-
-
+#' @keywords internal
 kbdindex <- function(dates, t, p, wrs = 5, start.date = NULL, what = "kbdi") { # requires date to compute mean annual precipitation
     if (length(t) != length(p) | length(t) != length(dates)) stop("Length of input data vectors differ")
     what <- match.arg(what, choices = c("kbdi", "madf"), several.ok = FALSE)

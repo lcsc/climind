@@ -1,38 +1,39 @@
 Package: ClimInd
 Type: Package
-Version: 0.1-1
-Date: 2018-07-01
+Version: 0.1-2
+Date: 2019-05-12
 Title: Climate Indices
-Authors@R: c(person("Reig Gracia", "Fergus", role = c("aut", "cre"), email = "fergusrg@gmail.com"))
-Author: Reig Gracia Fergus [aut, cre]
-Maintainer: Reig Gracia Fergus <fergusrg@gmail.com>
+Authors@R: c(person("Fergus", "Reig-Gracia", role = c("aut", "cre"), email = "fergusrg@gmail.com"),
+  person(c('Sergio','M.'), 'Vicente-Serrano', role='aut', email='svicen@ipe.csic.es'),
+  person(c('Fernando'), 'Dominguez-Castro', role='aut', email='f.dominguez@ipe.csic.es'),
+  person(c('Joaquin'), 'Bedia-Jiménez', role='aut', email='bediaj@unican.es'))
+Author: Fergus Reig-Gracia [aut, cre], Sergio M. Vicente-Serrano [aut], Fernando Dominguez-Castro [aut], Joaquin Bedia-Jiménez [aut]
+Maintainer: Fergus Reig-Gracia <fergusrg@gmail.com>
 Depends: R (>= 2.10), SPEI, chron, weathermetrics
 Suggests: MASS,
     knitr,
     rmarkdown,
     testthat
-Description: Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices Climate indices.
+Description: Computes 138 standard climate indices at monthly, seasonal and annual resolution. These indices were selected, based on their direct and significant impacts on target sectors, after a thorough review of the literature in the field of extreme weather events and natural hazards. Overall, the selected indices characterize different aspects of the frequency, intensity and duration of extreme events, and are derived from a broad set of climatic variables, including surface air temperature, precipitation, relative humidity, wind speed, cloudiness, solar radiation, and snow cover. The 138 indices have been classified as follow: Temperature based indices (42), Precipitation based indices (22), Bioclimatic indices (21), Wind-based indices (5), Aridity/ continentality indices (10), Snow-based indices (13), Cloud/radiation based indices (6), Drought indices (8), Fire indices (5), Tourism indices (5).
 License: GPL (>= 3)
-URL: https://github.com/indecis-eu/indecis
-LazyLoad: no
+URL: https://gitlab.com/indecis-eu/indecis
+LazyLoad: yes
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2018-07-01 11:38:24 UTC; freig
+Packaged: 2019-05-12 11:38:24 UTC; freig
 RoxygenNote: 6.1.1
-VignetteBuilder: knitr
 ByteCompile: true
-Collate:
-  'data.R'
-  'indecis_indices_functions.R'
-  'Fire_Danger_Index_Functions.R'
-  'penman_fao_dia.R'
-  'indecis_indices.R'
-  'fwi1D.R'
-  'kbdindex.R'
-  'nesterovIndex.R'
-  'custom_functions.R'
-  'ffdi.R'
-  'ClimInd-package.R'
-  'indecis.R'
-  'ClimIndNews.R'  
-  'macArthurFFDI.R'
+Collate: 
+    'ClimInd-package.R'
+    'ClimIndNews.R'
+    'custom_functions.R'
+    'data.R'
+    'ffdi.R'
+    'fwi1D.R'
+    'penman_fao_dia.R'
+    'nesterovIndex.R'
+    'macArthurFFDI.R'
+    'kbdindex.R'
+    'indecis_indices_functions.R'
+    'indecis_indices.R'
+    'indecis.R'

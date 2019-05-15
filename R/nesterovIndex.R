@@ -27,7 +27,7 @@
 #' \item Holsten, A., Dominic, A.R., Costa, L., Kropp, J.P., 2013. Evaluation of the performance of meteorological forest fire indices for German federal states. Forest Ecology and Management 287, 123–131. 
 #' } 
 #'   @author J. Bedia
-
+#' @keywords internal
 nesterovIndex <- function(t, rh, p, modified = FALSE) {
     t <- t
     r <- rh

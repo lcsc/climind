@@ -54,9 +54,9 @@
 #' }
 #' @author J. Bedia, partially based on the original FORTRAN code by van Wagner and Pickett (1985)
 #' 
-#' @export
+## @export
 #' 
-
+#' @keywords internal
 fwi1D <- function(dates,
                   Tm, H, r, W,
                   lat = 46,

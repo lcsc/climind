@@ -9,8 +9,8 @@
 #' @references McArthur, A.G. (1973) Forest Fire Danger Meter Mk.5. Commonwealth of Australian Forestry and Timber Bureau.
 #' @seealso kbdindex
 #' @author J. Bedia
-#' @export
-
+## @export
+#' @keywords internal
 ffdiIndex <- function(madf, t, h, w) {
     m <- matrix(data = c(madf, t, h, w), ncol = 2)
     if (any(is.na(m))) {

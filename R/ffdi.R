@@ -15,8 +15,8 @@
 #'  However, Vajda \emph{et al.} (2014, Table 1) provide reference values for different soil moisture conditions. This value ranges
 #'  from 0.1 (very dry) to 0.5 (very wet).
 #' @author J. Bedia (based on the original FORTRAN code from Vajda et al. 2014).
-#' @export
-
+## @export
+#' @keywords internal
 fffdi <- function(pr, pet, Wvol.init = 0.5, z = 60) {
     stopifnot(length(pr) == length(pet))
     if (any(is.na(pr) | is.na(pet))) {
