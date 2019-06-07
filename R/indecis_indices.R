@@ -56,14 +56,15 @@ index_titles = array(NA, dim=c(138))
 index_names = array(NA, dim=c(138))
 index_functions = list()
 
-#' @title 1. GTX: Mean TX
-#' @description -
+#' @title Mean TX
+#' @description Average value of monthly maximum air temperature
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return average temperature
+#' @return Average temperature
 #' @export
 #' @examples
 #' data(data_all)
@@ -76,14 +77,15 @@ index_titles[1] = "Mean TX"
 index_names[1] = "gtx"
 attr(calculate_1, "data") <- c(TMAX)
 
-#' @title 2. XTX: Maximum TX
-#' @description -
+#' @title Maximum TX
+#' @description Maximum value of monthly maximum air temperature
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return average temperature
+#' @return Average temperature
 #' @export
 #' @examples
 #' data(data_all)
@@ -96,14 +98,15 @@ index_titles[2] = "Maximum TX"
 index_names[2] = "xtx"
 attr(calculate_2, "data") <- c(TMAX)
 
-#' @title 3. NTX: Minimum TX
-#' @description -
+#' @title Minimum TX
+#' @description Minimum value of monthly maximum air temperature
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return average temperature
+#' @return Average temperature
 #' @export
 #' @examples
 #' data(data_all)
@@ -116,14 +119,15 @@ index_titles[3] = "Minimum TX"
 index_names[3] = "ntx"
 attr(calculate_3, "data") <- c(TMAX)
 
-#' @title 4. GTN: Mean TN
-#' @description -
+#' @title Mean TN
+#' @description Average value of monthly minimum air temperature
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return average temperature
+#' @return Average temperature
 #' @export
 #' @examples
 #' data(data_all)
@@ -136,14 +140,15 @@ index_titles[4] = "Mean TN"
 index_names[4] = "gtn"
 attr(calculate_4, "data") <- c(TMIN)
 
-#' @title 5. XTN: Maximum TN
-#' @description -
+#' @title Maximum TN
+#' @description Maximum value of monthly minimum air temperature
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return average temperature
+#' @return Average temperature
 #' @export
 #' @examples
 #' data(data_all)
@@ -156,14 +161,15 @@ index_titles[5] = "Maximum TN"
 index_names[5] = "xtn"
 attr(calculate_5, "data") <- c(TMIN)
 
-#' @title 6. NTN: Minimum TN
-#' @description -
+#' @title Minimum TN
+#' @description Minimum value of monthly maximum air temperature
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return average temperature
+#' @return Average temperature
 #' @export
 #' @examples
 #' data(data_all)
@@ -176,14 +182,15 @@ index_titles[6] = "Minimum TN"
 index_names[6] = "ntn"
 attr(calculate_6, "data") <- c(TMIN)
 
-#' @title 7. GTG: Mean TG
-#' @description -
+#' @title Mean TG
+#' @description Average value of monthly mean air temperature
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return average temperature
+#' @return Average temperature
 #' @export
 #' @examples
 #' data(data_all)
@@ -196,14 +203,15 @@ index_titles[7] = "Mean TG"
 index_names[7] = "gtg"
 attr(calculate_7, "data") <- c(TMEAN)
 
-#' @title 8. XTG: Maximum TG
-#' @description -
+#' @title Maximum TG
+#' @description Maximum value of monthly mean air temperature
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return average temperature
+#' @return Average temperature
 #' @export
 #' @examples
 #' data(data_all)
@@ -216,14 +224,15 @@ index_titles[8] = "Maximum TG"
 index_names[8] = "xtg"
 attr(calculate_8, "data") <- c(TMEAN)
 
-#' @title 9. NTG: Minimum TG
-#' @description -
+#' @title Minimum TG
+#' @description Minimum value of monthly mean air temperature
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return average temperature
+#' @return Average temperature
 #' @export
 #' @examples
 #' data(data_all)
@@ -236,8 +245,11 @@ index_titles[9] = "Minimum TG"
 index_names[9] = "ntg"
 attr(calculate_9, "data") <- c(TMEAN)
 
-#' @title  10. CD: Cold days
+#' @title Cold days
 #' @description Percentages of days with TX lower than the 10th percentile.
+#' Total numbers of days with maximum air temperatures lower than the 10th percentile.
+#' No. days TX < 10p
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param time.scale month, season or year
@@ -263,8 +275,11 @@ index_titles[10] = "Cold days"
 index_names[10] = "cd"
 attr(calculate_10, "data") <- c(TMAX)
 
-#' @title 11. CN: Cold nights
-#' @description  Percentages of days with TN lower than the 10th percentile.
+#' @title Cold nights
+#' @description Percentages of days with TN lower than the 10th percentile.
+#' Total numbers of days with minimum air temperatures lower than the 10th percentile.
+#' No. days TN <  10p
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data minimum temperature
 #' @param time.scale month, season or year
@@ -283,8 +298,9 @@ index_titles[11] = "Cold nights"
 index_names[11] = "cn"
 attr(calculate_11, "data") <- c(TMIN)
 
-#' @title 12. CDD: Cold spell duration
+#' @title Cold spell duration
 #' @description Count of days with at least 6 consecutive days when TN < 10th percentile
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time
@@ -320,8 +336,9 @@ index_titles[12] = "Cold spell duration"
 index_names[12] = "cdd"
 attr(calculate_12, "data") <- c(TMIN)
 
-#' @title 13. DTR: Diurnal temperature range
+#' @title Diurnal temperature range
 #' @description Mean difference between TX and TN.
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #'
 #' @param tmax maximum temperature 
 #' @param tmin minimum temperature
@@ -343,8 +360,9 @@ index_titles[13] = "Diurnal temperature range"
 index_names[13] = "dtr"
 attr(calculate_13, "data") <- c(TMAX, TMIN)
 
-#' @title 14. vDTR: Mean daily difference DTR
+#' @title Mean daily difference DTR
 #' @description Mean absolute day-to-day difference in DTR
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' \deqn{vDTR_j = \frac{ \sum_{ i = 2 } ^ { I } \mid ( TX_{ ij } - TN_{ ij } ) - ( TX_{ij} )-TN_{ i - 1j }) \mid } {I}}
 #'
 #' @param tmax maximum temperature 
@@ -371,8 +389,11 @@ index_titles[14] = "Mean daily difference DTR"
 index_names[14] = "vdtr"
 attr(calculate_14, "data") <- c(TMAX, TMIN)
 
-#' @title 15. FD: Frost days
+#' @title Frost days
 #' @description Number of days with minimum temperature < 0 Celsius.
+#' Total number of days with TN < 0℃
+#' No. days TN <  0℃
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time
@@ -395,8 +416,11 @@ index_titles[15] = "Frost days"
 index_names[15] = "fd"
 attr(calculate_15, "data") <- c(TMIN)
 
-#' @title 16. GSL = Growing season length
+#' @title Growing season length
 #' @description Annual count of days between the first span of at least 6 days with TG > 5 Celsius and first span after 1 July of 6 days with TG < 5 Celsius.
+#' Annual count of days between the first span of at least 6 days with TG >5℃  and first span after 1 July of 6 days with TG <5℃.
+#' at least 6 days with TG >5℃ and first span after 1 July of 6 days with TG <5 ℃.
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data mean temperature
 #' @param data_names names of each period of time
@@ -411,7 +435,7 @@ gsl = calculate_16 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     if(na.rm | sum(is.na(data))==0){
       BREAKVALUE = 5 #Grados de ruptura
-      times.data = chron(names(data)) #Fechas a tratar      
+      times.data = chron(names(data)) #Fechas a tratar
       aux = which(times.data == chron(paste0("7/1/", unique(years(times.data)))), arr.ind = TRUE, useNames = TRUE) # Fecha en la que se pasa de buscar mayores de 5 a menores de 5
 
       ### Fecha desde la que contar
@@ -457,8 +481,11 @@ index_titles[16] = "Growing season length"
 index_names[16] = "gsl"
 attr(calculate_16, "data") <- c(TMEAN)
 
-#' @title 17. ID: Ice days
+#' @title Ice days
 #' @description Number of days with maximum temperature < 0 Celsius.
+#' Number of days with TX <0℃
+#' No. days TX<  0℃
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -481,8 +508,11 @@ index_titles[17] = "Ice days"
 index_names[17] = "id"
 attr(calculate_17, "data") <- c(TMAX)
 
-#' @title 18. CFD: Maximum consecutive frost days
+#' @title Maximum consecutive frost days
 #' @description Maximum number of consecutive with days TN < 0 Celsius
+#' Maximum number of consecutive with days TN<0℃
+#' n days with TN <0℃
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time
@@ -511,8 +541,9 @@ index_titles[18] = "Maximum consecutive frost days"
 index_names[18] = "cfd"
 attr(calculate_18, "data") <- c(TMIN)
 
-#' @title 19. ETR: Extreme temperature range
+#' @title Extreme temperature range
 #' @description Difference between the highest TX and the lowest TN.
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param tmax maximum temperature
 #' @param tmin minimum temperature
@@ -537,8 +568,11 @@ index_titles[19] = "Extreme temperature range"
 index_names[19] = "etr"
 attr(calculate_19, "data") <- c(TMAX, TMIN)
 
-#' @title 20. SUD: Summer days
+#' @title Summer days
 #' @description Number of days with maximum temperature > 25 Celsius.
+#' Number of days with TX >25℃.
+#' No. days TX <  25℃
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -561,8 +595,11 @@ index_titles[20] = "Summer days"
 index_names[20] = "sud"
 attr(calculate_20, "data") <- c(TMAX)
 
-#' @title 21. CSD: Maximum consecutive summer days
+#' @title Maximum consecutive summer days
 #' @description Maximum number of consecutive summer days (TX > 25 Celsius)
+#' Maximum number of consecutive days with TX > 25℃
+#' n days with TX >25℃
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -597,8 +634,10 @@ index_titles[21] = "Maximum consecutive summer days"
 index_names[21] = "csd"
 attr(calculate_21, "data") <- c(TMAX)
 
-#' @title 22. DD17: Difference days above/below Tx17
-#' @description (days tx > 17 Celsius)–(days TX < 17 Celsius)
+#' @title Difference days above/below Tx17
+#' @description (days tx > 17 Celsius)-(days TX < 17 Celsius)
+#' (days TX >17℃)-(days TX <17℃)
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -621,8 +660,11 @@ index_titles[22] = "Difference days above/below Tx17"
 index_names[22] = "dd17"
 attr(calculate_22, "data") <- c(TMAX)
 
-#' @title 23. TN: Tropical nights
+#' @title Tropical nights
 #' @description Number of days with TN > 20 Celsius.
+#' Number of days with TN >20℃.
+#' No. days TN >20℃
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time
@@ -645,8 +687,11 @@ index_titles[23] = "Tropical nights"
 index_names[23] = "tn"
 attr(calculate_23, "data") <- c(TMIN)
 
-#' @title 24. HD17: Heating degree days 
+#' @title Heating degree days
 #' @description (sum(17-TG)) only for days with TG < 17 Celsius
+#' (sum(17-TG)) only for days with TG<17℃
+#' (sum(17-TG)) when daily TG<17℃
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' \deqn{HD17_j = \sum_{j-1}^{I} (17 ^ oC - TG_ij)}
 #' 
 #' @param data mean temperature
@@ -670,8 +715,11 @@ index_titles[24] = "Heating degree days"
 index_names[24] = "hd17"
 attr(calculate_24, "data") <- c(TMEAN)
 
-#' @title 25. VCD: Very cold days
+#' @title Very cold days
 #' @description Number of days with minimum temperature <1st percentile.
+#' Number of days with TN <1st percentile.
+#' No. days TN < 1p
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time
@@ -698,8 +746,11 @@ index_titles[25] = "Very cold days"
 index_names[25] = "vcd"
 attr(calculate_25, "data") <- c(TMIN)
 
-#' @title 26. VWD: Very warm days
+#' @title Very warm days
 #' @description Number of days with maximum temperature >99th percentile per year.
+#' Number of days with TX >99th percentile per year.
+#' No. days TX > 99p
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -724,8 +775,11 @@ index_titles[26] = "Very warm days"
 index_names[26] = "vwd"
 attr(calculate_26, "data") <- c(TMAX)
 
-#' @title 27. WD: Warm days
+#' @title Warm days
 #' @description Percentages of days with maximum temperatures higher than the 90th percentile.
+#' Total numbers of days with TX higher than the 90th percentile.
+#' No. days TX > 90p
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -750,8 +804,11 @@ index_titles[27] = "Warm days"
 index_names[27] = "wd"
 attr(calculate_27, "data") <- c(TMAX)
 
-#' @title 28. WN: Warm nights
+#' @title Warm nights
 #' @description Percentages of days with minimum temperatures higher than the 90th percentile.
+#' Total numbers of days TN higher than the 90th percentile.
+#' No. days TN > 90p
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time
@@ -776,8 +833,9 @@ index_titles[28] = "Warm nights"
 index_names[28] = "wn"
 attr(calculate_28, "data") <- c(TMIN)
 
-#' @title 29. WSD: Warm spell duration
+#' @title Warm spell duration
 #' @description Count of days with at least 6 consecutive days when TX > 90th percentile.
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -809,8 +867,11 @@ index_titles[29] = "Warm spell duration"
 index_names[29] = "wsd"
 attr(calculate_29, "data") <- c(TMAX)
 
-#' @title 30. ZCD: Zero crossing days
+#' @title Zero crossing days
 #' @description Number of days with Tmax > 0 Celsius and Tmin < 0 Celsius.
+#' Number of days with TX > 0 ℃ and TN < 0 ℃.
+#' days with TX > 0 ℃ and TN < 0 ℃.
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param tmax maximum temperature
 #' @param tmin minimum temperature
@@ -835,8 +896,10 @@ index_titles[30] = "Zero crossing days"
 index_names[30] = "zcd"
 attr(calculate_30, "data") <- c(TMAX, TMIN)
 
-#' @title 31. OGS6: Onset of growing season 6 days
+#' @title Onset of growing season 6 days
 #' @description The start of the first span with at least 6 days with Tmean > 5 Celsius
+#' The start of the first span with at least 6 days with Tmean >5℃
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time
@@ -869,8 +932,10 @@ index_titles[31] = "Onset of growing season 6 days"
 index_names[31] = "ogs6"
 attr(calculate_31, "data") <- c(TMEAN)
 
-#' @title 32. OGS10: Onset of growing season 10 days
+#' @title Onset of growing season 10 days
 #' @description The start of the first span with at least 10 days with Tmean > 5 Celsius
+#' The start of the first span with at least 10 days with Tmean >5℃
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time
@@ -903,8 +968,11 @@ index_titles[32] = "Onset of growing season 10 days"
 index_names[32] = "ogs10"
 attr(calculate_32, "data") <- c(TMEAN)
 
-#' @title 33. Ta_o: Growing season (Apr-Oct)
+#' @title Growing season (Apr-Oct)
 #' @description Growing season (april to october) mean TG
+#' growing season mean temperature (April-October in the Northern Hemisphere; and October-April in the Southern Hemisphere).
+#' average of monthly mean temperatures in the growing season (April-October in the Northern Hemisphere; October-April in the Southern Hemisphere).
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time
@@ -928,8 +996,11 @@ index_titles[33] = "Growing season (Apr-Oct)"
 index_names[33] = "ta_o"
 attr(calculate_33, "data") <- c(TMEAN)
 
-#' @title 34. Tm_s: Growing season(May-Sep)
+#' @title Growing season(May-Sep)
 #' @description Growing season (may to september) mean TG
+#' Growing season (May to September) mean TG
+#' mean TG averaged for the period from May to September
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time
@@ -953,8 +1024,10 @@ index_titles[34] = "Growing season(May-Sep)"
 index_names[34] = "tm_s"
 attr(calculate_34, "data") <- c(TMEAN)
 
-#' @title 35. GD4: Growing degree days
+#' @title Growing degree days
 #' @description Sum of degree days over 4 Celsius
+#' Sum of degree days over 4℃
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time
@@ -977,8 +1050,11 @@ index_titles[35] = "Growing degree days"
 index_names[35] = "gd4"
 attr(calculate_35, "data") <- c(TMEAN)
 
-#' @title 36. WKI: Winkler index
-#' @description Sum of degree days over 10 Celsius from April 1 until October 31 = Sum max [(avg. daily temp. – 10), 0]
+#' @title Winkler index
+#' @description Sum of degree days over 10 Celsius from April 1 until October 31 = Sum max [(avg. daily temp. - 10), 0]
+#' Sum of degree days over 10℃ from April 1 until October 31
+#' ; where nm is the number of days, n, of the month, m. All the months with average temperatures < 10℃ are not considered in the sum.
+#' @references Winkler, A.J., J.A. Cook, W.M. Kliewer, and L.A. Lider. 1974. General Viticulture. 4th ed. University of California Press, Berkeley.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -1002,8 +1078,10 @@ index_titles[36] = "Winkler index"
 index_names[36] = "wki"
 attr(calculate_36, "data") <- c(TMAX)
 
-#' @title 37. WS: Winter Severity
+#' @title Winter Severity
 #' @description Mean temperature of the coldest month of the year
+#' Mean TG of the coldest month of the year
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -1031,8 +1109,11 @@ index_titles[37] = "Winter Severity"
 index_names[37] = "ws"
 attr(calculate_37, "data") <- c(TMAX)
 
-#' @title 38. STX32: Sums TX32
+#' @title Sums TX32
 #' @description Sums of maximum temperatures >= 32 Celsius
+#' Is an agrometeorological parameter characterizing thermal impact on winter wheat and maize crops in Romania. The 32 ℃ limit is the critical biological threshold for the maximum air temperature from which the physiological optimal growth and development of wheat and maize plants is particularly affected during the critical period with maximum temperature requirements. This critical period corresponds to the June-August interval
+#' \deqn{\sum Tmax \geq 32℃} on the interval June-August
+#' @references Sandu I., Mateescu Elena, Vatamanu V. V, Schimbari climatice in Romania si efectele asupra agriculturii, Editura Sitech, Craiova, 2010
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -1055,8 +1136,11 @@ index_titles[38] = "Sums TX32"
 index_names[38] = "stx32"
 attr(calculate_38, "data") <- c(TMAX)
 
-#' @title 39. D32: Days TX32
+#' @title Days TX32
 #' @description Number of days whith TX >= 32 Celsius
+#' Number of days whith TX>=32 Celsius
+#' number of days whith TX>=32 Celsius
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
@@ -1079,8 +1163,11 @@ index_titles[39] = "Days TX32"
 index_names[39] = "d32"
 attr(calculate_39, "data") <- c(TMAX)
 
-#' @title 40. STN15: Sums TN-15
+#' @title Sums TN-15
 #' @description Sums of minimum air temperatures <= -15 Celsius recorded in December-February interval
+#' the amount of minimum air temperatures below -15℃
+#' \deqn{\sum Tmin \leq -15℃} recorded in December-February interval
+#' @references Sandu I., Mateescu Elena, Vatamanu V. V, Schimbari climatice in Romania si efectele asupra agriculturii, Editura Sitech, Craiova, 2010
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time
@@ -1104,8 +1191,11 @@ index_titles[40] = "Sums TN-15"
 index_names[40] = "stn15"
 attr(calculate_40, "data") <- c(TMIN)
 
-#' @title 41. STN10: Sums TN-10
+#' @title Sums TN-10
 #' @description Sums of minimum air temperatures <=-10 Celsius recorded in December-February interval
+#' Sums of TN <= -10℃ recorded in December-February interval
+#' sum TN <= -10℃ recorded in December-February interval
+#' @references Sandu I., Mateescu Elena, Vatamanu V. V, Schimbari climatice in Romania si efectele asupra agriculturii, Editura Sitech, Craiova, 2010
 #' 
 #' @param data minimum temperature
 #' @param data_names names of each period of time
@@ -1129,8 +1219,11 @@ index_titles[41] = "Sums TN-10"
 index_names[41] = "stn10"
 attr(calculate_41, "data") <- c(TMIN)
 
-#' @title 42. PTG: Sums positive
+#' @title Sums positive
 #' @description Sums of positive TG  calculated for the 1st of February to the 10th April interval
+#' Sums of positive average temperatures calculated for the 1st of February to the 10th April interval
+#' \deqn{\sum Tmed \geq 0℃} calculated from the 1 st  of February to the 10th of April
+#' @references Sandu I., Mateescu Elena, Vatamanu V. V, Schimbari climatice in Romania si efectele asupra agriculturii, Editura Sitech, Craiova, 2010
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time
@@ -1158,8 +1251,9 @@ index_names[42] = "ptg"
 attr(calculate_42, "data") <- c(TMEAN)
 
 ####Precipitation-based
-#' @title 43. RT: Total precipitation
-#' @description -
+#' @title Total precipitation
+#' @description Total amounts of precipitation
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1182,8 +1276,9 @@ index_titles[43] = "Total precipitation"
 index_names[43] = "rt"
 attr(calculate_43, "data") <- c(PRECIPITATION)
 
-#' @title 44. RX: Maximum precipitation
-#' @description -
+#' @title Maximum precipitation
+#' @description The highest amount of precipitation
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1206,8 +1301,11 @@ index_titles[44] = "Maximum precipitation"
 index_names[44] = "rx"
 attr(calculate_44, "data") <- c(PRECIPITATION)
 
-#' @title 45. R10mm: Days precipitation >= R10mm 
+#' @title Days precipitation >= R10mm
 #' @description Annual count of days when daily precipitation amount >= 10mm
+#' Annual count of days when daily precipitation amount >= 10mm
+#' No. days >= 10mm
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1231,8 +1329,11 @@ index_titles[45] = "Days precipitation >= R10mm "
 index_names[45] = "r10mm"
 attr(calculate_45, "data") <- c(PRECIPITATION)
 
-#' @title 46. R20mm: Days precipitation >= R20mm 
+#' @title Days precipitation >= R20mm
 #' @description Annual count of days when daily precipitation amount >= 20mm
+#' Annual count of days when daily precipitation amount >= 20mm
+#' No. days >= 20mm
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1255,8 +1356,9 @@ index_titles[46] = "Days precipitation >= R20mm "
 index_names[46] = "r20mm"
 attr(calculate_46, "data") <- c(PRECIPITATION)
 
-#' @title 49. Rx1d: Maximum daily R
+#' @title Maximum daily R
 #' @description Maximum 1-day precipitation
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1279,8 +1381,10 @@ index_titles[49] = "Maximum daily R"
 index_names[49] = "rx1d"
 attr(calculate_49, "data") <- c(PRECIPITATION)
 
-#' @title 50. Rx5d: Maximum 5 days R
+#' @title Maximum 5 days R
 #' @description Maximum consecutive 5-day precipitation 
+#' Maximum consecutive 5-day precipitation
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1308,8 +1412,9 @@ index_titles[50] = "Maximum 5 days R"
 index_names[50] = "rx5d"
 attr(calculate_50, "data") <- c(PRECIPITATION)
 
-#' @title 51. SDII: Simple precipitation intensity index
+#' @title Simple precipitation intensity index
 #' @description Sum of precipitation in wet days (days with >1mm of precipitation), and dividing that by the number of wet days in the period.
+#' @references Michele Brunetti, Maurizio Maugerib, Teresa Nanni, (2001) Changes in total precipitation, rainy days and extreme events in northeastern Italy, International Journal of Climatology
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1337,8 +1442,9 @@ index_titles[51] = "Simple precipitation intensity index"
 index_names[51] = "sdii"
 attr(calculate_51, "data") <- c(PRECIPITATION)
 
-#' @title 52. DD: Dry days
+#' @title Dry days
 #' @description Number of days with less than 1 mm/day
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1361,8 +1467,9 @@ index_titles[52] = "Dry days"
 index_names[52] = "dd"
 attr(calculate_52, "data") <- c(PRECIPITATION)
 
-#' @title 53. EP: Effective precipitation
+#' @title Effective precipitation
 #' @description Precipitation minus evapotranspiration
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param eto et0
 #' @param pr precipitation
@@ -1386,8 +1493,9 @@ index_titles[53] = "Precipitation minus evapotranspiration"
 index_names[53] = "ep"
 attr(calculate_53, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
-#' @title 54. LDP: Longest dry period
+#' @title Longest dry period
 #' @description Maximum length of consecutive dry days (RR<1)
+#' @references Gregory J. McCabe, David R. Legates, Harry F. Lins, Variability and trends in dry day frequency and dry event length in the southwestern United States, Journal of Geophysical Research, VOL. 115, D07108, doi:10.1029/2009JD012866, 2010
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1415,8 +1523,9 @@ index_titles[54] = "Longest dry period"
 index_names[54] = "ldp"
 attr(calculate_54, "data") <- c(PRECIPITATION)
 
-#' @title 55. LWP: Longest wet period
+#' @title Longest wet period
 #' @description Maximum length of consecutive wet days (RR>=1)
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1444,8 +1553,9 @@ index_titles[55] = "Longest wet period"
 index_names[55] = "lwp"
 attr(calculate_55, "data") <- c(PRECIPITATION)
 
-#' @title 56. R95tot: Precipitation fraction very wet days
+#' @title Precipitation fraction very wet days
 #' @description Precipitation at days exceeding the 95percentile divided by total precipitation
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1473,8 +1583,9 @@ index_titles[56] = "Precipitation fraction very wet days"
 index_names[56] = "r95tot"
 attr(calculate_56, "data") <- c(PRECIPITATION)
 
-#' @title 57. R99tot: Precipitation fraction extremely wet days
+#' @title Precipitation fraction extremely wet days
 #' @description Precipitation at days exceeding the 99percentile divided by total precipitation
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1501,8 +1612,9 @@ index_titles[57] = "Precipitation fraction extremely wet days"
 index_names[57] = "r99tot"
 attr(calculate_57, "data") <- c(PRECIPITATION)
 
-#' @title 58. D50mm: Heavy precipitation days
+#' @title Heavy precipitation days
 #' @description Number of days with precipitation above 50mm
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1525,8 +1637,9 @@ index_titles[58] = "Heavy precipitation days"
 index_names[58] = "d50mm"
 attr(calculate_58, "data") <- c(PRECIPITATION)
 
-#' @title 59. D95p: Very wet days
+#' @title Very wet days
 #' @description Days when precipitation > 95p
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1551,8 +1664,10 @@ index_titles[59] = "Very wet days"
 index_names[59] = "d95p"
 attr(calculate_59, "data") <- c(PRECIPITATION)
 
-#' @title 60. PCI: Precipitation Concentration Index
+#' @title Precipitation Concentration Index
 #' @description PCI=100*sum(Pi^2)/P^2
+#' 
+#' @references J. Martin-Vide, “Spatial distribution of a daily precipitation concentration index in peninsular Spain,” International Journal of Climatology, vol. 24, no. 8, pp. 959–971, 2004.
 #' \deqn{PCI = \frac{\sum_{i=1}^{12} P_i ^ 2} {(P_t) ^ 2} * 100}
 #' 
 #' @param data precipitation
@@ -1579,8 +1694,9 @@ index_titles[60] = "Precipitation Concentration Index"
 index_names[60] = "pci"
 attr(calculate_60, "data") <- c(PRECIPITATION)
 
-#' @title 61. MFI: Modified Fournier Index
+#' @title Modified Fournier Index
 #' @description A precipitation concentration index
+#' @references Gabriels, D. (2006). Assessing the Modified Fournier Index and the Precipitation Concentration Index for Some European Countries. In Soil Erosion in Europe (eds J. Boardman and J. Poesen). doi:10.1002/0470859202.ch48
 #' MFI=sum(Pi^2)/P
 #' \url{https://es.scribd.com/document/76414093/modified-fournier-index}
 #' \deqn{MIFI = \sum_{i=1}^{12} \frac{P_i ^ 2} {P_t}}
@@ -1609,8 +1725,11 @@ index_titles[61] = "Modified Fournier Index"
 index_names[61] = "mfi"
 attr(calculate_61, "data") <- c(PRECIPITATION)
 
-#' @title 62. GSR: Growing season precipitation
+#' @title Growing season precipitation
 #' @description Growing season (april to october) total precipitation
+#' Growing season (April to October) total precipitation
+#' Total precipitation from April to October
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1634,8 +1753,11 @@ index_titles[62] = "Growing season precipitation"
 index_names[62] = "gsr"
 attr(calculate_62, "data") <- c(PRECIPITATION)
 
-#' @title 63. NGSR: Non-growing season precipitation
+#' @title Non-growing season precipitation
 #' @description October to april total precipitation, can inform on the resource available for low potential evaporation conditions
+#' October to April total precipitation, can inform on the resource available for low potential evaporation conditions
+#' Total precipitation from October to April
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1666,8 +1788,11 @@ index_titles[63] = "Non-growing season precipitation"
 index_names[63] = "ngsr"
 attr(calculate_63, "data") <- c(PRECIPITATION)
 
-#' @title 64. RTWD: Total precipitation wet days
+#' @title Total precipitation wet days
 #' @description Precipitation amount on days with RR >= 1 mm in a choosen period (e.g. year)
+#' Precipitation amount on days with RR >= 1 mm in a chosen period (e.g. year)
+#' Let RRij be the daily precipitation amount on day i in period j. If I represents the number of days in j.
+#' @references Karl, T.R., N. Nicholls, and A. Ghazi, 1999: CLIVAR/GCOS/WMO workshop on indices and indicators for climate extremes: Workshop summary. Climatic Change, 42, 3-7.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1690,8 +1815,11 @@ index_titles[64] = "Total precipitation wet days"
 index_names[64] = "rtwd"
 attr(calculate_64, "data") <- c(PRECIPITATION)
 
-#' @title 65. DR1mm:  Wet days 1mm
+#' @title Wet days 1mm
 #' @description Wet days >= 1 mm (days), ECA&D standard
+#' Total number of wet days >= 1 mm; standard index computed by ECA&D
+#' Let RRij be the daily precipitation amount on day i of period j. Count the number of days.
+#' @references ECA&D website: \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1714,8 +1842,11 @@ index_titles[65] = "Wet days 1mm"
 index_names[65] = "dr1mm"
 attr(calculate_65, "data") <- c(PRECIPITATION)
 
-#' @title 66. DR3mm: Wt days 3mm
+#' @title Wt days 3mm
 #' @description Wet days >= 3mm (days), ECA&D standard
+#' Total number of wet days >= 3 mm; standard index computed by ECA&D
+#' No. days RR>= 3mm
+#' @references ECA&D website: \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1739,8 +1870,9 @@ index_names[66] = "dr3mm"
 attr(calculate_66, "data") <- c(PRECIPITATION)
 
 ####Bioclimatic
-#' @title 67. BIO10: TG of warmest quarter
-#' @description -
+#' @title TG of warmest quarter
+#' @description TG of Warmest Quarter
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time
@@ -1764,8 +1896,9 @@ index_titles[67] = "TG of warmest quarter"
 index_names[67] = "bio10"
 attr(calculate_67, "data") <- c(TMEAN)
 
-#' @title 68. BIO11: TG of coldest quarter
-#' @description -
+#' @title TG of coldest quarter
+#' @description TG of Coldest Quarter
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time
@@ -1789,8 +1922,9 @@ index_titles[68] = "TG of coldest quarter"
 index_names[68] = "bio11"
 attr(calculate_68, "data") <- c(TMEAN)
 
-#' @title 69. BIO13: Precipitation of wettest month
-#' @description -
+#' @title Precipitation of wettest month
+#' @description Precipitation of Wettest Month
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1814,8 +1948,9 @@ index_titles[69] = "Precipitation of wettest month"
 index_names[69] = "bio13"
 attr(calculate_69, "data") <- c(PRECIPITATION)
 
-#' @title 70. BIO14: Precipitation of driest month
-#' @description -
+#' @title Precipitation of driest month
+#' @description Precipitation of Driest Month
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1839,8 +1974,11 @@ index_titles[70] = "Precipitation of driest month"
 index_names[70] = "bio14"
 attr(calculate_70, "data") <- c(PRECIPITATION)
 
-#' @title 71. BIO15: Coefficient of variation precipitation
+#' @title Coefficient of variation precipitation
 #' @description Precipitation seasonality (coefficient of variation)
+#' This is a measure of the variation in monthly precipitation totals over the course of the year. This index is the ratio of the standard deviation of the monthly total precipitation to the mean monthly total precipitation (also known as the coefficient of variation) and is expressed as a percentage.
+#' the coefficient of variation
+#' @references \url{http://www.worldclim.org/bioclim}
 #' This is a measure of the variation in monthly precipitation totals over the course of the year. This index is the ratio of the standard deviation of the monthly total precipitation to the mean monthly total precipitation (also known as the coefficient of variation) and is expressed as a percentage.
 #'
 #' @param data precipitation
@@ -1865,8 +2003,9 @@ index_titles[71] = "Coefficient of variation precipitation"
 index_names[71] = "bio15"
 attr(calculate_71, "data") <- c(PRECIPITATION)
 
-#' @title 72. BIO16: Precipitation wettest quarter
-#' @description -
+#' @title Precipitation wettest quarter
+#' @description Precipitation of Wettest Quarter
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1890,8 +2029,9 @@ index_titles[72] = "Precipitation wettest quarter"
 index_names[72] = "bio16"
 attr(calculate_72, "data") <- c(PRECIPITATION)
 
-#' @title 73. BIO17: Precipitation driest quarter
-#' @description -
+#' @title Precipitation driest quarter
+#' @description Precipitation of Driest Quarter
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -1915,8 +2055,9 @@ index_titles[73] = "Precipitation driest quarter"
 index_names[73] = "bio17"
 attr(calculate_73, "data") <- c(PRECIPITATION)
 
-#' @title 74. BIO18: Precipitation warmest quarter
-#' @description -
+#' @title Precipitation warmest quarter
+#' @description Precipitation of Warmest Quarter
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param pr precipitation
 #' @param taverage medium temperature
@@ -1941,8 +2082,9 @@ index_titles[74] = "Precipitation warmest quarter"
 index_names[74] = "bio18"
 attr(calculate_74, "data") <- c(PRECIPITATION, TMEAN)
 
-#' @title 75. BIO19: Precipitation coldest quarter
-#' @description -
+#' @title Precipitation coldest quarter
+#' @description Precipitation of Coldest Quarter
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param pr precipitation
 #' @param taverage medium temperature
@@ -1967,8 +2109,10 @@ index_titles[75] = "Precipitation coldest quarter"
 index_names[75] = "bio19"
 attr(calculate_75, "data") <- c(PRECIPITATION, TMEAN)
 
-#' @title 76. BIO4: Temperature seasonality
+#' @title Temperature seasonality
 #' @description Standard deviation temperature *100
+#' Standard deviation *100
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time
@@ -1991,8 +2135,9 @@ index_titles[76] = "Temperature seasonality"
 index_names[76] = "bio4"
 attr(calculate_76, "data") <- c(TMEAN)
 
-#' @title 77. BIO5: TX warmest month
-#' @description -
+#' @title TX warmest month
+#' @description TX of Warmest Month
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param data mean temperature
 #' @param tmax maximum temperature
@@ -2018,8 +2163,9 @@ index_titles[77] = "TX warmest month"
 index_names[77] = "bio5"
 attr(calculate_77, "data") <- c(TMEAN, TMAX)
 
-#' @title 78. BIO6: TN of coldest month
-#' @description -
+#' @title TN of coldest month
+#' @description TN of Coldest Month
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param data mean temperature
 #' @param tmin minimum temperature
@@ -2045,8 +2191,11 @@ index_titles[78] = "TN of coldest month"
 index_names[78] = "bio6"
 attr(calculate_78, "data") <- c(TMEAN, TMIN)
 
-#' @title 79. BIO7: Difference warmest/coldest month
+#' @title Difference warmest/coldest month
 #' @description Temperature Annual Range (BIO5-BIO6)
+#' TX of Warmest Month minus TN of Coldest Month
+#' TX of Warmest Month - TN of Coldest Month
+#' @references \url{http://www.worldclim.org/bioclim}
 #' TX of warmest month minus TN of coldest month
 #' 
 #' @param data medium temperature
@@ -2068,8 +2217,9 @@ index_titles[79] = "Difference warmest/coldest month"
 index_names[79] = "bio7"
 attr(calculate_79, "data") <- c(TMEAN, TMIN, TMAX)
 
-#' @title 80. BIO8: TG of wettest quarter
-#' @description -
+#' @title TG of wettest quarter
+#' @description TG of Wettest Quarter
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param pr precipitation
 #' @param taverage medium temperature
@@ -2094,8 +2244,9 @@ index_titles[80] = "TG of wettest quarter"
 index_names[80] = "bio8"
 attr(calculate_80, "data") <- c(PRECIPITATION, TMEAN)
 
-#' @title 81. BIO9: TG of driest quarter
-#' @description -
+#' @title TG of driest quarter
+#' @description TG of Driest Quarter
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param pr precipitation
 #' @param taverage medium temperature 
@@ -2120,8 +2271,10 @@ index_titles[81] = "TG of driest quarter"
 index_names[81] = "bio9"
 attr(calculate_81, "data") <- c(PRECIPITATION, TMEAN)
 
-#' @title 82. BIO20: Mean radiation 
+#' @title Mean radiation
 #' @description \url{https://www.edenextdata.com/?q=content/climond-bioclimatic-variables-2030} (W m-2)
+#' Mean radiation (W m-2) following \url{https://www.edenextdata.com/?q=content/climond-bioclimatic-variables-2030}
+#' @references \url{http://www.worldclim.org/bioclim}
 #' 
 #' @param data radiation en w/m2
 #' @param data_names names of each period of time
@@ -2140,8 +2293,11 @@ index_titles[82] = "Mean radiation"
 index_names[82] = "bio20"
 attr(calculate_82, "data") <- c(RADIATION_W)
 
-#' @title 83. UTCI: Universal thermal climate index
+#' @title Universal thermal climate index
 #' @description UTCI (Blazejczyk et all, 2012) (Air temperature, Humidity, Wind)
+#' Considers dry temperature, relative humidity, solar radiation, and wind speed into account and is regarded as the reference environmental temperature causing strain.
+#' UTCI is a complex function of several meteorological parameters (T2m [C],v10m [m/s],RH [%], cloudiness [%], soil temperature[C]) and additional parameters (latitude, Julian day, local solar time); a comprehensive description may be found at \url{https://goo.gl/by4hH9}  ; the coefficients of the polynomial approximation are available at \url{http://www.utci.org/utci_doku.php} (UTCI_a002.f90 file) and more info on the calculation of other  parameters (e.g. Tmrt) may be found in the help files of the BioKlima2.6 software (\url{https://www.igipz.pan.pl/Bioklima-zgik.html})
+#' @references Bröde P et al. 2012: Deriving the operational procedure for the Universal Thermal Climate Index (UTCI). International journal of biometeorology 56:3, 481-494. K.Y. Blazejczyk, G. Epstein, G. Jendritzky, H. Staiger, B. Tinz, Int J Biometeorol., 56:3, 515-535, doi:  10.1007/s00484-011-0453-2.
 #' \url{https://goo.gl/by4hH9}
 #' \url{http://www.utci.org/}
 #' \url{https://rdrr.io/github/alfcrisci/rBiometeo/man/UTCI.html}
@@ -2401,8 +2557,11 @@ index_titles[83] = "Universal thermal climate index"
 index_names[83] = "utci"
 attr(calculate_83, "data") <- c(TMEAN, DEWPOINT, WIND, "RADIATIONTEMPERATURE")
 
-#' @title 84. MI: Mould index
+#' @title Mould index
 #' @description Number of days with  a relative humidity over 90\% in combination with temperatures above 10 Celsius 
+#' Number of days with a relative humidity over 90% in combination with air temperatures above 10℃.
+#' No. days RH> 90% & TG> 10℃.
+#' @references \url{http://www.tut.fi/en/research/research-fields/civil-engineering/structural-engineering/building-physics/finnish-mould-growth-model/index.htm}
 #' 
 #' @param taverage medium temperature
 #' @param rh relative humidity
@@ -2427,9 +2586,11 @@ index_titles[84] = "Mould index"
 index_names[84] = "mi"
 attr(calculate_84, "data") <- c(TMEAN, HUMIDITY)
 
-#' @title 85. HI: Heat Index
+#' @title Heat Index
 #' @description Temperature + humidity 
-#' \url{http://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml}
+#' Combines air temperature and relative humidity to determine the human-perceived equivalent temperature
+#' HI= -42,379+(2,04901523)*T)+(10,14333127*rh)-(0,22475541*T*rh)-(6,83783*10-3*T2)-(5,481717*10-2*rh2)+(1,22874*10-3*T2*rh)+(8,5282*10-4*T*rh2)-(1,99*10-6*T2*rh2). Where T is air temperature in ºF and rh is relative humidity in %
+#' @references \url{http://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml}
 #' Available from the R package weathermetrics
 #' 
 #' @param taverage medium temperature
@@ -2456,8 +2617,11 @@ index_titles[85] = "Heat Index"
 index_names[85] = "hi"
 attr(calculate_85, "data") <- c(TMEAN, HUMIDITY)
 
-#' @title 86. WCI: Wind chill index
+#' @title Wind chill index
 #' @description Temperature + wind 
+#' is the lowering of body temperature due to the passing-flow of lower-temperature air. It combines air temperature and wind speed.
+#' WCI=13,12+0,6215T-11,37v0,16+0,3965Tv0,16 Where T is air temperature in ℃ and v is wind speed in Km/h
+#' @references : Osczevski, Randall; Bluestein, Maurice (2005). "The new wind chill equivalent temperature chart". Bulletin of the American Meteorological Society. 86 (10): 1453–1458
 #' Osczevski, R. & Bleustein, M. 2005, Bull. Amer. Meteor. Soc., 86, 1453, doi:10.1175/BAMS-86-10-1453 
 #' \url{https://journals.ametsoc.org/doi/abs/10.1175/BAMS-86-10-1453}
 #' Ta = air temperature; in Celsius ; v = wind speed in m/s (original: km/h)
@@ -2490,8 +2654,10 @@ index_titles[86] = "Wind chill index"
 index_names[86] = "wci"
 attr(calculate_86, "data") <- c(TMEAN, WIND)
 
-#' @title 87. AT: Apparent Temperature
+#' @title Apparent temperature
 #' @description AT = Ta + 0.33e -0.70v -4.00; Ta = air temperature in Celsius ; v = wind speed in m/s; e= water vapour pressure in hPa
+#' AT = Ta + 0.33e -0.70v -4.00; Ta = air temperature in ℃ ; v = wind speed in m/s; e= water vapor pressure in hPa
+#' @references Steadman, R.G., 1984: A Universal Scale of Apparent Temperature. J. Climate Appl. Meteor., 23, 1674–1687, \url{https://doi.org/10.1175/1520-0450(1984)023<1674:AUSOAT>2.0.CO;2}
 #' \deqn{e = \frac{RH}{100} * 6.015 * \exp(\frac{17.27 * Ta}{237.7 + Ta})}
 #' 
 #' @param taverage medium temperature
@@ -2521,8 +2687,10 @@ index_names[87] = "at"
 attr(calculate_87, "data") <- c(TMEAN, WIND, VAPOUR)
 
 ####wind-based
-#' @title 88. DFx21: Days wind gusts above 21 m/s
-#' @description -
+#' @title Days wind gusts above 21 m/s
+#' @description number of days with wind gusts above 21 m/s
+#' No. days with wind gusts > 21 m/s
+#' @references Azad, Kalam & Alam, Muhammad. (2010). Determination of Wind Gust Factor at Windy areas of Bangladesh. 10.13140/2.1.2090.6884.
 #' 
 #' @param data wind
 #' @param data_names names of each period of time
@@ -2545,8 +2713,11 @@ index_titles[88] = "Days wind gusts above 21 m/s"
 index_names[88] = "dfx21"
 attr(calculate_88, "data") <- c(WINDGUST)
 
-#' @title 89. FXx: Daily maximum wind gust
+#' @title Daily maximum wind gust
 #' @description Maximun value of daily maximum wind gust (m/s), ECA&D standard
+#' Maximum value of daily maximum wind gust (m/s); standard index computed by ECA&D
+#' Let FXij be the daily maximum wind gust for day i of period j.)
+#' @references ECA&D website: \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 #' 
 #' @param data maximum wind gust
 #' @param data_names names of each period of time
@@ -2569,8 +2740,11 @@ index_titles[89] = "Daily maximum wind gust"
 index_names[89] = "fxx"
 attr(calculate_89, "data") <- c(WINDGUST)
 
-#' @title 90. FG: Mean of daily mean wind strength
+#' @title Mean of daily mean wind strength
 #' @description Mean of daily mean wind strength (m/s), ECA&D standard
+#' Mean of daily mean wind strength (m/s); standard index computed by ECA&D
+#' Let FGij be the daily mean wind strength for day i of period j
+#' @references \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 #' 
 #' @param data wind
 #' @param data_names names of each period of time
@@ -2593,8 +2767,11 @@ index_titles[90] = "Mean of daily mean wind strength"
 index_names[90] = "fg"
 attr(calculate_90, "data") <- c(WIND)
 
-#' @title 91. FGcalm: Calm days
+#' @title Calm days
 #' @description Calm days (average wind FG <= 2 m/s) (days), ECA&D standard
+#' Number of calm days (FG <=2 m/s); standard index computed by ECA&D
+#' Let FGij be the daily averaged wind strength for day i of period j. Count the number of days with.
+#' @references ECA&D website: \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 #' 
 #' @param data wind
 #' @param data_names names of each period of time
@@ -2617,8 +2794,11 @@ index_titles[91] = "Calm days2"
 index_names[91] = "fgcalm"
 attr(calculate_91, "data") <- c(WIND)
 
-#' @title 92. FG6Bft: Days daily averaged wind above 10.8m/s
+#' @title Days daily averaged wind above 10.8m/s
 #' @description Days with daily averaged wind >= 6 Bft (10.8 m/s) (days), ECA&D standard
+#' Number of days with daily averaged wind >=6 Bft (10.8 m/s) (days); standard index computed by ECA&D
+#' Let FGij be the daily averaged wind strength for day i of period j. Count the number of days with.
+#' @references ECA&D website: \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 #' 
 #' @param data wind
 #' @param data_names names of each period of time
@@ -2642,8 +2822,9 @@ index_names[92] = "fg6bft"
 attr(calculate_92, "data") <- c(WIND)
 
 ####aridity/continentality-indices
-#' @title  93. Eto: Reference evapotranspiration
+#' @title Reference evapotranspiration
 #' @description If data available using Fao-56 Penman-Monteith, if not using the Hargreaves & Samani method.
+#' @references Chiew, F.H.S., Kamaladasa, N.N., Malano, H.M., McMahon, T.A., 1995. Penman–Monteith FAO-24 reference crop evapotranspiration and class-A pan data in Australia. Agric. Water Manage. 28, 9–21
 #' 
 #' @param tmin tmin
 #' @param tmax tmax
@@ -2669,6 +2850,10 @@ attr(calculate_92, "data") <- c(WIND)
 #'      insolation=data_all$insolation, rh = data_all$humidity)
 eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, insolation=NA, rh=NA, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 
+  if(is.null(w)){
+    return(NULL)
+  }
+
   data = calc_eto(tmin = tmin, tmax = tmax, radiation = radiation, insolation=insolation, toa = toa, w = w, lat=lat, tdew = tdew, mde=mde, rh = rh)
 
   function_ = function(data){
@@ -2682,8 +2867,9 @@ index_titles[93] = "Reference evapotranspiration"
 index_names[93] = "eto"
 attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, RADIATION, MDE, DEWPOINT, INSOLATION, HUMIDITY)
 
-#' @title 94. UAI: UNEP Aridity Index
+#' @title UNEP Aridity Index
 #' @description P/Eto
+#' @references Huiping Huang, Yuping Han, Mingming Cao, Jinxi Song, and Heng Xiao, “Spatial-Temporal Variation of Aridity Index of China during 1960–2013,” Advances in Meteorology, vol. 2016, Article ID 1536135, 10 pages, 2016. \url{https://doi.org/10.1155/2016/1536135}
 #' 
 #' @param eto et0
 #' @param pr precipitation
@@ -2708,8 +2894,10 @@ index_titles[94] = "UNEP Aridity Index"
 index_names[94] = "uai"
 attr(calculate_94, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
-#' @title 95. CMD: Climatic moisture deficit
+#' @title Climatic moisture deficit
 #' @description ETo - Effective precipitation
+#' ETo - Effective Precipitation
+#' @references Parks, S. A., Parisien, M. , Miller, C. , Holsinger, L. M. and Baggett, L. S. (2018), Fine‐scale spatial climate variation and drought mediate the likelihood of reburning. Ecol Appl, 28: 573-586. doi:10.1002/eap.1671
 #' 
 #' @param eto et0
 #' @param pr precipitation
@@ -2734,8 +2922,9 @@ index_titles[95] = "Climatic moisture deficit"
 index_names[95] = "cmd"
 attr(calculate_95, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
-#' @title 96. MAI: De Martonne aridity index
+#' @title De Martonne aridity index
 #' @description Annual rainfall/(Annual TG+10)
+#' @references Baltas E (2007) Spatial distribution of climatic indices in northern Greece. Meteorol Appl 14: 69-78
 #' De Martonne = P / (T + 10); P is the annual total amount of precipitation (mm) and T is the mean annual air temperature (Celsius)
 #' 
 #' @param pr precipitation
@@ -2763,8 +2952,9 @@ index_titles[96] = "De Martonne aridity index"
 index_names[96] = "mai"
 attr(calculate_96, "data") <- c(PRECIPITATION, TMEAN)
 
-#' @title 97. EAI: Emberger aridity index
+#' @title Emberger aridity index
 #' @description (100*annual rainfall)/(TGhottest month2-TG coldest month2)
+#' @references Wallén, C. (1967). Aridity Definitions and Their Applicability. Geografiska Annaler. Series A, Physical Geography, 49(2/4), 367-384. doi:10.2307/520903
 #' 
 #' @param pr precipitation
 #' @param taverage medium temperature
@@ -2790,8 +2980,9 @@ index_titles[97] = "Emberger aridity index"
 index_names[97] = "eai"
 attr(calculate_97, "data") <- c(PRECIPITATION, TMEAN)
 
-#' @title 98. JCI: Johansson Continentality Index
+#' @title Johansson Continentality Index
 #' @description (1.7E/sinf)-20.4 where E (in8C) is the annual range of mean monthly air temperatures and f is the geographical latitude of the station
+#' @references Gavilán RG (2005) The use of climatic parameters and indices in vegetation distribution. A case study in the Spanish Sistema Central. Int J Biometeorol 50: 111-120
 #' ( 1.7 * the annual range of monthly mean air temperatures grados / sin(geographic latitude grados) ) - 20.4
 #' 
 #' @param data medium temperature
@@ -2817,8 +3008,10 @@ index_titles[98] = "Johansson Continentality Index"
 index_names[98] = "jci"
 attr(calculate_98, "data") <- c(TMEAN, LAT)
 
-#' @title 99. KOI: Kerner Oceanity Index
+#' @title Kerner Oceanity Index
 #' @description (100*(To-Ta))/E where To and Ta are the October and April mean values of TG respectively and E is the annual range of monthly mean air temperatures, in Celsius.
+#' (100*(To-Ta))/E where To and Ta are the October and April mean values of TG respectively and E is the annual range of monthly mean air temperatures, in ℃.
+#' @references Andrade, C. and Corte‐Real, J. (2017), Assessment of the spatial distribution of continental‐oceanic climate indices in the Iberian Peninsula. Int. J. Climatol., 37: 36-45. doi:10.1002/joc.4685
 #' 
 #' @param data medium temperature
 #' @param data_names names of each period of time
@@ -2843,8 +3036,10 @@ index_titles[99] = "Kerner Oceanity Index"
 index_names[99] = "koi"
 attr(calculate_99, "data") <- c(TMEAN)
 
-#' @title 100. PiCI: Pinna Combinative index
-#' @description 1/2((P/(T+10))+(12Pd/(Td+10))) where P and T are the annual mean values of precipitation and air temperature and P'd, T'dare the mean values of precipitation and air temperature of the driest month
+#' @title Pinna Combinative index
+#' @description 1/2((P/(T+10))+(12Pd/(Td+10))) where P and T are the annual mean values of precipitation and air temperature and P´d, T´d are the mean values of precipitation and air temperature of the driest month
+#' 1/2((P/(T+10))+(12Pd/(Td+10))) where P and T are the annual mean values of precipitation and air temperature and P´d, T´d are the mean values of precipitation and air temperature of the driest month
+#' @references Baltas, E. (2007), Spatial distribution of climatic indices in northern Greece. Met. Apps, 14: 69-78. doi:10.1002/met.7
 #' 
 #' @param pr precipitation 
 #' @param taverage medium temperature
@@ -2871,9 +3066,12 @@ index_titles[100] = "Pinna Combinative index"
 index_names[100] = "pici"
 attr(calculate_100, "data") <- c(PRECIPITATION, TMEAN)
 
-#' @title 101. BI: Budyko Index
+#' @title Budyko Index
 #' @description (Rn/L*P)*100, where Rn is the mean annual net radiation (also known as the net radiation balance), P is the mean annual precipitation, and L is the latent heat of vaporization for water 
-#' vaporization: 2257 kJ/kg (539,4 cal/g) a 97 Celsius. \url{"https://es.wikipedia.org/wiki/Clasificacion_climatica_de_Budyko"}
+#' (Rn/L*P)*100, where Rn is the mean annual net radiation (also known as the net radiation balance), P is the mean annual precipitation, and L is the latent heat of vaporization for water
+#' (Rn/L*P)*100, where Rn is the mean annual net radiation, P is the mean annual precipitation, and L is the latent heat of vaporization for water
+#' @references Creed, I. F., Spargo, A. T., Jones, J. A., Buttle, J. M., Adams, M. B., Beall, F. D., Booth, E. G., Campbell, J. L., Clow, D. , Elder, K. , Green, M. B., Grimm, N. B., Miniat, C. , Ramlal, P. , Saha, A. , Sebestyen, S. , Spittlehouse, D. , Sterling, S. , Williams, M. W., Winkler, R. and Yao, H. (2014), Changing forest water yields in response to climate warming: results from long‐term experimental watershed sites across North America. Glob Change Biol, 20: 3191-3208. doi:10.1111/gcb.12615
+#' vaporization: 2257 kJ/kg (539,4 cal/g) a 97 Celsius. \url{https://es.wikipedia.org/wiki/Clasificacion_climatica_de_Budyko}
 #' 
 #' @param data net radiation 
 #' @param pr precipitation
@@ -2902,8 +3100,11 @@ index_titles[101] = "Budyko Index"
 index_names[101] = "bi"
 attr(calculate_101, "data") <- c(RADIATION, PRECIPITATION)
 
-#' @title 102. MOI: Marsz Oceanity Index
+#' @title Marsz Oceanity Index
 #' @description MOI = ( 0.731 * geographic latitude grados + 1.767 ) / the annual range of monthly mean air temperatures grados
+#' \deqn{(0.731 \phi +1.767)/Tamp} where Tamp is the annual range of the monthly mean air temperatures (℃) and \deqn{\phi} (hereafter, degrees) is the geographical latitude of the grid point
+#' (0.731+1.767)/Tamp where Tamp is the annual range of the monthly mean air temperatures (℃) and  (hereafter, degrees) is the geographical latitude of the grid point
+#' @references Gavilán RG (2005) The use of climatic parameters and
 #' 
 #' @param data medium temperature
 #' @param value lat 
@@ -2929,8 +3130,9 @@ index_names[102] = "moi"
 attr(calculate_102, "data") <- c(TMEAN, LAT)
 
 ####snow-based
-#' @title 103. SS: Snowfall sum
-#' @description -
+#' @title Snowfall sum
+#' @description Sum of snowfall
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snowfall
 #' @param data_names names of each period of time
@@ -2950,8 +3152,9 @@ index_titles[103] = "Snowfall sum"
 index_names[103] = "ss"
 attr(calculate_103, "data") <- c(SNOWFALLMM)
 
-#' @title 104. SD0_10: Snow depth 1-10
+#' @title Snow depth 1-10
 #' @description The number of days with snow depth in the range 1-10 cm
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -2975,8 +3178,9 @@ index_titles[104] = "Snow depth 0-10"
 index_names[104] = "sd0_10"
 attr(calculate_104, "data") <- c(SNOWDEPTHTHICKNESS)
 
-#' @title 105. SD10_20: Snow depth 10-20
+#' @title Snow depth 10-20
 #' @description The number of days with snow depth of 10-20 cm
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -3000,8 +3204,10 @@ index_titles[105] = "Snow depth 10-20"
 index_names[105] = "sd10_20"
 attr(calculate_105, "data") <- c(SNOWDEPTHTHICKNESS)
 
-#' @title 106. SdD: Snow depth
+#' @title Snow depth
 #' @description Mean of daily snow depth
+#' mean of daily snow depth
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -3021,8 +3227,11 @@ index_titles[106] = "Snow depth"
 index_names[106] = "snd"
 attr(calculate_106, "data") <- c(SNOWDEPTHTHICKNESS)
 
-#' @title 107. FSD: Frequency of snow days
+#' @title Frequency of snow days
 #' @description Number of snow days
+#' number of snow days
+#' No. snow days
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snowfall
 #' @param data_names names of each period of time
@@ -3045,8 +3254,11 @@ index_titles[107] = "Frequency of snow days"
 index_names[107] = "fsd"
 attr(calculate_107, "data") <- c(SNOWFALL)
 
-#' @title 108. MSD: Mild snowy days
+#' @title Mild snowy days
 #' @description Annual number of days with snow depth more than 5 cm.
+#' number of days with snow depth more than 5 cm.
+#' No. days snow depth> 5 cm.
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -3069,8 +3281,11 @@ index_titles[108] = "Mild snowy days"
 index_names[108] = "msd"
 attr(calculate_108, "data") <- c(SNOWDEPTHTHICKNESS)
 
-#' @title 109. HSD: Heavy snowy days
+#' @title Heavy snowy days
 #' @description Annual number of days with snow depth more than 50 cm.
+#' number of days with snow depth more than 50 cm.
+#' No. days snow depth> 50 cm.
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -3093,8 +3308,11 @@ index_titles[109] = "Heavy snowy days"
 index_names[109] = "hsd"
 attr(calculate_109, "data") <- c(SNOWDEPTHTHICKNESS)
 
-#' @title 110. FSC: Date of first snow cover
+#' @title Date of first snow cover
 #' @description First day when there is measurable snow cover
+#' first day when there is measurable snow cover
+#' first day with measurable snow cover
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -3124,8 +3342,10 @@ index_titles[110] = "Date of first snow cover"
 index_names[110] = "fsc"
 attr(calculate_110, "data") <- c(SNOWDEPTH)
 
-#' @title 111. FPSC: Date of first permanent snow cover 
+#' @title Date of first permanent snow cover
 #' @description First day of the longest period with consecutive snow cover day.
+#' First day of the longest period with consecutive snow cover day
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -3163,8 +3383,10 @@ index_titles[111] = "Date of first permanent snow cover "
 index_names[111] = "fpsc"
 attr(calculate_111, "data") <- c(SNOWDEPTH)
 
-#' @title 112. LPSC: Date of last permanent snow cover
+#' @title Date of last permanent snow cover
 #' @description Last day of the longest period with consecutive snow cover day.
+#' Last day of the longest period with consecutive snow cover day
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -3202,8 +3424,9 @@ index_titles[112] = "Date of last permanent snow cover"
 index_names[112] = "lpsc"
 attr(calculate_112, "data") <- c(SNOWDEPTH)
 
-#' @title 113. ASD: Average snow depth
-#' @description -
+#' @title Average snow depth
+#' @description Average snow depth
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -3223,8 +3446,9 @@ index_titles[113] = "Average snow depth"
 index_names[113] = "asd"
 attr(calculate_113, "data") <- c(SNOWDEPTHTHICKNESS)
 
-#' @title 114. SCD: Amount of snow covered days
-#' @description -
+#' @title Amount of snow covered days
+#' @description Amount of snow covered days
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -3247,8 +3471,9 @@ index_titles[114] = "Amount of snow covered days"
 index_names[114] = "scd"
 attr(calculate_114, "data") <- c(SNOWDEPTH)
 
-#' @title 115. MS: Maximum snow depth
-#' @description -
+#' @title Maximum snow depth
+#' @description Maximum snow depth
+#' @references \url{https://www.ecad.eu/download/millennium/millennium.php#snow}
 #' 
 #' @param data snow depth
 #' @param data_names names of each period of time
@@ -3269,8 +3494,10 @@ index_names[115] = "ms"
 attr(calculate_115, "data") <- c(SNOWDEPTHTHICKNESS)
 
 ####Cloud/radiation-based
-#' @title 116. SSD: Sum of sunshine duration
-#' @description -
+#' @title Sum of sunshine duration
+#' @description Sunshine duration (hours); standard index computed by ECA&D
+#' sum of sunshine duration
+#' @references \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 #' 
 #' @param data sunshine duration
 #' @param data_names names of each period of time
@@ -3290,8 +3517,11 @@ index_titles[116] = "Sum of sunshine duration"
 index_names[116] = "ssd"
 attr(calculate_116, "data") <- c(INSOLATION)
 
-#' @title 117. SND: Sunny days
+#' @title Sunny days
 #' @description Days with mean cloud cover less than 10\%.
+#' days with mean cloud cover less than 10%.
+#' No. days CC< 10%.
+#' @references Rastogi, B., A.P. Williams, D.T. Fischer, S.F. Iacobellis, K. McEachern, L. Carvalho, C. Jones, S.A. Baguskas, and C.J. Still, 2016: Spatial and Temporal Patterns of Cloud Cover and Fog Inundation in Coastal California: Ecological Implications. Earth Interact., 20, 1–19, \url{https://doi.org/10.1175/EI-D-15-0033.1}
 #' 
 #' @param data cloud cover
 #' @param data_names names of each period of time
@@ -3314,8 +3544,9 @@ index_titles[117] = "Sunny days"
 index_names[117] = "snd"
 attr(calculate_117, "data") <- c(CLOUD)
 
-#' @title 118. ClD: Cloudy days
+#' @title Cloudy days
 #' @description Number of days with cloud base below 100 meter.
+#' @references Rastogi, B., A.P. Williams, D.T. Fischer, S.F. Iacobellis, K. McEachern, L. Carvalho, C. Jones, S.A. Baguskas, and C.J. Still, 2016: Spatial and Temporal Patterns of Cloud Cover and Fog Inundation in Coastal California: Ecological Implications. Earth Interact., 20, 1–19, \url{https://doi.org/10.1175/EI-D-15-0033.1}
 #' 
 #' @param data cloud base below 100 meter
 #' @param data_names names of each period of time
@@ -3338,8 +3569,10 @@ index_titles[118] = "Cloudy days"
 index_names[118] = "cld"
 attr(calculate_118, "data") <- c(CLOUD100)
 
-#' @title 119. CC: Mean daily cloud cover
-#' @description -
+#' @title Mean daily cloud cover
+#' @description Mean daily cloud cover (oktas)
+#' Let  be the daily cloud cover for day i of period j.
+#' @references Huschke, Ralph E. (1970) [1959]. "Cloud cover". Glossary of Meteorology (2nd ed.). Boston: American Meteorological Society. Retrieved 2013-08-24.
 #' 
 #' @param data cloud cover
 #' @param data_names names of each period of time
@@ -3359,8 +3592,11 @@ index_titles[119] = "Mean daily cloud cover"
 index_names[119] = "cc"
 attr(calculate_119, "data") <- c(CLOUD)
 
-#' @title 120. SSp: Sunshine duration fraction
+#' @title Sunshine duration fraction
 #' @description Sunshine duration fraction with respect to day length (\%), standard ECA&D: 100*(SS/SSmax) SS: sum of sunshine duration, SSmax: maximun daylight hours 
+#' Sunshine duration fraction with respect to day length (%); standard index computed by ECA&D.
+#' This index is then given by: Let  be the daily sunshine duration for day i of period j and the maximum daylight hours for day I of period j.
+#' @references \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 #' 
 #' @param data sunshine duration
 #' @param data_names names of each period of time
@@ -3383,8 +3619,11 @@ index_titles[120] = "Sunshine duration fraction"
 index_names[120] = "ssp"
 attr(calculate_120, "data") <- c(INSOLATION)
 
-#' @title 121. ACI: Atmospheric Clarity Index
+#' @title Atmospheric Clarity Index
 #' @description Ratio between solar radiation at surface and solar radiation at TOA (alt top of the atmosphere empirically obtained)
+#' Ratio between solar radiation at surface and solar radiation at TOA (empirically obtained, see \url{https://goo.gl/Wzs1Zk})
+#' Ratio between solar radiation at surface and solar radiation at TOA
+#' @references HONTORIA, L.; AGUILERA, J.; ZUFIRIA, P. Generation of hourly irradiation synthetic series using the neural network multilayer perceptron. Solar Energy, v. 72, n. 5, p. 441-446, 2002.
 #' \url{https://goo.gl/Wzs1Zk}
 #' \url{http://www.greenrhinoenergy.com/solar/radiation/atmosphere.php}
 #' 
@@ -3412,8 +3651,9 @@ index_names[121] = "aci"
 attr(calculate_121, "data") <- c(RADIATION, RADIATIONTOA)
 
 ####Drought indices
-#' @title 122. SPI1: Standardized precipitation index 1
-#' @description -
+#' @title Standardized precipitation index 1
+#' @description Standardized precipitation index calculated at 1-month time scale
+#' @references McKee, T. B., Doesken, N. J. and Kleist, J.: The relationship of drought frequency and duration to time scales, Eighth Conf. Appl. Climatol., 179–184, 1993.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -3432,8 +3672,9 @@ index_titles[122] = "Standardized precipitation index 1"
 index_names[122] = "spi1"
 attr(calculate_122, "data") <- c(PRECIPITATION)
 
-#' @title 123. SPI3: Standardized precipitation index 3
-#' @description -
+#' @title Standardized precipitation index 3
+#' @description Standardized precipitation index calculated at 3-month time scale
+#' @references McKee, T. B., Doesken, N. J. and Kleist, J.: The relationship of drought frequency and duration to time scales, Eighth Conf. Appl. Climatol., 179–184, 1993.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -3452,8 +3693,9 @@ index_titles[123] = "Standardized precipitation index 3"
 index_names[123] = "spi3"
 attr(calculate_123, "data") <- c(PRECIPITATION)
 
-#' @title 124. SPI6: Standardized precipitation index 6
-#' @description -
+#' @title Standardized precipitation index 6
+#' @description Standardized precipitation index calculated at 6-month time scale
+#' @references McKee, T. B., Doesken, N. J. and Kleist, J.: The relationship of drought frequency and duration to time scales, Eighth Conf. Appl. Climatol., 179–184, 1993.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -3472,8 +3714,9 @@ index_titles[124] = "Standardized precipitation index 6"
 index_names[124] = "spi6"
 attr(calculate_124, "data") <- c(PRECIPITATION)
 
-#' @title 125. SPI12: Standardized precipitation index 12
-#' @description -
+#' @title Standardized precipitation index 12
+#' @description Standardized precipitation index calculated at 12-month time scale
+#' @references McKee, T. B., Doesken, N. J. and Kleist, J.: The relationship of drought frequency and duration to time scales, Eighth Conf. Appl. Climatol., 179–184, 1993.
 #' 
 #' @param data precipitation
 #' @param data_names names of each period of time
@@ -3492,8 +3735,9 @@ index_titles[125] = "Standardized precipitation index 12"
 index_names[125] = "spi12"
 attr(calculate_125, "data") <- c(PRECIPITATION)
 
-#' @title 126. SPEI1: Standardised Precipitation-Evapotranspiration Index 1
-#' @description -
+#' @title Standardised Precipitation-Evapotranspiration Index 1
+#' @description Standardized precipitation-evapotranspiration index calculated at 1-month time scale
+#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
 #' 
 #' @param eto et0
 #' @param pr precipitation
@@ -3513,8 +3757,9 @@ index_titles[126] = "Standardised Precipitation-Evapotranspiration Index 1"
 index_names[126] = "spei1"
 attr(calculate_126, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
-#' @title 127. SPEI3: Standardised Precipitation-Evapotranspiration Index 3
-#' @description -
+#' @title Standardised Precipitation-Evapotranspiration Index 3
+#' @description Standardized precipitation-evapotranspiration index calculated at 3-month time scale
+#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
 #' 
 #' @param eto et0
 #' @param pr precipitation
@@ -3534,8 +3779,9 @@ index_titles[127] = "Standardised Precipitation-Evapotranspiration Index 3"
 index_names[127] = "spei3"
 attr(calculate_127, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
-#' @title 128. SPEI6: Standardised Precipitation-Evapotranspiration Index 6
-#' @description -
+#' @title Standardised Precipitation-Evapotranspiration Index 6
+#' @description Standardized precipitation-evapotranspiration index calculated at 6-month time scale
+#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
 #' 
 #' @param eto et0
 #' @param pr precipitation
@@ -3555,8 +3801,9 @@ index_titles[128] = "Standardised Precipitation-Evapotranspiration Index 6"
 index_names[128] = "spei6"
 attr(calculate_128, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
-#' @title 129. SPEI12: Standardised Precipitation-Evapotranspiration Index 12
-#' @description -
+#' @title Standardised Precipitation-Evapotranspiration Index 12
+#' @description Standardized precipitation-evapotranspiration index calculated at 12-month time scale
+#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
 #' 
 #' @param eto et0
 #' @param pr precipitation
@@ -3577,8 +3824,11 @@ index_names[129] = "spei12"
 attr(calculate_129, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
 ####Fire-based
-#' @title 130. FWI: Canadian Fire Weather Index
+#' @title Canadian Fire Weather Index
 #' @description \url{http://www.atriplex.info/index.php/Fire_Danger_Index_Functions_in_R}
+#' The Canadian Forest Fire Weather Index (FWI) is an indicator of fire weather intensity and is used to represent potential fire danger. It is computed from daily values of precipitation, temperature, near-surface wind and relative humidity
+#' dimensionless, see Van Wagner (1987) for formula.
+#' @references Van Wagner CE. 1987. Development and structure of the Canadian forest fire weather index system. Technical Report 35, Canadian Forestry Service: Ottawa, Ontario.
 #' \url{https://github.com/SantanderMetGroup/fireDanger}
 #' Combination of daily values of temperature, relative humidity, surface wind and precipitation
 #' 
@@ -3628,8 +3878,11 @@ index_titles[130] = "Canadian Fire Weather Index"
 index_names[130] = "fwi"
 attr(calculate_130, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, DEWPOINT, LAT)
 
-#' @title 131. KBDI: Keetch-Byran Drought Index
+#' @title Keetch-Byran Drought Index
 #' @description Combination of daily maximum in temperature and precipitation
+#' The Keetch-Byram Drought Index (KBDI) is an indicator of drought conditions and is used to predict wildfire severity. It estimates soil water deficit, or the amount of net rainfall (in inches or cm) that is required to reduce the index to zero.
+#' R package fireDanger
+#' @references Keetch, J.J. and Byram, G.M. (1968). A drought index for forest fire control. Tech. Rep., USDA Forest Service Research Paper SE-38, North Carolina, USA.
 #' \url{http://www.atriplex.info/index.php/Fire_Danger_Index_Functions_in_R#Keech-Byran_Drought_Index}
 #' \url{https://github.com/SantanderMetGroup/fireDanger/blob/devel/R/kbdi.R}
 #' \url{https://www.srs.fs.usda.gov/pubs/rp/rp_se038.pdf}
@@ -3674,8 +3927,11 @@ index_titles[131] = "Keetch-Byran Drought Index"
 index_names[131] = "kbdi"
 attr(calculate_131, "data") <- c(TMEAN, PRECIPITATION)
 
-#' @title 132. FFDI: McArthur Forest Fire Danger Index
+#' @title McArthur Forest Fire Danger Index
 #' @description Combination of temperature, relative humidity, surface wind speed and KBDI
+#' The McArthur Forest Fire Danger Index (FFDI) has been used in Australia for several decades, generally providing a good indication of the difficulty of fire suppression over a wide range of conditions. It estimates the amount of precipitation needed to bring the soil back to saturation and is computed from the Keetch-Byram Drought Index (KBDI) and Drought Factor (DF).
+#' inches or cm of precipitation Dimensionless, see Keetch and Byram (1968) for formula.
+#' @references McArthur, A. G. (1967). Fire behaviour in eucalypt forests. Forestry and Timber Bureau Leaflet 107, 36 pp.
 #' \url{http://www.atriplex.info/index.php/Fire_Danger_Index_Functions_in_R#Keech-Byran_Drought_Index}
 #' 
 #' @param taverage medium temperature
@@ -3718,8 +3974,11 @@ index_titles[132] = "McArthur Forest Fire Danger Index"
 index_names[132] = "ffdi"
 attr(calculate_132, "data") <- c(TMEAN, PRECIPITATION, HUMIDITY, WIND)
 
-#' @title 133. MNI: Modified Nesterov Index
+#' @title Modified Nesterov Index
 #' @description Cummulative function of temperature and dew point deficit
+#' The Modified Nesterov Index (MNI) is based on the Nesterov Index (NI), which was developed in former Soviet Union as an empirical function reflecting the relationship between observed weather conditions and fire occurrence.
+#' Dimensionless, it is a cumulative index  computed from daily temperature and dewpoint temperature, which is reset when a certain precipitation value is reached. See Groisman, P.Y., et al. (2007) for formula.
+#' @references Groisman, P.Y., et al., 2007. Global and Planetary Change 56, 371–386.
 #' \url{http://www.atriplex.info/index.php/Fire_Danger_Index_Functions_in_R}
 #' \url{https://github.com/jbedia/fireDanger/wiki/nesterovIndex}
 #' @param dew_point dew point
@@ -3769,8 +4028,11 @@ index_titles[133] = "Modified Nesterov Index"
 index_names[133] = "mni"
 attr(calculate_133, "data") <- c(DEWPOINT, TMEAN, HUMIDITY, PRECIPITATION)
 
-#' @title 134. FFFI: Finnish Forest Fire Index
+#' @title Finnish Forest Fire Index
 #' @description Combination of temperature, relative humidity, wind speed, radiation and precipitation (package fireDanger)
+#' Combination of air temperature, relative humidity, wind speed, radiation and precipitation
+#' R package fireDanger
+#' @references Giannakopoulos C, LeSager P, Moriondo M, Bindi M, Karali A, Hatzaki M, and Kostopoulou E. 2012. Comparison of fire danger indices in the Mediterranean for present day conditions. iForest - Biogeosciences and Forestry 5(4):197-203.
 #' \url{https://link.springer.com/chapter/10.1007\%2F978-3-642-55903-7_88}
 #' P-eto+-f1
 #' \url{https://github.com/SantanderMetGroup/fireDanger}
@@ -3786,6 +4048,9 @@ attr(calculate_133, "data") <- c(DEWPOINT, TMEAN, HUMIDITY, PRECIPITATION)
 #' data(data_all)
 #' fffi(data = data_all$rr, evap=data_all$evapotranspiration)
 fffi = calculate_134 = function(data, evap, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  if(is.null(data) | is.null(evap)){
+    return(NULL)
+  }
   data = fffdi(pr=data, pet = evap, Wvol.init = 0.5, z = 60)
   data.all = evap
   data.all[] = NA
@@ -3799,8 +4064,11 @@ index_names[134] = "fffi"
 attr(calculate_134, "data") <- c(PRECIPITATION, EVAPOTRANSPIRATION)
 
 ####Tourism
-#' @title 135. HCIU: Holliday Climate Index Urban
+#' @title Holliday Climate Index Urban
 #' @description Holliday Climate Index for Urban destinations (Scott et all, 2016) (Tmax,wind,cloudiness,RH, precipitation) Scott, D., Rutty, M., Amelung, B. and Tang, M. (2016): An inter-comparison of the Holiday Climate Index (HCI) and the Tourism Climate Index (TCI), Atmosphere, 7, 80, doi:10.3390/atmos7060080
+#' Holliday Climate Index for Urban destinations (Scott et all, 2016) (TX, wind, cloudiness, RH, precipitation) Scott, D., Rutty, M., Amelung, B. and Tang, M. (2016): An inter-comparison of the Holiday Climate Index (HCI) and the Tourism Climate Index (TCI), Atmosphere, 7, 80, doi:10.3390/atmos7060080
+#' HCI : Urban= 4*TC +2*A+(3*precipitation+wind) where TC=thermal comfort (as a function of Tmax [C] and RH [%]), A (aesthetic facet)=cloudiness (%), precipitation [mm],wind speed (at 10m)[km/h]. HCI scores may be in the range 0 (potentially dangerous for tourists) to 100 (ideal for tourism).
+#' @references Scott, D., Rutty, M., Amelung, B. and Tang, M. (2016): An inter-comparison of the Holiday Climate Index (HCI) and the Tourism Climate Index (TCI), Atmosphere, 7, 80, doi:10.3390/atmos7060080
 #' 
 #' @param pr precipitation
 #' @param w average wind
@@ -3826,8 +4094,11 @@ index_titles[135] = "Holliday Climate Index Urban"
 index_names[135] = "hciu"
 attr(calculate_135, "data") <- c(PRECIPITATION, WIND)
 
-#' @title 136. TCI: Tourism Climatic Index
+#' @title Tourism Climatic Index
 #' @description Standard index computed by ECA&D; Described at Miezkowski (1985), conceptual formula: TCI = 4cid + cia + 2R + 2S + W, where CId is a daytime comfort index, CIa a daily comfort index, R is cumulated rainfall, S the daily sunshine hours and W wind speed
+#' Represents a quantitative evaluation of world climate for the purposes of tourism and is a composite measure of the climatic well-being of tourists.
+#' TCI = 4cid + cia + 2R + 2S + W, where CId is a daytime comfort index, CIa a daily comfort index, R is cumulated rainfall, S the daily sunshine hours and W wind speed
+#' @references Mieczkowski, Z. (1985). The tourism climatic index: a method of evaluating world climates for tourism. The Canadian Geographer/Le Géographe canadien, 29(3), 220-233.
 #' 
 #' @param data precipitation
 #' @param sunshine net radiation 
@@ -3855,8 +4126,11 @@ index_titles[136] = "Tourism Climatic Index"
 index_names[136] = "tci"
 attr(calculate_136, "data") <- c(PRECIPITATION, RADIATION, WIND)
 
-#' @title 137. TCI60: Good tourism days TCI>60
+#' @title Good tourism days TCI>60
 #' @description Number of days TCI>60, standard ECA&D
+#' Number of days TCI>60 (see TCI)
+#' TCI = 8 Cld + 2 Cla + 4 R + 4 S + 2 W. Let TCIij be the daily value of the Tourism Climatic Index at day i of period j. Then counted is the number of days where: TCIij>=60. Where C ld is a daytime comfort index, consisting of the mean maximum air temperature Ta, max (℃) and the mean minimum relative humidity RH (%), Cla is the daily comfort index, consisting of the mean air temperature (℃) and the mean relative humidity (%), R is the precipitation (mm), S is the daily sunshine duration (h), and W is the mean wind speed (m/s).
+#' @references Mieczkowski, Z. (1985). The tourism climatic index: a method of evaluating world climates for tourism. The Canadian Geographer/Le Géographe canadien, 29(3), 220-233.
 #' 
 #' @param data precipitation
 #' @param sunshine net radiation 
@@ -3882,8 +4156,11 @@ index_titles[137] = "Good tourism days TCI>60"
 index_names[137] = "tci60"
 attr(calculate_137, "data") <- c(PRECIPITATION, RADIATION, WIND)
 
-#' @title 138. TCI80: Excellent tourism days TCI>80
+#' @title Excellent tourism days TCI>80
 #' @description Number of days TCI>80, standard ECA&D
+#' Number of days TCI>80 (see TCI)
+#' TCI = 8 Cld + 2 Cla + 4 R + 4 S + 2 W. Let TCIij be the daily value of the Tourism Climatic Index at day i of period j. Then counted is the number of days where: TCIij>=80. Where C ld is a daytime comfort index, consisting of the mean maximum air temperature Ta, max (℃) and the mean minimum relative humidity RH (%), Cla is the daily comfort index, consisting of the mean air temperature (℃) and the mean relative humidity (%), R is the precipitation (mm), S is the daily sunshine duration (h), and W is the mean wind speed (m/s).
+#' @references Mieczkowski, Z. (1985). The tourism climatic index: a method of evaluating world climates for tourism. The Canadian Geographer/Le Géographe canadien, 29(3), 220-233.
 #' 
 #' @param data precipitation
 #' @param sunshine net radiation 

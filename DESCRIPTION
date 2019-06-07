@@ -10,15 +10,15 @@ Authors@R: c(person("Fergus", "Reig-Gracia", role = c("aut", "cre"), email = "fe
 Author: Fergus Reig-Gracia [aut, cre], Sergio M. Vicente-Serrano [aut], Fernando Dominguez-Castro [aut], Joaquin Bedia-Jiménez [aut], C.E Van Wagner [aut], T.L Pickett [aut]
 Maintainer: Fergus Reig-Gracia <fergusrg@gmail.com>
 Depends: R (>= 2.10), SPEI, chron, weathermetrics
-Suggests: MASS,
-    knitr,
-    rmarkdown,
-    testthat
 Description: Computes 138 standard climate indices at monthly, seasonal and annual resolution. These indices were selected, based on their direct and significant impacts on target sectors, after a thorough review of the literature in the field of extreme weather events and natural hazards. Overall, the selected indices characterize different aspects of the frequency, intensity and duration of extreme events, and are derived from a broad set of climatic variables, including surface air temperature, precipitation, relative humidity, wind speed, cloudiness, solar radiation, and snow cover. The 138 indices have been classified as follow: Temperature based indices (42), Precipitation based indices (22), Bioclimatic indices (21), Wind-based indices (5), Aridity/ continentality indices (10), Snow-based indices (13), Cloud/radiation based indices (6), Drought indices (8), Fire indices (5), Tourism indices (5).
 License: GPL (>= 3)
 URL: https://gitlab.com/indecis-eu/indecis
 LazyLoad: yes
 Encoding: UTF-8
+Suggests: MASS,
+    knitr,
+    rmarkdown,
+    testthat
 NeedsCompilation: no
 Packaged: 2019-05-12 11:38:24 UTC; freig
 RoxygenNote: 6.1.1

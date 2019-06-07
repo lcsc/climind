@@ -140,7 +140,9 @@ penman_fao_diario <-
         # 10. Potential daylight hours (day length, h), N (eq. 1.34)
         N <- 7.64*omegas
         nN <- tsun/N
-      } 
+      }else{
+        return(ET0)
+      }
       # (eq. 1.37)
       as <- 0.25; bs <- 0.5
       Rs <- Tmin
