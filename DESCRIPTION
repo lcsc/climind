@@ -24,7 +24,7 @@ Packaged: 2019-05-12 11:38:24 UTC; freig
 RoxygenNote: 6.1.1
 ByteCompile: true
 Collate: 
-    'ClimInd-package.R'
+    'ClimInd.R'
     'ClimIndNews.R'
     'custom_functions.R'
     'data.R'

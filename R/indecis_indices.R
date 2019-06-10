@@ -248,7 +248,7 @@ attr(calculate_9, "data") <- c(TMEAN)
 #' @title Cold days
 #' @description Percentages of days with TX lower than the 10th percentile.
 #' Total numbers of days with maximum air temperatures lower than the 10th percentile.
-#' No. days TX < 10p
+#' @section Formula: No. days TX < 10p
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 #' 
 #' @param data maximum temperature
@@ -2297,13 +2297,12 @@ attr(calculate_82, "data") <- c(RADIATION_W)
 #' @description UTCI (Blazejczyk et all, 2012) (Air temperature, Humidity, Wind)
 #' Considers dry temperature, relative humidity, solar radiation, and wind speed into account and is regarded as the reference environmental temperature causing strain.
 #' UTCI is a complex function of several meteorological parameters (T2m [C],v10m [m/s],RH [%], cloudiness [%], soil temperature[C]) and additional parameters (latitude, Julian day, local solar time); a comprehensive description may be found at \url{https://goo.gl/by4hH9}  ; the coefficients of the polynomial approximation are available at \url{http://www.utci.org/utci_doku.php} (UTCI_a002.f90 file) and more info on the calculation of other  parameters (e.g. Tmrt) may be found in the help files of the BioKlima2.6 software (\url{https://www.igipz.pan.pl/Bioklima-zgik.html})
-#' @references Bröde P et al. 2012: Deriving the operational procedure for the Universal Thermal Climate Index (UTCI). International journal of biometeorology 56:3, 481-494. K.Y. Blazejczyk, G. Epstein, G. Jendritzky, H. Staiger, B. Tinz, Int J Biometeorol., 56:3, 515-535, doi:  10.1007/s00484-011-0453-2.
 #' \url{https://goo.gl/by4hH9}
 #' \url{http://www.utci.org/}
-#' \url{https://rdrr.io/github/alfcrisci/rBiometeo/man/UTCI.html}
 #' Copy \url{https://github.com/alfcrisci/rBiometeo}
-#' 
 #'Given air temperature (Celsius), relative humidity (\%), wind velocity (m/sec) and mean radiant temperature ( tmrt in Celsius degree) gives the Universal Thermal Climate Index in Celsius.
+#
+#' @references Bröde P et al. 2012: Deriving the operational procedure for the Universal Thermal Climate Index (UTCI). International journal of biometeorology 56:3, 481-494. K.Y. Blazejczyk, G. Epstein, G. Jendritzky, H. Staiger, B. Tinz, Int J Biometeorol., 56:3, 515-535, doi:  10.1007/s00484-011-0453-2.
 #' @param ta medium temperature
 #' @param rh humidity
 #' @param wind average wind
@@ -4029,13 +4028,11 @@ index_names[133] = "mni"
 attr(calculate_133, "data") <- c(DEWPOINT, TMEAN, HUMIDITY, PRECIPITATION)
 
 #' @title Finnish Forest Fire Index
-#' @description Combination of temperature, relative humidity, wind speed, radiation and precipitation (package fireDanger)
-#' Combination of air temperature, relative humidity, wind speed, radiation and precipitation
-#' R package fireDanger
-#' @references Giannakopoulos C, LeSager P, Moriondo M, Bindi M, Karali A, Hatzaki M, and Kostopoulou E. 2012. Comparison of fire danger indices in the Mediterranean for present day conditions. iForest - Biogeosciences and Forestry 5(4):197-203.
+#' @description Combination of temperature, relative humidity, wind speed, radiation and precipitation (R package fireDanger)
 #' \url{https://link.springer.com/chapter/10.1007\%2F978-3-642-55903-7_88}
 #' P-eto+-f1
 #' \url{https://github.com/SantanderMetGroup/fireDanger}
+#' @references Giannakopoulos C, LeSager P, Moriondo M, Bindi M, Karali A, Hatzaki M, and Kostopoulou E. 2012. Comparison of fire danger indices in the Mediterranean for present day conditions. iForest - Biogeosciences and Forestry 5(4):197-203.
 #' 
 #' @param data precipitation
 #' @param evap potential evapotranspiration

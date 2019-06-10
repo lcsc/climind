@@ -1,11 +1,2 @@
-#' ClimInd
-#' @name ClimInd
-#' @docType package
-#' @description  
-#' Computes 138 standard climate indices at monthly, seasonal and annual resolution. These indices were selected, based on their direct and significant impacts on target sectors, after a thorough review of the literature in the field of extreme weather events and natural hazards. Overall, the selected indices characterize different aspects of the frequency, intensity and duration of extreme events, and are derived from a broad set of climatic variables, including surface air temperature, precipitation, relative humidity, wind speed, cloudiness, solar radiation, and snow cover. The 138 indices have been classified as follow: Temperature based indices (42), Precipitation based indices (22), Bioclimatic indices (21), Wind-based indices (5), Aridity/ continentality indices (10), Snow-based indices (13), Cloud/radiation based indices (6), Drought indices (8), Fire indices (5), Tourism indices (5).
-#' @author     
-#' Fergus Reig-Gracia [aut, cre], Sergio M. Vicente-Serrano [aut], Fernando Dominguez-Castro [aut], Joaquin Bedia-Jiménez [aut]
-#' \url{https://gitlab.com/indecis-eu/indecis}
-#' @keywords package
-#' @keywords internal
-NULL
+#' @details Info
+"_PACKAGE"
