@@ -58,7 +58,7 @@ index_functions = list()
 
 #' @title Mean TX
 #' @description Mean of daily maximum air temperature
-#' @references European Climate Assessment & Dataset. Indices dictionary. https://www.ecad.eu//indicesextremes/indicesdictionary.php  
+#' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data maximum temperature
@@ -80,7 +80,7 @@ attr(calculate_1, "data") <- c(TMAX)
 
 #' @title Maximum TX
 #' @description Maximum of daily maximum air temperature
-#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. \url{https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf}
 ## @importance Important application in agriculture, tourism, water, human health
 #' 
 #' @param data maximum temperature
@@ -102,7 +102,7 @@ attr(calculate_2, "data") <- c(TMAX)
 
 #' @title Minimum TX
 #' @description Minimum of daily maximum air temperature
-#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. \url{https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data maximum temperature
@@ -124,7 +124,7 @@ attr(calculate_3, "data") <- c(TMAX)
 
 #' @title Mean TN
 #' @description Mean of daily minimum air temperature
-#' @references European Climate Assessment & Dataset. Indices dictionary. https://www.ecad.eu//indicesextremes/indicesdictionary.php
+#' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data minimum temperature
@@ -146,7 +146,7 @@ attr(calculate_4, "data") <- c(TMIN)
 
 #' @title Maximum TN
 #' @description Maximum of daily minimum air temperature
-#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. \url{https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data minimum temperature
@@ -168,7 +168,7 @@ attr(calculate_5, "data") <- c(TMIN)
 
 #' @title Minimum TN
 #' @description Minimum of daily minimum air temperature
-#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. \url{https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data minimum temperature
@@ -190,7 +190,7 @@ attr(calculate_6, "data") <- c(TMIN)
 
 #' @title Mean TG
 #' @description Mean of daily mean air temperature
-#' @references European Climate Assessment & Dataset. Indices dictionary. https://www.ecad.eu//indicesextremes/indicesdictionary.php
+#' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data medium temperature
@@ -277,7 +277,7 @@ cd = calculate_10 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
   return(byYears)
 }
 index_units[10] = C_days
-index_titles[10] = "Cold days"
+index_titles[10] = "Percentage of cold days"
 index_names[10] = "cd"
 attr(calculate_10, "data") <- c(TMAX)
 
@@ -299,7 +299,7 @@ cn = calculate_11 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
   return(calculate_10(data, data_names, time.scale, na.rm = na.rm))
 }
 index_units[11] = C_days
-index_titles[11] = "Cold nights"
+index_titles[11] = "Percentage of cold nights"
 index_names[11] = "cn"
 attr(calculate_11, "data") <- c(TMIN)
 
@@ -344,7 +344,7 @@ attr(calculate_12, "data") <- c(TMIN)
 #' @title Diurnal temperature range
 #' @description Mean difference between TX and TN.
 #' @section Formula: \deqn{DTR_j = \frac{ \sum_{ i = 1 } ^ { I } ( TX_{ ij } - TN_{ ij })} {I}}
-#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf
+#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. \url{https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param tmax maximum temperature 
@@ -370,7 +370,7 @@ attr(calculate_13, "data") <- c(TMAX, TMIN)
 #' @title Mean daily difference DTR
 #' @description Mean absolute day-to-day difference in DTR
 #' @section Formula: \deqn{vDTR_j = \frac{ \sum_{ i = 1 } ^ { I } \mid ( TX_{ ij } - TN_{ ij } ) - ( TX_{i-1,j} -TN_{ i - 1,j }) \mid } {I}}
-#' @references European Climate Assessment & Dataset. Indices dictionary. https://www.ecad.eu//indicesextremes/indicesdictionary.php
+#' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param tmax maximum temperature 
@@ -515,7 +515,7 @@ attr(calculate_17, "data") <- c(TMAX)
 
 #' @title Maximum consecutive frost days
 #' @description Maximum number of consecutive with days TN < 0 Celsius
-#' @references European Climate Assessment & Dataset. Indices dictionary. https://www.ecad.eu//indicesextremes/indicesdictionary.php
+#' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data minimum temperature
@@ -547,7 +547,7 @@ attr(calculate_18, "data") <- c(TMIN)
 
 #' @title Extreme temperature range
 #' @description Difference between the maximum TX and the minimum TN.
-#' @references European Climate Assessment & Dataset. Indices dictionary. https://www.ecad.eu//indicesextremes/indicesdictionary.php 
+#' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param tmax maximum temperature
@@ -1292,8 +1292,8 @@ attr(calculate_42, "data") <- c(TMEAN)
 #' @export
 #' @examples
 #' data(data_all)
-#' rt(data = data_all$rr)
-rt = calculate_43 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' rti(data = data_all$rr)
+rti = calculate_43 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data, na.rm = na.rm))
   }
@@ -1302,7 +1302,7 @@ rt = calculate_43 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 }
 index_units[43] = C_precipitation
 index_titles[43] = "Total precipitation"
-index_names[43] = "rt"
+index_names[43] = "rti"
 attr(calculate_43, "data") <- c(PRECIPITATION)
 
 #' @title Maximum precipitation
@@ -1356,7 +1356,7 @@ r10mm = calculate_45 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   return(byYears)
 }
 index_units[45] = C_days
-index_titles[45] = "Days precipitation >= R10mm "
+index_titles[45] = "Days precipitation >= R10mm"
 index_names[45] = "r10mm"
 attr(calculate_45, "data") <- c(PRECIPITATION)
 
@@ -1384,7 +1384,7 @@ r20mm = calculate_46 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   return(byYears)
 }
 index_units[46] = C_days
-index_titles[46] = "Days precipitation >= R20mm "
+index_titles[46] = "Days precipitation >= R20mm"
 index_names[46] = "r20mm"
 attr(calculate_46, "data") <- c(PRECIPITATION)
 
@@ -1526,7 +1526,7 @@ ep = calculate_53 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = 
   return(byYears)
 }
 index_units[53] = C_precipitation
-index_titles[53] = "Precipitation minus evapotranspiration"
+index_titles[53] = "Effective precipitation"
 index_names[53] = "ep"
 attr(calculate_53, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
@@ -2752,7 +2752,7 @@ at = calculate_87 = function(taverage, w, vapor, data_names=NULL, time.scale=YEA
   return(byYears)
 }
 index_units[87] = C_index
-index_titles[87] = "Apparent Temperature"
+index_titles[87] = "Apparent temperature"
 index_names[87] = "at"
 attr(calculate_87, "data") <- c(TMEAN, WIND, VAPOUR)
 
@@ -2864,7 +2864,7 @@ fgcalm = calculate_91 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
   return(byYears)
 }
 index_units[91] = C_days
-index_titles[91] = "Calm days2"
+index_titles[91] = "Calm days"
 index_names[91] = "fgcalm"
 attr(calculate_91, "data") <- c(WIND)
 
@@ -3261,7 +3261,7 @@ sd0_10 = calculate_104 = function(data, data_names=NULL, time.scale=YEAR, na.rm 
   return(byYears)
 }
 index_units[104] = C_days
-index_titles[104] = "Snow depth 0-10"
+index_titles[104] = "Snow depth 1-10"
 index_names[104] = "sd0_10"
 attr(calculate_104, "data") <- c(SNOWDEPTHTHICKNESS)
 
@@ -3473,7 +3473,7 @@ fpsc = calculate_111 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(byYears)
 }
 index_units[111] = C_date
-index_titles[111] = "Date of first permanent snow cover "
+index_titles[111] = "Date of first permanent snow cover"
 index_names[111] = "fpsc"
 attr(calculate_111, "data") <- c(SNOWDEPTH)
 
@@ -3724,10 +3724,8 @@ attr(calculate_120, "data") <- c(INSOLATION)
 
 #' @title Atmospheric Clarity Index
 #' @description Ratio between solar radiation at surface and solar radiation at TOA (alt top of the atmosphere empirically obtained)
-#' Ratio between solar radiation at surface and solar radiation at TOA (empirically obtained, see \url{https://goo.gl/Wzs1Zk})
-#' Ratio between solar radiation at surface and solar radiation at TOA
+#' Ratio between solar radiation at surface and solar radiation at TOA (empirically obtained)
 #' @references HONTORIA, L.; AGUILERA, J.; ZUFIRIA, P. Generation of hourly irradiation synthetic series using the neural network multilayer perceptron. Solar Energy, v. 72, n. 5, p. 441-446, 2002.
-#' \url{https://goo.gl/Wzs1Zk}
 #' \url{http://www.greenrhinoenergy.com/solar/radiation/atmosphere.php}
 ## @importance Important application in agriculture and tourism
 #' 
