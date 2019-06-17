@@ -16,7 +16,6 @@ URL: https://gitlab.com/indecis-eu/indecis
 LazyLoad: yes
 Encoding: UTF-8
 Suggests: MASS,
-    knitr,
     rmarkdown,
     testthat
 NeedsCompilation: no
