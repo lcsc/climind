@@ -1,7 +1,7 @@
 Package: ClimInd
 Type: Package
 Version: 0.1-2
-Date: 2019-05-12
+Date: 2019-07-4
 Title: Climate Indices
 Authors@R: c(person("Fergus", "Reig-Gracia", role = c("aut", "cre"), email = "fergusrg@gmail.com"),
   person(c('Sergio','M.'), 'Vicente-Serrano', role='aut', email='svicen@ipe.csic.es'),
