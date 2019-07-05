@@ -26,7 +26,7 @@
 #' \item Groisman, P.Y., Sherstyukov, B.G., Razuvaev, V.N., Knight, R.W., Enloe, J.G., Stroumentova, N.S., Whitfield, P.H., Forland, E., Hannsen-Bauer, I., Tuomenvirta, H., Aleksandersson, H., Mescherskaya, A.V., Karl, T.R., 2007. Potential forest fire danger over Northern Eurasia: Changes during the 20th century. Global and Planetary Change 56, 371–386. 
 #' \item Holsten, A., Dominic, A.R., Costa, L., Kropp, J.P., 2013. Evaluation of the performance of meteorological forest fire indices for German federal states. Forest Ecology and Management 287, 123–131. 
 #' } 
-#'   @author J. Bedia
+#'   @author Joaquin Bedia-Jiménez
 #' @keywords internal
 nesterovIndex <- function(t, rh, p, modified = FALSE) {
     t <- t

@@ -36,7 +36,7 @@
 #' \item Alexander, M.E., 1990. Computer calculation of the Keetch-Byram Drought Index - programmers beware. Fire Management Notes 51, 23–25.
 #' \item Dennison, P.E., Roberts, D.A., Thorgusen, S.R., Regelbrugge, J.C., Weise, D., Christopher, L., 2003. Modeling seasonal changes in live fuel moisture and equivalent water thickness using a cumulative water balance index. Remote Sensing of the Environment 88, 442–452.
 #' }
-#' @author J. Bedia
+#' @author Joaquin Bedia-Jiménez
 #' @keywords internal
 kbdindex <- function(dates, t, p, wrs = 5, start.date = NULL, what = "kbdi") { # requires date to compute mean annual precipitation
     if (length(t) != length(p) | length(t) != length(dates)) stop("Length of input data vectors differ")

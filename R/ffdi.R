@@ -1,5 +1,5 @@
 #' @title Finnish Forest Fire Danger Index 
-#' @description Implementation of the FFFDI for vector data
+#' @description Implementation of the FFFDI for vector data; based on the original FORTRAN code from Vajda et al. 2014.
 #' @param pr A vector of daily precipitation (in mm)
 #' @param pet A vector of daily (potential) evapotranspiration data (in mm).
 #' @param Wvol.init Initialization value for volumetric moisture, in the range 0.1-0.5. Default to 0.5 (very wet soil), but see Details.
@@ -14,7 +14,7 @@
 #'  index is started in early spring. This value is applied to all locations as a spatially constant initialization value.
 #'  However, Vajda \emph{et al.} (2014, Table 1) provide reference values for different soil moisture conditions. This value ranges
 #'  from 0.1 (very dry) to 0.5 (very wet).
-#' @author J. Bedia (based on the original FORTRAN code from Vajda et al. 2014).
+#' @author Joaquin Bedia-Jiménez
 ## @export
 #' @keywords internal
 fffdi <- function(pr, pet, Wvol.init = 0.5, z = 60) {

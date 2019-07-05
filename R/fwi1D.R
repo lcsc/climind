@@ -1,6 +1,6 @@
 #' @title Fire Weather Index applied to 1D data
 #' 
-#' @description Implementation of the Canadian Fire Weather Index System for vector data
+#' @description Implementation of the Canadian Fire Weather Index System for vector data; partially based on the original FORTRAN code by van Wagner and Pickett (1985)
 #' 
 #' @param dates Vector of dates. This is a character string in the form \code{d/m/y} 
 #' @param Tm Vector of temperature records (deg. Celsius)
@@ -52,7 +52,7 @@
 #' \item Bedia, J., Herrera, S., Camia, A., Moreno, J.M., Gutierrez, J.M., 2014. Forest Fire Danger Projections in the Mediterranean using ENSEMBLES Regional Climate Change Scenarios. Climatic Change 122, 185-199. 
 
 #' }
-#' @author J. Bedia, partially based on the original FORTRAN code by van Wagner and Pickett (1985)
+#' @author Joaquin Bedia-Jiménez
 #' 
 ## @export
 #' 

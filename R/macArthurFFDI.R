@@ -8,7 +8,7 @@
 #' @return A vector of (daily) FFDI data
 #' @references McArthur, A.G. (1973) Forest Fire Danger Meter Mk.5. Commonwealth of Australian Forestry and Timber Bureau.
 #' @seealso kbdindex
-#' @author J. Bedia
+#' @author Joaquin Bedia-Jiménez
 ## @export
 #' @keywords internal
 ffdiIndex <- function(madf, t, h, w) {
