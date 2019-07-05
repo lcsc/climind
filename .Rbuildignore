@@ -4,3 +4,5 @@
 .travis.yml
 .git
 LICENSE
+^.*\.Rproj$
+^\.Rproj\.user$

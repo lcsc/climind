@@ -30,14 +30,14 @@ library(SPEI)
 library(weathermetrics)
 
 # Abreviaturas
-TMEAN = "tg" # daily mean temperature TG, ℃
-TMIN = "tn" # daily minimum temperature TN, ℃
-TMAX = "tx" # daily maximum temperature TX, ℃
+TMEAN = "tg" # daily mean temperature TG, Celsius
+TMIN = "tn" # daily minimum temperature TN, Celsius
+TMAX = "tx" # daily maximum temperature TX, Celsius
 PRECIPITATION = "rr" # daily precipitation sum RR, mm
 LAT = "lat" # lat, degree
 RADIATION = "radiation" # net radiation, J/m2
 RADIATION_W = "radiation_w" # net radiation, W/m2
-DEWPOINT = "dewpoint" #dew point, ℃
+DEWPOINT = "dewpoint" #dew point, Celsius
 WIND = "wind" #average wind, m/s
 HUMIDITY = "humidity" #relative humidity, %
 VAPOUR = "vapour" #water vapour pressure, hPa

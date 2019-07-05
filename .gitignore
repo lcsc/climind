@@ -3,3 +3,4 @@ revdep/*
 vignettes/*
 man/*
 *.tar.gz
+.Rproj.user
