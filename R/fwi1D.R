@@ -1,6 +1,6 @@
 #' @title Fire Weather Index applied to 1D data
 #' 
-#' @description Implementation of the Canadian Fire Weather Index System for vector data; partially based on the original FORTRAN code by van Wagner and Pickett (1985)
+#' @description Implementation of the Canadian Fire Weather Index System for vector data
 #' 
 #' @param dates Vector of dates. This is a character string in the form \code{d/m/y} 
 #' @param Tm Vector of temperature records (deg. Celsius)
@@ -50,7 +50,6 @@
 #' \item Herrera, S., Bedia, J., Gutierrez, J.M., Fernandez, J., Moreno, J.M., 2013. On the projection of future fire danger conditions with various instantaneous/mean-daily data sources. Climatic Change 118, 827-840. 
 #' 
 #' \item Bedia, J., Herrera, S., Camia, A., Moreno, J.M., Gutierrez, J.M., 2014. Forest Fire Danger Projections in the Mediterranean using ENSEMBLES Regional Climate Change Scenarios. Climatic Change 122, 185-199. 
-
 #' }
 #' @author Joaquin Bedia-Jiménez
 #' 
@@ -74,7 +73,7 @@ fwi1D <- function(dates,
     rm.ind <- which(!complete.cases(Tm, H, r, W))
     non.na.ind <- setdiff(1:length(mes), rm.ind)
     if (length(rm.ind) > 0) {
-        warning("Missing values were removed from the time series before computation")
+        # warning("Missing values were removed from the time series before computation")
         # dates <- dates[-rm.ind]
         mes <- mes[-rm.ind]
         Tm <- Tm[-rm.ind]
@@ -100,19 +99,19 @@ fwi1D <- function(dates,
     dlf <- aux[[2]]
     aux <- NULL
     if (any(H > 100)) {
-        warning("One or more values of humidity above 100% were corrected")
+        # warning("One or more values of humidity above 100% were corrected")
         H[which(H > 100)] <- 100
     }
     if (any(H < 0)) {
-        warning("Some negative values of humidity were corrected")
+        # warning("Some negative values of humidity were corrected")
         H[which(H < 0)] <- 0
     }
     if (any(r < 0)) {
-        warning("Some negative values of precipitation were corrected")
+        # warning("Some negative values of precipitation were corrected")
         r[which(r < 0)] <- 0
     }
     if (any(W < 0)) {
-        warning("Some negative values of wind were corrected")
+        # warning("Some negative values of wind were corrected")
         W[which(W < 0)] <- 0
     }
     f0 <- c(init.pars[1], rep(NA,length(mes))) 

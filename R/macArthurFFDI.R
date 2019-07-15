@@ -14,7 +14,7 @@
 ffdiIndex <- function(madf, t, h, w) {
     m <- matrix(data = c(madf, t, h, w), ncol = 2)
     if (any(is.na(m))) {
-        warning("Missing values deleted from the input series")
+        # warning("Missing values deleted from the input series")
         na <- unique(which(is.na(m), arr.ind = TRUE)[ ,1])
         madf <- madf[-na]
         t <- t[-na] 

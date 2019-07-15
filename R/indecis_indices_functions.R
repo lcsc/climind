@@ -52,6 +52,7 @@ CLOUD100 = "cloud100" #cloud base below 100 meter, %
 RADIATIONTOA = "radiationtoa" #solar radiation at TOA (alt top of the atmosphere empirically obtained), W/m2
 MDE = "mde"
 SNOWDEPTHTHICKNESS = "snowdepththickness" #snowdepth, mm snow
+SNOWDENSITY = "snowdensity" # snow density, kg m-3
 
 # Necesitamos
 # mean radiation, W/m-2
@@ -374,7 +375,7 @@ calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation
   # data2 <- penman_fao_diario(Tmin=tmin, Tmax=tmax, Ra=NA, Rs=NA, tsun=insolation, U2=w, J=dat_msum, lat=lat, ed=NA, Tdew=tdew, RH=rh, P=NA, P0=NA, z=mde, crop="short")
   data <- array(data*dat_mlen)
   names(data) <- names(tmin)
-  print(paste("Values < 0:", sum(data<0, na.rm=TRUE)))
+  # print(paste("Values < 0:", sum(data<0, na.rm=TRUE)))
   data[data<0] = 0
   return(data)
 }

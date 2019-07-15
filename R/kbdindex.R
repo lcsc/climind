@@ -50,7 +50,7 @@ kbdindex <- function(dates, t, p, wrs = 5, start.date = NULL, what = "kbdi") { #
     # ----------------------------------------------------------------------
     m <- matrix(data = c(t, p), ncol = 2)
     if (any(is.na(m))) {
-        warning("Missing values deleted from the input series")
+        # warning("Missing values deleted from the input series")
         na <- unique(which(is.na(m), arr.ind = TRUE)[ ,1])
         t <- t[-na] 
         p <- p[-na] 

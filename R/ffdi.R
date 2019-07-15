@@ -1,5 +1,5 @@
 #' @title Finnish Forest Fire Danger Index 
-#' @description Implementation of the FFFDI for vector data; based on the original FORTRAN code from Vajda et al. 2014.
+#' @description Implementation of the FFFDI for vector data
 #' @param pr A vector of daily precipitation (in mm)
 #' @param pet A vector of daily (potential) evapotranspiration data (in mm).
 #' @param Wvol.init Initialization value for volumetric moisture, in the range 0.1-0.5. Default to 0.5 (very wet soil), but see Details.

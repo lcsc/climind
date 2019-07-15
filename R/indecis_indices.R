@@ -1040,7 +1040,7 @@ attr(calculate_35, "data") <- c(TMEAN)
 #' @references Winkler, A.J., J.A. Cook, W.M. Kliewer, and L.A. Lider. 1974. General Viticulture. 4th ed. University of California Press, Berkeley.
 ## @importance Important application in agriculture
 #' 
-#' @param data maximum temperature
+#' @param data medium temperature
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... ...
@@ -1048,7 +1048,7 @@ attr(calculate_35, "data") <- c(TMEAN)
 #' @export
 #' @examples
 #' data(data_all)
-#' wki(data = data_all$tx)
+#' wki(data = data_all$tg)
 wki = calculate_36 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){  
     data = data[months(chron(names(data)))%in%c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
@@ -1060,13 +1060,13 @@ wki = calculate_36 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[36] = C_degrees
 index_titles[36] = "Winkler index"
 index_names[36] = "wki"
-attr(calculate_36, "data") <- c(TMAX)
+attr(calculate_36, "data") <- c(TMEAN)
 
 #' @title Winter Severity
 #' @description Mean TG of the coldest month of the year
 ## @importance Important application in agriculture
 #' 
-#' @param data maximum temperature
+#' @param data medium temperature
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... ...
@@ -1074,7 +1074,7 @@ attr(calculate_36, "data") <- c(TMAX)
 #' @export
 #' @examples
 #' data(data_all)
-#' ws(data = data_all$tx)
+#' ws(data = data_all$tg)
 ws = calculate_37 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){  
     byMonths = calcf_data(data=data, extract_names=select_time_function(MONTH), data_names=NULL, operation=mean, na.rm = na.rm)
@@ -1090,25 +1090,26 @@ ws = calculate_37 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[37] = C_degrees
 index_titles[37] = "Winter Severity"
 index_names[37] = "ws"
-attr(calculate_37, "data") <- c(TMAX)
+attr(calculate_37, "data") <- c(TMEAN)
 
 #' @title Sums TX32
 #' @description Sum of degree days when TX >= 32 Celsius on the interval June-August. The 32 celsius limit is the critical biological threshold for the maximum air temperature from which the physiological optimal growth and development of wheat and maize plants.
 ## @importance Important application in agriculture
 #' @param data maximum temperature
 #' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... ...
 #' @return temperature sums 1
 #' @export
 #' @examples
 #' data(data_all)
 #' stx32(data = data_all$tx)
-stx32 = calculate_38 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+stx32 = calculate_38 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    return(sum(data[data>=32], na.rm = na.rm))
+    data = data[months(chron(names(data)))%in%c(JUN, JUL, AUG)]
+    return(sum(abs(data[data>=32]-32), na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[38] = C_degrees
@@ -1117,23 +1118,24 @@ index_names[38] = "stx32"
 attr(calculate_38, "data") <- c(TMAX)
 
 #' @title Days TX32
-#' @description Number of days whith TX >= 32 Celsius
+#' @description Number of days whith TX >= 32 Celsius on the interval June-August.
 ## @importance Important application in agriculture,water, human health
 #' 
 #' @param data maximum temperature
 #' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... ...
 #' @return temperature sums 1
 #' @export
 #' @examples
 #' data(data_all)
 #' d32(data = data_all$tx)
-d32 = calculate_39 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+d32 = calculate_39 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
+    data = data[months(chron(names(data)))%in%c(JUN, JUL, AUG)]
     return(sum(data>=32, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[39] = C_days
@@ -1157,7 +1159,7 @@ attr(calculate_39, "data") <- c(TMAX)
 stn15 = calculate_40 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     data = data[months(chron(names(data)))%in%c(DEC, JAN, FEB)]
-    return(sum(data[data <= -15], na.rm = na.rm))
+    return(sum(abs(data[data <= -15]-15), na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
   return(byYears)
@@ -1183,7 +1185,7 @@ attr(calculate_40, "data") <- c(TMIN)
 stn10 = calculate_41 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     data = data[months(chron(names(data)))%in%c(DEC, JAN, FEB)]
-    return(sum(data[data <= -10], na.rm = na.rm))
+    return(sum(abs(data[data <= -10]-10), na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
   return(byYears)
@@ -1225,7 +1227,6 @@ attr(calculate_42, "data") <- c(TMEAN)
 ####Precipitation-based
 #' @title Total precipitation
 #' @description Total amounts of precipitation
-#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture and water
 #' 
 #' @param data precipitation
@@ -1327,32 +1328,6 @@ index_units[46] = C_days
 index_titles[46] = "Days precipitation >= R20mm"
 index_names[46] = "r20mm"
 attr(calculate_46, "data") <- c(PRECIPITATION)
-
-#' @title Maximum daily R
-#' @description Maximum 1-day precipitation
-#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
-## @importance Important application in agriculture and water
-#' 
-#' @param data precipitation
-#' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Rx1day
-#' @export
-#' @examples
-#' data(data_all)
-#' rx1d(data = data_all$rr)
-rx1d = calculate_49 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  function_ = function(data, value){
-    return(max(data, na.rm = na.rm))
-  }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
-  return(byYears)
-}
-index_units[49] = C_precipitation
-index_titles[49] = "Maximum daily R"
-index_names[49] = "rx1d"
-attr(calculate_49, "data") <- c(PRECIPITATION)
 
 #' @title Maximum 5 days R
 #' @description Maximum consecutive 5-day precipitation 
@@ -1543,12 +1518,12 @@ attr(calculate_55, "data") <- c(PRECIPITATION)
 #' data(data_all)
 #' r95tot(data = data_all$rr)
 r95tot = calculate_56 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.95))
+  value = calcf_data(data=data[data>0], extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.95))
   function_ = function(data, value){
     if(sum(is.na(data))>0){ return(NA) }
     value = select_value_for_data(data, value, time.scale)
     data = 100*sum(data[data>value], na.rm = na.rm)/sum(data, na.rm = na.rm)
-    if(is.na(data)){ data = 100 }
+    if(is.na(data) | data==Inf | data==-Inf){ data = 0 }
     return(data)
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
@@ -1573,14 +1548,14 @@ attr(calculate_56, "data") <- c(PRECIPITATION)
 #' data(data_all)
 #' r99tot(data = data_all$rr)
 r99tot = calculate_57 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.99))
+  value = calcf_data(data=data[data>0], extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.99))
   function_ = function(data, value){
     if(sum(is.na(data))>0){ return(NA) }
     value = select_value_for_data(data, value, time.scale)
     return(100*sum(data[data>value], na.rm = na.rm)/sum(data, na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
-  byYears[is.nan(byYears) | byYears==Inf | byYears==-Inf] = 100
+  byYears[is.nan(byYears) | byYears==Inf | byYears==-Inf] = 0
   return(byYears)
 }
 index_units[57] = C_precipitation
@@ -1967,7 +1942,7 @@ attr(calculate_70, "data") <- c(PRECIPITATION)
 bio15 = calculate_71 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     byMonth = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=sum, na.rm = na.rm)
-    return(stats::sd(byMonth, na.rm = na.rm)/mean(byMonth, na.rm = na.rm))
+    return(100*stats::sd(byMonth, na.rm = na.rm)/mean(byMonth, na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
   return(byYears)
@@ -2301,7 +2276,7 @@ utci = calculate_83 = function(ta, rh, wind, tmrt, data_names=NULL, time.scale=Y
     e = ta/10 # e = es(ta)/10; # use vapour pressure in kPa 
     pa = (e*rh/100.0)
     va = wind;
-    va[va < 0.51] = 0.5
+    va[va < 0.5] = 0.5
     va[va > 17] = 17
 
     if(!is.null(tmrt)){
@@ -2785,7 +2760,7 @@ attr(calculate_92, "data") <- c(WIND)
 
 ####aridity/continentality-indices
 #' @title Reference evapotranspiration
-#' @description If data available using Fao-56 Penman-Monteith, if not using the Hargreaves & Samani method.
+#' @description If data available using Fao-56 Penman-Monteith
 #' @references Chiew, F.H.S., Kamaladasa, N.N., Malano, H.M., McMahon, T.A., 1995. Penman–Monteith FAO-24 reference crop evapotranspiration and class-A pan data in Australia. Agric. Water Manage. 28, 9–21
 ## @importance Important application in agriculture
 #' 
@@ -2820,7 +2795,7 @@ eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, 
   data = calc_eto(tmin = tmin, tmax = tmax, radiation = radiation, insolation=insolation, toa = toa, w = w, lat=lat, tdew = tdew, mde=mde, rh = rh)
 
   function_ = function(data){
-    return(mean(data, na.rm=na.rm))
+    return(sum(data, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
   return(byYears)
@@ -2861,7 +2836,7 @@ attr(calculate_94, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @title Climatic moisture deficit
 #' @description ETo - Effective precipitation
 #' ETo - Effective Precipitation
-#' @references Parks, S. A., Parisien, M. , Miller, C. , Holsinger, L. M. and Baggett, L. S. (2018), Fine‐scale spatial climate variation and drought mediate the likelihood of reburning. Ecol Appl, 28: 573-586. doi:10.1002/eap.1671
+#' @references Parks, S. A., Parisien, M. , Miller, C. , Holsinger, L. M. and Baggett, L. S. (2018), Fine-scale spatial climate variation and drought mediate the likelihood of reburning. Ecol Appl, 28: 573-586. doi:10.1002/eap.1671
 ## @importance Important application in agriculture
 #' 
 #' @param eto et0
@@ -2935,6 +2910,7 @@ attr(calculate_96, "data") <- c(PRECIPITATION, TMEAN)
 #' data(data_all)
 #' eai(pr = data_all$rr, taverage = data_all$tg)
 eai = calculate_97 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...){
+  taverage = taverage + 273.15
   function_ = function(data, pr){
     byMonths = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
     p = sum(pr[names(data)], na.rm=na.rm)
@@ -3027,7 +3003,7 @@ pici = calculate_100 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ..
     taverage = taverage[names(data)]
     data.month = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
     taverage.month = calcf_data(data=taverage, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
-    return(1/2* ((mean(data, na.rm=na.rm)/(mean(taverage, na.rm=na.rm)+10)) + (12*min(data.month, na.rm=na.rm) / (taverage.month[data.month==min(data.month, na.rm=na.rm)][1]+10))))
+    return(1/2* ((sum(data, na.rm=na.rm)/(mean(taverage, na.rm=na.rm)+10)) + (12*min(data.month, na.rm=na.rm) / (taverage.month[data.month==min(data.month, na.rm=na.rm)][1]+10))))
   }
   byYears = calcf_data(data=pr, extract_names=years, data_names=data_names, operation=function_, taverage=taverage)
   return(byYears)
@@ -3038,12 +3014,12 @@ index_names[100] = "pici"
 attr(calculate_100, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Budyko Index
-#' @description  Budyko Index is based on characteristics of the surface heat and water balance.
+#' @description Budyko Index is based on characteristics of the surface heat and water balance.
 #' @section Formula: \deqn{BI = 100\frac {Rn}{L*P}} Rn= annual net radiation, P = annual precipitation, L = latent heat of vaporization for water 
 #' @references Budyko M.I. The Heat Balance of the Earth's Surface U.S. Department of Commerce, Washington D.C (1958) 259 pp., translated by N.A. Stepanova
 ## @importance Important application in agriculture
 #' 
-#' @param data net radiation 
+#' @param data net radiation, surface solar radiation downwards, J/m2
 #' @param pr precipitation
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
@@ -3057,10 +3033,10 @@ bi = calculate_101 = function(data, pr, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, pr){
     pr = pr[names(data)]
     r = 0.8 * mean(data, na.rm=na.rm)/1000
-    pp = mean(pr, na.rm=na.rm)
+    pp = sum(pr, na.rm=na.rm)
     l = 2257
     # return(100*pp/(l*r))
-    return(r/(pp*l))
+    return(100*r/(pp*l))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), operation=function_, data_names=data_names, pr=pr)
   return(byYears)
@@ -3244,7 +3220,7 @@ attr(calculate_107, "data") <- c(SNOWFALL)
 #' msd(data = data_all$snowdepththickness)
 msd = calculate_108 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data>5/100, na.rm=na.rm))
+    return(sum(data>50/100, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
@@ -3270,7 +3246,7 @@ attr(calculate_108, "data") <- c(SNOWDEPTHTHICKNESS)
 #' hsd(data = data_all$snowdepththickness)
 hsd = calculate_109 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data>50/100, na.rm=na.rm))
+    return(sum(data>500/100, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
@@ -3511,8 +3487,8 @@ index_titles[117] = "Sunny days"
 index_names[117] = "snd"
 attr(calculate_117, "data") <- c(CLOUD)
 
-#' @title Cloudy days
-#' @description Number of days with cloud base below 100 meter.
+#' @title Foggy days
+#' @description Number of days with fog.
 #' @references Rastogi, B., A.P. Williams, D.T. Fischer, S.F. Iacobellis, K. McEachern, L. Carvalho, C. Jones, S.A. Baguskas, and C.J. Still, 2016: Spatial and Temporal Patterns of Cloud Cover and Fog Inundation in Coastal California: Ecological Implications. Earth Interact., 20, 1–19, \url{https://doi.org/10.1175/EI-D-15-0033.1}
 ## @importance Important application in agriculture and tourism
 #' 
@@ -3524,8 +3500,8 @@ attr(calculate_117, "data") <- c(CLOUD)
 #' @export
 #' @examples
 #' data(data_all)
-#' cld(data = data_all$cloud100)
-cld = calculate_118 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' fod(data = data_all$cloud100)
+fod = calculate_118 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){    
     return(sum(data>0, na.rm=na.rm))
   }
@@ -3533,7 +3509,7 @@ cld = calculate_118 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   return(byYears)
 }
 index_units[118] = C_days
-index_titles[118] = "Cloudy days"
+index_titles[118] = "Foggy days"
 index_names[118] = "cld"
 attr(calculate_118, "data") <- c(CLOUD100)
 

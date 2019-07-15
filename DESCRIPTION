@@ -3,10 +3,6 @@ Type: Package
 Version: 0.1-2
 Date: 2019-07-4
 Title: Climate Indices
-Authors@R: c(person("Fergus", "Reig-Gracia", role = c("aut", "cre"), email = "fergusrg@gmail.com"),
-  person(c('Sergio','M.'), 'Vicente-Serrano', role='aut', email='svicen@ipe.csic.es'),
-  person(c('Fernando'), 'Dominguez-Castro', role='aut', email='f.dominguez.castro@gmail.com'),
-  person(c('Joaquin'), 'Bedia-Jiménez', role='ctb', email='bediaj@unican.es'))
 Author: Fergus Reig-Gracia [aut, cre], Sergio M. Vicente-Serrano [aut], Fernando Dominguez-Castro [aut], Joaquin Bedia-Jiménez [ctb]
 Maintainer: Fergus Reig-Gracia <fergusrg@gmail.com>
 Depends: R (>= 2.10), SPEI, chron, weathermetrics
