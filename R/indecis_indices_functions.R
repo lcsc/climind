@@ -34,7 +34,7 @@ TMEAN = "tg" # daily mean temperature TG, Celsius
 TMIN = "tn" # daily minimum temperature TN, Celsius
 TMAX = "tx" # daily maximum temperature TX, Celsius
 PRECIPITATION = "rr" # daily precipitation sum RR, mm
-LAT = "lat" # lat, degree
+LAT = "lat" # latitude, degree
 RADIATION = "radiation" # net radiation, J/m2
 RADIATION_W = "radiation_w" # net radiation, W/m2
 DEWPOINT = "dewpoint" #dew point, Celsius
@@ -42,17 +42,18 @@ WIND = "wind" #average wind, m/s
 HUMIDITY = "humidity" #relative humidity, %
 VAPOUR = "vapour" #water vapour pressure, hPa
 WINDGUST = "windgust" #maximum wind gust, m/s
-EVAPOTRANSPIRATION = "evapotranspiration" #Evapotranspiration et0 -> MAL
+EVAPOTRANSPIRATION = "evapotranspiration" #Evapotranspiration et0 mm -> MAL
 SNOWFALL = "snowfall" # snowfall, m of water equivalent
 SNOWFALLMM = "snowfallmm" # snowfall, mm of water equivalent
-SNOWDEPTH = "snowdepth" #snowdepth, m of water equivalent
+SWE = "swe" #swe, m of water equivalent
 INSOLATION = "insolation" #insolation, hours of sun -> MAL
-CLOUD = "cloud" # cloud, %
+CLOUD = "cloud" # cloud cover, %
 CLOUD100 = "cloud100" #cloud base below 100 meter, %
 RADIATIONTOA = "radiationtoa" #solar radiation at TOA (alt top of the atmosphere empirically obtained), W/m2
-MDE = "mde"
-SNOWDEPTHTHICKNESS = "snowdepththickness" #snowdepth, mm snow
+MDE = "mde" # digital elevation model, m
+SNOWDEPTH = "snowdepth" #snow depth, mm snow
 SNOWDENSITY = "snowdensity" # snow density, kg m-3
+RADIATIONTEMPERATURE = "radiationtemperature" # radiation temperature, Celsius
 
 # Necesitamos
 # mean radiation, W/m-2
@@ -340,7 +341,7 @@ select_time_function = function(time.scale){
 
 #' Et0
 #'
-#' @param tmin minimum temperature, Celsius
+#' @param tmin daily minimum temperature, Celsius, Celsius
 #' @param tmax maximum temperature, Celsius
 #' @param toa radiation toa, J/m2
 #' @param w average wind, m/s at 10m
@@ -383,7 +384,7 @@ calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation
 #' Dew point to relative humidity
 #'
 #' @param tmax maximum temperature
-#' @param tmin minimum temperature
+#' @param tmin daily minimum temperature, Celsius
 #' @param td dew point
 #' @return rh
 #' @keywords internal
@@ -563,7 +564,7 @@ minimum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 #' SPI: Standardized Precipitation Index
 #' 1, 3, 6 and 12 month SPI
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param scale scale
 #' @param na.rm logical. Should missing values (including NaN) be removed?

@@ -31,11 +31,15 @@ C_degrees = "celsius"
 C_days = "days"
 C_date = "date"
 C_precipitation = "mm"
-C_index = "index"
-C_radiation = "radiation"
+C_index = "index units"
+C_radiation = "W m-2"
+C_radiation_w = "W m-2"
 C_wind = "wind"
-C_snow = "snow"
-C_cloud = C_sunshine = "sunshine"
+C_snow = "mm"
+C_snow_m = "m"
+C_cloud = "%"
+C_sunshine = "hours"
+C_percentage = "%"
 
 # index_tipes = array(NA, dim=c(138))
 # index_tipes[1:42] = "Temperature-based"
@@ -61,11 +65,11 @@ index_functions = list()
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Average temperature
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -83,11 +87,11 @@ attr(calculate_1, "data") <- c(TMAX)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. \url{https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf}
 ## @importance Important application in agriculture, tourism, water, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Average temperature
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -105,11 +109,11 @@ attr(calculate_2, "data") <- c(TMAX)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. \url{https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf}
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Average temperature
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -127,11 +131,11 @@ attr(calculate_3, "data") <- c(TMAX)
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Average temperature
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -149,11 +153,11 @@ attr(calculate_4, "data") <- c(TMIN)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. \url{https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf}
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Average temperature
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -171,11 +175,11 @@ attr(calculate_5, "data") <- c(TMIN)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. \url{https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf}
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Average temperature
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -193,11 +197,11 @@ attr(calculate_6, "data") <- c(TMIN)
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Average temperature
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -214,7 +218,7 @@ attr(calculate_7, "data") <- c(TMEAN)
 #' @description Maximum of daily mean air temperature
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
@@ -235,7 +239,7 @@ attr(calculate_8, "data") <- c(TMEAN)
 #' @description Minimum value of daily mean air temperature
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time 
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
@@ -257,11 +261,11 @@ attr(calculate_9, "data") <- c(TMEAN)
 #' @section Formula: \deqn{cd = \frac{No. days TX < 10p} {No. days} * 100}
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param time.scale month, season or year
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return percentage of cold days
+#' @return percentage
 #' @export
 #' @examples
 #' data(data_all)
@@ -276,7 +280,7 @@ cd = calculate_10 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
-index_units[10] = C_days
+index_units[10] = C_percentage
 index_titles[10] = "Percentage of cold days"
 index_names[10] = "cd"
 attr(calculate_10, "data") <- c(TMAX)
@@ -286,11 +290,11 @@ attr(calculate_10, "data") <- c(TMAX)
 #' @section Formula: \deqn{cn = \frac{No. days TN <  10p} {No. days} * 100} 
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param time.scale month, season or year
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return percentage of cold nights
+#' @return percentage
 #' @export
 #' @examples
 #' data(data_all)
@@ -298,7 +302,7 @@ attr(calculate_10, "data") <- c(TMAX)
 cn = calculate_11 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(calculate_10(data, data_names, time.scale, na.rm = na.rm))
 }
-index_units[11] = C_days
+index_units[11] = C_percentage
 index_titles[11] = "Percentage of cold nights"
 index_names[11] = "cn"
 attr(calculate_11, "data") <- c(TMIN)
@@ -307,11 +311,11 @@ attr(calculate_11, "data") <- c(TMIN)
 #' @description Count of days with at least 6 consecutive days when TN < 10th percentile
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Cold spell duration index
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -347,12 +351,12 @@ attr(calculate_12, "data") <- c(TMIN)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5. \url{https://www.ecad.eu/documents/WCDMP_72_TD_1500_en_1.pdf}
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param tmax maximum temperature 
-#' @param tmin minimum temperature
+#' @param tmax daily maximum temperature, Celsius 
+#' @param tmin daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Diurnal temperature range
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -373,12 +377,12 @@ attr(calculate_13, "data") <- c(TMAX, TMIN)
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param tmax maximum temperature 
-#' @param tmin minimum temperature
+#' @param tmax daily maximum temperature, Celsius 
+#' @param tmin daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return vDTR
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -402,11 +406,11 @@ attr(calculate_14, "data") <- c(TMAX, TMIN)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture.
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return frost days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -428,11 +432,11 @@ attr(calculate_15, "data") <- c(TMIN)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture
 #' 
-#' @param data mean temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return growing season length
+#' @param ... further arguments passed to or from other methods
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -492,11 +496,11 @@ attr(calculate_16, "data") <- c(TMEAN)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return ice days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -518,11 +522,11 @@ attr(calculate_17, "data") <- c(TMAX)
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return maximum consecutive frost
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -549,12 +553,12 @@ attr(calculate_18, "data") <- c(TMIN)
 #' @description Difference between the maximum TX and the minimum TN.
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param tmax maximum temperature
-#' @param tmin minimum temperature
+#' @param tmax daily maximum temperature, Celsius
+#' @param tmin daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return extreme temperature range
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -573,16 +577,15 @@ index_names[19] = "etr"
 attr(calculate_19, "data") <- c(TMAX, TMIN)
 
 #' @title Summer days
-#' @description Number of days with maximum temperature > 25 Celsius.
-#' Number of days with TX >25 Celsius.
+#' @description Number of days with daily maximum temperature > 25 Celsius.
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Summer days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -603,11 +606,11 @@ attr(calculate_20, "data") <- c(TMAX)
 #' @description Maximum number of consecutive summer days (TX > 25 Celsius)
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return consecutive summer days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -640,11 +643,11 @@ attr(calculate_21, "data") <- c(TMAX)
 #' @description (days tx > 17 Celsius)-(days TX < 17 Celsius)
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Temperature sums
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -666,11 +669,11 @@ attr(calculate_22, "data") <- c(TMAX)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Tropical nights
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -693,11 +696,11 @@ attr(calculate_23, "data") <- c(TMIN)
 #' @references Quayle, R. G., & Diaz, H. F. (1980). Heating degree day data applied to residential heating energy consumption. Journal of Applied Meteorology, 19(3), 241-246. https://doi.org/10.1175/1520-0450(1980)019<0241:HDDDAT>2.0.CO;2
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data mean temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return HD17
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -718,11 +721,11 @@ attr(calculate_24, "data") <- c(TMEAN)
 #' @description Days with TN <1st percentile.
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Very cold days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -747,11 +750,11 @@ attr(calculate_25, "data") <- c(TMIN)
 #' @description Days with TX >99th percentile per year.
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Very warm days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -772,14 +775,13 @@ attr(calculate_26, "data") <- c(TMAX)
 
 #' @title Warm days
 #' @description Total numbers of days with TX higher than the 90th percentile.
-#' 
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Warm days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -802,11 +804,11 @@ attr(calculate_27, "data") <- c(TMAX)
 #' @description Percentages of days with TN higher than the 90th percentile.
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Warm nights
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -826,14 +828,14 @@ index_names[28] = "wn"
 attr(calculate_28, "data") <- c(TMIN)
 
 #' @title Warm spell duration
-#' @description Count of days with at least 6 consecutive days when TX > 90th percentile.
+#' @description Number of days which are part of groups of at least 6 consecutive days when TX > 90th percentile.
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Warm spell duration index
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -861,15 +863,14 @@ attr(calculate_29, "data") <- c(TMAX)
 
 #' @title Zero crossing days
 #' @description Number of days with TX > 0 Celsius and TN < 0 Celsius.
-#' 
 ## @importance Important application in agriculture, tourism, human health
 #' 
-#' @param tmax maximum temperature
-#' @param tmin minimum temperature
+#' @param tmax daily maximum temperature, Celsius
+#' @param tmin daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return zero crossing days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -891,11 +892,11 @@ attr(calculate_30, "data") <- c(TMAX, TMIN)
 #' @description Date of the start of the first span with at least 6 days with TG >5 Celsius
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Onset of growing season 1
+#' @return date
 #' @export
 #' @examples
 #' data(data_all)
@@ -926,11 +927,11 @@ attr(calculate_31, "data") <- c(TMEAN)
 #' @description Date of the start of the first span with at least 10 days with TG > 5 Celsius
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Onset of growing season 2
+#' @return date
 #' @export
 #' @examples
 #' data(data_all)
@@ -961,11 +962,11 @@ attr(calculate_32, "data") <- c(TMEAN)
 #' @description Growing season (april to october) mean TG
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return Growing season temperature 1
+#' @param ... further arguments passed to or from other methods
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -987,11 +988,11 @@ attr(calculate_33, "data") <- c(TMEAN)
 #' @description Growing season (may to september) mean TG
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return Growing season temperature 2
+#' @param ... further arguments passed to or from other methods
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -1014,11 +1015,11 @@ attr(calculate_34, "data") <- c(TMEAN)
 #' @references McMaster, G. S., & Wilhelm, W. W. (1997). Growing degree-days: One equation, two interpretations. Agricultural and Forest Meteorology, 87(4), 291-300
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return GD4
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -1040,11 +1041,11 @@ attr(calculate_35, "data") <- c(TMEAN)
 #' @references Winkler, A.J., J.A. Cook, W.M. Kliewer, and L.A. Lider. 1974. General Viticulture. 4th ed. University of California Press, Berkeley.
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return Winkler index
+#' @param ... further arguments passed to or from other methods
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -1066,11 +1067,11 @@ attr(calculate_36, "data") <- c(TMEAN)
 #' @description Mean TG of the coldest month of the year
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return Winter Severity index
+#' @param ... further arguments passed to or from other methods
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -1095,11 +1096,11 @@ attr(calculate_37, "data") <- c(TMEAN)
 #' @title Sums TX32
 #' @description Sum of degree days when TX >= 32 Celsius on the interval June-August. The 32 celsius limit is the critical biological threshold for the maximum air temperature from which the physiological optimal growth and development of wheat and maize plants.
 ## @importance Important application in agriculture
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return temperature sums 1
+#' @param ... further arguments passed to or from other methods
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -1121,11 +1122,11 @@ attr(calculate_38, "data") <- c(TMAX)
 #' @description Number of days whith TX >= 32 Celsius on the interval June-August.
 ## @importance Important application in agriculture,water, human health
 #' 
-#' @param data maximum temperature
+#' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return temperature sums 1
+#' @param ... further arguments passed to or from other methods
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -1147,11 +1148,11 @@ attr(calculate_39, "data") <- c(TMAX)
 #' @description Sum of degree days when TN <= -15 Celsius recorded in December-February interval
 ## @importance Important application in agriculture,energy, human health, tourism
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return temperature sums 2
+#' @param ... further arguments passed to or from other methods
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -1173,11 +1174,11 @@ attr(calculate_40, "data") <- c(TMIN)
 #' @description Sum of degree days when TN <=-10 Celsius recorded in December-February interval
 ## @importance Important application in agriculture,energy, human health, tourism
 #' 
-#' @param data minimum temperature
+#' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return temperature sums 3
+#' @param ... further arguments passed to or from other methods
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -1199,11 +1200,11 @@ attr(calculate_41, "data") <- c(TMIN)
 #' @description Sums of positive TG calculated for the 1st of February to the 10th April interval
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return temperature sums 5
+#' @param ... further arguments passed to or from other methods
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -1229,11 +1230,11 @@ attr(calculate_42, "data") <- c(TMEAN)
 #' @description Total amounts of precipitation
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return total precipitation
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1255,11 +1256,11 @@ attr(calculate_43, "data") <- c(PRECIPITATION)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return maximum precipitation
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1281,11 +1282,11 @@ attr(calculate_44, "data") <- c(PRECIPITATION)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return R10mm
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -1308,11 +1309,11 @@ attr(calculate_45, "data") <- c(PRECIPITATION)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return R20mm
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -1334,11 +1335,11 @@ attr(calculate_46, "data") <- c(PRECIPITATION)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Rx5day
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1365,11 +1366,11 @@ attr(calculate_50, "data") <- c(PRECIPITATION)
 #' @references Michele Brunetti, Maurizio Maugerib, Teresa Nanni, (2001) Changes in total precipitation, rainy days and extreme events in northeastern Italy, International Journal of Climatology
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return SDII
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1395,11 +1396,11 @@ attr(calculate_51, "data") <- c(PRECIPITATION)
 #' @description Number of days with less than 1 mm
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return dry days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -1420,12 +1421,12 @@ attr(calculate_52, "data") <- c(PRECIPITATION)
 #' @description Precipitation minus evapotranspiration
 ## @importance Important application in agriculture and water
 #' 
-#' @param eto et0
-#' @param pr precipitation
+#' @param eto et0, mm
+#' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return effective precipitation
+#' @return mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1447,11 +1448,11 @@ attr(calculate_53, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return longest dry period
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -1478,11 +1479,11 @@ attr(calculate_54, "data") <- c(PRECIPITATION)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return longest wet period
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -1508,11 +1509,11 @@ attr(calculate_55, "data") <- c(PRECIPITATION)
 #' @description Precipitation at days exceeding the 95percentile divided by total precipitation expressed in percentage
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return PVWD
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1538,11 +1539,11 @@ attr(calculate_56, "data") <- c(PRECIPITATION)
 #' @description Precipitation at days exceeding the 99percentile divided by total precipitation expressed in percentage
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return PEWD
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1567,11 +1568,11 @@ attr(calculate_57, "data") <- c(PRECIPITATION)
 #' @description Number of days with precipitation above 50mm
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return heavy precipitation days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -1593,11 +1594,11 @@ attr(calculate_58, "data") <- c(PRECIPITATION)
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return R95p
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -1619,14 +1620,13 @@ attr(calculate_59, "data") <- c(PRECIPITATION)
 #' @title Precipitation Concentration Index
 #' @description Index to evaluate precipitation heterogeneity at a monthly scale. Values <10 (uniform monthly rainfall distribution); values 11-15 (moderate concentration of precipitation); values 16-20 (irregular distribution); and >20 ((high precipitation concentration)
 #' @section Formula: \deqn{PCI = \frac{\sum_{i=1}^{12} P_i ^ 2} {(P_t) ^ 2} * 100}
-## @importance Important application in agriculture and water
 #' @references Oliver, J.E. (1980) Monthly precipitation distribution: a comparative index. Professional Geographer, 32, 300–309
-
-#' @param data precipitation
+## @importance Important application in agriculture and water
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return PCI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -1641,7 +1641,7 @@ pci = calculate_60 = function(data, data_names=NULL, na.rm = FALSE, ...){
   byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[60] = C_precipitation
+index_units[60] = C_index
 index_titles[60] = "Precipitation Concentration Index"
 index_names[60] = "pci"
 attr(calculate_60, "data") <- c(PRECIPITATION)
@@ -1650,14 +1650,13 @@ attr(calculate_60, "data") <- c(PRECIPITATION)
 #' @description The precipitation concentration index is frequently associated to erosion risk.  Values: 0-60 very low; 60-90 Low; 90-120 moderate; 120-160 high; > 160 very high.
 #' @section Formula: \deqn{MFI = \sum_{i=1}^{12} \frac{P_i ^ 2} {P_t}}
 #' @references Fournier F. 1960. Climat et Erosion. PUF: Paris. Arnoldus HM. 1980. An approximation of the rainfall factor in the Uni-versal Soil Loss Equation. In Assessments of Erosion, de Boodts M,Gabriels D (eds). John Wiley and Sons Ltd, Chichester 127–132. De Luis M., González-Hidalgo J.C., Longares L.A. Is rainfal erosivity increasing in the Mediterranean Iberian Peninsula?. Land Degradation & Development, 21: 139-144. 
-#' 
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return MFI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -1672,7 +1671,7 @@ mfi = calculate_61 = function(data, data_names=NULL, na.rm = FALSE, ...){
   byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[61] = C_precipitation
+index_units[61] = C_index
 index_titles[61] = "Modified Fournier Index"
 index_names[61] = "mfi"
 attr(calculate_61, "data") <- c(PRECIPITATION)
@@ -1681,11 +1680,11 @@ attr(calculate_61, "data") <- c(PRECIPITATION)
 #' @description Growing season (april to october) total precipitation
 ## @importance Important application in agriculture
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return GSP
+#' @param ... further arguments passed to or from other methods
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1707,11 +1706,11 @@ attr(calculate_62, "data") <- c(PRECIPITATION)
 #' @description Total precipitation from October to April
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return non growing precipitation
+#' @param ... further arguments passed to or from other methods
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1741,11 +1740,11 @@ attr(calculate_63, "data") <- c(PRECIPITATION)
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, water management and tourism.
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return precipitation in wet days
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1767,11 +1766,11 @@ attr(calculate_64, "data") <- c(PRECIPITATION)
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, water management and tourism.
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return RR1
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -1783,22 +1782,21 @@ dr1mm = calculate_65 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[65] = C_precipitation
+index_units[65] = C_days
 index_titles[65] = "Wet days 1mm"
 index_names[65] = "dr1mm"
 attr(calculate_65, "data") <- c(PRECIPITATION)
 
 #' @title Wet days 3mm
 #' @description Total number of Wet days >= 3mm 
-#' 
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture, water management and tourism.
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return RR3
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -1810,7 +1808,7 @@ dr3mm = calculate_66 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[66] = C_precipitation
+index_units[66] = C_days
 index_titles[66] = "Wt days 3mm"
 index_names[66] = "dr3mm"
 attr(calculate_66, "data") <- c(PRECIPITATION)
@@ -1821,11 +1819,11 @@ attr(calculate_66, "data") <- c(PRECIPITATION)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @param ... ... 
-#' @return BIO10
+#' @param ... further arguments passed to or from other methods 
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -1848,11 +1846,11 @@ attr(calculate_67, "data") <- c(TMEAN)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @param ... ... 
-#' @return BIO11
+#' @param ... further arguments passed to or from other methods 
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -1875,11 +1873,11 @@ attr(calculate_68, "data") <- c(TMEAN)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO13
+#' @param ... further arguments passed to or from other methods 
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1902,11 +1900,11 @@ attr(calculate_69, "data") <- c(PRECIPITATION)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO14
+#' @param ... further arguments passed to or from other methods 
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1926,15 +1924,13 @@ attr(calculate_70, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation coefficient of variation 
 #' @description The coefficient of variation is a measure of the variation in monthly precipitation totals over the course of the year. This index is the ratio of the standard deviation of the monthly total precipitation to the mean monthly total precipitation and is expressed as a percentage.
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
-#' This is a measure of the variation in monthly precipitation totals over the course of the year. This index is the ratio of the standard deviation of the monthly total precipitation to the mean monthly total precipitation (also known as the coefficient of variation) and is expressed as a percentage.
 ## @importance Important application in agriculture
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO15
+#' @param ... further arguments passed to or from other methods 
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -1957,11 +1953,11 @@ attr(calculate_71, "data") <- c(PRECIPITATION)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @param ... ... 
-#' @return BIO16
+#' @param ... further arguments passed to or from other methods 
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -1984,11 +1980,11 @@ attr(calculate_72, "data") <- c(PRECIPITATION)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO17
+#' @param ... further arguments passed to or from other methods 
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -2011,12 +2007,12 @@ attr(calculate_73, "data") <- c(PRECIPITATION)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param pr precipitation
-#' @param taverage medium temperature
+#' @param pr daily precipitation, mm
+#' @param taverage daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO18
+#' @param ... further arguments passed to or from other methods 
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -2039,12 +2035,12 @@ attr(calculate_74, "data") <- c(PRECIPITATION, TMEAN)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param pr precipitation
-#' @param taverage medium temperature
+#' @param pr daily precipitation, mm
+#' @param taverage daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO19
+#' @param ... further arguments passed to or from other methods 
+#' @return precipitation, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -2067,11 +2063,11 @@ attr(calculate_75, "data") <- c(PRECIPITATION, TMEAN)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO4
+#' @param ... further arguments passed to or from other methods 
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -2093,12 +2089,12 @@ attr(calculate_76, "data") <- c(TMEAN)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param data mean temperature
-#' @param tmax maximum temperature
+#' @param data daily mean temperature, Celsius
+#' @param tmax daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO5
+#' @param ... further arguments passed to or from other methods 
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -2122,12 +2118,12 @@ attr(calculate_77, "data") <- c(TMEAN, TMAX)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param data mean temperature
-#' @param tmin minimum temperature
+#' @param data daily mean temperature, Celsius
+#' @param tmin daily minimum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO6
+#' @param ... further arguments passed to or from other methods 
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -2151,13 +2147,13 @@ attr(calculate_78, "data") <- c(TMEAN, TMIN)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
-#' @param tmin min temperature
-#' @param tmax max temperature
+#' @param data daily mean temperature, Celsius
+#' @param tmin daily minimum temperature, Celsius
+#' @param tmax daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO7
+#' @param ... further arguments passed to or from other methods 
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -2165,7 +2161,7 @@ attr(calculate_78, "data") <- c(TMEAN, TMIN)
 bio7 = calculate_79 = function(data, tmin, tmax, data_names=NULL, na.rm = FALSE, ...){
   return(bio5(data, tmax, data_names=data_names, na.rm=na.rm)-bio6(data, tmin, data_names=data_names, na.rm=na.rm))
 }
-index_units[79] = C_index
+index_units[79] = C_degrees
 index_titles[79] = "Difference warmest/coldest month"
 index_names[79] = "bio7"
 attr(calculate_79, "data") <- c(TMEAN, TMIN, TMAX)
@@ -2175,12 +2171,12 @@ attr(calculate_79, "data") <- c(TMEAN, TMIN, TMAX)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param pr precipitation
-#' @param taverage medium temperature
+#' @param pr daily precipitation, mm
+#' @param taverage daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO8
+#' @param ... further arguments passed to or from other methods 
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -2203,12 +2199,12 @@ attr(calculate_80, "data") <- c(PRECIPITATION, TMEAN)
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
-#' @param pr precipitation
-#' @param taverage medium temperature 
+#' @param pr daily precipitation, mm
+#' @param taverage daily mean temperature, Celsius 
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return BIO9
+#' @param ... further arguments passed to or from other methods 
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
@@ -2230,11 +2226,11 @@ attr(calculate_81, "data") <- c(PRECIPITATION, TMEAN)
 #' @description Mean radiation (W m-2)
 #' @references Kriticos, D.J., Webber, B.L., Leriche, A., Ota, N., Macadam, I., Bathols, J. and Scott, J.K. (2012) CliMond: global high-resolution historical and future scenario climate surfaces for bioclimatic modelling. Methods in Ecology and Evolution, 3, 53-64. http://dx.doi.org/10.1111/j.2041-210X.2011.00134.x
 #' 
-#' @param data radiation en w/m2
+#' @param data radiation, W m-2
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return BIO20
+#' @return radiation, W m-2
 #' @export
 #' @examples
 #' data(data_all)
@@ -2242,37 +2238,38 @@ attr(calculate_81, "data") <- c(PRECIPITATION, TMEAN)
 bio20 = calculate_82 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(average_temp(data=data, data_names=data_names, time.scale=time.scale, na.rm=na.rm))
 }
-index_units[82] = C_radiation
+index_units[82] = C_radiation_w
 index_titles[82] = "Mean radiation"
 index_names[82] = "bio20"
 attr(calculate_82, "data") <- c(RADIATION_W)
 
 #' @title Universal Thermal Climate Index
-#' @description The Universal Thermal Climate Index is expressed as an equivalent ambient temperature (Celsius) of a reference environment providing the same physiological response of a reference person as the actual environment
-#' \url{http://www.utci.org/} http://www.utci.org/utci_doku.php
-#' Copy \url{https://github.com/alfcrisci/rBiometeo}
-#'Given air temperature (Celsius), relative humidity (\%), wind velocity (m/sec) and mean radiant temperature ( tmrt in Celsius degree) gives the Universal Thermal Climate Index in Celsius.
-## @importance Important application in tourism, energy and health
+#' @description The Universal Thermal Climate is defined as the air temperature of the reference condition causing the same model response as actual conditions. The deviation of UTCI from air temperature, depends on the values of air and mean radiant temperature), wind speed and humidity.
+#' @references Blazejczyk, K.; Jendritzky, G.; Bröde, P.; Fiala, D.; Havenith, G.; Epstein, Y., Psikuta, A.; Kampmann, B. 2013. An introduction to the Universal Thermal Climate Index (UTCI). Geographia Polonica, 86 (1), pp.5-10. \url{http://www.utci.org/}
+## @importance Important application in tourism and health
 #' 
 #' @references Blazejczyk, K., Epstein, Y., Jendritzky, G., Staiger, H., & Tinz, B. (2012). Comparison of UTCI to selected thermal indices. International Journal of Biometeorology, 56(3), 515-535. doi:10.1007/s00484-011-0453-2
-#' @param ta medium temperature
-#' @param rh humidity
-#' @param wind average wind
-#' @param tmrt radiation temperature
+#' @param taverage daily mean temperature, Celsius
+#' @param rh relative humidity, percentage
+#' @param w average wind, m/s
+#' @param tmrt radiation temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return UTCI
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
-#' utci(ta = data_all$tg, rh = data_all$dewpoint, wind = data_all$wind, 
-#'      tmrt = data_all$"RADIATIONTEMPERATURE")
-utci = calculate_83 = function(ta, rh, wind, tmrt, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-    if(is.null(ta) | is.null(rh) | is.null(wind)) {
+#' utci(ta = data_all$tg, rh = data_all$humidity, w = data_all$wind, 
+#'      tmrt = data_all$radiationtemperature)
+utci = calculate_83 = function(taverage, rh, w, tmrt, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+    if(is.null(taverage) | is.null(rh) | is.null(w)) {
       return(NULL) 
     }
 
+    ta = taverage
+    wind = w
+    
     e = ta/10 # e = es(ta)/10; # use vapour pressure in kPa 
     pa = (e*rh/100.0)
     va = wind;
@@ -2506,18 +2503,18 @@ utci = calculate_83 = function(ta, rh, wind, tmrt, data_names=NULL, time.scale=Y
 index_units[83] = C_index
 index_titles[83] = "Universal thermal climate index"
 index_names[83] = "utci"
-attr(calculate_83, "data") <- c(TMEAN, DEWPOINT, WIND, "RADIATIONTEMPERATURE")
+attr(calculate_83, "data") <- c(TMEAN, HUMIDITY, WIND, RADIATIONTEMPERATURE)
 
 #' @title Mould index
 #' @description Number of days with  a relative humidity over 90% in combination with TG above 10 Celsius 
 ## @importance Important application in tourism, energy and health
 #' 
-#' @param taverage medium temperature
-#' @param rh relative humidity
+#' @param taverage daily mean temperature, Celsius
+#' @param rh relative humidity, percentage
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Mould index
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -2541,12 +2538,12 @@ attr(calculate_84, "data") <- c(TMEAN, HUMIDITY)
 #' @references \url{http://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml}
 ## @importance Important application in tourism, energy and health
 #' 
-#' @param taverage medium temperature
-#' @param rh relative humidity
+#' @param taverage daily mean temperature, Celsius
+#' @param rh relative humidity, percentage
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Heat Index
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -2571,12 +2568,12 @@ attr(calculate_85, "data") <- c(TMEAN, HUMIDITY)
 #' @references Osczevski, Randall; Bluestein, Maurice (2005). The new wind chill equivalent temperature chart. Bulletin of the American Meteorological Society. 86 (10): 1453–1458
 ## @importance Important application in energy and tourism
 #' 
-#' @param taverage medium temperature
-#' @param w average wind
+#' @param taverage daily mean temperature, Celsius
+#' @param w average wind, m/s
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return WCI
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -2599,16 +2596,15 @@ attr(calculate_86, "data") <- c(TMEAN, WIND)
 #' @title Apparent temperature
 #' @description Index of the percived temperature.
 #' @section Formula: \deqn{AT = TG + 0.33e -0.70v -4.00}  TG = air temperature in Celsius ; v = wind speed in m/s; e= water vapour pressure in hPa 
-#' 
 ## @importance Important application in tourism
 #' 
-#' @param taverage medium temperature
-#' @param w average wind
-#' @param vapor water vapour pressure
+#' @param taverage daily mean temperature, Celsius
+#' @param w average wind, m/s
+#' @param vapor water vapour pressure, hPa
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return AT
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -2633,15 +2629,15 @@ attr(calculate_87, "data") <- c(TMEAN, WIND, VAPOUR)
 #' @description Number of days with wind gusts above 21 m/s
 ## @importance Important application in energy and tourism
 #' 
-#' @param data wind
+#' @param data maximum wind gust, m/s
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return Gustmax
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
-#' dfx21(data = data_all$windGUST)
+#' dfx21(data = data_all$windgust)
 dfx21 = calculate_88 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data>21, na.rm=na.rm))
@@ -2659,15 +2655,15 @@ attr(calculate_88, "data") <- c(WINDGUST)
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in energy, agriculture and tourism
 #' 
-#' @param data maximum wind gust
+#' @param data maximum wind gust, m/s
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return FXx
+#' @return wind, m/s
 #' @export
 #' @examples
 #' data(data_all)
-#' fxx(data = data_all$windGUST)
+#' fxx(data = data_all$windgust)
 fxx = calculate_89 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(max(data, na.rm=na.rm))
@@ -2685,11 +2681,11 @@ attr(calculate_89, "data") <- c(WINDGUST)
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in energy, agriculture and tourism
 #' 
-#' @param data wind
+#' @param data average wind, m/s
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return FG
+#' @return wind, m/s
 #' @export
 #' @examples
 #' data(data_all)
@@ -2711,11 +2707,11 @@ attr(calculate_90, "data") <- c(WIND)
 #' @references ECA&D website: European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in energy and tourism
 #' 
-#' @param data wind
+#' @param data average wind, m/s
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return FGcalm
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -2737,11 +2733,11 @@ attr(calculate_91, "data") <- c(WIND)
 #' @references ECA&D website: European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in energy, agriculture and tourism.
 #' 
-#' @param data wind
+#' @param data average wind, m/s
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return FG6Bft
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -2764,20 +2760,20 @@ attr(calculate_92, "data") <- c(WIND)
 #' @references Chiew, F.H.S., Kamaladasa, N.N., Malano, H.M., McMahon, T.A., 1995. Penman–Monteith FAO-24 reference crop evapotranspiration and class-A pan data in Australia. Agric. Water Manage. 28, 9–21
 ## @importance Important application in agriculture
 #' 
-#' @param tmin tmin
-#' @param tmax tmax
-#' @param toa toa
-#' @param w w
-#' @param lat lat
-#' @param tdew tdew
-#' @param mde mde
-#' @param radiation radiation
-#' @param insolation insolation
-#' @param rh relative humidity
+#' @param tmin daily minimum temperature, Celsius
+#' @param tmax daily maximum temperature, Celsius
+#' @param toa solar radiation at TOA, W/m2
+#' @param w average wind, m/s
+#' @param lat latitude, degree
+#' @param tdew dew point, Celsius
+#' @param mde digital elevation model, m
+#' @param radiation net radiation, J/m2
+#' @param insolation insolation, hours of sun
+#' @param rh relative humidity, percentage
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return Eto
+#' @return mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -2800,7 +2796,7 @@ eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, 
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[93] = C_index
+index_units[93] = C_precipitation
 index_titles[93] = "Reference evapotranspiration"
 index_names[93] = "eto"
 attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, RADIATION, MDE, DEWPOINT, INSOLATION, HUMIDITY)
@@ -2810,12 +2806,12 @@ attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, RADIATION, 
 #' @references Huiping Huang, Yuping Han, Mingming Cao, Jinxi Song, and Heng Xiao Spatial-Temporal Variation of Aridity Index of China during 1960–2013. Advances in Meteorology, vol. 2016, Article ID 1536135, 10 pages, 2016. \url{https://doi.org/10.1155/2016/1536135}
 ## @importance Important application in agriculture
 #' 
-#' @param eto et0
-#' @param pr precipitation
+#' @param eto evapotranspiration, mm
+#' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return iUNEP
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -2835,16 +2831,15 @@ attr(calculate_94, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 
 #' @title Climatic moisture deficit
 #' @description ETo - Effective precipitation
-#' ETo - Effective Precipitation
 #' @references Parks, S. A., Parisien, M. , Miller, C. , Holsinger, L. M. and Baggett, L. S. (2018), Fine-scale spatial climate variation and drought mediate the likelihood of reburning. Ecol Appl, 28: 573-586. doi:10.1002/eap.1671
 ## @importance Important application in agriculture
 #' 
-#' @param eto et0
-#' @param pr precipitation
+#' @param eto evapotranspiration, mm
+#' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return CMD
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -2868,12 +2863,12 @@ attr(calculate_95, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @section Formula: \deqn{MAI = \frac{P} {TG+10}} P = annual precipitation (mm); TG = mean annual air temperature (Celsius)
 ## @importance Important application in agriculture
 #' 
-#' @param pr precipitation
-#' @param taverage medium temperature
+#' @param pr daily precipitation, mm
+#' @param taverage daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return Martonne Aridity Index
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -2899,12 +2894,12 @@ attr(calculate_96, "data") <- c(PRECIPITATION, TMEAN)
 #' @references Emberger L. 1930. La végétation de la région méditerranéenne: essai d'une classification des groupements végétaux Revue Générale de Botanique, 42 (641–662), pp. 705-721
 ## @importance Important application in agriculture
 #' 
-#' @param pr precipitation
-#' @param taverage medium temperature
+#' @param pr daily precipitation, mm
+#' @param taverage daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return Emberger Aridity Index
+#' @param ... further arguments passed to or from other methods 
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -2930,12 +2925,12 @@ attr(calculate_97, "data") <- c(PRECIPITATION, TMEAN)
 #' @references Chronopoulou-Sereli A. 1996. Courses of Agricultural Meteorology.Publications Agricultural University of Athens: Athens, OH
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param value lat
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return JCI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -2959,11 +2954,11 @@ attr(calculate_98, "data") <- c(TMEAN, LAT)
 #' @references Zambakas J. 1992.General Climatology. Department of Geology,National & Kapodistrian University of Athens, Athens. Gavilan RG. 2005. The use of climatic parameters and indices in vege-tation distribution. A case study in the Spanish System Central.Int. J.Biometeorol.50: 111–120.
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
+#' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time
-#' @return Kerner Oceanity Index
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -2988,12 +2983,12 @@ attr(calculate_99, "data") <- c(TMEAN)
 #' @references Zambakas J. 1992. General Climatology. Department of Geology, National & Kapodistrian University of Athens: Athens, Greece.
 ## @importance Important application in agriculture
 #' 
-#' @param pr precipitation 
-#' @param taverage medium temperature
+#' @param pr daily precipitation, mm 
+#' @param taverage daily mean temperature, Celsius
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return Pinna Combinative index
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3019,12 +3014,12 @@ attr(calculate_100, "data") <- c(PRECIPITATION, TMEAN)
 #' @references Budyko M.I. The Heat Balance of the Earth's Surface U.S. Department of Commerce, Washington D.C (1958) 259 pp., translated by N.A. Stepanova
 ## @importance Important application in agriculture
 #' 
-#' @param data net radiation, surface solar radiation downwards, J/m2
-#' @param pr precipitation
+#' @param data net radiation, J/m2
+#' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ... 
-#' @return Budyko Index
+#' @param ... further arguments passed to or from other methods 
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3052,22 +3047,22 @@ attr(calculate_101, "data") <- c(RADIATION, PRECIPITATION)
 #' @references Marsz A, Rakusa-Suszczewskis S. 1987. Charakterystyka ekologiczna rejonu Zatoki Admiralicji (King George Island, SouthShetland Islands). 1. Klimat i obszary wolne od lodu.Kosmos36:103–127.
 ## @importance Important application in agriculture
 #' 
-#' @param data medium temperature
-#' @param value lat 
+#' @param data daily mean temperature, Celsius
+#' @param lat latitude, degree
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return n0to10
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
-#' moi(data = data_all$tg, value = data_all$lat)
-moi = calculate_102 = function(data, value, data_names=NULL, na.rm = FALSE, ...){
+#' moi(data = data_all$tg, lat = data_all$lat)
+moi = calculate_102 = function(data, lat, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, value){
     data = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
     return(( 0.731 * value + 1.767 ) / (max(data, na.rm=na.rm)-min(data, na.rm=na.rm)) )
   }
-  byYears = calcf_data(data=data, extract_names=years, operation=function_, data_names=data_names, value=value)
+  byYears = calcf_data(data=data, extract_names=years, operation=function_, data_names=data_names, value=lat)
   return(byYears)
 }
 index_units[102] = C_index
@@ -3080,11 +3075,11 @@ attr(calculate_102, "data") <- c(TMEAN, LAT)
 #' @description Sum of snowfall
 ## @importance Important application in water and tourism
 #' 
-#' @param data snowfall
+#' @param data snowfall, mm of water equivalent
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return n0to10
+#' @return snow, mm
 #' @export
 #' @examples
 #' data(data_all)
@@ -3103,15 +3098,15 @@ attr(calculate_103, "data") <- c(SNOWFALLMM)
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in water and tourism
 #' 
-#' @param data snow depth
+#' @param data snow depth, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return SD0_10
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
-#' sd0_10(data = data_all$snowdepththickness)
+#' sd0_10(data = data_all$snowdepth)
 sd0_10 = calculate_104 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data>=1 & data<=10, na.rm=na.rm))
@@ -3123,22 +3118,22 @@ sd0_10 = calculate_104 = function(data, data_names=NULL, time.scale=YEAR, na.rm 
 index_units[104] = C_days
 index_titles[104] = "Snow depth 1-10"
 index_names[104] = "sd0_10"
-attr(calculate_104, "data") <- c(SNOWDEPTHTHICKNESS)
+attr(calculate_104, "data") <- c(SNOWDEPTH)
 
 #' @title Snow depth 10-20
 #' @description The number of days with snow depth of 10-20 cm
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in water and tourism
 #' 
-#' @param data snow depth
+#' @param data snow depth, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return SD10_20
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
-#' sd10_20(data = data_all$snowdepththickness)
+#' sd10_20(data = data_all$snowdepth)
 sd10_20 = calculate_105 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data>=10 & data<=20, na.rm=na.rm))
@@ -3150,44 +3145,18 @@ sd10_20 = calculate_105 = function(data, data_names=NULL, time.scale=YEAR, na.rm
 index_units[105] = C_days
 index_titles[105] = "Snow depth 10-20"
 index_names[105] = "sd10_20"
-attr(calculate_105, "data") <- c(SNOWDEPTHTHICKNESS)
-
-#' @title Snow depth
-#' @description Mean of daily snow depth
-#' mean of daily snow depth
-#' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
-## @importance Important application in water and tourism
-#' 
-#' @param data snow depth
-#' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return snow depth
-#' @export
-#' @examples
-#' data(data_all)
-#' sdd(data = data_all$snowdepththickness)
-sdd = calculate_106 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm=na.rm)
-  return(byYears)
-}
-index_units[106] = C_snow
-index_titles[106] = "Snow depth"
-index_names[106] = "sdd"
-attr(calculate_106, "data") <- c(SNOWDEPTHTHICKNESS)
+attr(calculate_105, "data") <- c(SNOWDEPTH)
 
 #' @title Number of snow days
 #' @description Number of snow days
-#' number of snow days
-#' No. snow days
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in water and tourism
 #' 
-#' @param data snowfall
+#' @param data snowfall, m of water equivalent
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return freq. of snow days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -3205,22 +3174,22 @@ index_names[107] = "fsd"
 attr(calculate_107, "data") <- c(SNOWFALL)
 
 #' @title Mild snowy days
-#' @description number of days with snow depth > 5 cm.
+#' @description Number of days with snow depth > 5 cm.
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in water and tourism
 #' 
-#' @param data snow depth
+#' @param data snow depth, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return mild snowy days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
-#' msd(data = data_all$snowdepththickness)
+#' msd(data = data_all$snowdepth)
 msd = calculate_108 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data>50/100, na.rm=na.rm))
+    return(sum(data > 50, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
@@ -3228,25 +3197,25 @@ msd = calculate_108 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[108] = C_days
 index_titles[108] = "Mild snowy days"
 index_names[108] = "msd"
-attr(calculate_108, "data") <- c(SNOWDEPTHTHICKNESS)
+attr(calculate_108, "data") <- c(SNOWDEPTH)
 
 #' @title Heavy snowy days
 #' @description Number of days with snow depth more than 50 cm.
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in water and tourism
 #' 
-#' @param data snow depth
+#' @param data snow depth, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return heavy snowy days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
-#' hsd(data = data_all$snowdepththickness)
+#' hsd(data = data_all$snowdepth)
 hsd = calculate_109 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data>500/100, na.rm=na.rm))
+    return(sum(data > 500, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
@@ -3254,17 +3223,17 @@ hsd = calculate_109 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[109] = C_days
 index_titles[109] = "Heavy snowy days"
 index_names[109] = "hsd"
-attr(calculate_109, "data") <- c(SNOWDEPTHTHICKNESS)
+attr(calculate_109, "data") <- c(SNOWDEPTH)
 
 #' @title Date of first snow cover
 #' @description First day when there is measurable snow cover (day of the hydrological year)
 ## @importance Important application in water and tourism
 #' 
-#' @param data snow depth
+#' @param data snow depth, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return first snowcover
+#' @param ... further arguments passed to or from other methods
+#' @return date
 #' @export
 #' @examples
 #' data(data_all)
@@ -3272,7 +3241,7 @@ attr(calculate_109, "data") <- c(SNOWDEPTHTHICKNESS)
 fsc = calculate_110 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     if(na.rm | sum(is.na(data))==0){
-      value = which(data>0)[1]
+      value = which(data > 1)[1]
       if(is.na(value)){
         value = 0
       }
@@ -3290,14 +3259,13 @@ attr(calculate_110, "data") <- c(SNOWDEPTH)
 
 #' @title Date of first permanent snow cover
 #' @description First day of the longest period with consecutive snow cover day (day of the hydrological year).
-#' First day of the longest period with consecutive snow cover day
 ## @importance Important application in water and tourism
 #' 
-#' @param data snow depth
+#' @param data snow depth, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return first permanent snowcover
+#' @param ... further arguments passed to or from other methods
+#' @return date
 #' @export
 #' @examples
 #' data(data_all)
@@ -3333,11 +3301,11 @@ attr(calculate_111, "data") <- c(SNOWDEPTH)
 #' @description Last day of the longest period with consecutive snow cover day (day of the hydrological year).
 ## @importance Important application in water and tourism
 #' 
-#' @param data snow depth
+#' @param data snow depth, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return last permanent snowcover
+#' @param ... further arguments passed to or from other methods
+#' @return date
 #' @export
 #' @examples
 #' data(data_all)
@@ -3373,40 +3341,40 @@ attr(calculate_112, "data") <- c(SNOWDEPTH)
 #' @description Average snow depth
 ## @importance Important application in water and tourism
 #' 
-#' @param data snow depth
+#' @param data snow depth, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return average snow depth
+#' @return snow depth, m
 #' @export
 #' @examples
 #' data(data_all)
-#' asd(data = data_all$snowdepththickness)
+#' asd(data = data_all$snowdepth)
 asd = calculate_113 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm=na.rm)
+  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm=na.rm)/1000
   return(byYears)
 }
-index_units[113] = C_snow
+index_units[113] = C_snow_m
 index_titles[113] = "Average snow depth"
 index_names[113] = "asd"
-attr(calculate_113, "data") <- c(SNOWDEPTHTHICKNESS)
+attr(calculate_113, "data") <- c(SNOWDEPTH)
 
 #' @title Number of snow covered days
 #' @description Number of snow covered days (snow depth > 0)
 ## @importance Important application in water and tourism
 #' 
-#' @param data snow depth
+#' @param data snow depth, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return snow covered days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
 #' scd(data = data_all$snowdepth)
 scd = calculate_114 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){    
-    return(sum(data>0, na.rm=na.rm))
+    return(sum(data > 1, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
@@ -3420,23 +3388,23 @@ attr(calculate_114, "data") <- c(SNOWDEPTH)
 #' @description Maximum snow depth (m)
 ## @importance Important application in water and tourism
 #' 
-#' @param data snow depth
+#' @param data snow depth, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return maximum snow depth
+#' @return snow depth, m
 #' @export
 #' @examples
 #' data(data_all)
-#' ms(data = data_all$snowdepththickness)
+#' ms(data = data_all$snowdepth)
 ms = calculate_115 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=max, data_names=data_names, na.rm=na.rm)
+  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=max, data_names=data_names, na.rm=na.rm)/1000
   return(byYears)
 }
-index_units[115] = C_snow
+index_units[115] = C_snow_m
 index_titles[115] = "Maximum snow depth"
 index_names[115] = "ms"
-attr(calculate_115, "data") <- c(SNOWDEPTHTHICKNESS)
+attr(calculate_115, "data") <- c(SNOWDEPTH)
 
 ####Cloud/radiation-based
 #' @title Sum of sunshine duration
@@ -3444,11 +3412,11 @@ attr(calculate_115, "data") <- c(SNOWDEPTHTHICKNESS)
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture and tourism
 #' 
-#' @param data sunshine duration
+#' @param data insolation, hours of sun
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return SSD, h
+#' @return hours of sun
 #' @export
 #' @examples
 #' data(data_all)
@@ -3466,11 +3434,11 @@ attr(calculate_116, "data") <- c(INSOLATION)
 #' @description Days with mean cloud cover less than 10%.
 ## @importance Important application in agriculture and tourism
 #' 
-#' @param data cloud cover
+#' @param data cloud cover, percentage
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return SND
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -3492,11 +3460,11 @@ attr(calculate_117, "data") <- c(CLOUD)
 #' @references Rastogi, B., A.P. Williams, D.T. Fischer, S.F. Iacobellis, K. McEachern, L. Carvalho, C. Jones, S.A. Baguskas, and C.J. Still, 2016: Spatial and Temporal Patterns of Cloud Cover and Fog Inundation in Coastal California: Ecological Implications. Earth Interact., 20, 1–19, \url{https://doi.org/10.1175/EI-D-15-0033.1}
 ## @importance Important application in agriculture and tourism
 #' 
-#' @param data cloud base below 100 meter
+#' @param data cloud base below 100 meter, percentage
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return cloudy days
+#' @return days
 #' @export
 #' @examples
 #' data(data_all)
@@ -3510,18 +3478,18 @@ fod = calculate_118 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 }
 index_units[118] = C_days
 index_titles[118] = "Foggy days"
-index_names[118] = "cld"
+index_names[118] = "fod"
 attr(calculate_118, "data") <- c(CLOUD100)
 
 #' @title Mean daily cloud cover
 #' @description Mean daily cloud cover (%)
 ## @importance Important application in agriculture and tourism
 #' 
-#' @param data cloud cover
+#' @param data cloud cover, percentage
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return mean CC
+#' @return percentage
 #' @export
 #' @examples
 #' data(data_all)
@@ -3538,15 +3506,14 @@ attr(calculate_119, "data") <- c(CLOUD)
 #' @title Sunshine duration percentage
 #' @description Sunshine duration fraction with respect to day length (%) 
 #' @section Formula: \deqn{SSP = \frac{SS} {SSmax} * 100} SS: sum of sunshine duration (h); SSmax: maximun daylight (h)
-#' 
 #' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture and tourism
 #' 
-#' @param data sunshine duration
+#' @param data insolation, hours of sun
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return ssp
+#' @return percentage
 #' @export
 #' @examples
 #' data(data_all)
@@ -3558,7 +3525,7 @@ ssp = calculate_120 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
   return(byYears)
 }
-index_units[120] = C_index
+index_units[120] = C_percentage
 index_titles[120] = "Sunshine duration fraction"
 index_names[120] = "ssp"
 attr(calculate_120, "data") <- c(INSOLATION)
@@ -3567,12 +3534,12 @@ attr(calculate_120, "data") <- c(INSOLATION)
 #' @description Ratio between solar radiation at surface and solar radiation at TOA (alt top of the atmosphere)
 ## @importance Important application in agriculture and tourism
 #' 
-#' @param data net radiation 
-#' @param toa solar radiation at TOA
+#' @param data net radiation, J/m2
+#' @param toa solar radiation at TOA, W/m2
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return ACI
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3596,11 +3563,11 @@ attr(calculate_121, "data") <- c(RADIATION, RADIATIONTOA)
 #' @references McKee, T. B., Doesken, N. J. and Kleist, J.: The relationship of drought frequency and duration to time scales, Eighth Conf. Appl. Climatol., 179–184, 1993.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return SPI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3618,11 +3585,11 @@ attr(calculate_122, "data") <- c(PRECIPITATION)
 #' @references McKee, T. B., Doesken, N. J. and Kleist, J.: The relationship of drought frequency and duration to time scales, Eighth Conf. Appl. Climatol., 179–184, 1993.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return SPI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3640,11 +3607,11 @@ attr(calculate_123, "data") <- c(PRECIPITATION)
 #' @references McKee, T. B., Doesken, N. J. and Kleist, J.: The relationship of drought frequency and duration to time scales, Eighth Conf. Appl. Climatol., 179–184, 1993.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return SPI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3662,11 +3629,11 @@ attr(calculate_124, "data") <- c(PRECIPITATION)
 #' @references McKee, T. B., Doesken, N. J. and Kleist, J.: The relationship of drought frequency and duration to time scales, Eighth Conf. Appl. Climatol., 179–184, 1993.
 ## @importance Important application in agriculture and water
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return SPI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3684,12 +3651,12 @@ attr(calculate_125, "data") <- c(PRECIPITATION)
 #' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
 ## @importance Important application in agriculture and water
 #' 
-#' @param eto et0
-#' @param pr precipitation
+#' @param eto evapotranspiration, mm
+#' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return SPEI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3707,12 +3674,12 @@ attr(calculate_126, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
 ## @importance Important application in agriculture and water
 #' 
-#' @param eto et0
-#' @param pr precipitation
+#' @param eto evapotranspiration, mm
+#' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return SPEI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3730,12 +3697,12 @@ attr(calculate_127, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
 ## @importance Important application in agriculture and water
 #' 
-#' @param eto et0
-#' @param pr precipitation
+#' @param eto evapotranspiration, mm
+#' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return SPEI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3753,12 +3720,12 @@ attr(calculate_128, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
 ## @importance Important application in agriculture
 #' 
-#' @param eto et0
-#' @param pr precipitation
+#' @param eto evapotranspiration, mm
+#' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... ...
-#' @return SPEI
+#' @param ... further arguments passed to or from other methods
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3774,43 +3741,30 @@ attr(calculate_129, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 ####Fire-based
 #' @title Canadian Fire Weather Index
 #' @description The Canadian Forest Fire Weather Index is an indicator of fire weather intensity and is used to represent potential fire danger. It is computed from daily values of precipitation, temperature, near-surface wind and relative humidity
-#' dimensionless, see Van Wagner (1987).
 #' @references Van Wagner CE. 1987. Development and structure of the Canadian forest fire weather index system. Technical Report 35, Canadian Forestry Service: Ottawa, Ontario. Bedia, J., Herrera, S., Gutiérrez, J. M., Zavala, G., Urbieta, I. R., & Moreno, J. M. (2012). Sensitivity of fire weather index to different reanalysis products in the iberian peninsula. Natural Hazards and Earth System Science, 12(3), 699-708. doi:10.5194/nhess-12-699-2012
-#' ## @importance Important application for fire prevention
+## @importance Important application for fire prevention
 #' 
-#' @param taverage medium temperature
-#' @param rh relative humidity
-#' @param w average wind
-#' @param pr precipitation
-#' @param dew_point dew_point
-#' @param lat latitude
+#' @param taverage daily mean temperature, Celsius
+#' @param rh relative humidity, percentage
+#' @param w average wind, m/s
+#' @param pr daily precipitation, mm
+#' @param lat latitude, degree
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return FWI
+#' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
 #' fwi(taverage = data_all$tg, rh = data_all$humidity, w = data_all$wind, 
-#'      pr = data_all$rr, dew_point=data_all$dewpoint, lat = data_all$lat)
-fwi = calculate_130 = function(taverage, rh, w, pr, dew_point, lat, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  if(is.null(taverage) | is.null(rh) | is.null(w) | is.null(pr) | is.null(dew_point) | is.null(lat)) { 
+#'      pr = data_all$rr, lat = data_all$lat)
+fwi = calculate_130 = function(taverage, rh, w, pr, lat, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  if(is.null(taverage) | is.null(rh) | is.null(w) | is.null(pr) | is.null(lat)) { 
     return(NULL) 
   }
 
-  # # fergus: Comparar las 2 funciones
-  # dayLength = DayLengths(lat)
-  # data = index_CFWI(Month=as.numeric(months(names(taverage))), Days=as.POSIXlt(chron(names(taverage)))$yday+1, Temp=taverage, Dew = dew_point, WS = w, Rain = pr, daylist = dayLength)
-  # names(data) = names(taverage)
-
-  # fireDanger
-  # missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(rh) | is.na(pr) | is.na(w)
-  # data.nas = fwi1D(months=as.numeric(months(names(taverage[!missing.values]))), Tm=taverage[!missing.values], H=rh[!missing.values], r=pr[!missing.values], W=w[!missing.values], lat = lat)
-
-
-
-# Ej. fwi1D(dates, Tm, H, r, W, lat = 46, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
-# dates=names(taverage); Tm=taverage; H=rh; r=pr=data_all$rr; W=w; lat = lat; what = "FWI"; init.pars = c(85, 6, 15); spin.up = 0
+  # Ej. fwi1D(dates, Tm, H, r, W, lat = 46, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
+  # dates=names(taverage); Tm=taverage; H=rh; r=pr=data_all$rr; W=w; lat = lat; what = "FWI"; init.pars = c(85, 6, 15); spin.up = 0
   data = fwi1D(dates=names(taverage), Tm=taverage, H=rh, r=pr, W=w, lat = lat, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
 
   # data = taverage
@@ -3819,22 +3773,22 @@ fwi = calculate_130 = function(taverage, rh, w, pr, dew_point, lat, data_names=N
   byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
   return(byYears)
 }
-index_units[130] = C_index
+index_units[130] = C_degrees
 index_titles[130] = "Canadian Fire Weather Index"
 index_names[130] = "fwi"
-attr(calculate_130, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, DEWPOINT, LAT)
+attr(calculate_130, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, LAT)
 
 #' @title Keetch-Byran Drought Index
 #' @description The Keetch-Byram Drought Index (KBDI) is an indicator of drought conditions and is used to predict wildfire severity.
 #' @references Keetch, J.J. and Byram, G.M. (1968). A drought index for forest fire control. Tech. Rep., USDA Forest Service Research Paper SE-38, North Carolina, USA. Alexander, M.E., 1990. Computer calculation of the Keetch-Byram Drought Index - programmers beware. Fire Management Notes 51, 23–25.
 ## @importance Important application for fire prevention
 #' 
-#' @param taverage medium temperature
-#' @param pr precipitation
+#' @param taverage daily mean temperature, Celsius
+#' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return KBDI
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3843,16 +3797,6 @@ kbdi = calculate_131 = function(taverage, pr, data_names=NULL, time.scale=YEAR, 
   if(is.null(taverage) | is.null(pr)) { 
     return(NULL) 
   }
-
-# Q = Wc - W
-# daily maximum temperature T
-# mean annual rainfall R
-
-  # # fergus: Comparar las 2 funciones
-  # byYears = calcf_data(data=pr, extract_names=select_time_function(time.scale), operation=sum, na.rm = na.rm)
-  # map = mean(byYears, na.rm=TRUE)
-  # data.all = index_KBDI(Temperature=taverage, Rain=pr, MAP=map)
-  # names(data.all) = names(taverage)
 
   # fireDanger
   missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(pr)
@@ -3873,14 +3817,14 @@ attr(calculate_131, "data") <- c(TMEAN, PRECIPITATION)
 #' @description The McArthur Forest Fire Danger Index (FFDI) is a good indication of the difficulty of fire suppression over a wide range of conditions. It estimates the amount of precipitation needed to bring the soil back to saturation and is computed from the Keetch-Byram Drought Index (KBDI) and Drought Factor (DF).
 #' @references McArthur, A. G. (1967). Fire behaviour in eucalypt forests. Forestry and Timber Bureau Leaflet 107, 36 pp.
 #' 
-#' @param taverage medium temperature
-#' @param pr precipitation
-#' @param rh relative humidity
-#' @param w average wind
+#' @param taverage daily mean temperature, Celsius
+#' @param pr daily precipitation, mm
+#' @param rh relative humidity, percentage
+#' @param w average wind, m/s
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return FFDI
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3890,13 +3834,6 @@ ffdi = calculate_132 = function(taverage, pr, rh, w, data_names=NULL, time.scale
     return(NULL) 
   }
 
-  # byYears = calcf_data(data=pr, extract_names=select_time_function(time.scale), operation=sum, na.rm = na.rm)
-  # map = mean(byYears, na.rm=TRUE)
-  # kdbiData = index_KBDI(Temperature=taverage, Rain=pr, MAP=map)
-  # data = index_MA(Temperature=taverage, Rain=pr, DewPoint=rh, MAP=map, Wind=w, KBDI=kdbiData)
-  # names(data) = names(taverage)
-  # byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
-  
   data.all = taverage
   data.all[] = NA
 
@@ -3918,14 +3855,14 @@ attr(calculate_132, "data") <- c(TMEAN, PRECIPITATION, HUMIDITY, WIND)
 #' @references Groisman, P.Y., et al., 2007. Global and Planetary Change 56, 371–386.
 ## @importance Important application in fire prevention
 #' 
-#' @param dew_point dew point
-#' @param taverage medium temperature
-#' @param rh relative humidity
-#' @param pr precipitation
+#' @param dew_point dew point, Celsius
+#' @param taverage daily mean temperature, Celsius
+#' @param rh relative humidity, percentage
+#' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return MNI
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3933,25 +3870,6 @@ attr(calculate_132, "data") <- c(TMEAN, PRECIPITATION, HUMIDITY, WIND)
 mni = calculate_133 = function(dew_point, taverage, rh, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   if(is.null(dew_point) | is.null(taverage) | is.null(rh) | is.null(pr)) { return(NULL) 
   }
-
-  # Rewriting the function index_MMI
-  # lookK_ <- function(data){
-  #   data.return = data
-  #   data.return[data>= 0.0 & data< 0.1] = 1.0
-  #   data.return[data>= 0.1 & data< 1.0] = 0.8
-  #   data.return[data>= 1.0 & data< 3.0] = 0.6
-  #   data.return[data>= 3.0 & data< 6.0] = 0.4
-  #   data.return[data>= 6.0 & data< 15.0] = 0.2
-  #   data.return[data>= 15.0 & data< 19.0] = 0.1
-  #   data.return[data< 0 | data>=19.0] = 0
-  # }
-  # deficit = taverage - dew_point
-  # data = taverage * deficit * lookK_(pr)
-  # data[pr>3.0] = 0.0
-
-  # fergus: Comparar las 2 funciones
-  # data = index_MMI(DewPoint=dew_point, Temperature=taverage, Rain=pr)
-  # names(data) = names(taverage)
 
   # fireDanger
   data = nesterovIndex(t = taverage, rh = rh, p = pr, modified = FALSE)
@@ -3970,12 +3888,12 @@ attr(calculate_133, "data") <- c(DEWPOINT, TMEAN, HUMIDITY, PRECIPITATION)
 #' @references Venäläinen A, Heikinheimo M. 2003. The Finnish forest fire index calculation system. In Early Warning Systems for Natural Disaster Reduction, Zschau J, Kuppers A (eds). Springer: Berlin; 645–648.. Vajda, A., Venalainen, A., Suomi, I., Junila, P. and Makela, H., 2014. Assessment of forest fire danger in a boreal forest environment: description and evaluation of the operational system applied in Finland. Meteorol. Appl., 21: 879-887, DOI: 10.1002/met.1425
 ## @importance Important application in fire prevention
 #' 
-#' @param data precipitation
+#' @param data daily precipitation, mm
 #' @param evap potential evapotranspiration
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return FFFI
+#' @return index value
 #' @export
 #' @examples
 #' data(data_all)
@@ -3995,133 +3913,6 @@ index_units[134] = C_index
 index_titles[134] = "Finnish Forest Fire Index"
 index_names[134] = "fffi"
 attr(calculate_134, "data") <- c(PRECIPITATION, EVAPOTRANSPIRATION)
-
-####Tourism
-#' @title Holliday Climate Index Urban
-#' @description Holliday Climate Index for Urban destinations (Scott et all, 2016) (Tmax,wind,cloudiness,RH, precipitation) Scott, D., Rutty, M., Amelung, B. and Tang, M. (2016): An inter-comparison of the Holiday Climate Index (HCI) and the Tourism Climate Index (TCI), Atmosphere, 7, 80, doi:10.3390/atmos7060080
-#' Holliday Climate Index for Urban destinations (Scott et all, 2016) (TX, wind, cloudiness, RH, precipitation) Scott, D., Rutty, M., Amelung, B. and Tang, M. (2016): An inter-comparison of the Holiday Climate Index (HCI) and the Tourism Climate Index (TCI), Atmosphere, 7, 80, doi:10.3390/atmos7060080
-#' HCI : Urban= 4*TC +2*A+(3*precipitation+wind) where TC=thermal comfort (as a function of Tmax [C] and RH [%]), A (aesthetic facet)=cloudiness (%), precipitation [mm],wind speed (at 10m)[km/h]. HCI scores may be in the range 0 (potentially dangerous for tourists) to 100 (ideal for tourism).
-#' @references Scott, D., Rutty, M., Amelung, B. and Tang, M. (2016): An inter-comparison of the Holiday Climate Index (HCI) and the Tourism Climate Index (TCI), Atmosphere, 7, 80, doi:10.3390/atmos7060080
-## @importance Important application in tourism
-#' 
-#' @param pr precipitation
-#' @param w average wind
-#' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return HCIU
-#' @export
-#' @examples
-#' data(data_all)
-#' hciu(pr = data_all$rr, w=data_all$wind)
-hciu = calculate_135 = function(pr, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  #tc: thermal comfort 
-  # data = 4*tc + 2*cloud_cover + 3*pr + w
-  # function_ = function(data){
-  #   return(mean(data, na.rm=na.rm))
-  # }
-  # byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
-  return(NULL)
-}
-index_units[135] = C_index
-index_titles[135] = "Holliday Climate Index Urban"
-index_names[135] = "hciu"
-attr(calculate_135, "data") <- c(PRECIPITATION, WIND)
-
-#' @title Tourism Climatic Index
-#' @description Standard index computed by ECA&D; Described at Miezkowski (1985), conceptual formula: TCI = 4cid + cia + 2R + 2S + W, where CId is a daytime comfort index, CIa a daily comfort index, R is cumulated rainfall, S the daily sunshine hours and W wind speed
-#' Represents a quantitative evaluation of world climate for the purposes of tourism and is a composite measure of the climatic well-being of tourists.
-#' TCI = 4cid + cia + 2R + 2S + W, where CId is a daytime comfort index, CIa a daily comfort index, R is cumulated rainfall, S the daily sunshine hours and W wind speed
-#' @references Mieczkowski, Z. (1985). The tourism climatic index: a method of evaluating world climates for tourism. The Canadian Geographer/Le Géographe canadien, 29(3), 220-233.
-## @importance Important application in tourism
-#' 
-#' @param data precipitation
-#' @param sunshine net radiation 
-#' @param w average wind
-#' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return TCI
-#' @export
-#' @examples
-#' data(data_all)
-#' tci(data=data_all$rr, sunshine=radiation.value, w=w.value)
-tci = calculate_136 = function(data, sunshine, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  # #cia: Daily Comfort Index
-  # #cid: Daytime Comfort Index 
-  # data = 2 * ( 4*cid + cia + 2*pr + 2*sunshine + w )
-  # function_ = function(data){
-  #   return(mean(data, na.rm=na.rm))
-  # }
-  # byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
-  return(NULL)
-}
-index_units[136] = C_index
-index_titles[136] = "Tourism Climatic Index"
-index_names[136] = "tci"
-attr(calculate_136, "data") <- c(PRECIPITATION, RADIATION, WIND)
-
-#' @title Good tourism days TCI>60
-#' @description Number of days TCI>60, standard ECA&D
-#' Number of days TCI>60 (see TCI)
-#' TCI = 8 Cld + 2 Cla + 4 R + 4 S + 2 W. Let TCIij be the daily value of the Tourism Climatic Index at day i of period j. Then counted is the number of days where: TCIij>=60. Where C ld is a daytime comfort index, consisting of the mean maximum air temperature Ta, max (℃) and the mean minimum relative humidity RH (%), Cla is the daily comfort index, consisting of the mean air temperature (℃) and the mean relative humidity (%), R is the precipitation (mm), S is the daily sunshine duration (h), and W is the mean wind speed (m/s).
-#' @references Mieczkowski, Z. (1985). The tourism climatic index: a method of evaluating world climates for tourism. The Canadian Geographer/Le Géographe canadien, 29(3), 220-233.
-## @importance Important application in tourism
-#' 
-#' @param data precipitation
-#' @param sunshine net radiation 
-#' @param w average wind
-#' @param time.scale month, season or year
-#' @param data_names names of each period of time
-#' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return TCI60
-#' @export
-#' @examples
-#' data(data_all)
-#' tci60(data=data_all$rr, sunshine=data_all$radiation, w=data_all$wind)
-tci60 = calculate_137 = function(data, sunshine, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  data = tci(data=data, sunshine=sunshine, w=w, data_names=data_names, time.scale=time.scale, na.rm = na.rm)
-  function_ = function(data){
-    return(sum(data>60, na.rm = na.rm))
-  }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
-  return(byYears)
-}
-index_units[137] = C_days
-index_titles[137] = "Good tourism days TCI>60"
-index_names[137] = "tci60"
-attr(calculate_137, "data") <- c(PRECIPITATION, RADIATION, WIND)
-
-#' @title Excellent tourism days TCI>80
-#' @description Number of days TCI>80, standard ECA&D
-#' Number of days TCI>80 (see TCI)
-#' TCI = 8 Cld + 2 Cla + 4 R + 4 S + 2 W. Let TCIij be the daily value of the Tourism Climatic Index at day i of period j. Then counted is the number of days where: TCIij>=80. Where C ld is a daytime comfort index, consisting of the mean maximum air temperature Ta, max (℃) and the mean minimum relative humidity RH (%), Cla is the daily comfort index, consisting of the mean air temperature (℃) and the mean relative humidity (%), R is the precipitation (mm), S is the daily sunshine duration (h), and W is the mean wind speed (m/s).
-#' @references Mieczkowski, Z. (1985). The tourism climatic index: a method of evaluating world climates for tourism. The Canadian Geographer/Le Géographe canadien, 29(3), 220-233.
-## @importance Important application in tourism
-#' 
-#' @param data precipitation
-#' @param sunshine net radiation 
-#' @param w average wind
-#' @param time.scale month, season or year
-#' @param data_names names of each period of time
-#' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return TCI80
-#' @export
-#' @examples
-#' data(data_all)
-#' tci80(data=data_all$rr, sunshine=data_all$radiation, w=data_all$wind)
-tci80 = calculate_138 = function(data, sunshine, w,  data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  data = tci(data=data, sunshine=sunshine, w=w, data_names=data_names, time.scale=time.scale, na.rm = na.rm)
-  function_ = function(data){
-    return(sum(data>80, na.rm = na.rm))
-  }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
-  return(byYears)
-}
-index_units[138] = C_days
-index_titles[138] = "Excellent tourism days TCI>80"
-index_names[138] = "tci80"
-attr(calculate_138, "data") <- c(PRECIPITATION, RADIATION, WIND)
 
 i = 1
 for (i in 1:length(index_tipes)){

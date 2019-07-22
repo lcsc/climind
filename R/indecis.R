@@ -56,13 +56,13 @@ scale_name = function(name){
 }
 
 #' @title Calculate all indexes
-#' @description - 
+#' @description Calculate all indexes for a point 
 #'
 #' @param data data list
-#' @param lat latitude
+#' @param lat latitude, degree
 #' @param time.scale month, season or year
 #' @param data_names names of each period of time
-#' @param index_result index_result
+#' @param index_result indexes to calculate
 #' @return all indexes
 #' @export
 ## @examples
@@ -77,8 +77,9 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
   if(is.null(data[[SNOWFALLMM]]) & !is.null(data[[SNOWFALL]])){
     data[[SNOWFALLMM]] = data[[SNOWFALL]]*1000
   }
-  if(is.null(data[[SNOWDEPTHTHICKNESS]]) & !is.null(data[[SNOWDEPTH]])){
-    data[[SNOWDEPTHTHICKNESS]] = data[[SNOWDEPTH]]/312
+  if(is.null(data[[SNOWDEPTH]]) & !is.null(data[[SWE]]) & !is.null(data[[SNOWDENSITY]])){
+    # data[[SNOWDEPTH]] = data[[SWE]]/312
+    data[[SNOWDEPTH]] = 100000 * data[[SWE]] / data[[SNOWDENSITY]] # 100000 * m of water equivalent / kg m-3
   }
   if(is.null(data[[VAPOUR]]) &  !is.null(data[[DEWPOINT]])){
     data[[VAPOUR]] = td_to_vapor(data[[DEWPOINT]])
@@ -246,8 +247,6 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
       # print(paste("Calculate", "function", n, "i", i))
       result_list[[index_names[n]]] <- calculate_n_index(n, data=data)
     }
-    # Eliminados: 47 48
-    # Devuelven NULL porque no sabemos como funcionan 135 136 137 138
     # index_result_yes = which(index_names%in%names(result_list))
     # index_result_no = which(!(index_names%in%names(result_list)))
   }
@@ -255,10 +254,10 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
 }
 
 #' @title Calculate all indexes for all time scales
-#' @description -
+#' @description Calculate all indexes for a point and all time scales
 #'
 #' @param data data list
-#' @param lat latitude
+#' @param lat latitude, degree
 #' @return all indexes
 #' @export
 ## @examples
