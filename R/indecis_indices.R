@@ -973,7 +973,7 @@ attr(calculate_32, "data") <- c(TMEAN)
 #' ta_o(data=data_all$tg)
 ta_o = calculate_33 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    data = data[months(chron(names(data)))%in%c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
+    data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
     return(mean(data, na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
@@ -999,7 +999,7 @@ attr(calculate_33, "data") <- c(TMEAN)
 #' tm_s(data=data_all$tg)
 tm_s = calculate_34 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    data = data[months(chron(names(data)))%in%c(MAY, JUN, JUL, AUG, SEP)]
+    data = data[months(chron(names(data))) %in% c(MAY, JUN, JUL, AUG, SEP)]
     return(mean(data, na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
@@ -1052,7 +1052,7 @@ attr(calculate_35, "data") <- c(TMEAN)
 #' wki(data = data_all$tg)
 wki = calculate_36 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){  
-    data = data[months(chron(names(data)))%in%c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
+    data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
     return(sum(data[data>10]-10, na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
@@ -1107,7 +1107,7 @@ attr(calculate_37, "data") <- c(TMEAN)
 #' stx32(data = data_all$tx)
 stx32 = calculate_38 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    data = data[months(chron(names(data)))%in%c(JUN, JUL, AUG)]
+    data = data[months(chron(names(data))) %in% c(JUN, JUL, AUG)]
     return(sum(abs(data[data>=32]-32), na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
@@ -1133,7 +1133,7 @@ attr(calculate_38, "data") <- c(TMAX)
 #' d32(data = data_all$tx)
 d32 = calculate_39 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    data = data[months(chron(names(data)))%in%c(JUN, JUL, AUG)]
+    data = data[months(chron(names(data))) %in% c(JUN, JUL, AUG)]
     return(sum(data>=32, na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
@@ -1159,7 +1159,7 @@ attr(calculate_39, "data") <- c(TMAX)
 #' stn15(data = data_all$tn)
 stn15 = calculate_40 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    data = data[months(chron(names(data)))%in%c(DEC, JAN, FEB)]
+    data = data[months(chron(names(data))) %in% c(DEC, JAN, FEB)]
     return(sum(abs(data[data <= -15]-15), na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
@@ -1185,7 +1185,7 @@ attr(calculate_40, "data") <- c(TMIN)
 #' stn10(data = data_all$tn)
 stn10 = calculate_41 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    data = data[months(chron(names(data)))%in%c(DEC, JAN, FEB)]
+    data = data[months(chron(names(data))) %in% c(DEC, JAN, FEB)]
     return(sum(abs(data[data <= -10]-10), na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
@@ -1517,9 +1517,11 @@ attr(calculate_55, "data") <- c(PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' r95tot(data = data_all$rr)
+#' r95tot(data = data_all$rr, time.scale="month")
 r95tot = calculate_56 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data[data>0], extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.95))
+  data.quantile = data
+  data.quantile[data.quantile<=0] = NA
+  value = calcf_data(data=data.quantile, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.95))
   function_ = function(data, value){
     if(sum(is.na(data))>0){ return(NA) }
     value = select_value_for_data(data, value, time.scale)
@@ -1531,7 +1533,7 @@ r95tot = calculate_56 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
   return(byYears)
 }
 index_units[56] = C_precipitation
-index_titles[56] = "Precipitation fraction very wet days"
+index_titles[56] = "Percentage precipitation of very wet days"
 index_names[56] = "r95tot"
 attr(calculate_56, "data") <- c(PRECIPITATION)
 
@@ -1549,7 +1551,9 @@ attr(calculate_56, "data") <- c(PRECIPITATION)
 #' data(data_all)
 #' r99tot(data = data_all$rr)
 r99tot = calculate_57 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data[data>0], extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.99))
+  data.quantile = data
+  data.quantile[data.quantile<=0] = NA
+  value = calcf_data(data=data.quantile, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.99))
   function_ = function(data, value){
     if(sum(is.na(data))>0){ return(NA) }
     value = select_value_for_data(data, value, time.scale)
@@ -1691,7 +1695,7 @@ attr(calculate_61, "data") <- c(PRECIPITATION)
 #' gsr(data = data_all$rr)
 gsr = calculate_62 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    data = data[months(chron(names(data)))%in%c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]    
+    data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]    
     return(sum(data, na.rm = na.rm))
   }
   byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
@@ -1717,7 +1721,7 @@ attr(calculate_62, "data") <- c(PRECIPITATION)
 #' ngsr(data = data_all$rr)
 ngsr = calculate_63 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    data = data[months(chron(names(data)))%in%c(OCT, NOV, DEC, JAN, FEB, MAR, APR)]
+    data = data[months(chron(names(data))) %in% c(OCT, NOV, DEC, JAN, FEB, MAR, APR)]
     return(sum(data, na.rm = na.rm))
   }
   # Ej. 1956: Oct:Dec 1956 + Jan:April 1957
@@ -1725,7 +1729,7 @@ ngsr = calculate_63 = function(data, data_names=NULL, na.rm = FALSE, ...){
   data2 = c(data[i:length(data)], rep(NA, i-1))
   names(data2) = names(data)
 
-  data[months(chron(names(data)))%in%c(JAN, FEB, MAR, APR)] = data2[months(chron(names(data)))%in%c(JAN, FEB, MAR, APR)]
+  data[months(chron(names(data))) %in% c(JAN, FEB, MAR, APR)] = data2[months(chron(names(data))) %in% c(JAN, FEB, MAR, APR)]
 
   byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
   return(byYears)
@@ -1809,7 +1813,7 @@ dr3mm = calculate_66 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   return(byYears)
 }
 index_units[66] = C_days
-index_titles[66] = "Wt days 3mm"
+index_titles[66] = "Wet days 3mm"
 index_names[66] = "dr3mm"
 attr(calculate_66, "data") <- c(PRECIPITATION)
 
@@ -1922,7 +1926,7 @@ index_titles[70] = "Precipitation of driest month"
 index_names[70] = "bio14"
 attr(calculate_70, "data") <- c(PRECIPITATION)
 
-#' @title Precipitation coefficient of variation 
+#' @title Precipitation coefficient of variation
 #' @description The coefficient of variation is a measure of the variation in monthly precipitation totals over the course of the year. This index is the ratio of the standard deviation of the monthly total precipitation to the mean monthly total precipitation and is expressed as a percentage.
 ## @importance Important application in agriculture
 #' 
@@ -1944,7 +1948,7 @@ bio15 = calculate_71 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(byYears)
 }
 index_units[71] = C_index
-index_titles[71] = "Coefficient of variation precipitation"
+index_titles[71] = "Precipitation coefficient of variation"
 index_names[71] = "bio15"
 attr(calculate_71, "data") <- c(PRECIPITATION)
 
@@ -1998,7 +2002,7 @@ bio17 = calculate_73 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(byYears)
 }
 index_units[73] = C_precipitation
-index_titles[73] = "Precipitation driest quarter"
+index_titles[73] = "Precipitation of Driest Quarter"
 index_names[73] = "bio17"
 attr(calculate_73, "data") <- c(PRECIPITATION)
 
@@ -2059,7 +2063,7 @@ index_names[75] = "bio19"
 attr(calculate_75, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Temperature seasonality
-#' @description TG standard deviation *100
+#' @description TG standard deviation * 100
 #' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
@@ -2162,7 +2166,7 @@ bio7 = calculate_79 = function(data, tmin, tmax, data_names=NULL, na.rm = FALSE,
   return(bio5(data, tmax, data_names=data_names, na.rm=na.rm)-bio6(data, tmin, data_names=data_names, na.rm=na.rm))
 }
 index_units[79] = C_degrees
-index_titles[79] = "Difference warmest/coldest month"
+index_titles[79] = "Temperature Annual Range"
 index_names[79] = "bio7"
 attr(calculate_79, "data") <- c(TMEAN, TMIN, TMAX)
 
@@ -2248,7 +2252,6 @@ attr(calculate_82, "data") <- c(RADIATION_W)
 #' @references Blazejczyk, K.; Jendritzky, G.; Bröde, P.; Fiala, D.; Havenith, G.; Epstein, Y., Psikuta, A.; Kampmann, B. 2013. An introduction to the Universal Thermal Climate Index (UTCI). Geographia Polonica, 86 (1), pp.5-10. \url{http://www.utci.org/}
 ## @importance Important application in tourism and health
 #' 
-#' @references Blazejczyk, K., Epstein, Y., Jendritzky, G., Staiger, H., & Tinz, B. (2012). Comparison of UTCI to selected thermal indices. International Journal of Biometeorology, 56(3), 515-535. doi:10.1007/s00484-011-0453-2
 #' @param taverage daily mean temperature, Celsius
 #' @param rh relative humidity, percentage
 #' @param w average wind, m/s
@@ -2501,7 +2504,7 @@ utci = calculate_83 = function(taverage, rh, w, tmrt, data_names=NULL, time.scal
     return(average_temp(data=data, data_names=data_names, time.scale=time.scale, na.rm=na.rm))
 }
 index_units[83] = C_index
-index_titles[83] = "Universal thermal climate index"
+index_titles[83] = "Universal Thermal Climate Index"
 index_names[83] = "utci"
 attr(calculate_83, "data") <- c(TMEAN, HUMIDITY, WIND, RADIATIONTEMPERATURE)
 
@@ -2750,7 +2753,7 @@ fg6bft = calculate_92 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
   return(byYears)
 }
 index_units[92] = C_days
-index_titles[92] = "Days daily averaged wind above 10.8m/s"
+index_titles[92] = "Number of days with averaged wind above 10.8m/s"
 index_names[92] = "fg6bft"
 attr(calculate_92, "data") <- c(WIND)
 
@@ -3004,7 +3007,7 @@ pici = calculate_100 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ..
   return(byYears)
 }
 index_units[100] = C_index
-index_titles[100] = "Pinna Combinative index"
+index_titles[100] = "Pinna Combinative Index"
 index_names[100] = "pici"
 attr(calculate_100, "data") <- c(PRECIPITATION, TMEAN)
 
@@ -3042,8 +3045,8 @@ index_names[101] = "bi"
 attr(calculate_101, "data") <- c(RADIATION, PRECIPITATION)
 
 #' @title Marsz Oceanity Index
-#' @description MOI = ( 0.731 * geographic latitude grados + 1.767 ) / the annual range of monthly mean air temperatures grados
-#' @section Formula: \deqn{MOI=\frac {0.731 \phi +1.767}{Thm-Tcm}} \deqn{\phi} = geographical latitude; Thm = Average temperature of the hottest month (Celsius); Tcm = Average temperature of the coldest month (Celsius)  
+#' @description The annual range of monthly mean air temperatures grados
+#' @section Formula: \deqn{MOI=\frac {0.731 \phi +1.767}{Thm-Tcm}} Phi = geographical latitude; Thm = Average temperature of the hottest month (Celsius); Tcm = Average temperature of the coldest month (Celsius)  
 #' @references Marsz A, Rakusa-Suszczewskis S. 1987. Charakterystyka ekologiczna rejonu Zatoki Admiralicji (King George Island, SouthShetland Islands). 1. Klimat i obszary wolne od lodu.Kosmos36:103–127.
 ## @importance Important application in agriculture
 #' 
@@ -3169,7 +3172,7 @@ fsd = calculate_107 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   return(byYears)
 }
 index_units[107] = C_days
-index_titles[107] = "Frequency of snow days"
+index_titles[107] = "Number of snow days"
 index_names[107] = "fsd"
 attr(calculate_107, "data") <- c(SNOWFALL)
 
@@ -3380,7 +3383,7 @@ scd = calculate_114 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   return(byYears)
 }
 index_units[114] = C_days
-index_titles[114] = "Amount of snow covered days"
+index_titles[114] = "Number of snow covered days"
 index_names[114] = "scd"
 attr(calculate_114, "data") <- c(SNOWDEPTH)
 
@@ -3526,7 +3529,7 @@ ssp = calculate_120 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   return(byYears)
 }
 index_units[120] = C_percentage
-index_titles[120] = "Sunshine duration fraction"
+index_titles[120] = "Sunshine duration percentage"
 index_names[120] = "ssp"
 attr(calculate_120, "data") <- c(INSOLATION)
 
