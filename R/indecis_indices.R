@@ -271,13 +271,13 @@ attr(calculate_9, "data") <- c(TMEAN)
 #' data(data_all)
 #' cd(data=data_all$tx)
 cd = calculate_10 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.10))
+  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.10))
 
   function_ = function(data, value){    
     value = select_value_for_data(data, value, time.scale)
     return(100*sum(data<value, na.rm = na.rm)/length(data))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
 index_units[10] = C_percentage
@@ -321,7 +321,7 @@ attr(calculate_11, "data") <- c(TMIN)
 #' data(data_all)
 #' cdd(data=data_all$tn)
 cdd = calculate_12 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-   value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.10))
+  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.10))
 
   function_ = function(data, value){
     if(na.rm | sum(is.na(data))==0){
@@ -336,7 +336,7 @@ cdd = calculate_12 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
     }
   }
 
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
 
   return(byYears)
 }
@@ -363,7 +363,7 @@ attr(calculate_12, "data") <- c(TMIN)
 #' dtr(tmax=data_all$tx, tmin=data_all$tn)
 dtr = calculate_13 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data = tmax - tmin
-  byMonths = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=mean, na.rm = na.rm)
+  byMonths = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=mean, na.rm = na.rm)
   return(byMonths)
 }
 index_units[13] = C_degrees
@@ -393,7 +393,7 @@ vdtr = calculate_14 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.
     data = abs(data[1:(length(data)-1)]-data[2:length(data)])
     data_names = data_names[-1]
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=mean, na.rm = na.rm)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=mean, na.rm = na.rm)
   return(byYears)
 }
 index_units[14] = C_degrees
@@ -419,7 +419,7 @@ fd = calculate_15 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
   function_ = function(data){
     return(sum(data<0, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[15] = C_days
@@ -483,7 +483,7 @@ gsl = calculate_16 = function(data, data_names=NULL, na.rm = FALSE, ...){
       return(NA)
     }
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[16] = C_days
@@ -509,7 +509,7 @@ id = calculate_17 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
   function_ = function(data){
     return(sum(data<0, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[17] = C_days
@@ -541,7 +541,7 @@ cfd = calculate_18 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
     }
     return(calculate)
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[18] = C_days
@@ -568,7 +568,7 @@ etr = calculate_19 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.r
     calculate = max(tmax, na.rm = na.rm)-min(tmin[names(tmax)], na.rm = na.rm) 
     return(calculate)
   }
-  byYears = calcf_data(data=tmax, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, tmin=tmin)
+  byYears = calcf_data(data=tmax, time.scale=time.scale, data_names=data_names, operation=function_, tmin=tmin)
   return(byYears)
 }
 index_units[19] = C_degrees
@@ -594,7 +594,7 @@ sud = calculate_20 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
   function_ = function(data){
     return(sum(data>25, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[20] = C_days
@@ -631,7 +631,7 @@ csd = calculate_21 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
     }
     return(calculate)
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[21] = C_days
@@ -656,7 +656,7 @@ dd17 = calculate_22 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   function_ = function(data){
     return(sum(data>17, na.rm = na.rm)-sum(data<17, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[22] = C_days
@@ -682,7 +682,7 @@ tn = calculate_23 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
   function_ = function(data){  
     return(sum(data>20, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[23] = C_days
@@ -709,7 +709,7 @@ hd17 = calculate_24 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   function_ = function(data){
     return(sum(17-data[!is.na(data) & data < 17], na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[24] = C_degrees
@@ -731,14 +731,14 @@ attr(calculate_24, "data") <- c(TMEAN)
 #' data(data_all)
 #' vcd(data=data_all$tn)
 vcd = calculate_25 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.01))
+  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.01))
 
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
     return(sum(data<value, na.rm = na.rm))
   }
 
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
 index_units[25] = C_days
@@ -760,12 +760,12 @@ attr(calculate_25, "data") <- c(TMIN)
 #' data(data_all)
 #' vwd(data=data_all$tx)
 vwd = calculate_26 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.99))
+  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.99))
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
     return(sum(data>value, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
 index_units[26] = C_days
@@ -787,12 +787,12 @@ attr(calculate_26, "data") <- c(TMAX)
 #' data(data_all)
 #' wd(data=data_all$tx)
 wd = calculate_27 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.90))
+  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.90))
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
     return(100*sum(data>value, na.rm = na.rm)/length(data))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
 index_units[27] = C_days
@@ -814,12 +814,12 @@ attr(calculate_27, "data") <- c(TMAX)
 #' data(data_all)
 #' wn(data=data_all$tn)
 wn = calculate_28 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.90))
+  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.90))
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
     return(100*sum(data>value, na.rm = na.rm)/length(data))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
 index_units[28] = C_days
@@ -841,7 +841,7 @@ attr(calculate_28, "data") <- c(TMIN)
 #' data(data_all)
 #' wsd(data=data_all$tx)
 wsd = calculate_29 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.90))  
+  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.90))  
   function_ = function(data, value){
     if(na.rm | sum(is.na(data))==0){
       value = select_value_for_data(data, value, time.scale)
@@ -853,7 +853,7 @@ wsd = calculate_29 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
       return(NA)
     }
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
 index_units[29] = C_days
@@ -880,7 +880,7 @@ zcd = calculate_30 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.r
   function_ = function(data){
     return(sum(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[30] = C_days
@@ -915,7 +915,7 @@ ogs6 = calculate_31 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
       return(NA)
     }
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[31] = C_date
@@ -950,7 +950,7 @@ ogs10 = calculate_32 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
       return(NA)
     }
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[32] = C_date
@@ -976,7 +976,7 @@ ta_o = calculate_33 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
     return(mean(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[33] = C_degrees
@@ -1002,7 +1002,7 @@ tm_s = calculate_34 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[months(chron(names(data))) %in% c(MAY, JUN, JUL, AUG, SEP)]
     return(mean(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[34] = C_degrees
@@ -1028,7 +1028,7 @@ gd4 = calculate_35 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
   function_ = function(data){
     return(sum(data[data>4]-4, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[35] = C_degrees
@@ -1055,7 +1055,7 @@ wki = calculate_36 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
     return(sum(data[data>10]-10, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[36] = C_degrees
@@ -1078,14 +1078,14 @@ attr(calculate_36, "data") <- c(TMEAN)
 #' ws(data = data_all$tg)
 ws = calculate_37 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){  
-    byMonths = calcf_data(data=data, extract_names=select_time_function(MONTH), data_names=NULL, operation=mean, na.rm = na.rm)
+    byMonths = calcf_data(data=data, time.scale=MONTH, data_names=NULL, operation=mean, na.rm = na.rm)
     if(sum(!is.na(byMonths))>0){
       return(byMonths[!is.na(byMonths) & byMonths==min(byMonths, na.rm = na.rm)][1])
     }else{
       return(NA)
     }
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[37] = C_degrees
@@ -1110,7 +1110,7 @@ stx32 = calculate_38 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[months(chron(names(data))) %in% c(JUN, JUL, AUG)]
     return(sum(abs(data[data>=32]-32), na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[38] = C_degrees
@@ -1136,7 +1136,7 @@ d32 = calculate_39 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[months(chron(names(data))) %in% c(JUN, JUL, AUG)]
     return(sum(data>=32, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[39] = C_days
@@ -1162,7 +1162,7 @@ stn15 = calculate_40 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[months(chron(names(data))) %in% c(DEC, JAN, FEB)]
     return(sum(abs(data[data <= -15]-15), na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[40] = C_degrees
@@ -1188,7 +1188,7 @@ stn10 = calculate_41 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[months(chron(names(data))) %in% c(DEC, JAN, FEB)]
     return(sum(abs(data[data <= -10]-10), na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[41] = C_degrees
@@ -1217,7 +1217,7 @@ ptg = calculate_42 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[chron(names(data))>=t.ini & chron(names(data))<=t.end]
     return(sum(data[data >= 0], na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[42] = C_degrees
@@ -1243,7 +1243,7 @@ rti = calculate_43 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
   function_ = function(data){
     return(sum(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[43] = C_precipitation
@@ -1269,7 +1269,7 @@ rx = calculate_44 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
   function_ = function(data){
     return(max(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[44] = C_precipitation
@@ -1296,7 +1296,7 @@ r10mm = calculate_45 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   function_ = function(data){
     return(sum(data>=10, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, data_names=data_names, extract_names=select_time_function(time.scale), operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[45] = C_days
@@ -1322,7 +1322,7 @@ r20mm = calculate_46 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   function_ = function(data){
     return(sum(data>=20, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[46] = C_days
@@ -1353,7 +1353,7 @@ rx5d = calculate_50 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
     data.sum = data + data2 + data3 + data4 + data5
     return(max(data.sum, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[50] = C_precipitation
@@ -1384,7 +1384,7 @@ sdii = calculate_51 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
     }
     return(data_calc)
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[51] = C_precipitation
@@ -1409,7 +1409,7 @@ dd = calculate_52 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
   function_ = function(data){
     return(sum(data < 1, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[52] = C_days
@@ -1435,7 +1435,7 @@ ep = calculate_53 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = 
   function_ = function(pr, eto){
     return(sum(pr-eto[names(pr)], na.rm = na.rm))
   }
-  byYears = calcf_data(data=pr, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, eto=eto)
+  byYears = calcf_data(data=pr, time.scale=time.scale, data_names=data_names, operation=function_, eto=eto)
   return(byYears)
 }
 index_units[53] = C_precipitation
@@ -1466,7 +1466,7 @@ ldp = calculate_54 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
     }
     return(count)  
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[54] = C_days
@@ -1497,7 +1497,7 @@ lwp = calculate_55 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
     }
     return(count)  
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[55] = C_days
@@ -1521,7 +1521,7 @@ attr(calculate_55, "data") <- c(PRECIPITATION)
 r95tot = calculate_56 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data.quantile = data
   data.quantile[data.quantile<=0] = NA
-  value = calcf_data(data=data.quantile, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.95))
+  value = calcf_data(data=data.quantile, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.95))
   function_ = function(data, value){
     if(sum(is.na(data))>0){ return(NA) }
     value = select_value_for_data(data, value, time.scale)
@@ -1529,7 +1529,7 @@ r95tot = calculate_56 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
     if(is.na(data) | data==Inf | data==-Inf){ data = 0 }
     return(data)
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
 index_units[56] = C_precipitation
@@ -1553,13 +1553,13 @@ attr(calculate_56, "data") <- c(PRECIPITATION)
 r99tot = calculate_57 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data.quantile = data
   data.quantile[data.quantile<=0] = NA
-  value = calcf_data(data=data.quantile, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.99))
+  value = calcf_data(data=data.quantile, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.99))
   function_ = function(data, value){
     if(sum(is.na(data))>0){ return(NA) }
     value = select_value_for_data(data, value, time.scale)
     return(100*sum(data[data>value], na.rm = na.rm)/sum(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   byYears[is.nan(byYears) | byYears==Inf | byYears==-Inf] = 0
   return(byYears)
 }
@@ -1585,7 +1585,7 @@ d50mm = calculate_58 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   function_ = function(data, value){
     return(sum(data>value, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=50)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=50)
   return(byYears)
 }
 index_units[58] = C_days
@@ -1608,12 +1608,12 @@ attr(calculate_58, "data") <- c(PRECIPITATION)
 #' data(data_all)
 #' d95p(data = data_all$rr)
 d95p = calculate_59 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, extract_names=select_all_time_function(time.scale), data_names=NULL, operation=quantile_null, probs=c(.95))
+  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.95))
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
     return(sum(data>value, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
 index_units[59] = C_days
@@ -1637,12 +1637,12 @@ attr(calculate_59, "data") <- c(PRECIPITATION)
 #' pci(data = data_all$rr)
 pci = calculate_60 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    byMonths = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=sum, na.rm = na.rm)
+    byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm = na.rm)
     data2Sum = sum(byMonths^2, na.rm = na.rm)
     dataSum2 = sum(byMonths, na.rm = na.rm)^2
     return(100*data2Sum/dataSum2)
   }
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[60] = C_index
@@ -1667,12 +1667,12 @@ attr(calculate_60, "data") <- c(PRECIPITATION)
 #' mfi(data = data_all$rr)
 mfi = calculate_61 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    byMonths = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=sum, na.rm = na.rm)
+    byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm = na.rm)
     data2Sum = sum(byMonths^2, na.rm = na.rm)
     dataSum2 = sum(byMonths, na.rm = na.rm)
     return(data2Sum/dataSum2)
   }
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[61] = C_index
@@ -1698,7 +1698,7 @@ gsr = calculate_62 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]    
     return(sum(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[62] = C_precipitation
@@ -1731,7 +1731,7 @@ ngsr = calculate_63 = function(data, data_names=NULL, na.rm = FALSE, ...){
 
   data[months(chron(names(data))) %in% c(JAN, FEB, MAR, APR)] = data2[months(chron(names(data))) %in% c(JAN, FEB, MAR, APR)]
 
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[63] = C_precipitation
@@ -1757,7 +1757,7 @@ rtwd = calculate_64 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   function_ = function(data){
     return(sum(data[data>=1], na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[64] = C_precipitation
@@ -1783,7 +1783,7 @@ dr1mm = calculate_65 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   function_ = function(data){
     return(sum(data>=1, na.rm = na.rm)) #mm
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[65] = C_days
@@ -1809,7 +1809,7 @@ dr3mm = calculate_66 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   function_ = function(data){
     return(sum(data>=3, na.rm = na.rm)) #mm
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[66] = C_days
@@ -1837,7 +1837,7 @@ bio10 = calculate_67 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = months_quarter(functionValues=data, selectFunction=max, na.rm=na.rm)
     return(mean(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=YEAR, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[67] = C_degrees
@@ -1864,7 +1864,7 @@ bio11 = calculate_68 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = months_quarter(functionValues=data, selectFunction=min, na.rm=na.rm)
     return(mean(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=YEAR, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[68] = C_degrees
@@ -1888,10 +1888,10 @@ attr(calculate_68, "data") <- c(TMEAN)
 #' bio13(data = data_all$rr)
 bio13 = calculate_69 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    byMonths = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=sum, na.rm = na.rm)
+    byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm = na.rm)
     return(max(byMonths, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[69] = C_precipitation
@@ -1915,10 +1915,10 @@ attr(calculate_69, "data") <- c(PRECIPITATION)
 #' bio14(data = data_all$rr)
 bio14 = calculate_70 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    byMonths = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=sum, na.rm = na.rm)
+    byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm = na.rm)
     return(min(byMonths, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[70] = C_precipitation
@@ -1941,10 +1941,10 @@ attr(calculate_70, "data") <- c(PRECIPITATION)
 #' bio15(data = data_all$rr)
 bio15 = calculate_71 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    byMonth = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=sum, na.rm = na.rm)
+    byMonth = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm = na.rm)
     return(100*stats::sd(byMonth, na.rm = na.rm)/mean(byMonth, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[71] = C_index
@@ -1971,7 +1971,7 @@ bio16 = calculate_72 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = months_quarter(functionValues=data, selectFunction=max, na.rm=na.rm)
     return(sum(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[72] = C_precipitation
@@ -1998,7 +1998,7 @@ bio17 = calculate_73 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data_calc = months_quarter(functionValues=data, selectFunction=min, na.rm=na.rm)
     return(sum(data_calc, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[73] = C_precipitation
@@ -2026,7 +2026,7 @@ bio18 = calculate_74 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ..
     data = months_quarter(functionValues=taverage[names(data)], selectFunction=max, selectValues=data, na.rm=na.rm)
     return(sum(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=pr, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_, taverage=taverage)
+  byYears = calcf_data(data=pr, time.scale=YEAR, data_names=data_names, operation=function_, taverage=taverage)
   return(byYears)
 }
 index_units[74] = C_precipitation
@@ -2054,7 +2054,7 @@ bio19 = calculate_75 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ..
     data = months_quarter(functionValues=taverage[names(data)], selectFunction=min, selectValues=data, na.rm=na.rm)
     return(sum(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=pr, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_, taverage=taverage)
+  byYears = calcf_data(data=pr, time.scale=YEAR, data_names=data_names, operation=function_, taverage=taverage)
   return(byYears)
 }
 index_units[75] = C_precipitation
@@ -2080,7 +2080,7 @@ bio4 = calculate_76 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     return(100*stats::sd(data, na.rm = na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[76] = C_degrees
@@ -2105,11 +2105,11 @@ attr(calculate_76, "data") <- c(TMEAN)
 #' bio5(data = data_all$tg, tmax = data_all$tx)
 bio5 = calculate_77 = function(data, tmax, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, tmax){
-    byMonths.mean = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
-    byMonths.max = calcf_data(data=tmax[names(data)], extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
+    byMonths.mean = calcf_data(data=data, time.scale=MONTH, operation=mean, na.rm=na.rm)
+    byMonths.max = calcf_data(data=tmax[names(data)], time.scale=MONTH, operation=mean, na.rm=na.rm)
     return(byMonths.max[max(byMonths.mean, na.rm=na.rm)==byMonths.mean][1])
   }
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_, tmax=tmax)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_, tmax=tmax)
   return(byYears)
 }
 index_units[77] = C_degrees
@@ -2134,11 +2134,11 @@ attr(calculate_77, "data") <- c(TMEAN, TMAX)
 #' bio6(data = data_all$tg, tmin = data_all$tn)
 bio6 = calculate_78 = function(data, tmin, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, tmin){
-    byMonths.mean = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
-    byMonths.min = calcf_data(data=tmin[names(data)], extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
+    byMonths.mean = calcf_data(data=data, time.scale=MONTH, operation=mean, na.rm=na.rm)
+    byMonths.min = calcf_data(data=tmin[names(data)], time.scale=MONTH, operation=mean, na.rm=na.rm)
     return(byMonths.min[min(byMonths.mean, na.rm=na.rm)==byMonths.mean][1])
   }
-  byYears = calcf_data(data=data, data_names=data_names, extract_names=years, operation=function_, tmin=tmin)
+  byYears = calcf_data(data=data, data_names=data_names, time.scale=YEAR, operation=function_, tmin=tmin)
   return(byYears)
 }
 index_units[78] = C_degrees
@@ -2190,7 +2190,7 @@ bio8 = calculate_80 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...
     byMonths = months_quarter(functionValues=pr[names(data)], selectFunction=max, selectValues=data, na.rm=na.rm)
     return(mean(byMonths, na.rm=na.rm))
   }
-  byYears = calcf_data(data=taverage, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_, pr=pr)
+  byYears = calcf_data(data=taverage, time.scale=YEAR, data_names=data_names, operation=function_, pr=pr)
   return(byYears)
 }
 index_units[80] = C_degrees
@@ -2218,7 +2218,7 @@ bio9 = calculate_81 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...
     byMonths = months_quarter(functionValues=pr[names(data)], selectFunction=min, selectValues=data, na.rm=na.rm)
     return(mean(byMonths, na.rm=na.rm))
   }
-  byYears = calcf_data(data=taverage, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_, pr=pr)
+  byYears = calcf_data(data=taverage, time.scale=YEAR, data_names=data_names, operation=function_, pr=pr)
   return(byYears)
 }
 index_units[81] = C_degrees
@@ -2527,7 +2527,7 @@ mi = calculate_84 = function(taverage, rh, data_names=NULL, time.scale=YEAR, na.
   function_ = function(data){    
     return(sum(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[84] = C_days
@@ -2557,7 +2557,7 @@ hi = calculate_85 = function(taverage, rh, data_names=NULL, time.scale=YEAR, na.
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[85] = C_index
@@ -2588,7 +2588,7 @@ wci = calculate_86 = function(taverage, w, data_names=NULL, time.scale=YEAR, na.
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[86] = C_index
@@ -2619,7 +2619,7 @@ at = calculate_87 = function(taverage, w, vapor, data_names=NULL, time.scale=YEA
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[87] = C_index
@@ -2645,7 +2645,7 @@ dfx21 = calculate_88 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   function_ = function(data){
     return(sum(data>21, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[88] = C_days
@@ -2671,7 +2671,7 @@ fxx = calculate_89 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
   function_ = function(data){
     return(max(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[89] = C_wind
@@ -2697,7 +2697,7 @@ fg = calculate_90 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[90] = C_wind
@@ -2723,7 +2723,7 @@ fgcalm = calculate_91 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
   function_ = function(data){
     return(sum(data<=2, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[91] = C_days
@@ -2749,7 +2749,7 @@ fg6bft = calculate_92 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
   function_ = function(data){
     return(sum(data>=10.8, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[92] = C_days
@@ -2796,7 +2796,7 @@ eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, 
   function_ = function(data){
     return(sum(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[93] = C_precipitation
@@ -2824,7 +2824,7 @@ uai = calculate_94 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm =
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[94] = C_index
@@ -2852,7 +2852,7 @@ cmd = calculate_95 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm =
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[95] = C_index
@@ -2883,7 +2883,7 @@ mai = calculate_96 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...)
     taverage = mean(taverage, na.rm=na.rm)
     return(data/(taverage+10))
   }
-  byYears = calcf_data(data=pr, extract_names=select_time_function(YEAR), data_names=data_names, operation=function_, taverage=taverage)
+  byYears = calcf_data(data=pr, time.scale=YEAR, data_names=data_names, operation=function_, taverage=taverage)
   return(byYears)
 }
 index_units[96] = C_index
@@ -2910,11 +2910,11 @@ attr(calculate_96, "data") <- c(PRECIPITATION, TMEAN)
 eai = calculate_97 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...){
   taverage = taverage + 273.15
   function_ = function(data, pr){
-    byMonths = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
+    byMonths = calcf_data(data=data, time.scale=MONTH, operation=mean, na.rm=na.rm)
     p = sum(pr[names(data)], na.rm=na.rm)
     return(100*p / (max(byMonths, na.rm=na.rm)^2 - min(byMonths, na.rm=na.rm)^2))
   }
-  byYears = calcf_data(data=taverage, extract_names=years, operation=function_, data_names=data_names, pr=pr)
+  byYears = calcf_data(data=taverage, time.scale=YEAR, operation=function_, data_names=data_names, pr=pr)
   return(byYears)
 }
 index_units[97] = C_index
@@ -2940,10 +2940,10 @@ attr(calculate_97, "data") <- c(PRECIPITATION, TMEAN)
 #' jci(data = data_all$tg, value = data_all$lat)
 jci = calculate_98 = function(data, data_names=NULL, value, na.rm = FALSE, ...){
   function_ = function(data, value){  
-    data = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
+    data = calcf_data(data=data, time.scale=MONTH, operation=mean, na.rm=na.rm)
     return((1.7 * (max(data, na.rm=na.rm)-min(data, na.rm=na.rm)) / sin(pi*value/180)) - 20.4)
   }
-  byYears = calcf_data(data=data, extract_names=years, operation=function_, data_names=data_names, value=value)
+  byYears = calcf_data(data=data, time.scale=YEAR, operation=function_, data_names=data_names, value=value)
   return(byYears)
 }
 index_units[98] = C_index
@@ -2968,11 +2968,11 @@ attr(calculate_98, "data") <- c(TMEAN, LAT)
 #' koi(data = data_all$tg)
 koi = calculate_99 = function(data, data_names=NULL, na.rm = FALSE, ...){  
   function_ = function(data){
-    data = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
+    data = calcf_data(data=data, time.scale=MONTH, operation=mean, na.rm=na.rm)
     data = 100 * (data[grepl("Oct", names(data))]-data[grepl("Apr", names(data))]) / (max(data, na.rm=na.rm)-min(data, na.rm=na.rm))
     return(data)
   }
-  byYears = calcf_data(data=data, extract_names=years, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[99] = C_index
@@ -2999,11 +2999,11 @@ attr(calculate_99, "data") <- c(TMEAN)
 pici = calculate_100 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, taverage){
     taverage = taverage[names(data)]
-    data.month = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
-    taverage.month = calcf_data(data=taverage, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
+    data.month = calcf_data(data=data, time.scale=MONTH, operation=mean, na.rm=na.rm)
+    taverage.month = calcf_data(data=taverage, time.scale=MONTH, operation=mean, na.rm=na.rm)
     return(1/2* ((sum(data, na.rm=na.rm)/(mean(taverage, na.rm=na.rm)+10)) + (12*min(data.month, na.rm=na.rm) / (taverage.month[data.month==min(data.month, na.rm=na.rm)][1]+10))))
   }
-  byYears = calcf_data(data=pr, extract_names=years, data_names=data_names, operation=function_, taverage=taverage)
+  byYears = calcf_data(data=pr, time.scale=YEAR, data_names=data_names, operation=function_, taverage=taverage)
   return(byYears)
 }
 index_units[100] = C_index
@@ -3036,7 +3036,7 @@ bi = calculate_101 = function(data, pr, data_names=NULL, na.rm = FALSE, ...){
     # return(100*pp/(l*r))
     return(100*r/(pp*l))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(YEAR), operation=function_, data_names=data_names, pr=pr)
+  byYears = calcf_data(data=data, time.scale=YEAR, operation=function_, data_names=data_names, pr=pr)
   return(byYears)
 }
 index_units[101] = C_index
@@ -3062,10 +3062,10 @@ attr(calculate_101, "data") <- c(RADIATION, PRECIPITATION)
 #' moi(data = data_all$tg, lat = data_all$lat)
 moi = calculate_102 = function(data, lat, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, value){
-    data = calcf_data(data=data, extract_names=select_time_function(MONTH), operation=mean, na.rm=na.rm)
+    data = calcf_data(data=data, time.scale=MONTH, operation=mean, na.rm=na.rm)
     return(( 0.731 * value + 1.767 ) / (max(data, na.rm=na.rm)-min(data, na.rm=na.rm)) )
   }
-  byYears = calcf_data(data=data, extract_names=years, operation=function_, data_names=data_names, value=lat)
+  byYears = calcf_data(data=data, time.scale=YEAR, operation=function_, data_names=data_names, value=lat)
   return(byYears)
 }
 index_units[102] = C_index
@@ -3088,7 +3088,7 @@ attr(calculate_102, "data") <- c(TMEAN, LAT)
 #' data(data_all)
 #' ss(data = data_all$snowfallmm)
 ss = calculate_103 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=sum, data_names=data_names, na.rm=na.rm)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=sum, data_names=data_names, na.rm=na.rm)
   return(byYears)
 }
 index_units[103] = C_snow
@@ -3115,7 +3115,7 @@ sd0_10 = calculate_104 = function(data, data_names=NULL, time.scale=YEAR, na.rm 
     return(sum(data>=1 & data<=10, na.rm=na.rm))
   }
   data = data/10
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[104] = C_days
@@ -3142,7 +3142,7 @@ sd10_20 = calculate_105 = function(data, data_names=NULL, time.scale=YEAR, na.rm
     return(sum(data>=10 & data<=20, na.rm=na.rm))
   }
   data = data/10
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[105] = C_days
@@ -3168,7 +3168,7 @@ fsd = calculate_107 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   function_ = function(data){
     return(sum(data>0, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[107] = C_days
@@ -3194,7 +3194,7 @@ msd = calculate_108 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   function_ = function(data){
     return(sum(data > 50, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[108] = C_days
@@ -3220,7 +3220,7 @@ hsd = calculate_109 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   function_ = function(data){
     return(sum(data > 500, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[109] = C_days
@@ -3252,7 +3252,7 @@ fsc = calculate_110 = function(data, data_names=NULL, na.rm = FALSE, ...){
     }
     return(NA)
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(HYDROYEAR), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=HYDROYEAR, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[110] = C_date
@@ -3275,7 +3275,7 @@ attr(calculate_110, "data") <- c(SNOWDEPTH)
 #' fpsc(data = data_all$snowdepth)
 fpsc = calculate_111 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    data = as.numeric(data>0)
+    data = as.numeric(data>1)
     data.rle = rle(as.numeric(data))
     data.i = which(data.rle$lengths>1 & data.rle$values>0, arr.ind = TRUE, useNames = TRUE)
     if(na.rm | sum(is.na(data))==0){
@@ -3283,7 +3283,7 @@ fpsc = calculate_111 = function(data, data_names=NULL, na.rm = FALSE, ...){
         return(0)
       }
       data.i = data.i[which(max(data.rle$length[data.i])==data.rle$length[data.i])[1]]
-      if(is.na(data.i) | data.i==1){
+      if(is.na(data.i) | data.i==1){ 
         return(data.i)
       }else{
         return(sum(1, data.rle$lengths[1:(data.i-1)], na.rm = na.rm))
@@ -3292,7 +3292,7 @@ fpsc = calculate_111 = function(data, data_names=NULL, na.rm = FALSE, ...){
       return(NA)
     }
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(HYDROYEAR), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=HYDROYEAR, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[111] = C_date
@@ -3315,7 +3315,7 @@ attr(calculate_111, "data") <- c(SNOWDEPTH)
 #' lpsc(data = data_all$snowdepth)
 lpsc = calculate_112 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
-    data = as.numeric(data>0)
+    data = as.numeric(data>1)
     data.rle = rle(as.numeric(data))
     data.i = which(data.rle$lengths>1 & data.rle$values>0, arr.ind = TRUE, useNames = TRUE)
     if(na.rm | sum(is.na(data))==0){
@@ -3323,7 +3323,7 @@ lpsc = calculate_112 = function(data, data_names=NULL, na.rm = FALSE, ...){
         return(0)
       }
       data.i = data.i[which(max(data.rle$length[data.i])==data.rle$length[data.i])[1]]
-      if(is.na(data.i) | data.i==1){
+      if(is.na(data.i)){ # | data.i==1
         return(data.i)
       }else{
         return(sum(1, data.rle$lengths[1:(data.i)], na.rm = na.rm)-1)
@@ -3332,7 +3332,7 @@ lpsc = calculate_112 = function(data, data_names=NULL, na.rm = FALSE, ...){
       return(NA)
     }
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(HYDROYEAR), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=HYDROYEAR, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[112] = C_date
@@ -3354,7 +3354,10 @@ attr(calculate_112, "data") <- c(SNOWDEPTH)
 #' data(data_all)
 #' asd(data = data_all$snowdepth)
 asd = calculate_113 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm=na.rm)/1000
+  function_ = function(data){    
+    return(mean(data > 1, na.rm=na.rm))
+  }
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)/1000
   return(byYears)
 }
 index_units[113] = C_snow_m
@@ -3379,7 +3382,7 @@ scd = calculate_114 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   function_ = function(data){    
     return(sum(data > 1, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[114] = C_days
@@ -3401,7 +3404,7 @@ attr(calculate_114, "data") <- c(SNOWDEPTH)
 #' data(data_all)
 #' ms(data = data_all$snowdepth)
 ms = calculate_115 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=max, data_names=data_names, na.rm=na.rm)/1000
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=max, data_names=data_names, na.rm=na.rm)/1000
   return(byYears)
 }
 index_units[115] = C_snow_m
@@ -3425,7 +3428,7 @@ attr(calculate_115, "data") <- c(SNOWDEPTH)
 #' data(data_all)
 #' ssd(data = data_all$insolation)
 ssd = calculate_116 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=sum, data_names=data_names, na.rm=na.rm)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=sum, data_names=data_names, na.rm=na.rm)
   return(byYears)
 }
 index_units[116] = C_sunshine
@@ -3450,7 +3453,7 @@ snd = calculate_117 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   function_ = function(data){    
     return(sum(data<10, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[117] = C_days
@@ -3476,7 +3479,7 @@ fod = calculate_118 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   function_ = function(data){    
     return(sum(data>0, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[118] = C_days
@@ -3498,7 +3501,7 @@ attr(calculate_118, "data") <- c(CLOUD100)
 #' data(data_all)
 #' cc(data = data_all$cloud)
 cc = calculate_119 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm=na.rm)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=mean, data_names=data_names, na.rm=na.rm)
   return(byYears)
 }
 index_units[119] = C_cloud
@@ -3525,7 +3528,7 @@ ssp = calculate_120 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   function_ = function(data){    
     return(100*mean(data, na.rm=na.rm)/24)
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
 index_units[120] = C_percentage
@@ -3552,7 +3555,7 @@ aci = calculate_121 = function(data, toa, data_names=NULL, time.scale=YEAR, na.r
     toa = toa[names(data)]
     return(mean(data/toa, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=function_, data_names=data_names, toa=toa)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names, toa=toa)
   return(byYears)
 }
 index_units[121] = C_index
@@ -3773,7 +3776,7 @@ fwi = calculate_130 = function(taverage, rh, w, pr, lat, data_names=NULL, time.s
   # data = taverage
   # data[!missing.values] = data.nas
 
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=mean, data_names=data_names, na.rm = na.rm)
   return(byYears)
 }
 index_units[130] = C_degrees
@@ -3808,7 +3811,7 @@ kbdi = calculate_131 = function(taverage, pr, data_names=NULL, time.scale=YEAR, 
   data.all[] = NA
   data.all[names(data.nas)] = data.nas
 
-  byYears = calcf_data(data=data.all, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
+  byYears = calcf_data(data=data.all, time.scale=time.scale, operation=mean, data_names=data_names, na.rm = na.rm)
   return(byYears)
 }
 index_units[131] = C_index
@@ -3845,7 +3848,7 @@ ffdi = calculate_132 = function(taverage, pr, rh, w, data_names=NULL, time.scale
   data.ffdi = ffdiIndex(madf = data.nas, t = taverage[names(data.nas)], h = rh[names(data.nas)], w = w[names(data.nas)])
   data.all[names(data.ffdi)] = data.ffdi
 
-  byYears = calcf_data(data=data.all, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
+  byYears = calcf_data(data=data.all, time.scale=time.scale, operation=mean, data_names=data_names, na.rm = na.rm)
   return(byYears)
 }
 index_units[132] = C_index
@@ -3878,7 +3881,7 @@ mni = calculate_133 = function(dew_point, taverage, rh, pr, data_names=NULL, tim
   data = nesterovIndex(t = taverage, rh = rh, p = pr, modified = FALSE)
   names(data) = names(taverage)
 
-  byYears = calcf_data(data=data, extract_names=select_time_function(time.scale), operation=mean, data_names=data_names, na.rm = na.rm)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=mean, data_names=data_names, na.rm = na.rm)
   return(byYears)
 }
 index_units[133] = C_index
@@ -3909,7 +3912,7 @@ fffi = calculate_134 = function(data, evap, data_names=NULL, time.scale=YEAR, na
   data.all = evap
   data.all[] = NA
   data.all[names(data)] = data
-  byYears = calcf_data(data = data.all, extract_names=select_time_function(time.scale), operation = mean, data_names = data_names, na.rm = na.rm)
+  byYears = calcf_data(data = data.all, time.scale=time.scale, operation = mean, data_names = data_names, na.rm = na.rm)
   return(byYears)
 }
 index_units[134] = C_index

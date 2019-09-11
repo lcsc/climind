@@ -109,10 +109,11 @@ calcf_data__ = function(ok, oks, data, operation, ...){
 #' @param data_names names
 #' @param data data
 #' @param operation operation
+#' @param time.scale month, season, year or hydrological_years
 #' @param ... ...
 #' @return operation
 #' @keywords internal
-calcf_data_ = function(data_names, data, operation, ...){
+calcf_data_ = function(data_names, data, operation, time.scale, ...){
   average = sapply(unique(data_names), calcf_data__, oks=data_names, data=data, operation=operation, ...)
   average[average==Inf | average==-Inf] = NA
   names(average) = unique(data_names)
@@ -125,6 +126,9 @@ calcf_data_ = function(data_names, data, operation, ...){
     if(sum(grepl(JAN, names(average)), na.rm = TRUE)>0 & length(average)>12){
       average = array(c(average[grepl(JAN, names(average))], average[grepl(FEB, names(average))], average[grepl(MAR, names(average))], average[grepl(APR, names(average))], average[grepl(MAY, names(average))], average[grepl(JUN, names(average))], average[grepl(JUL, names(average))], average[grepl(AUG, names(average))], average[grepl(SEP, names(average))], average[grepl(OCT, names(average))],average[grepl(NOV, names(average))], average[grepl(DEC, names(average))]), dim=c(ceiling(length(average)/12), 12), dimnames=list(unique(substr(names(average), nchar(names(average))-3, nchar(names(average)))), c(JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC)))
     }
+  }
+  if(time.scale==HYDROYEAR){
+    average[1] = NA
   }
   return(average)
 }
@@ -147,13 +151,14 @@ quantile_null = function(x, ...){
 #'
 #' @param data data
 #' @param date date 
-#' @param extract_names Operation to split data
+#' @param time.scale month, season, year or hydrological_years
 #' @param operation Main operation
 #' @param data_names names of each period of time
 #' @param ... ...
 #' @return result operation
 #' @keywords internal
-calcf_data = function(data, date, extract_names, data_names, operation, ...){
+calcf_data = function(data, date, time.scale, data_names, operation, ...){
+  extract_names = select_time_function(time.scale)
   if(missing(data) || is.null(data) || length(data)==0){
     return(NULL)
   }
@@ -170,23 +175,9 @@ calcf_data = function(data, date, extract_names, data_names, operation, ...){
       stop("Name number")
     }
   }
-  data_calc = calcf_data_(data_names=data_names, data=data, operation=operation, ...)
+  data_calc = calcf_data_(data_names=data_names, data=data, operation=operation, time.scale=time.scale, ...)
   data_calc[is.nan(data_calc)] = 0
   return(data_calc)
-}
-
-#' Estación del año de una fecha dada
-#'
-#' @param max maximum temperature
-#' @param min minimum temperature
-#' @param mean medium temperature
-#' @param extract_names Operation to split data
-#' @param operation Main operation
-#' @param ... ...
-#' @return result operation
-#' @keywords internal
-calcf_data_max_min_mean = function(max, min, mean, extract_names, operation, ...){
-  return(data.frame(max=calcf_data(max, extract_names, operation, ...), min=calcf_data(min, extract_names, operation, ...), mean=calcf_data(mean, extract_names, operation, ...)))
 }
 
 #' Data with months and years in names 
@@ -281,6 +272,7 @@ months_years = function(time){
 }
 
 #' Function to select all "time" data
+#'
 #' @param time.scale month, season or year
 #' @return function
 #' @keywords internal
@@ -534,7 +526,7 @@ r_to_in = function(radiation, lat, mde) {
 #' @return average temperature
 #' @keywords internal
 average_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  return(calcf_data(data, extract_names=select_time_function(time.scale), data_names=data_names, operation=mean, na.rm = na.rm))
+  return(calcf_data(data, time.scale=time.scale, data_names=data_names, operation=mean, na.rm = na.rm))
 }
 
 #' Maximum temperature
@@ -546,7 +538,7 @@ average_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 #' @return maximum temperature
 #' @keywords internal
 maximum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  return(calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=max, na.rm = na.rm))
+  return(calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=max, na.rm = na.rm))
 }
 
 #' Minimum temperature
@@ -558,7 +550,7 @@ maximum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 #' @return minimum temperature
 #' @keywords internal
 minimum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  return(calcf_data(data=data, extract_names=select_time_function(time.scale), data_names=data_names, operation=min, na.rm = na.rm))
+  return(calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=min, na.rm = na.rm))
 }
 
 #' SPI: Standardized Precipitation Index
@@ -572,7 +564,7 @@ minimum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 #' @keywords internal
 calc_spi = function(data, data_names=NULL, scale=3, na.rm=FALSE){
   if(is.null(data)) { return(NULL) }
-  byMonths = calcf_data(data=data, extract_names=months_years, operation=sum, na.rm=na.rm)
+  byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm=na.rm)
   # byMonths = byMonths[as.character(1979:2017), ]
   if(sum(is.na(byMonths))==0){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
@@ -599,7 +591,7 @@ calc_spi = function(data, data_names=NULL, scale=3, na.rm=FALSE){
 calc_spei = function(eto, pr, data_names=NULL, scale=3, na.rm=FALSE){
   if(is.null(eto) | is.null(pr)) { return(NULL) }
   data = pr - eto 
-  byMonths = calcf_data(data=data, extract_names=months_years, operation=sum, na.rm=na.rm)
+  byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm=na.rm)
   if(sum(is.na(byMonths))==0){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
     spei.vector = array(spei(byMonths.vector, scale=scale, na.rm = TRUE)$fitted[, 1])
