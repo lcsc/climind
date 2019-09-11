@@ -271,7 +271,7 @@ attr(calculate_9, "data") <- c(TMEAN)
 #' data(data_all)
 #' cd(data=data_all$tx)
 cd = calculate_10 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.10))
+  value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.10))
 
   function_ = function(data, value){    
     value = select_value_for_data(data, value, time.scale)
@@ -321,7 +321,7 @@ attr(calculate_11, "data") <- c(TMIN)
 #' data(data_all)
 #' cdd(data=data_all$tn)
 cdd = calculate_12 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.10))
+  value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.10))
 
   function_ = function(data, value){
     if(na.rm | sum(is.na(data))==0){
@@ -731,7 +731,7 @@ attr(calculate_24, "data") <- c(TMEAN)
 #' data(data_all)
 #' vcd(data=data_all$tn)
 vcd = calculate_25 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.01))
+  value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.01))
 
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
@@ -760,7 +760,7 @@ attr(calculate_25, "data") <- c(TMIN)
 #' data(data_all)
 #' vwd(data=data_all$tx)
 vwd = calculate_26 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.99))
+  value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.99))
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
     return(sum(data>value, na.rm = na.rm))
@@ -792,7 +792,7 @@ wd = calculate_27 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
     value = select_value_for_data(data, value, time.scale)
     return(100*sum(data>value, na.rm = na.rm)/length(data))
   }
-  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
 index_units[27] = C_days
@@ -814,7 +814,7 @@ attr(calculate_27, "data") <- c(TMAX)
 #' data(data_all)
 #' wn(data=data_all$tn)
 wn = calculate_28 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.90))
+  value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.90))
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
     return(100*sum(data>value, na.rm = na.rm)/length(data))
@@ -841,7 +841,7 @@ attr(calculate_28, "data") <- c(TMIN)
 #' data(data_all)
 #' wsd(data=data_all$tx)
 wsd = calculate_29 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.90))  
+  value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.90))  
   function_ = function(data, value){
     if(na.rm | sum(is.na(data))==0){
       value = select_value_for_data(data, value, time.scale)
@@ -1521,7 +1521,7 @@ attr(calculate_55, "data") <- c(PRECIPITATION)
 r95tot = calculate_56 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data.quantile = data
   data.quantile[data.quantile<=0] = NA
-  value = calcf_data(data=data.quantile, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.95))
+  value = calcf_data(data=data.quantile, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.95))
   function_ = function(data, value){
     if(sum(is.na(data))>0){ return(NA) }
     value = select_value_for_data(data, value, time.scale)
@@ -1553,7 +1553,7 @@ attr(calculate_56, "data") <- c(PRECIPITATION)
 r99tot = calculate_57 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data.quantile = data
   data.quantile[data.quantile<=0] = NA
-  value = calcf_data(data=data.quantile, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.99))
+  value = calcf_data(data=data.quantile, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.99))
   function_ = function(data, value){
     if(sum(is.na(data))>0){ return(NA) }
     value = select_value_for_data(data, value, time.scale)
@@ -1608,7 +1608,7 @@ attr(calculate_58, "data") <- c(PRECIPITATION)
 #' data(data_all)
 #' d95p(data = data_all$rr)
 d95p = calculate_59 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.95))
+  value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.95))
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
     return(sum(data>value, na.rm = na.rm))

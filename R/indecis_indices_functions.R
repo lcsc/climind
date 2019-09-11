@@ -152,13 +152,14 @@ quantile_null = function(x, ...){
 #' @param data data
 #' @param date date 
 #' @param time.scale month, season, year or hydrological_years
-#' @param operation Main operation
+#' @param extract_names Operation to split data
 #' @param data_names names of each period of time
+#' @param operation Main operation
 #' @param ... ...
 #' @return result operation
 #' @keywords internal
-calcf_data = function(data, date, time.scale, data_names, operation, ...){
-  extract_names = select_time_function(time.scale)
+calcf_data = function(data, date, time.scale, extract_names=select_time_function, data_names, operation, ...){
+  extract_names = extract_names(time.scale)
   if(missing(data) || is.null(data) || length(data)==0){
     return(NULL)
   }

@@ -1,7 +1,7 @@
 Package: ClimInd
 Type: Package
 Version: 0.1-3
-Date: 2019-07-19
+Date: 2019-09-11
 Title: Climate Indices
 Author: Fergus Reig-Gracia [aut, cre], Sergio M. Vicente-Serrano [aut], Fernando Dominguez-Castro [aut], Joaquin Bedia-Jiménez [ctb]
 Maintainer: Fergus Reig-Gracia <fergusrg@gmail.com>
@@ -15,7 +15,7 @@ Suggests: MASS,
     rmarkdown,
     testthat
 NeedsCompilation: no
-Packaged: 2019-07-19 11:38:24 UTC; freig
+Packaged: 2019-09-11 11:38:24 UTC; freig
 RoxygenNote: 6.1.1
 ByteCompile: true
 Collate: 
