@@ -1430,7 +1430,7 @@ attr(calculate_52, "data") <- c(PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' ep(pr = data_all$rr, eto = data_all$evapotranspiration)
+#' ep(eto = data_all$eto, pr = data_all$rr)
 ep = calculate_53 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(pr, eto){
     return(sum(pr-eto[names(pr)], na.rm = na.rm))
@@ -1441,7 +1441,7 @@ ep = calculate_53 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[53] = C_precipitation
 index_titles[53] = "Effective precipitation"
 index_names[53] = "ep"
-attr(calculate_53, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
+attr(calculate_53, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Longest dry period
 #' @description Maximum length of consecutive dry days (RR<1)
@@ -2802,7 +2802,7 @@ eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, 
 index_units[93] = C_precipitation
 index_titles[93] = "Reference evapotranspiration"
 index_names[93] = "eto"
-attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, RADIATION, MDE, DEWPOINT, INSOLATION, HUMIDITY)
+attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, DEWPOINT, MDE, RADIATION, INSOLATION, HUMIDITY)
 
 #' @title UNEP Aridity Index
 #' @description P/Eto
@@ -2818,7 +2818,7 @@ attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, RADIATION, 
 #' @export
 #' @examples
 #' data(data_all)
-#' uai(eto = data_all$evapotranspiration, pr = data_all$rr)
+#' uai(eto = data_all$eto, pr = data_all$rr)
 uai = calculate_94 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data = pr/eto
   function_ = function(data){
@@ -2830,15 +2830,15 @@ uai = calculate_94 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[94] = C_index
 index_titles[94] = "UNEP Aridity Index"
 index_names[94] = "uai"
-attr(calculate_94, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
+attr(calculate_94, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Climatic moisture deficit
-#' @description ETo - Effective precipitation
+#' @description ETo - evapotranspiration
 #' @references Parks, S. A., Parisien, M. , Miller, C. , Holsinger, L. M. and Baggett, L. S. (2018), Fine-scale spatial climate variation and drought mediate the likelihood of reburning. Ecol Appl, 28: 573-586. doi:10.1002/eap.1671
 ## @importance Important application in agriculture
 #' 
-#' @param eto evapotranspiration, mm
-#' @param pr daily precipitation, mm
+#' @param eto eto, mm
+#' @param evapotranspiration evapotranspiration, mm
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
@@ -2846,7 +2846,7 @@ attr(calculate_94, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' cmd(eto = data_all$evapotranspiration, pr = data_all$rr)
+#' cmd(eto = data_all$eto, pr = data_all$evapotranspiration)
 cmd = calculate_95 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data = eto-pr
   function_ = function(data){
@@ -2858,7 +2858,7 @@ cmd = calculate_95 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[95] = C_index
 index_titles[95] = "Climatic moisture deficit"
 index_names[95] = "cmd"
-attr(calculate_95, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
+attr(calculate_95, "data") <- c(ETO, EVAPOTRANSPIRATION)
 
 #' @title De Martonne aridity index
 #' @description De Martonne aridity index is the ratio between the annual amount of precipitation and anual mean of temperature plus 10 Celsius.
@@ -3666,14 +3666,14 @@ attr(calculate_125, "data") <- c(PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' spei1(eto = data_all$evapotranspiration, pr = data_all$rr)
+#' spei1(eto = data_all$eto, pr = data_all$rr, na.rm = TRUE)
 spei1 = calculate_126 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
   return(calc_spei(eto, pr, data_names, scale=1, na.rm=na.rm))  
 }
 index_units[126] = C_index
 index_titles[126] = "Standardised Precipitation-Evapotranspiration Index 1"
 index_names[126] = "spei1"
-attr(calculate_126, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
+attr(calculate_126, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 3
 #' @description Standardized precipitation-evapotranspiration index calculated at 3-month time scale
@@ -3689,14 +3689,14 @@ attr(calculate_126, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' spei3(eto = data_all$evapotranspiration, pr = data_all$rr)
+#' spei3(eto = data_all$eto, pr = data_all$rr)
 spei3 = calculate_127 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
   return(calc_spei(eto, pr, data_names, scale=3, na.rm=na.rm))
 }
 index_units[127] = C_index
 index_titles[127] = "Standardised Precipitation-Evapotranspiration Index 3"
 index_names[127] = "spei3"
-attr(calculate_127, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
+attr(calculate_127, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 6
 #' @description Standardized precipitation-evapotranspiration index calculated at 6-month time scale
@@ -3712,14 +3712,14 @@ attr(calculate_127, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' spei6(eto = data_all$evapotranspiration, pr = data_all$rr)
+#' spei6(eto = data_all$eto, pr = data_all$rr)
 spei6 = calculate_128 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
     return(calc_spei(eto, pr, data_names, scale=6, na.rm=na.rm))
 }
 index_units[128] = C_index
 index_titles[128] = "Standardised Precipitation-Evapotranspiration Index 6"
 index_names[128] = "spei6"
-attr(calculate_128, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
+attr(calculate_128, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 12
 #' @description Standardized precipitation-evapotranspiration index calculated at 12-month time scale
@@ -3735,14 +3735,14 @@ attr(calculate_128, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' spei12(eto = data_all$evapotranspiration, pr = data_all$rr)
+#' spei12(eto = data_all$eto, pr = data_all$rr)
 spei12 = calculate_129 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
    return(calc_spei(eto, pr, data_names, scale=12, na.rm=na.rm))
 }
 index_units[129] = C_index
 index_titles[129] = "Standardised Precipitation-Evapotranspiration Index 12"
 index_names[129] = "spei12"
-attr(calculate_129, "data") <- c(EVAPOTRANSPIRATION, PRECIPITATION)
+attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
 
 ####Fire-based
 #' @title Canadian Fire Weather Index
@@ -3903,7 +3903,7 @@ attr(calculate_133, "data") <- c(DEWPOINT, TMEAN, HUMIDITY, PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' fffi(data = data_all$rr, evap=data_all$evapotranspiration)
+#' fffi(data = data_all$rr, evap=data_all$eto)
 fffi = calculate_134 = function(data, evap, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   if(is.null(data) | is.null(evap)){
     return(NULL)
@@ -3918,7 +3918,7 @@ fffi = calculate_134 = function(data, evap, data_names=NULL, time.scale=YEAR, na
 index_units[134] = C_index
 index_titles[134] = "Finnish Forest Fire Index"
 index_names[134] = "fffi"
-attr(calculate_134, "data") <- c(PRECIPITATION, EVAPOTRANSPIRATION)
+attr(calculate_134, "data") <- c(PRECIPITATION, ETO)
 
 i = 1
 for (i in 1:length(index_tipes)){

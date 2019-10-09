@@ -42,7 +42,8 @@ WIND = "wind" #average wind, m/s
 HUMIDITY = "humidity" #relative humidity, %
 VAPOUR = "vapour" #water vapour pressure, hPa
 WINDGUST = "windgust" #maximum wind gust, m/s
-EVAPOTRANSPIRATION = "evapotranspiration" #Evapotranspiration et0 mm -> MAL
+EVAPOTRANSPIRATION = "evapotranspiration" #Evapotranspiration, mm
+ETO = "eto" #Eto, mm
 SNOWFALL = "snowfall" # snowfall, m of water equivalent
 SNOWFALLMM = "snowfallmm" # snowfall, mm of water equivalent
 SWE = "swe" #swe, m of water equivalent
@@ -565,17 +566,18 @@ minimum_temp = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 #' @keywords internal
 calc_spi = function(data, data_names=NULL, scale=3, na.rm=FALSE){
   if(is.null(data)) { return(NULL) }
-  byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm=na.rm)
+  byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm=FALSE, data_names=NULL)
   # byMonths = byMonths[as.character(1979:2017), ]
-  if(sum(is.na(byMonths))==0){
+  if(sum(!is.na(byMonths))!=0 & (!na.rm & sum(is.na(byMonths))==0)){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
-    spi.vector = array(spi(byMonths.vector, scale=scale, na.rm = TRUE)$fitted[, 1])
+    spi.vector = array(spi(byMonths.vector, scale=scale, na.rm = na.rm)$fitted[, 1])
   }else{
     spi.vector = NA
   }
   spi.matrix = t(array(spi.vector, dim=c(dim(byMonths)[2], dim(byMonths)[1])))
   colnames(spi.matrix)=colnames(byMonths)
   rownames(spi.matrix)=rownames(byMonths)
+  spi.matrix[is.na(byMonths)] = NA
   return(spi.matrix)
 }
 
@@ -591,17 +593,20 @@ calc_spi = function(data, data_names=NULL, scale=3, na.rm=FALSE){
 #' @keywords internal
 calc_spei = function(eto, pr, data_names=NULL, scale=3, na.rm=FALSE){
   if(is.null(eto) | is.null(pr)) { return(NULL) }
-  data = pr - eto 
-  byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm=na.rm)
-  if(sum(is.na(byMonths))==0){
+  data = pr - eto
+  byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm=FALSE, data_names=NULL)
+  if(sum(!is.na(byMonths))!=0 & (!na.rm & sum(is.na(byMonths))==0)){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
-    spei.vector = array(spei(byMonths.vector, scale=scale, na.rm = TRUE)$fitted[, 1])
+    spei.vector = array(spei(byMonths.vector, scale=scale, na.rm = na.rm)$fitted[, 1])
   }else{
     spei.vector = NA
   }
+  spei.vector[spei.vector < -5] <- -5
+  spei.vector[spei.vector > 5] <- 5
   spei.matrix = t(array(spei.vector, dim=c(dim(byMonths)[2], dim(byMonths)[1])))
   colnames(spei.matrix)=colnames(byMonths)
   rownames(spei.matrix)=rownames(byMonths)
+  spei.matrix[is.na(byMonths)] = NA
   return(spei.matrix)
 }
 

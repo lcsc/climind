@@ -94,32 +94,12 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
   if(is.null(data[[VAPOUR]]) &  !is.null(data[[DEWPOINT]])){
     data[[VAPOUR]] = td_to_vapor(data[[DEWPOINT]])
   }
-  if(is.null(data[[RADIATION_W]]) & !is.null(data[[RADIATION]])){
-    # J/m2 -> W/M2
-    data[[RADIATION_W]] = data[[RADIATION]] / (24*60*60)
-  }
-  if(is.null(data[[RADIATION]]) & !is.null(data[[RADIATION_W]])){
-    # W/M2 -> J/m2 
-    data[[RADIATION]] = data[[RADIATION_W]] * (24*60*60)
-  }
-  if(is.null(data[[HUMIDITY]]) & !is.null(data[[TMAX]]) & !is.null(data[[TMIN]]) & !is.null(data[[DEWPOINT]])){
-    data[[HUMIDITY]] = td_to_rh(tmax=data[[TMAX]], tmin=data[[TMIN]], td=data[[DEWPOINT]])
-  }
-  if(is.null(data[[TMEAN]]) & !is.null(data[[TMAX]]) & !is.null(data[[TMIN]])){
-    data[[TMEAN]] = (data[[TMAX]]+data[[TMIN]])/2
-  }
-  if(is.null(data[[INSOLATION]]) & !is.null(data[[RADIATION]]) & !is.null(data[[LAT]]) & !is.null(data[[MDE]])){
-    data[[INSOLATION]] = r_to_in(radiation=data[[RADIATION]], lat=data[[LAT]], mde=data[[MDE]])
-  }
-  if(is.null(data[[EVAPOTRANSPIRATION]]) & !is.null(data[[TMIN]]) & !is.null(data[[MDE]]) & !is.null(data[[TMAX]]) & (!is.null(data[[RADIATION]]) | !is.null(data[[INSOLATION]])) & !is.null(data[[WIND]]) & !is.null(data[LAT]) & !is.null(data[[DEWPOINT]])){
-    # tmin = data[[TMIN]]; tmax = data[[TMAX]]; radiation = data[[RADIATION]]; toa = data[[RADIATIONTOA]]; w = data[[WIND]]; lat=data[[LAT]]; tdew = data[[DEWPOINT]]; mde=data[[MDE]]; rh=data[[HUMIDITY]]
-    # data[[EVAPOTRANSPIRATION]] = calc_eto(tmin = data[[TMIN]], tmax = data[[TMAX]], radiation = data[[RADIATION]], insolation=data[[INSOLATION]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], rh=data[[HUMIDITY]])
-    data[[EVAPOTRANSPIRATION]] = calc_eto(tmin = data[[TMIN]], tmax = data[[TMAX]], radiation = data[[RADIATION]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], rh=data[[HUMIDITY]], insolation=data[[INSOLATION]])
-  }
-
   # Checking values
   if(sum(data[[TMAX]]<data[[TMIN]], na.rm = TRUE)>0){
     warning("TMAX < TMIN")
+  }
+  if(is.null(data[[TMEAN]]) & !is.null(data[[TMAX]]) & !is.null(data[[TMIN]])){
+    data[[TMEAN]] = (data[[TMAX]]+data[[TMIN]])/2
   }
   if(sum(data[[TMAX]]<data[[TMEAN]], na.rm = TRUE)>0){
     warning("TMAX < TMEAN")
@@ -127,9 +107,20 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
   if(sum(data[[TMEAN]]<data[[TMIN]], na.rm = TRUE)>0){
     warning("TMEAN < TMIN")
   }
+  if(is.null(data[[HUMIDITY]]) & !is.null(data[[TMAX]]) & !is.null(data[[TMIN]]) & !is.null(data[[DEWPOINT]])){
+    data[[HUMIDITY]] = td_to_rh(tmax=data[[TMAX]], tmin=data[[TMIN]], td=data[[DEWPOINT]])
+  }
   if(sum(data[[PRECIPITATION]]<0, na.rm = TRUE)>0){
     warning(paste("PRECIPITATION < 0", sum(data[[PRECIPITATION]]<0, na.rm = TRUE)))
     data[[PRECIPITATION]][data[[PRECIPITATION]]<0] = 0 
+  }
+  if(is.null(data[[RADIATION]]) & !is.null(data[[RADIATION_W]])){
+    # W/M2 -> J/m2 
+    data[[RADIATION]] = data[[RADIATION_W]] * (24*60*60)
+  }
+  if(is.null(data[[RADIATION_W]]) & !is.null(data[[RADIATION]])){
+    # J/m2 -> W/M2
+    data[[RADIATION_W]] = data[[RADIATION]] / (24*60*60)
   }
   if(sum(data[[RADIATION]]<0, na.rm = TRUE)>0){
     data[[RADIATION]][data[[RADIATION]]<0] = 0
@@ -165,6 +156,13 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
     data[[CLOUD100]][data[[CLOUD100]]>100] = 100
     data[[CLOUD100]][data[[CLOUD100]]<0] = 0
     warning("CLOUD100 > 100")
+  }
+  if(is.null(data[[INSOLATION]]) & !is.null(data[[RADIATION]]) & !is.null(data[[LAT]]) & !is.null(data[[MDE]])){
+    data[[INSOLATION]] = r_to_in(radiation=data[[RADIATION]], lat=data[[LAT]], mde=data[[MDE]])
+  }
+  if(is.null(data[[ETO]]) & !is.null(data[[TMIN]]) & !is.null(data[[MDE]]) & !is.null(data[[TMAX]]) & (!is.null(data[[RADIATION]]) | !is.null(data[[INSOLATION]])) & !is.null(data[[WIND]]) & !is.null(data[LAT]) & !is.null(data[[DEWPOINT]])){
+    # tmin = data[[TMIN]]; tmax = data[[TMAX]]; radiation = data[[RADIATION]]; toa = data[[RADIATIONTOA]]; w = data[[WIND]]; lat=data[[LAT]]; tdew = data[[DEWPOINT]]; mde=data[[MDE]]; rh=data[[HUMIDITY]]
+    data[[ETO]] = calc_eto(tmin = data[[TMIN]], tmax = data[[TMAX]], radiation = data[[RADIATION]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], rh=data[[HUMIDITY]], insolation=data[[INSOLATION]])
   }
   # data_all=data
 
