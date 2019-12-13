@@ -42,7 +42,7 @@ WIND = "wind" #average wind, m/s
 HUMIDITY = "humidity" #relative humidity, %
 VAPOUR = "vapour" #water vapour pressure, hPa
 WINDGUST = "windgust" #maximum wind gust, m/s
-EVAPOTRANSPIRATION = "evapotranspiration" #Evapotranspiration, mm
+EVAPOTRANSPIRATION = "evaporation" #Evapotranspiration, mm
 ETO = "eto" #Eto, mm
 SNOWFALL = "snowfall" # snowfall, m of water equivalent
 SNOWFALLMM = "snowfallmm" # snowfall, mm of water equivalent
@@ -326,7 +326,7 @@ select_time_function = function(time.scale){
       if(time.scale==HYDROYEAR){
         extract_names = hydrological_years
       }else{ #time.scale==YEAR
-        extract_names = years
+        extract_names = chron::years
       }
     }
   }
@@ -568,7 +568,7 @@ calc_spi = function(data, data_names=NULL, scale=3, na.rm=FALSE){
   if(is.null(data)) { return(NULL) }
   byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm=FALSE, data_names=NULL)
   # byMonths = byMonths[as.character(1979:2017), ]
-  if(sum(!is.na(byMonths))!=0 & (!na.rm & sum(is.na(byMonths))==0)){
+  if((na.rm & sum(!is.na(byMonths))!=0) | (!na.rm & sum(is.na(byMonths))==0)){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
     spi.vector = array(spi(byMonths.vector, scale=scale, na.rm = na.rm)$fitted[, 1])
   }else{
@@ -595,7 +595,7 @@ calc_spei = function(eto, pr, data_names=NULL, scale=3, na.rm=FALSE){
   if(is.null(eto) | is.null(pr)) { return(NULL) }
   data = pr - eto
   byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm=FALSE, data_names=NULL)
-  if(sum(!is.na(byMonths))!=0 & (!na.rm & sum(is.na(byMonths))==0)){
+  if((na.rm & sum(!is.na(byMonths))!=0) | (!na.rm & sum(is.na(byMonths))==0)){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
     spei.vector = array(spei(byMonths.vector, scale=scale, na.rm = na.rm)$fitted[, 1])
   }else{

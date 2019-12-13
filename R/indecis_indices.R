@@ -34,7 +34,7 @@ C_precipitation = "mm"
 C_index = "index units"
 C_radiation = "W m-2"
 C_radiation_w = "W m-2"
-C_wind = "wind"
+C_wind = "m/s"
 C_snow = "mm"
 C_snow_m = "m"
 C_cloud = "%"
@@ -269,8 +269,8 @@ attr(calculate_9, "data") <- c(TMEAN)
 #' @export
 #' @examples
 #' data(data_all)
-#' cd(data=data_all$tx)
-cd = calculate_10 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' tx10p(data=data_all$tx)
+tx10p = calculate_10 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.10))
 
   function_ = function(data, value){    
@@ -282,7 +282,7 @@ cd = calculate_10 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 }
 index_units[10] = C_percentage
 index_titles[10] = "Percentage of cold days"
-index_names[10] = "cd"
+index_names[10] = "tx10p"
 attr(calculate_10, "data") <- c(TMAX)
 
 #' @title Percentage of cold nights
@@ -298,13 +298,13 @@ attr(calculate_10, "data") <- c(TMAX)
 #' @export
 #' @examples
 #' data(data_all)
-#' cn(data=data_all$tn)
-cn = calculate_11 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' tn10p(data=data_all$tn)
+tn10p = calculate_11 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(calculate_10(data, data_names, time.scale, na.rm = na.rm))
 }
 index_units[11] = C_percentage
 index_titles[11] = "Percentage of cold nights"
-index_names[11] = "cn"
+index_names[11] = "tn10p"
 attr(calculate_11, "data") <- c(TMIN)
 
 #' @title Cold spell duration
@@ -319,8 +319,8 @@ attr(calculate_11, "data") <- c(TMIN)
 #' @export
 #' @examples
 #' data(data_all)
-#' cdd(data=data_all$tn)
-cdd = calculate_12 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' csdi(data=data_all$tn)
+csdi = calculate_12 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.10))
 
   function_ = function(data, value){
@@ -342,7 +342,7 @@ cdd = calculate_12 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 }
 index_units[12] = C_days
 index_titles[12] = "Cold spell duration"
-index_names[12] = "cdd"
+index_names[12] = "csdi"
 attr(calculate_12, "data") <- c(TMIN)
 
 #' @title Diurnal temperature range
@@ -589,8 +589,8 @@ attr(calculate_19, "data") <- c(TMAX, TMIN)
 #' @export
 #' @examples
 #' data(data_all)
-#' sud(data=data_all$tx)
-sud = calculate_20 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' su(data=data_all$tx)
+su = calculate_20 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data>25, na.rm = na.rm))
   }
@@ -599,7 +599,7 @@ sud = calculate_20 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 }
 index_units[20] = C_days
 index_titles[20] = "Summer days"
-index_names[20] = "sud"
+index_names[20] = "su"
 attr(calculate_20, "data") <- c(TMAX)
 
 #' @title Maximum consecutive summer days
@@ -677,8 +677,8 @@ attr(calculate_22, "data") <- c(TMAX)
 #' @export
 #' @examples
 #' data(data_all)
-#' tn(data=data_all$tn)
-tn = calculate_23 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' tr(data=data_all$tn)
+tr = calculate_23 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){  
     return(sum(data>20, na.rm = na.rm))
   }
@@ -687,7 +687,7 @@ tn = calculate_23 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 }
 index_units[23] = C_days
 index_titles[23] = "Tropical nights"
-index_names[23] = "tn"
+index_names[23] = "tr"
 attr(calculate_23, "data") <- c(TMIN)
 
 #' @title Heating degree days
@@ -785,8 +785,8 @@ attr(calculate_26, "data") <- c(TMAX)
 #' @export
 #' @examples
 #' data(data_all)
-#' wd(data=data_all$tx)
-wd = calculate_27 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' tx90p(data=data_all$tx)
+tx90p = calculate_27 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.90))
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
@@ -797,7 +797,7 @@ wd = calculate_27 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 }
 index_units[27] = C_days
 index_titles[27] = "Warm days"
-index_names[27] = "wd"
+index_names[27] = "tx90p"
 attr(calculate_27, "data") <- c(TMAX)
 
 #' @title Warm nights
@@ -812,8 +812,8 @@ attr(calculate_27, "data") <- c(TMAX)
 #' @export
 #' @examples
 #' data(data_all)
-#' wn(data=data_all$tn)
-wn = calculate_28 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' tn90p(data=data_all$tn)
+tn90p = calculate_28 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.90))
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
@@ -822,9 +822,9 @@ wn = calculate_28 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
   byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
-index_units[28] = C_days
+index_units[28] = C_percentage
 index_titles[28] = "Warm nights"
-index_names[28] = "wn"
+index_names[28] = "tn90p"
 attr(calculate_28, "data") <- c(TMIN)
 
 #' @title Warm spell duration
@@ -839,8 +839,8 @@ attr(calculate_28, "data") <- c(TMIN)
 #' @export
 #' @examples
 #' data(data_all)
-#' wsd(data=data_all$tx)
-wsd = calculate_29 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' wsdi(data=data_all$tx)
+wsdi = calculate_29 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.90))  
   function_ = function(data, value){
     if(na.rm | sum(is.na(data))==0){
@@ -858,7 +858,7 @@ wsd = calculate_29 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 }
 index_units[29] = C_days
 index_titles[29] = "Warm spell duration"
-index_names[29] = "wsd"
+index_names[29] = "wsdi"
 attr(calculate_29, "data") <- c(TMAX)
 
 #' @title Zero crossing days
@@ -1124,14 +1124,14 @@ attr(calculate_38, "data") <- c(TMAX)
 #' 
 #' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
+#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @param ... further arguments passed to or from other methods
 #' @return days
 #' @export
 #' @examples
 #' data(data_all)
 #' d32(data = data_all$tx)
-d32 = calculate_39 = function(data, data_names=NULL, na.rm = FALSE, ...){
+d32 = calculate_39 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     data = data[months(chron(names(data))) %in% c(JUN, JUL, AUG)]
     return(sum(data>=32, na.rm = na.rm))
@@ -1264,8 +1264,8 @@ attr(calculate_43, "data") <- c(PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' rx(data = data_all$rr)
-rx = calculate_44 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' rx1day(data = data_all$rr)
+rx1day = calculate_44 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(max(data, na.rm = na.rm))
   }
@@ -1274,7 +1274,7 @@ rx = calculate_44 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 }
 index_units[44] = C_precipitation
 index_titles[44] = "Maximum precipitation"
-index_names[44] = "rx"
+index_names[44] = "rx1day"
 attr(calculate_44, "data") <- c(PRECIPITATION)
 
 #' @title Days precipitation >= R10mm
@@ -1456,8 +1456,8 @@ attr(calculate_53, "data") <- c(ETO, PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' ldp(data = data_all$rr)
-ldp = calculate_54 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' cdd(data = data_all$rr)
+cdd = calculate_54 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     data.rle = rle(as.numeric(data<1))
     count = sum(data.rle$values==1, na.rm = na.rm)
@@ -1471,7 +1471,7 @@ ldp = calculate_54 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 }
 index_units[54] = C_days
 index_titles[54] = "Longest dry period"
-index_names[54] = "ldp"
+index_names[54] = "cdd"
 attr(calculate_54, "data") <- c(PRECIPITATION)
 
 #' @title Longest wet period
@@ -1487,8 +1487,8 @@ attr(calculate_54, "data") <- c(PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' lwp(data = data_all$rr)
-lwp = calculate_55 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' cwd(data = data_all$rr)
+cwd = calculate_55 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     data.rle = rle(as.numeric(data>=1))
     count = sum(data.rle$values==1, na.rm = na.rm)
@@ -1502,7 +1502,7 @@ lwp = calculate_55 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 }
 index_units[55] = C_days
 index_titles[55] = "Longest wet period"
-index_names[55] = "lwp"
+index_names[55] = "cwd"
 attr(calculate_55, "data") <- c(PRECIPITATION)
 
 #' @title Percentage precipitation of very wet days
@@ -1532,7 +1532,7 @@ r95tot = calculate_56 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
   byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
-index_units[56] = C_precipitation
+index_units[56] = C_percentage
 index_titles[56] = "Percentage precipitation of very wet days"
 index_names[56] = "r95tot"
 attr(calculate_56, "data") <- c(PRECIPITATION)
@@ -1563,7 +1563,7 @@ r99tot = calculate_57 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
   byYears[is.nan(byYears) | byYears==Inf | byYears==-Inf] = 0
   return(byYears)
 }
-index_units[57] = C_precipitation
+index_units[57] = C_percentage
 index_titles[57] = "Precipitation fraction extremely wet days"
 index_names[57] = "r99tot"
 attr(calculate_57, "data") <- c(PRECIPITATION)
@@ -2083,7 +2083,7 @@ bio4 = calculate_76 = function(data, data_names=NULL, na.rm = FALSE, ...){
   byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[76] = C_degrees
+index_units[76] = C_index
 index_titles[76] = "Temperature seasonality"
 index_names[76] = "bio4"
 attr(calculate_76, "data") <- c(TMEAN)
@@ -2583,7 +2583,7 @@ attr(calculate_85, "data") <- c(TMEAN, HUMIDITY)
 #' wci(taverage = data_all$tg, w = data_all$wind)
 wci = calculate_86 = function(taverage, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   w = w*(3600/1000)
-  data = 13.12 + 0.6215*taverage - 11.37*w + 0.3965*taverage*w
+  data = 13.12 + 0.6215*taverage - 11.37*(w^0.16) + 0.3965*taverage*(w^0.16)
   data[is.na(taverage) | is.na(w)] = NA
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
@@ -2622,7 +2622,7 @@ at = calculate_87 = function(taverage, w, vapor, data_names=NULL, time.scale=YEA
   byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[87] = C_index
+index_units[87] = C_degrees
 index_titles[87] = "Apparent temperature"
 index_names[87] = "at"
 attr(calculate_87, "data") <- c(TMEAN, WIND, VAPOUR)
@@ -2846,9 +2846,9 @@ attr(calculate_94, "data") <- c(ETO, PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' cmd(eto = data_all$eto, pr = data_all$evapotranspiration)
-cmd = calculate_95 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  data = eto-pr
+#' cmd(eto = data_all$eto, evapotranspiration = data_all$evaporation)
+cmd = calculate_95 = function(eto, evapotranspiration, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  data = eto-evapotranspiration
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
@@ -3192,8 +3192,9 @@ attr(calculate_107, "data") <- c(SNOWFALL)
 #' msd(data = data_all$snowdepth)
 msd = calculate_108 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data > 50, na.rm=na.rm))
+    return(sum(data > 5, na.rm=na.rm))
   }
+  data = data/10
   byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
@@ -3218,8 +3219,9 @@ attr(calculate_108, "data") <- c(SNOWDEPTH)
 #' hsd(data = data_all$snowdepth)
 hsd = calculate_109 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
-    return(sum(data > 500, na.rm=na.rm))
+    return(sum(data > 50, na.rm=na.rm))
   }
+  data = data/10
   byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)
 }
@@ -3355,7 +3357,7 @@ attr(calculate_112, "data") <- c(SNOWDEPTH)
 #' asd(data = data_all$snowdepth)
 asd = calculate_113 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){    
-    return(mean(data > 1, na.rm=na.rm))
+    return(mean(data[data > 1], na.rm=na.rm))
   }
   byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)/1000
   return(byYears)
@@ -3477,7 +3479,7 @@ attr(calculate_117, "data") <- c(CLOUD)
 #' fod(data = data_all$cloud100)
 fod = calculate_118 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){    
-    return(sum(data>0, na.rm=na.rm))
+    return(sum(data>10, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, time.scale=time.scale, operation=function_, data_names=data_names)
   return(byYears)

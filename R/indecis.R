@@ -164,6 +164,7 @@ calculate_all = function(data, lat=NULL, time.scale=YEAR, data_names=NULL, index
     # tmin = data[[TMIN]]; tmax = data[[TMAX]]; radiation = data[[RADIATION]]; toa = data[[RADIATIONTOA]]; w = data[[WIND]]; lat=data[[LAT]]; tdew = data[[DEWPOINT]]; mde=data[[MDE]]; rh=data[[HUMIDITY]]
     data[[ETO]] = calc_eto(tmin = data[[TMIN]], tmax = data[[TMAX]], radiation = data[[RADIATION]], toa = data[[RADIATIONTOA]], w = data[[WIND]], lat=data[[LAT]], tdew = data[[DEWPOINT]], mde=data[[MDE]], rh=data[[HUMIDITY]], insolation=data[[INSOLATION]])
   }
+  # return(list("eto_all"=data[[ETO]])) #fergus:quitar
   # data_all=data
 
   if(is.null(data_names)){
