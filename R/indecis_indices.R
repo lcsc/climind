@@ -2538,7 +2538,7 @@ attr(calculate_84, "data") <- c(TMEAN, HUMIDITY)
 #' @title Heat Index
 #' @description Combines air temperature and relative humidity to determine the human-perceived equivalent temperature
 #' @section Formula: \deqn{HI= -42,379+2,04901523*TG+10,14333127*rh-0,22475541*TG*rh-0.00683783*TG^2-0.05481717*rh^2+0.0122874*TG^2*rh+0.00085282*TG*rh^2-0.00000199*TG^2*rh^2}. Where TG is air temperature in ºF and rh is relative humidity in %
-#' @references \url{http://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml}
+#' @references The Heat Index Equation \url{http://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml}
 ## @importance Important application in tourism, energy and health
 #' 
 #' @param taverage daily mean temperature, Celsius
