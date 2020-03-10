@@ -95,13 +95,13 @@ attr(calculate_1, "data") <- c(TMAX)
 #' @export
 #' @examples
 #' data(data_all)
-#' xtx(data=data_all$tx)
-xtx = calculate_2 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' txx(data=data_all$tx)
+txx = calculate_2 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(maximum_temp(data=data, data_names=data_names, time.scale=time.scale, na.rm = na.rm))
 }
 index_units[2] = C_degrees
 index_titles[2] = "Maximum TX"
-index_names[2] = "xtx"
+index_names[2] = "txx"
 attr(calculate_2, "data") <- c(TMAX)
 
 #' @title Minimum TX
@@ -117,13 +117,13 @@ attr(calculate_2, "data") <- c(TMAX)
 #' @export
 #' @examples
 #' data(data_all)
-#' ntx(data=data_all$tx)
-ntx = calculate_3 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' txn(data=data_all$tx)
+txn = calculate_3 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(minimum_temp(data=data, data_names=data_names, time.scale=time.scale, na.rm = na.rm))
 }
 index_units[3] = C_degrees
 index_titles[3] = "Minimum TX"
-index_names[3] = "ntx"
+index_names[3] = "txn"
 attr(calculate_3, "data") <- c(TMAX)
 
 #' @title Mean TN
@@ -161,13 +161,13 @@ attr(calculate_4, "data") <- c(TMIN)
 #' @export
 #' @examples
 #' data(data_all)
-#' xtn(data=data_all$tn)
-xtn = calculate_5 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' tnx(data=data_all$tn)
+tnx = calculate_5 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(maximum_temp(data=data, data_names=data_names, time.scale=time.scale, na.rm = na.rm))
 }
 index_units[5] = C_degrees
 index_titles[5] = "Maximum TN"
-index_names[5] = "xtn"
+index_names[5] = "tnx"
 attr(calculate_5, "data") <- c(TMIN)
 
 #' @title Minimum TN
@@ -183,13 +183,13 @@ attr(calculate_5, "data") <- c(TMIN)
 #' @export
 #' @examples
 #' data(data_all)
-#' ntn(data=data_all$tn)
-ntn = calculate_6 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' tnn(data=data_all$tn)
+tnn = calculate_6 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   return(minimum_temp(data=data, data_names=data_names, time.scale=time.scale, na.rm = na.rm))
 }
 index_units[6] = C_degrees
 index_titles[6] = "Minimum TN"
-index_names[6] = "ntn"
+index_names[6] = "tnn"
 attr(calculate_6, "data") <- c(TMIN)
 
 #' @title Mean TG
@@ -1752,8 +1752,8 @@ attr(calculate_63, "data") <- c(PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' rtwd(data = data_all$rr)
-rtwd = calculate_64 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' prcptot(data = data_all$rr)
+prcptot = calculate_64 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     return(sum(data[data>=1], na.rm = na.rm))
   }
@@ -1762,7 +1762,7 @@ rtwd = calculate_64 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 }
 index_units[64] = C_precipitation
 index_titles[64] = "Total precipitation wet days"
-index_names[64] = "rtwd"
+index_names[64] = "prcptot"
 attr(calculate_64, "data") <- c(PRECIPITATION)
 
 #' @title Wet days 1mm
