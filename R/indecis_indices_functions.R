@@ -174,7 +174,7 @@ calcf_data = function(data, date, time.scale, extract_names=select_time_function
     data_names = extract_names(date)
   }else{
     if(length(data_names)!=length(data)){
-      stop("Name number")
+      stop(paste("Name number", time.scale))
     }
   }
   data_calc = calcf_data_(data_names=data_names, data=data, operation=operation, time.scale=time.scale, ...)

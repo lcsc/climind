@@ -62,7 +62,7 @@ test_that("csd_calculate_21", {
   expect_equivalent(as.numeric(calculate_21(data)["2000"]), 8)  
 })
 
-test_that("wsd_calculate_29", {
+test_that("wsdi_calculate_29", {
   # Count of days with at least 6 consecutive days when TX > 90th percentile.
   data[1:length(data)] <- 0
   data[as.character(seq(chron("01/20/00"), chron("01/27/00")))] <- 28
@@ -79,7 +79,7 @@ test_that("ogs10_calculate_32", {
   expect_equivalent(as.numeric(calculate_32(data)["2000"]), 15)
 })
 
-test_that("rx5day_calculate_50", {
+test_that("rx5d_calculate_50", {
   # Maximum consecutive 5-day precipitation
   data[1:length(data)] <- 0
   data[as.character(seq(chron("01/20/00"), chron("01/27/00")))] <- 2

@@ -4,3 +4,4 @@ vignettes/*
 man/*
 *.tar.gz
 .Rproj.user
+ClimInd.Rcheck/

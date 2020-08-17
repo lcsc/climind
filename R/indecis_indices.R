@@ -1820,7 +1820,7 @@ attr(calculate_66, "data") <- c(PRECIPITATION)
 ####Bioclimatic
 #' @title TG of warmest quarter
 #' @description TG of the warmest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -1847,7 +1847,7 @@ attr(calculate_67, "data") <- c(TMEAN)
 
 #' @title TG of coldest quarter
 #' @description TG of coldest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -1874,7 +1874,7 @@ attr(calculate_68, "data") <- c(TMEAN)
 
 #' @title Precipitation of wettest month
 #' @description Total precipitation of the wettest month of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily precipitation, mm
@@ -1901,7 +1901,7 @@ attr(calculate_69, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation of driest month
 #' @description Total precipitation of the driest month of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily precipitation, mm
@@ -1954,7 +1954,7 @@ attr(calculate_71, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation wettest quarter
 #' @description Precipitation of the wettest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily precipitation, mm
@@ -1981,7 +1981,7 @@ attr(calculate_72, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation of Driest Quarter
 #' @description Precipitation of the driest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily precipitation, mm
@@ -2008,7 +2008,7 @@ attr(calculate_73, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation warmest quarter
 #' @description Precipitation of the warmest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param pr daily precipitation, mm
@@ -2036,7 +2036,7 @@ attr(calculate_74, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Precipitation coldest quarter
 #' @description Precipitation of the coldest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param pr daily precipitation, mm
@@ -2064,7 +2064,7 @@ attr(calculate_75, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Temperature seasonality
 #' @description TG standard deviation * 100
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -2090,7 +2090,7 @@ attr(calculate_76, "data") <- c(TMEAN)
 
 #' @title TX warmest month
 #' @description TX of the warmest month of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -2119,7 +2119,7 @@ attr(calculate_77, "data") <- c(TMEAN, TMAX)
 
 #' @title TN of coldest month
 #' @description TN of the coldest month of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -2148,7 +2148,7 @@ attr(calculate_78, "data") <- c(TMEAN, TMIN)
 
 #' @title Temperature Annual Range
 #' @description  TX of the warmest month minus TN of coldest month
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -2172,7 +2172,7 @@ attr(calculate_79, "data") <- c(TMEAN, TMIN, TMAX)
 
 #' @title TG of wettest quarter
 #' @description TG of the wettest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param pr daily precipitation, mm
@@ -2200,7 +2200,7 @@ attr(calculate_80, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title TG of driest quarter
 #' @description TG of the driest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{http://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param pr daily precipitation, mm
@@ -3905,7 +3905,7 @@ attr(calculate_133, "data") <- c(DEWPOINT, TMEAN, HUMIDITY, PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' fffi(data = data_all$rr, evap=data_all$eto)
+#' fffi(data = data_all$rr, evap=data_all$eto, data_names=data_names, time.scale=MONTH)
 fffi = calculate_134 = function(data, evap, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   if(is.null(data) | is.null(evap)){
     return(NULL)
