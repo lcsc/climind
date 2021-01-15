@@ -257,7 +257,7 @@ index_names[9] = "ntg"
 attr(calculate_9, "data") <- c(TMEAN)
 
 #' @title Percentage of cold days
-#' @description Percentages of days with TX lower than the 10th percentile.
+#' @description Percentages of days with TX lower than the 10th percentile. The 10th percentile is computed based on the time scale selected (month, season or year) not daily as ETCCDI does. If you want to compute daily you can use RClimDex package.
 #' @section Formula: \deqn{cd = \frac{No. days TX < 10p} {No. days} * 100}
 ## @importance Important application in agriculture, tourism, human health
 #' 
@@ -286,7 +286,7 @@ index_names[10] = "tx10p"
 attr(calculate_10, "data") <- c(TMAX)
 
 #' @title Percentage of cold nights
-#' @description Percentages of days with TN lower than the 10th percentile.
+#' @description Percentages of days with TN lower than the 10th percentile. The 10th percentile is computed based on the time scale selected (month, season or year) not daily as ETCCDI does. If you want to compute daily you can use RClimDex package.
 #' @section Formula: \deqn{cn = \frac{No. days TN <  10p} {No. days} * 100} 
 ## @importance Important application in agriculture, tourism, human health
 #' 
@@ -308,7 +308,7 @@ index_names[11] = "tn10p"
 attr(calculate_11, "data") <- c(TMIN)
 
 #' @title Cold spell duration
-#' @description Count of days with at least 6 consecutive days when TN < 10th percentile
+#' @description Count of days with at least 6 consecutive days when TN < 10th percentile. The 10th percentile is computed based on the time scale selected (month, season or year) not daily as ETCCDI does. If you want to compute daily you can use RClimDex package.
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data daily minimum temperature, Celsius
@@ -429,7 +429,7 @@ attr(calculate_15, "data") <- c(TMIN)
 
 #' @title Growing season length
 #' @description Annual count of days between the first span of at least 6 days with TG > 5 Celsius and first span after 1 July of 6 days with TG < 5 Celsius.
-#' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
+#' @references European Climate Assessment & Dataset. Indices dictionary. \url{https://www.ecad.eu//indicesextremes/indicesdictionary.php}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -718,7 +718,7 @@ index_names[24] = "hd17"
 attr(calculate_24, "data") <- c(TMEAN)
 
 #' @title Very cold days
-#' @description Days with TN <1st percentile.
+#' @description Days with TN <1st percentile. The 1th percentile is computed based on the time scale selected (month, season or year).
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data daily minimum temperature, Celsius
@@ -747,7 +747,7 @@ index_names[25] = "vcd"
 attr(calculate_25, "data") <- c(TMIN)
 
 #' @title Very warm days
-#' @description Days with TX >99th percentile per year.
+#' @description Days with TX >99th percentile per year. The 99th percentile is computed based on the time scale selected (month, season or year).
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data daily maximum temperature, Celsius
@@ -774,7 +774,7 @@ index_names[26] = "vwd"
 attr(calculate_26, "data") <- c(TMAX)
 
 #' @title Warm days
-#' @description Total numbers of days with TX higher than the 90th percentile.
+#' @description Total numbers of days with TX higher than the 90th percentile. The 90th percentile is computed based on the time scale selected (month, season or year) not daily as ETCCDI does. If you want to compute daily you can use RClimDex package.
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data daily maximum temperature, Celsius
@@ -801,7 +801,7 @@ index_names[27] = "tx90p"
 attr(calculate_27, "data") <- c(TMAX)
 
 #' @title Warm nights
-#' @description Percentages of days with TN higher than the 90th percentile.
+#' @description Percentages of days with TN higher than the 90th percentile.  The 90th percentile is computed based on the time scale selected (month, season or year) not daily.
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data daily minimum temperature, Celsius
@@ -828,7 +828,7 @@ index_names[28] = "tn90p"
 attr(calculate_28, "data") <- c(TMIN)
 
 #' @title Warm spell duration
-#' @description Number of days which are part of groups of at least 6 consecutive days when TX > 90th percentile.
+#' @description Number of days which are part of groups of at least 6 consecutive days when TX > 90th percentile. The 90th percentile is computed based on the time scale selected (month, season or year) not daily as ETCCDI does. If you want to compute daily you can use RClimDex package.
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data daily maximum temperature, Celsius
@@ -1506,7 +1506,7 @@ index_names[55] = "cwd"
 attr(calculate_55, "data") <- c(PRECIPITATION)
 
 #' @title Percentage precipitation of very wet days
-#' @description Precipitation at days exceeding the 95percentile divided by total precipitation expressed in percentage
+#' @description Precipitation at days exceeding the 95th percentile divided by total precipitation expressed in percentage. The 95th percentile is computed based on the time scale selected (month, season or year) not daily.
 ## @importance Important application in agriculture and water
 #' 
 #' @param data daily precipitation, mm
@@ -1538,7 +1538,7 @@ index_names[56] = "r95tot"
 attr(calculate_56, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation fraction extremely wet days
-#' @description Precipitation at days exceeding the 99percentile divided by total precipitation expressed in percentage
+#' @description Precipitation at days exceeding the 99th percentile divided by total precipitation expressed in percentage, The 99th percentile is computed based on the time scale selected (month, season or year) not daily
 ## @importance Important application in agriculture and water
 #' 
 #' @param data daily precipitation, mm
@@ -1594,7 +1594,7 @@ index_names[58] = "d50mm"
 attr(calculate_58, "data") <- c(PRECIPITATION)
 
 #' @title Very wet days
-#' @description Days with precipitation > 95p
+#' @description Days with precipitation > 95th percentile. The 95th percentile is computed based on the time scale selected (month, season or year) not daily 
 #' @references Klein Tank AMG, Zwiers FW, Zhang X. 2009. Guidelines on analysis of extremes in a changing climate in support of informed decisions for adaptation, climate data and monitoring WCDMP-No 72, WMO-TD No 1500, p 5.
 ## @importance Important application in agriculture and water
 #' 
@@ -2952,7 +2952,7 @@ index_names[98] = "jci"
 attr(calculate_98, "data") <- c(TMEAN, LAT)
 
 #' @title Kerner Oceanity Index
-#' @description KOI analysed the oceanity assuming that marine climates have colder spring months in comparison with the autum nmonth.
+#' @description KOI analysed the oceanity assuming that marine climates have colder spring months in comparison with the autum months.
 #' @section Formula: \deqn{KOI = \frac {100(TGo-TGa)}{Thm-Tcm}} TGo = Average temperature of October TGa = Average temperature of April Thm = Average temperature of the hottest month (Celsius); Tcm = Average temperature of the coldest month (Celsius)
 #' @references Zambakas J. 1992.General Climatology. Department of Geology,National & Kapodistrian University of Athens, Athens. Gavilan RG. 2005. The use of climatic parameters and indices in vege-tation distribution. A case study in the Spanish System Central.Int. J.Biometeorol.50: 111–120.
 ## @importance Important application in agriculture
@@ -3745,193 +3745,3 @@ index_units[129] = C_index
 index_titles[129] = "Standardised Precipitation-Evapotranspiration Index 12"
 index_names[129] = "spei12"
 attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
-
-####Fire-based
-#' @title Canadian Fire Weather Index
-#' @description The Canadian Forest Fire Weather Index is an indicator of fire weather intensity and is used to represent potential fire danger. It is computed from daily values of precipitation, temperature, near-surface wind and relative humidity
-#' @references Van Wagner CE. 1987. Development and structure of the Canadian forest fire weather index system. Technical Report 35, Canadian Forestry Service: Ottawa, Ontario. Bedia, J., Herrera, S., Gutiérrez, J. M., Zavala, G., Urbieta, I. R., & Moreno, J. M. (2012). Sensitivity of fire weather index to different reanalysis products in the iberian peninsula. Natural Hazards and Earth System Science, 12(3), 699-708. doi:10.5194/nhess-12-699-2012
-## @importance Important application for fire prevention
-#' 
-#' @param taverage daily mean temperature, Celsius
-#' @param rh relative humidity, percentage
-#' @param w average wind, m/s
-#' @param pr daily precipitation, mm
-#' @param lat latitude, degree
-#' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return temperature, Celsius
-#' @export
-#' @examples
-#' data(data_all)
-#' fwi(taverage = data_all$tg, rh = data_all$humidity, w = data_all$wind, 
-#'      pr = data_all$rr, lat = data_all$lat)
-fwi = calculate_130 = function(taverage, rh, w, pr, lat, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  if(is.null(taverage) | is.null(rh) | is.null(w) | is.null(pr) | is.null(lat)) { 
-    return(NULL) 
-  }
-
-  # Ej. fwi1D(dates, Tm, H, r, W, lat = 46, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
-  # dates=names(taverage); Tm=taverage; H=rh; r=pr=data_all$rr; W=w; lat = lat; what = "FWI"; init.pars = c(85, 6, 15); spin.up = 0
-  data = fwi1D(dates=names(taverage), Tm=taverage, H=rh, r=pr, W=w, lat = lat, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
-
-  # data = taverage
-  # data[!missing.values] = data.nas
-
-  byYears = calcf_data(data=data, time.scale=time.scale, operation=mean, data_names=data_names, na.rm = na.rm)
-  return(byYears)
-}
-index_units[130] = C_degrees
-index_titles[130] = "Canadian Fire Weather Index"
-index_names[130] = "fwi"
-attr(calculate_130, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, LAT)
-
-#' @title Keetch-Byran Drought Index
-#' @description The Keetch-Byram Drought Index (KBDI) is an indicator of drought conditions and is used to predict wildfire severity.
-#' @references Keetch, J.J. and Byram, G.M. (1968). A drought index for forest fire control. Tech. Rep., USDA Forest Service Research Paper SE-38, North Carolina, USA. Alexander, M.E., 1990. Computer calculation of the Keetch-Byram Drought Index - programmers beware. Fire Management Notes 51, 23–25.
-## @importance Important application for fire prevention
-#' 
-#' @param taverage daily mean temperature, Celsius
-#' @param pr daily precipitation, mm
-#' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return index value
-#' @export
-#' @examples
-#' data(data_all)
-#' kbdi(taverage = data_all$tg, pr=data_all$rr)
-kbdi = calculate_131 = function(taverage, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  if(is.null(taverage) | is.null(pr)) { 
-    return(NULL) 
-  }
-
-  # fireDanger
-  missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(pr)
-  data.nas = kbdindex(dates=names(taverage)[!missing.values], t=taverage[!missing.values], p=pr[!missing.values], wrs = 5, start.date = NULL)
-  data.all = taverage
-  data.all[] = NA
-  data.all[names(data.nas)] = data.nas
-
-  byYears = calcf_data(data=data.all, time.scale=time.scale, operation=mean, data_names=data_names, na.rm = na.rm)
-  return(byYears)
-}
-index_units[131] = C_index
-index_titles[131] = "Keetch-Byran Drought Index"
-index_names[131] = "kbdi"
-attr(calculate_131, "data") <- c(TMEAN, PRECIPITATION)
-
-#' @title McArthur Forest Fire Danger Index
-#' @description The McArthur Forest Fire Danger Index (FFDI) is a good indication of the difficulty of fire suppression over a wide range of conditions. It estimates the amount of precipitation needed to bring the soil back to saturation and is computed from the Keetch-Byram Drought Index (KBDI) and Drought Factor (DF).
-#' @references McArthur, A. G. (1967). Fire behaviour in eucalypt forests. Forestry and Timber Bureau Leaflet 107, 36 pp.
-#' 
-#' @param taverage daily mean temperature, Celsius
-#' @param pr daily precipitation, mm
-#' @param rh relative humidity, percentage
-#' @param w average wind, m/s
-#' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return index value
-#' @export
-#' @examples
-#' data(data_all)
-#' ffdi(taverage = data_all$tg, pr=data_all$rr, rh=data_all$humidity, w=data_all$wind)
-ffdi = calculate_132 = function(taverage, pr, rh, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  if(is.null(taverage) | is.null(pr) | is.null(rh) | is.null(w)) { 
-    return(NULL) 
-  }
-
-  data.all = taverage
-  data.all[] = NA
-
-  missing.values = is.na(taverage) | is.na(names(taverage)) | is.na(pr)
-  data.nas = kbdindex(dates=names(taverage)[!missing.values], t=taverage[!missing.values], p=pr[!missing.values], wrs = 5, start.date = NULL)
-  data.ffdi = ffdiIndex(madf = data.nas, t = taverage[names(data.nas)], h = rh[names(data.nas)], w = w[names(data.nas)])
-  data.all[names(data.ffdi)] = data.ffdi
-
-  byYears = calcf_data(data=data.all, time.scale=time.scale, operation=mean, data_names=data_names, na.rm = na.rm)
-  return(byYears)
-}
-index_units[132] = C_index
-index_titles[132] = "McArthur Forest Fire Danger Index"
-index_names[132] = "ffdi"
-attr(calculate_132, "data") <- c(TMEAN, PRECIPITATION, HUMIDITY, WIND)
-
-#' @title Modified Nesterov Index
-#' @description The Modified Nesterov Index (MNI) reflects the relationship between observed weather conditions and fire occurrence. It is a cumulative index  computed from daily temperature and dewpoint temperature, which is reset when a certain precipitation value is reached.
-#' @references Groisman, P.Y., et al., 2007. Global and Planetary Change 56, 371–386.
-## @importance Important application in fire prevention
-#' 
-#' @param dew_point dew point, Celsius
-#' @param taverage daily mean temperature, Celsius
-#' @param rh relative humidity, percentage
-#' @param pr daily precipitation, mm
-#' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return index value
-#' @export
-#' @examples
-#' data(data_all)
-#' mni(dew_point=data_all$dewpoint, taverage=data_all$tg, rh=data_all$humidity, pr=data_all$rr)
-mni = calculate_133 = function(dew_point, taverage, rh, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  if(is.null(dew_point) | is.null(taverage) | is.null(rh) | is.null(pr)) { return(NULL) 
-  }
-
-  # fireDanger
-  data = nesterovIndex(t = taverage, rh = rh, p = pr, modified = FALSE)
-  names(data) = names(taverage)
-
-  byYears = calcf_data(data=data, time.scale=time.scale, operation=mean, data_names=data_names, na.rm = na.rm)
-  return(byYears)
-}
-index_units[133] = C_index
-index_titles[133] = "Modified Nesterov Index"
-index_names[133] = "mni"
-attr(calculate_133, "data") <- c(DEWPOINT, TMEAN, HUMIDITY, PRECIPITATION)
-
-#' @title Finnish Forest Fire Index
-#' @description Finnish forest fire index is determined from the surface moisture, by estimating the volumetric moisture of a 60 mm thick soil surface layer using potential evaporation and precipitation data.
-#' @references Venäläinen A, Heikinheimo M. 2003. The Finnish forest fire index calculation system. In Early Warning Systems for Natural Disaster Reduction, Zschau J, Kuppers A (eds). Springer: Berlin; 645–648.. Vajda, A., Venalainen, A., Suomi, I., Junila, P. and Makela, H., 2014. Assessment of forest fire danger in a boreal forest environment: description and evaluation of the operational system applied in Finland. Meteorol. Appl., 21: 879-887, DOI: 10.1002/met.1425
-## @importance Important application in fire prevention
-#' 
-#' @param data daily precipitation, mm
-#' @param evap potential evapotranspiration
-#' @param data_names names of each period of time
-#' @param time.scale month, season or year
-#' @param na.rm logical. Should missing values (including NaN) be removed?
-#' @return index value
-#' @export
-#' @examples
-#' data(data_all)
-#' fffi(data = data_all$rr, evap=data_all$eto, data_names=data_names, time.scale=MONTH)
-fffi = calculate_134 = function(data, evap, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  if(is.null(data) | is.null(evap)){
-    return(NULL)
-  }
-  data = fffdi(pr=data, pet = evap, Wvol.init = 0.5, z = 60)
-  data.all = evap
-  data.all[] = NA
-  data.all[names(data)] = data
-  byYears = calcf_data(data = data.all, time.scale=time.scale, operation = mean, data_names = data_names, na.rm = na.rm)
-  return(byYears)
-}
-index_units[134] = C_index
-index_titles[134] = "Finnish Forest Fire Index"
-index_names[134] = "fffi"
-attr(calculate_134, "data") <- c(PRECIPITATION, ETO)
-
-i = 1
-for (i in 1:length(index_tipes)){
-  index_tipes[[i]] = index_names[index_tipes[[i]]]
-}
-names(index_units) = names(index_titles) = names(index_names) = index_names
-
-i = 1
-for (i in 1:138){
-  if(!is.na(index_names[i])){
-    index_functions[[index_names[i]]] = get(paste0("calculate_", i))
-  }
-}
-
