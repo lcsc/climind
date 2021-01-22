@@ -3745,3 +3745,16 @@ index_units[129] = C_index
 index_titles[129] = "Standardised Precipitation-Evapotranspiration Index 12"
 index_names[129] = "spei12"
 attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
+
+i = 1
+for (i in 1:length(index_tipes)){
+  index_tipes[[i]] = index_names[index_tipes[[i]]]
+}
+names(index_units) = names(index_titles) = names(index_names) = index_names
+
+i = 1
+for (i in 1:138){
+  if(!is.na(index_names[i])){
+    index_functions[[index_names[i]]] = get(paste0("calculate_", i))
+  }
+}
