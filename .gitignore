@@ -5,3 +5,5 @@ man/*
 *.tar.gz
 .Rproj.user
 ClimInd.Rcheck/
+..Rcheck/
+..pdf
