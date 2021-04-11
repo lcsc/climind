@@ -693,7 +693,7 @@ attr(calculate_23, "data") <- c(TMIN)
 #' @title Heating degree days
 #' @description accumulated degree when TG is below 17 Celsius
 #' @section Formula:\deqn{HD17_j = \sum_{j-1}^{I} (17 ^ oC - TG_ij)}
-#' @references Quayle, R. G., & Diaz, H. F. (1980). Heating degree day data applied to residential heating energy consumption. Journal of Applied Meteorology, 19(3), 241-246. https://doi.org/10.1175/1520-0450(1980)019<0241:HDDDAT>2.0.CO;2
+#' @references Quayle, R. G., & Diaz, H. F. (1980). Heating degree day data applied to residential heating energy consumption. Journal of Applied Meteorology, 19(3), 241-246. \doi{10.1175/1520-0450(1980)019<0241:HDDDAT>2.0.CO;2}
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data daily mean temperature, Celsius
@@ -1820,7 +1820,7 @@ attr(calculate_66, "data") <- c(PRECIPITATION)
 ####Bioclimatic
 #' @title TG of warmest quarter
 #' @description TG of the warmest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -1847,7 +1847,7 @@ attr(calculate_67, "data") <- c(TMEAN)
 
 #' @title TG of coldest quarter
 #' @description TG of coldest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -1874,7 +1874,7 @@ attr(calculate_68, "data") <- c(TMEAN)
 
 #' @title Precipitation of wettest month
 #' @description Total precipitation of the wettest month of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily precipitation, mm
@@ -1901,7 +1901,7 @@ attr(calculate_69, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation of driest month
 #' @description Total precipitation of the driest month of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily precipitation, mm
@@ -1954,7 +1954,7 @@ attr(calculate_71, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation wettest quarter
 #' @description Precipitation of the wettest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily precipitation, mm
@@ -1981,7 +1981,7 @@ attr(calculate_72, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation of Driest Quarter
 #' @description Precipitation of the driest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily precipitation, mm
@@ -2008,7 +2008,7 @@ attr(calculate_73, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation warmest quarter
 #' @description Precipitation of the warmest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param pr daily precipitation, mm
@@ -2036,7 +2036,7 @@ attr(calculate_74, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Precipitation coldest quarter
 #' @description Precipitation of the coldest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param pr daily precipitation, mm
@@ -2064,7 +2064,7 @@ attr(calculate_75, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Temperature seasonality
 #' @description TG standard deviation * 100
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -2090,7 +2090,7 @@ attr(calculate_76, "data") <- c(TMEAN)
 
 #' @title TX warmest month
 #' @description TX of the warmest month of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -2119,7 +2119,7 @@ attr(calculate_77, "data") <- c(TMEAN, TMAX)
 
 #' @title TN of coldest month
 #' @description TN of the coldest month of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -2148,7 +2148,7 @@ attr(calculate_78, "data") <- c(TMEAN, TMIN)
 
 #' @title Temperature Annual Range
 #' @description  TX of the warmest month minus TN of coldest month
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -2172,7 +2172,7 @@ attr(calculate_79, "data") <- c(TMEAN, TMIN, TMAX)
 
 #' @title TG of wettest quarter
 #' @description TG of the wettest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param pr daily precipitation, mm
@@ -2200,7 +2200,7 @@ attr(calculate_80, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title TG of driest quarter
 #' @description TG of the driest quarter of the year
-#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. doi: 10.1002/joc.1276. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
+#' @references Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. Int J Climatol 25:1965–1978. \doi{10.1002/joc.1276}. \url{https://web.archive.org/web/20190714191708/https://www.worldclim.org/bioclim}
 ## @importance Important application in agriculture
 #' 
 #' @param pr daily precipitation, mm
@@ -2228,7 +2228,7 @@ attr(calculate_81, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Mean radiation
 #' @description Mean radiation (W m-2)
-#' @references Kriticos, D.J., Webber, B.L., Leriche, A., Ota, N., Macadam, I., Bathols, J. and Scott, J.K. (2012) CliMond: global high-resolution historical and future scenario climate surfaces for bioclimatic modelling. Methods in Ecology and Evolution, 3, 53-64. http://dx.doi.org/10.1111/j.2041-210X.2011.00134.x
+#' @references Kriticos, D.J., Webber, B.L., Leriche, A., Ota, N., Macadam, I., Bathols, J. and Scott, J.K. (2012) CliMond: global high-resolution historical and future scenario climate surfaces for bioclimatic modelling. Methods in Ecology and Evolution, 3, 53-64. \doi{10.1111/j.2041-210X.2011.00134.x}
 #' 
 #' @param data radiation, W m-2
 #' @param data_names names of each period of time
@@ -2538,7 +2538,7 @@ attr(calculate_84, "data") <- c(TMEAN, HUMIDITY)
 #' @title Heat Index
 #' @description Combines air temperature and relative humidity to determine the human-perceived equivalent temperature
 #' @section Formula: \deqn{HI= -42,379+2,04901523*TG+10,14333127*rh-0,22475541*TG*rh-0.00683783*TG^2-0.05481717*rh^2+0.0122874*TG^2*rh+0.00085282*TG*rh^2-0.00000199*TG^2*rh^2}. Where TG is air temperature in ºF and rh is relative humidity in %
-#' @references The Heat Index Equation \url{http://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml}
+#' @references The Heat Index Equation \url{https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml}
 ## @importance Important application in tourism, energy and health
 #' 
 #' @param taverage daily mean temperature, Celsius
@@ -2806,7 +2806,7 @@ attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, DEWPOINT, M
 
 #' @title UNEP Aridity Index
 #' @description P/Eto
-#' @references Huiping Huang, Yuping Han, Mingming Cao, Jinxi Song, and Heng Xiao Spatial-Temporal Variation of Aridity Index of China during 1960–2013. Advances in Meteorology, vol. 2016, Article ID 1536135, 10 pages, 2016. \url{https://doi.org/10.1155/2016/1536135}
+#' @references Huiping Huang, Yuping Han, Mingming Cao, Jinxi Song, and Heng Xiao Spatial-Temporal Variation of Aridity Index of China during 1960–2013. Advances in Meteorology, vol. 2016, Article ID 1536135, 10 pages, 2016. \doi{10.1155/2016/1536135}
 ## @importance Important application in agriculture
 #' 
 #' @param eto evapotranspiration, mm
@@ -2834,7 +2834,7 @@ attr(calculate_94, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Climatic moisture deficit
 #' @description ETo - evapotranspiration
-#' @references Parks, S. A., Parisien, M. , Miller, C. , Holsinger, L. M. and Baggett, L. S. (2018), Fine-scale spatial climate variation and drought mediate the likelihood of reburning. Ecol Appl, 28: 573-586. doi:10.1002/eap.1671
+#' @references Parks, S. A., Parisien, M. , Miller, C. , Holsinger, L. M. and Baggett, L. S. (2018), Fine-scale spatial climate variation and drought mediate the likelihood of reburning. Ecol Appl, 28: 573-586. \doi{10.1002/eap.1671}
 ## @importance Important application in agriculture
 #' 
 #' @param eto eto, mm
@@ -3465,7 +3465,7 @@ attr(calculate_117, "data") <- c(CLOUD)
 
 #' @title Foggy days
 #' @description Number of days with fog.
-#' @references Rastogi, B., A.P. Williams, D.T. Fischer, S.F. Iacobellis, K. McEachern, L. Carvalho, C. Jones, S.A. Baguskas, and C.J. Still, 2016: Spatial and Temporal Patterns of Cloud Cover and Fog Inundation in Coastal California: Ecological Implications. Earth Interact., 20, 1–19, \url{https://doi.org/10.1175/EI-D-15-0033.1}
+#' @references Rastogi, B., A.P. Williams, D.T. Fischer, S.F. Iacobellis, K. McEachern, L. Carvalho, C. Jones, S.A. Baguskas, and C.J. Still, 2016: Spatial and Temporal Patterns of Cloud Cover and Fog Inundation in Coastal California: Ecological Implications. Earth Interact., 20, 1–19, \doi{10.1175/EI-D-15-0033.1}
 ## @importance Important application in agriculture and tourism
 #' 
 #' @param data cloud base below 100 meter, percentage
@@ -3656,7 +3656,7 @@ attr(calculate_125, "data") <- c(PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 1
 #' @description Standardized precipitation-evapotranspiration index calculated at 1-month time scale
-#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
+#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), \doi{10.1175/2009JCLI2909.1}, 2010.
 ## @importance Important application in agriculture and water
 #' 
 #' @param eto evapotranspiration, mm
@@ -3679,7 +3679,7 @@ attr(calculate_126, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 3
 #' @description Standardized precipitation-evapotranspiration index calculated at 3-month time scale
-#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
+#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), \doi{10.1175/2009JCLI2909.1}, 2010.
 ## @importance Important application in agriculture and water
 #' 
 #' @param eto evapotranspiration, mm
@@ -3702,7 +3702,7 @@ attr(calculate_127, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 6
 #' @description Standardized precipitation-evapotranspiration index calculated at 6-month time scale
-#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
+#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), \doi{10.1175/2009JCLI2909.1}, 2010.
 ## @importance Important application in agriculture and water
 #' 
 #' @param eto evapotranspiration, mm
@@ -3725,7 +3725,7 @@ attr(calculate_128, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 12
 #' @description Standardized precipitation-evapotranspiration index calculated at 12-month time scale
-#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), doi:10.1175/2009JCLI2909.1, 2010.
+#' @references Vicente-Serrano, S. M., Beguería, S. and López-Moreno, J. I.: A multiscalar drought index sensitive to global warming: The standardized precipitation evapotranspiration index, J. Clim., 23(7), \doi{10.1175/2009JCLI2909.1}, 2010.
 ## @importance Important application in agriculture
 #' 
 #' @param eto evapotranspiration, mm
