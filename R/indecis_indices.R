@@ -787,12 +787,12 @@ attr(calculate_26, "data") <- c(TMAX)
 #' data(data_all)
 #' tx90p(data=data_all$tx)
 tx90p = calculate_27 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  value = calcf_data(data=data, time.scale=time.scale, data_names=NULL, operation=quantile_null, probs=c(.90))
+  value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.90))
   function_ = function(data, value){
     value = select_value_for_data(data, value, time.scale)
     return(100*sum(data>value, na.rm = na.rm)/length(data))
   }
-  byYears = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=data_names, operation=function_, value=value)
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
 index_units[27] = C_days
