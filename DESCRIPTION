@@ -16,7 +16,7 @@ Suggests: MASS,
     testthat
 NeedsCompilation: no
 Packaged: 2021-04-09 09:38:24 UTC; freig
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 ByteCompile: true
 Collate: 
     'ClimInd.R'
