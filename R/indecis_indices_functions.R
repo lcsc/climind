@@ -92,6 +92,18 @@ OCT = "Oct"
 NOV = "Nov"
 DEC = "Dec"
 
+#' Internal time names, useful to accelerate calculations
+#'
+#' @param time.scale month, season, year or hydrological_years
+#' @param date daily dates
+#' @return time names
+#' @export
+extract_time_names = function(date, time.scale){
+  extract_names = select_time_function(time.scale)
+  data_names = extract_names(date)
+  return(data_names)
+}
+
 #' Operation de data para los valores de oks == ok
 #'
 #' @param ok ok
