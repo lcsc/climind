@@ -359,7 +359,7 @@ select_time_function = function(time.scale){
 #' @param rh relative humidity, percentage
 #' @param na.rm na.rm
 #' @return et0
-#' @keywords internal
+#' @export
 calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation=NA, rh=NA, na.rm=FALSE){
   # toa = toa/(24*60*60)
 
