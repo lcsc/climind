@@ -58,6 +58,7 @@ index_tipes = list("Temperature-based"=c(1:42), "Precipitation-based" = c(43:66)
 index_units = array(NA, dim=c(138))
 index_titles = array(NA, dim=c(138))
 index_names = array(NA, dim=c(138))
+index_scales = list()
 index_functions = list()
 
 #' @title Mean TX
@@ -80,6 +81,7 @@ gtx = calculate_1 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[1] = C_degrees
 index_titles[1] = "Mean TX"
 index_names[1] = "gtx"
+index_scales[[1]] = c(MONTH, SEASON, YEAR)
 attr(calculate_1, "data") <- c(TMAX)
 
 #' @title Maximum TX
@@ -102,6 +104,7 @@ txx = calculate_2 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[2] = C_degrees
 index_titles[2] = "Maximum TX"
 index_names[2] = "txx"
+index_scales[[2]] = c(MONTH, SEASON, YEAR)
 attr(calculate_2, "data") <- c(TMAX)
 
 #' @title Minimum TX
@@ -124,6 +127,7 @@ txn = calculate_3 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[3] = C_degrees
 index_titles[3] = "Minimum TX"
 index_names[3] = "txn"
+index_scales[[3]] = c(MONTH, SEASON, YEAR)
 attr(calculate_3, "data") <- c(TMAX)
 
 #' @title Mean TN
@@ -146,6 +150,7 @@ gtn = calculate_4 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[4] = C_degrees
 index_titles[4] = "Mean TN"
 index_names[4] = "gtn"
+index_scales[[4]] = c(MONTH, SEASON, YEAR)
 attr(calculate_4, "data") <- c(TMIN)
 
 #' @title Maximum TN
@@ -168,6 +173,7 @@ tnx = calculate_5 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[5] = C_degrees
 index_titles[5] = "Maximum TN"
 index_names[5] = "tnx"
+index_scales[[5]] = c(MONTH, SEASON, YEAR)
 attr(calculate_5, "data") <- c(TMIN)
 
 #' @title Minimum TN
@@ -190,6 +196,7 @@ tnn = calculate_6 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[6] = C_degrees
 index_titles[6] = "Minimum TN"
 index_names[6] = "tnn"
+index_scales[[6]] = c(MONTH, SEASON, YEAR)
 attr(calculate_6, "data") <- c(TMIN)
 
 #' @title Mean TG
@@ -212,6 +219,7 @@ gtg = calculate_7 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[7] = C_degrees
 index_titles[7] = "Mean TG"
 index_names[7] = "gtg"
+index_scales[[7]] = c(MONTH, SEASON, YEAR)
 attr(calculate_7, "data") <- c(TMEAN)
 
 #' @title Maximum TG
@@ -233,6 +241,7 @@ xtg = calculate_8 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[8] = C_degrees
 index_titles[8] = "Maximum TG"
 index_names[8] = "xtg"
+index_scales[[8]] = c(MONTH, SEASON, YEAR)
 attr(calculate_8, "data") <- c(TMEAN)
 
 #' @title Minimum TG
@@ -254,6 +263,7 @@ ntg = calculate_9 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[9] = C_degrees
 index_titles[9] = "Minimum TG"
 index_names[9] = "ntg"
+index_scales[[9]] = c(MONTH, SEASON, YEAR)
 attr(calculate_9, "data") <- c(TMEAN)
 
 #' @title Percentage of cold days
@@ -283,6 +293,7 @@ tx10p = calculate_10 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[10] = C_percentage
 index_titles[10] = "Percentage of cold days"
 index_names[10] = "tx10p"
+index_scales[[10]] = c(MONTH, SEASON, YEAR)
 attr(calculate_10, "data") <- c(TMAX)
 
 #' @title Percentage of cold nights
@@ -305,6 +316,7 @@ tn10p = calculate_11 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[11] = C_percentage
 index_titles[11] = "Percentage of cold nights"
 index_names[11] = "tn10p"
+index_scales[[11]] = c(MONTH, SEASON, YEAR)
 attr(calculate_11, "data") <- c(TMIN)
 
 #' @title Cold spell duration
@@ -343,6 +355,7 @@ csdi = calculate_12 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[12] = C_days
 index_titles[12] = "Cold spell duration"
 index_names[12] = "csdi"
+index_scales[[12]] = c(MONTH, SEASON, YEAR)
 attr(calculate_12, "data") <- c(TMIN)
 
 #' @title Diurnal temperature range
@@ -369,6 +382,7 @@ dtr = calculate_13 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.r
 index_units[13] = C_degrees
 index_titles[13] = "Diurnal temperature range"
 index_names[13] = "dtr"
+index_scales[[13]] = c(MONTH, SEASON, YEAR)
 attr(calculate_13, "data") <- c(TMAX, TMIN)
 
 #' @title Mean daily difference DTR
@@ -399,6 +413,7 @@ vdtr = calculate_14 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.
 index_units[14] = C_degrees
 index_titles[14] = "Mean daily difference DTR"
 index_names[14] = "vdtr"
+index_scales[[14]] = c(MONTH, SEASON, YEAR)
 attr(calculate_14, "data") <- c(TMAX, TMIN)
 
 #' @title Frost days
@@ -425,6 +440,7 @@ fd = calculate_15 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[15] = C_days
 index_titles[15] = "Frost days"
 index_names[15] = "fd"
+index_scales[[15]] = c(MONTH, SEASON, YEAR)
 attr(calculate_15, "data") <- c(TMIN)
 
 #' @title Growing season length
@@ -489,6 +505,7 @@ gsl = calculate_16 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[16] = C_days
 index_titles[16] = "Growing season length"
 index_names[16] = "gsl"
+index_scales[[16]] = c(YEAR)
 attr(calculate_16, "data") <- c(TMEAN)
 
 #' @title Ice days
@@ -515,6 +532,7 @@ id = calculate_17 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[17] = C_days
 index_titles[17] = "Ice days"
 index_names[17] = "id"
+index_scales[[17]] = c(MONTH, SEASON, YEAR)
 attr(calculate_17, "data") <- c(TMAX)
 
 #' @title Maximum consecutive frost days
@@ -547,6 +565,7 @@ cfd = calculate_18 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[18] = C_days
 index_titles[18] = "Maximum consecutive frost days"
 index_names[18] = "cfd"
+index_scales[[18]] = c(MONTH, SEASON, YEAR)
 attr(calculate_18, "data") <- c(TMIN)
 
 #' @title Extreme temperature range
@@ -574,6 +593,7 @@ etr = calculate_19 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.r
 index_units[19] = C_degrees
 index_titles[19] = "Extreme temperature range"
 index_names[19] = "etr"
+index_scales[[19]] = c(MONTH, SEASON, YEAR)
 attr(calculate_19, "data") <- c(TMAX, TMIN)
 
 #' @title Summer days
@@ -600,6 +620,7 @@ su = calculate_20 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[20] = C_days
 index_titles[20] = "Summer days"
 index_names[20] = "su"
+index_scales[[20]] = c(MONTH, SEASON, YEAR)
 attr(calculate_20, "data") <- c(TMAX)
 
 #' @title Maximum consecutive summer days
@@ -637,6 +658,7 @@ csd = calculate_21 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[21] = C_days
 index_titles[21] = "Maximum consecutive summer days"
 index_names[21] = "csd"
+index_scales[[21]] = c(MONTH, SEASON, YEAR)
 attr(calculate_21, "data") <- c(TMAX)
 
 #' @title Difference days above/below Tx17
@@ -662,6 +684,7 @@ dd17 = calculate_22 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[22] = C_days
 index_titles[22] = "Difference days above/below Tx17"
 index_names[22] = "dd17"
+index_scales[[22]] = c(MONTH, SEASON, YEAR)
 attr(calculate_22, "data") <- c(TMAX)
 
 #' @title Tropical nights
@@ -688,6 +711,7 @@ tr = calculate_23 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[23] = C_days
 index_titles[23] = "Tropical nights"
 index_names[23] = "tr"
+index_scales[[23]] = c(MONTH, SEASON, YEAR)
 attr(calculate_23, "data") <- c(TMIN)
 
 #' @title Heating degree days
@@ -715,6 +739,7 @@ hd17 = calculate_24 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[24] = C_degrees
 index_titles[24] = "Heating degree days"
 index_names[24] = "hd17"
+index_scales[[24]] = c(MONTH, SEASON, YEAR)
 attr(calculate_24, "data") <- c(TMEAN)
 
 #' @title Very cold days
@@ -744,6 +769,7 @@ vcd = calculate_25 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[25] = C_days
 index_titles[25] = "Very cold days"
 index_names[25] = "vcd"
+index_scales[[25]] = c(MONTH, SEASON, YEAR)
 attr(calculate_25, "data") <- c(TMIN)
 
 #' @title Very warm days
@@ -771,6 +797,7 @@ vwd = calculate_26 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[26] = C_days
 index_titles[26] = "Very warm days"
 index_names[26] = "vwd"
+index_scales[[26]] = c(MONTH, SEASON, YEAR)
 attr(calculate_26, "data") <- c(TMAX)
 
 #' @title Warm days
@@ -798,6 +825,7 @@ tx90p = calculate_27 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[27] = C_days
 index_titles[27] = "Warm days"
 index_names[27] = "tx90p"
+index_scales[[27]] = c(MONTH, SEASON, YEAR)
 attr(calculate_27, "data") <- c(TMAX)
 
 #' @title Warm nights
@@ -825,6 +853,7 @@ tn90p = calculate_28 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[28] = C_percentage
 index_titles[28] = "Warm nights"
 index_names[28] = "tn90p"
+index_scales[[28]] = c(MONTH, SEASON, YEAR)
 attr(calculate_28, "data") <- c(TMIN)
 
 #' @title Warm spell duration
@@ -859,6 +888,7 @@ wsdi = calculate_29 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[29] = C_days
 index_titles[29] = "Warm spell duration"
 index_names[29] = "wsdi"
+index_scales[[29]] = c(MONTH, SEASON, YEAR)
 attr(calculate_29, "data") <- c(TMAX)
 
 #' @title Zero crossing days
@@ -886,6 +916,7 @@ zcd = calculate_30 = function(tmax, tmin, data_names=NULL, time.scale=YEAR, na.r
 index_units[30] = C_days
 index_titles[30] = "Zero crossing days"
 index_names[30] = "zcd"
+index_scales[[30]] = c(MONTH, SEASON, YEAR)
 attr(calculate_30, "data") <- c(TMAX, TMIN)
 
 #' @title Onset of growing season 6 days
@@ -921,6 +952,7 @@ ogs6 = calculate_31 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[31] = C_date
 index_titles[31] = "Onset of growing season 6 days"
 index_names[31] = "ogs6"
+index_scales[[31]] = c(MONTH, SEASON, YEAR)
 attr(calculate_31, "data") <- c(TMEAN)
 
 #' @title Onset of growing season 10 days
@@ -956,6 +988,7 @@ ogs10 = calculate_32 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[32] = C_date
 index_titles[32] = "Onset of growing season 10 days"
 index_names[32] = "ogs10"
+index_scales[[32]] = c(MONTH, SEASON, YEAR)
 attr(calculate_32, "data") <- c(TMEAN)
 
 #' @title Growing season (Apr-Oct)
@@ -982,6 +1015,7 @@ ta_o = calculate_33 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[33] = C_degrees
 index_titles[33] = "Growing season (Apr-Oct)"
 index_names[33] = "ta_o"
+index_scales[[33]] = c(YEAR)
 attr(calculate_33, "data") <- c(TMEAN)
 
 #' @title Growing season(May-Sep)
@@ -1008,6 +1042,7 @@ tm_s = calculate_34 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[34] = C_degrees
 index_titles[34] = "Growing season(May-Sep)"
 index_names[34] = "tm_s"
+index_scales[[34]] = c(YEAR)
 attr(calculate_34, "data") <- c(TMEAN)
 
 #' @title Growing degree days
@@ -1034,6 +1069,7 @@ gd4 = calculate_35 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[35] = C_degrees
 index_titles[35] = "Growing degree days"
 index_names[35] = "gd4"
+index_scales[[35]] = c(MONTH, SEASON, YEAR)
 attr(calculate_35, "data") <- c(TMEAN)
 
 #' @title Winkler index
@@ -1061,6 +1097,7 @@ wki = calculate_36 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[36] = C_degrees
 index_titles[36] = "Winkler index"
 index_names[36] = "wki"
+index_scales[[36]] = c(YEAR)
 attr(calculate_36, "data") <- c(TMEAN)
 
 #' @title Winter Severity
@@ -1091,6 +1128,7 @@ ws = calculate_37 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[37] = C_degrees
 index_titles[37] = "Winter Severity"
 index_names[37] = "ws"
+index_scales[[37]] = c(YEAR)
 attr(calculate_37, "data") <- c(TMEAN)
 
 #' @title Sums TX32
@@ -1116,6 +1154,7 @@ stx32 = calculate_38 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[38] = C_degrees
 index_titles[38] = "Sums TX32"
 index_names[38] = "stx32"
+index_scales[[38]] = c(YEAR)
 attr(calculate_38, "data") <- c(TMAX)
 
 #' @title Days TX32
@@ -1142,6 +1181,7 @@ d32 = calculate_39 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[39] = C_days
 index_titles[39] = "Days TX32"
 index_names[39] = "d32"
+index_scales[[39]] = c(MONTH, SEASON, YEAR)
 attr(calculate_39, "data") <- c(TMAX)
 
 #' @title Sums TN-15
@@ -1168,6 +1208,7 @@ stn15 = calculate_40 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[40] = C_degrees
 index_titles[40] = "Sums TN-15"
 index_names[40] = "stn15"
+index_scales[[40]] = c(YEAR)
 attr(calculate_40, "data") <- c(TMIN)
 
 #' @title Sums TN-10
@@ -1194,6 +1235,7 @@ stn10 = calculate_41 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[41] = C_degrees
 index_titles[41] = "Sums TN-10"
 index_names[41] = "stn10"
+index_scales[[41]] = c(YEAR)
 attr(calculate_41, "data") <- c(TMIN)
 
 #' @title Sums positive
@@ -1223,6 +1265,7 @@ ptg = calculate_42 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[42] = C_degrees
 index_titles[42] = "Sums positive"
 index_names[42] = "ptg"
+index_scales[[42]] = c(YEAR)
 attr(calculate_42, "data") <- c(TMEAN)
 
 ####Precipitation-based
@@ -1249,6 +1292,7 @@ rti = calculate_43 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[43] = C_precipitation
 index_titles[43] = "Total precipitation"
 index_names[43] = "rti"
+index_scales[[43]] = c(MONTH, SEASON, YEAR)
 attr(calculate_43, "data") <- c(PRECIPITATION)
 
 #' @title Maximum precipitation
@@ -1275,6 +1319,7 @@ rx1day = calculate_44 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[44] = C_precipitation
 index_titles[44] = "Maximum precipitation"
 index_names[44] = "rx1day"
+index_scales[[44]] = c(MONTH, SEASON, YEAR)
 attr(calculate_44, "data") <- c(PRECIPITATION)
 
 #' @title Days precipitation >= R10mm
@@ -1302,6 +1347,7 @@ r10mm = calculate_45 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[45] = C_days
 index_titles[45] = "Days precipitation >= R10mm"
 index_names[45] = "r10mm"
+index_scales[[45]] = c(MONTH, SEASON, YEAR)
 attr(calculate_45, "data") <- c(PRECIPITATION)
 
 #' @title Days precipitation >= R20mm
@@ -1328,6 +1374,7 @@ r20mm = calculate_46 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[46] = C_days
 index_titles[46] = "Days precipitation >= R20mm"
 index_names[46] = "r20mm"
+index_scales[[46]] = c(MONTH, SEASON, YEAR)
 attr(calculate_46, "data") <- c(PRECIPITATION)
 
 #' @title Maximum 5 days R
@@ -1359,6 +1406,7 @@ rx5d = calculate_50 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[50] = C_precipitation
 index_titles[50] = "Maximum 5 days R"
 index_names[50] = "rx5d"
+index_scales[[50]] = c(MONTH, SEASON, YEAR)
 attr(calculate_50, "data") <- c(PRECIPITATION)
 
 #' @title Simple precipitation intensity index
@@ -1390,6 +1438,7 @@ sdii = calculate_51 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[51] = C_precipitation
 index_titles[51] = "Simple precipitation intensity index"
 index_names[51] = "sdii"
+index_scales[[51]] = c(MONTH, SEASON, YEAR)
 attr(calculate_51, "data") <- c(PRECIPITATION)
 
 #' @title Dry days
@@ -1415,6 +1464,7 @@ dd = calculate_52 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[52] = C_days
 index_titles[52] = "Dry days"
 index_names[52] = "dd"
+index_scales[[52]] = c(MONTH, SEASON, YEAR)
 attr(calculate_52, "data") <- c(PRECIPITATION)
 
 #' @title Effective precipitation
@@ -1441,6 +1491,7 @@ ep = calculate_53 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[53] = C_precipitation
 index_titles[53] = "Effective precipitation"
 index_names[53] = "ep"
+index_scales[[53]] = c(MONTH, SEASON, YEAR)
 attr(calculate_53, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Longest dry period
@@ -1472,6 +1523,7 @@ cdd = calculate_54 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[54] = C_days
 index_titles[54] = "Longest dry period"
 index_names[54] = "cdd"
+index_scales[[54]] = c(MONTH, SEASON, YEAR)
 attr(calculate_54, "data") <- c(PRECIPITATION)
 
 #' @title Longest wet period
@@ -1503,6 +1555,7 @@ cwd = calculate_55 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[55] = C_days
 index_titles[55] = "Longest wet period"
 index_names[55] = "cwd"
+index_scales[[55]] = c(MONTH, SEASON, YEAR)
 attr(calculate_55, "data") <- c(PRECIPITATION)
 
 #' @title Percentage precipitation of very wet days
@@ -1535,6 +1588,7 @@ r95tot = calculate_56 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[56] = C_percentage
 index_titles[56] = "Percentage precipitation of very wet days"
 index_names[56] = "r95tot"
+index_scales[[56]] = c(MONTH, SEASON, YEAR)
 attr(calculate_56, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation fraction extremely wet days
@@ -1566,6 +1620,7 @@ r99tot = calculate_57 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[57] = C_percentage
 index_titles[57] = "Precipitation fraction extremely wet days"
 index_names[57] = "r99tot"
+index_scales[[57]] = c(MONTH, SEASON, YEAR)
 attr(calculate_57, "data") <- c(PRECIPITATION)
 
 #' @title Heavy precipitation days
@@ -1591,6 +1646,7 @@ d50mm = calculate_58 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[58] = C_days
 index_titles[58] = "Heavy precipitation days"
 index_names[58] = "d50mm"
+index_scales[[58]] = c(MONTH, SEASON, YEAR)
 attr(calculate_58, "data") <- c(PRECIPITATION)
 
 #' @title Very wet days
@@ -1619,6 +1675,7 @@ d95p = calculate_59 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[59] = C_days
 index_titles[59] = "Very wet days"
 index_names[59] = "d95p"
+index_scales[[59]] = c(MONTH, SEASON, YEAR)
 attr(calculate_59, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation Concentration Index
@@ -1648,6 +1705,7 @@ pci = calculate_60 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[60] = C_index
 index_titles[60] = "Precipitation Concentration Index"
 index_names[60] = "pci"
+index_scales[[60]] = c(YEAR)
 attr(calculate_60, "data") <- c(PRECIPITATION)
 
 #' @title Modified Fournier Index
@@ -1678,6 +1736,7 @@ mfi = calculate_61 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[61] = C_index
 index_titles[61] = "Modified Fournier Index"
 index_names[61] = "mfi"
+index_scales[[61]] = c(YEAR)
 attr(calculate_61, "data") <- c(PRECIPITATION)
 
 #' @title Growing season precipitation
@@ -1704,6 +1763,7 @@ gsr = calculate_62 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[62] = C_precipitation
 index_titles[62] = "Growing season precipitation"
 index_names[62] = "gsr"
+index_scales[[62]] = c(YEAR)
 attr(calculate_62, "data") <- c(PRECIPITATION)
 
 #' @title Non-growing season precipitation
@@ -1737,6 +1797,7 @@ ngsr = calculate_63 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[63] = C_precipitation
 index_titles[63] = "Non-growing season precipitation"
 index_names[63] = "ngsr"
+index_scales[[63]] = c(YEAR)
 attr(calculate_63, "data") <- c(PRECIPITATION)
 
 #' @title Total precipitation wet days
@@ -1763,6 +1824,7 @@ prcptot = calculate_64 = function(data, data_names=NULL, time.scale=YEAR, na.rm 
 index_units[64] = C_precipitation
 index_titles[64] = "Total precipitation wet days"
 index_names[64] = "prcptot"
+index_scales[[64]] = c(MONTH, SEASON, YEAR)
 attr(calculate_64, "data") <- c(PRECIPITATION)
 
 #' @title Wet days 1mm
@@ -1789,6 +1851,7 @@ dr1mm = calculate_65 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[65] = C_days
 index_titles[65] = "Wet days 1mm"
 index_names[65] = "dr1mm"
+index_scales[[65]] = c(MONTH, SEASON, YEAR)
 attr(calculate_65, "data") <- c(PRECIPITATION)
 
 #' @title Wet days 3mm
@@ -1815,6 +1878,7 @@ dr3mm = calculate_66 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[66] = C_days
 index_titles[66] = "Wet days 3mm"
 index_names[66] = "dr3mm"
+index_scales[[66]] = c(MONTH, SEASON, YEAR)
 attr(calculate_66, "data") <- c(PRECIPITATION)
 
 ####Bioclimatic
@@ -1843,6 +1907,7 @@ bio10 = calculate_67 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[67] = C_degrees
 index_titles[67] = "TG of warmest quarter"
 index_names[67] = "bio10"
+index_scales[[67]] = c(YEAR)
 attr(calculate_67, "data") <- c(TMEAN)
 
 #' @title TG of coldest quarter
@@ -1870,6 +1935,7 @@ bio11 = calculate_68 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[68] = C_degrees
 index_titles[68] = "TG of coldest quarter"
 index_names[68] = "bio11"
+index_scales[[68]] = c(YEAR)
 attr(calculate_68, "data") <- c(TMEAN)
 
 #' @title Precipitation of wettest month
@@ -1897,6 +1963,7 @@ bio13 = calculate_69 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[69] = C_precipitation
 index_titles[69] = "Precipitation of wettest month"
 index_names[69] = "bio13"
+index_scales[[69]] = c(YEAR)
 attr(calculate_69, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation of driest month
@@ -1924,6 +1991,7 @@ bio14 = calculate_70 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[70] = C_precipitation
 index_titles[70] = "Precipitation of driest month"
 index_names[70] = "bio14"
+index_scales[[70]] = c(YEAR)
 attr(calculate_70, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation coefficient of variation
@@ -1950,6 +2018,7 @@ bio15 = calculate_71 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[71] = C_index
 index_titles[71] = "Precipitation coefficient of variation"
 index_names[71] = "bio15"
+index_scales[[71]] = c(YEAR)
 attr(calculate_71, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation wettest quarter
@@ -1977,6 +2046,7 @@ bio16 = calculate_72 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[72] = C_precipitation
 index_titles[72] = "Precipitation wettest quarter"
 index_names[72] = "bio16"
+index_scales[[72]] = c(YEAR)
 attr(calculate_72, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation of Driest Quarter
@@ -2004,6 +2074,7 @@ bio17 = calculate_73 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[73] = C_precipitation
 index_titles[73] = "Precipitation of Driest Quarter"
 index_names[73] = "bio17"
+index_scales[[73]] = c(YEAR)
 attr(calculate_73, "data") <- c(PRECIPITATION)
 
 #' @title Precipitation warmest quarter
@@ -2032,6 +2103,7 @@ bio18 = calculate_74 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ..
 index_units[74] = C_precipitation
 index_titles[74] = "Precipitation warmest quarter"
 index_names[74] = "bio18"
+index_scales[[74]] = c(YEAR)
 attr(calculate_74, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Precipitation coldest quarter
@@ -2060,6 +2132,7 @@ bio19 = calculate_75 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ..
 index_units[75] = C_precipitation
 index_titles[75] = "Precipitation coldest quarter"
 index_names[75] = "bio19"
+index_scales[[75]] = c(YEAR)
 attr(calculate_75, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Temperature seasonality
@@ -2086,6 +2159,7 @@ bio4 = calculate_76 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[76] = C_index
 index_titles[76] = "Temperature seasonality"
 index_names[76] = "bio4"
+index_scales[[76]] = c(YEAR)
 attr(calculate_76, "data") <- c(TMEAN)
 
 #' @title TX warmest month
@@ -2115,6 +2189,7 @@ bio5 = calculate_77 = function(data, tmax, data_names=NULL, na.rm = FALSE, ...){
 index_units[77] = C_degrees
 index_titles[77] = "TX warmest month"
 index_names[77] = "bio5"
+index_scales[[77]] = c(YEAR)
 attr(calculate_77, "data") <- c(TMEAN, TMAX)
 
 #' @title TN of coldest month
@@ -2144,6 +2219,7 @@ bio6 = calculate_78 = function(data, tmin, data_names=NULL, na.rm = FALSE, ...){
 index_units[78] = C_degrees
 index_titles[78] = "TN of coldest month"
 index_names[78] = "bio6"
+index_scales[[78]] = c(YEAR)
 attr(calculate_78, "data") <- c(TMEAN, TMIN)
 
 #' @title Temperature Annual Range
@@ -2168,6 +2244,7 @@ bio7 = calculate_79 = function(data, tmin, tmax, data_names=NULL, na.rm = FALSE,
 index_units[79] = C_degrees
 index_titles[79] = "Temperature Annual Range"
 index_names[79] = "bio7"
+index_scales[[79]] = c(YEAR)
 attr(calculate_79, "data") <- c(TMEAN, TMIN, TMAX)
 
 #' @title TG of wettest quarter
@@ -2196,6 +2273,7 @@ bio8 = calculate_80 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...
 index_units[80] = C_degrees
 index_titles[80] = "TG of wettest quarter"
 index_names[80] = "bio8"
+index_scales[[80]] = c(YEAR)
 attr(calculate_80, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title TG of driest quarter
@@ -2224,6 +2302,7 @@ bio9 = calculate_81 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...
 index_units[81] = C_degrees
 index_titles[81] = "TG of driest quarter"
 index_names[81] = "bio9"
+index_scales[[81]] = c(YEAR)
 attr(calculate_81, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Mean radiation
@@ -2245,6 +2324,7 @@ bio20 = calculate_82 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[82] = C_radiation_w
 index_titles[82] = "Mean radiation"
 index_names[82] = "bio20"
+index_scales[[82]] = c(MONTH, SEASON, YEAR)
 attr(calculate_82, "data") <- c(RADIATION_W)
 
 #' @title Universal Thermal Climate Index
@@ -2506,6 +2586,7 @@ utci = calculate_83 = function(taverage, rh, w, tmrt, data_names=NULL, time.scal
 index_units[83] = C_index
 index_titles[83] = "Universal Thermal Climate Index"
 index_names[83] = "utci"
+index_scales[[83]] = c(MONTH, SEASON, YEAR)
 attr(calculate_83, "data") <- c(TMEAN, HUMIDITY, WIND, RADIATIONTEMPERATURE)
 
 #' @title Mould index
@@ -2533,6 +2614,7 @@ mi = calculate_84 = function(taverage, rh, data_names=NULL, time.scale=YEAR, na.
 index_units[84] = C_days
 index_titles[84] = "Mould index"
 index_names[84] = "mi"
+index_scales[[84]] = c(MONTH, SEASON, YEAR)
 attr(calculate_84, "data") <- c(TMEAN, HUMIDITY)
 
 #' @title Heat Index
@@ -2563,6 +2645,7 @@ hi = calculate_85 = function(taverage, rh, data_names=NULL, time.scale=YEAR, na.
 index_units[85] = C_index
 index_titles[85] = "Heat Index"
 index_names[85] = "hi"
+index_scales[[85]] = c(MONTH, SEASON, YEAR)
 attr(calculate_85, "data") <- c(TMEAN, HUMIDITY)
 
 #' @title Wind chill index
@@ -2594,6 +2677,7 @@ wci = calculate_86 = function(taverage, w, data_names=NULL, time.scale=YEAR, na.
 index_units[86] = C_index
 index_titles[86] = "Wind chill index"
 index_names[86] = "wci"
+index_scales[[86]] = c(MONTH, SEASON, YEAR)
 attr(calculate_86, "data") <- c(TMEAN, WIND)
 
 #' @title Apparent temperature
@@ -2625,6 +2709,7 @@ at = calculate_87 = function(taverage, w, vapor, data_names=NULL, time.scale=YEA
 index_units[87] = C_degrees
 index_titles[87] = "Apparent temperature"
 index_names[87] = "at"
+index_scales[[87]] = c(MONTH, SEASON, YEAR)
 attr(calculate_87, "data") <- c(TMEAN, WIND, VAPOUR)
 
 ####wind-based
@@ -2651,6 +2736,7 @@ dfx21 = calculate_88 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
 index_units[88] = C_days
 index_titles[88] = "Days wind gusts above 21 m/s"  
 index_names[88] = "dfx21"
+index_scales[[88]] = c(MONTH, SEASON, YEAR)
 attr(calculate_88, "data") <- c(WINDGUST)
 
 #' @title Daily maximum wind gust
@@ -2677,6 +2763,7 @@ fxx = calculate_89 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[89] = C_wind
 index_titles[89] = "Daily maximum wind gust"
 index_names[89] = "fxx"
+index_scales[[89]] = c(MONTH, SEASON, YEAR)
 attr(calculate_89, "data") <- c(WINDGUST)
 
 #' @title Mean of daily mean wind strength
@@ -2703,6 +2790,7 @@ fg = calculate_90 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FAL
 index_units[90] = C_wind
 index_titles[90] = "Mean of daily mean wind strength"
 index_names[90] = "fg"
+index_scales[[90]] = c(MONTH, SEASON, YEAR)
 attr(calculate_90, "data") <- c(WIND)
 
 #' @title Calm days
@@ -2729,6 +2817,7 @@ fgcalm = calculate_91 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[91] = C_days
 index_titles[91] = "Calm days"
 index_names[91] = "fgcalm"
+index_scales[[91]] = c(MONTH, SEASON, YEAR)
 attr(calculate_91, "data") <- c(WIND)
 
 #' @title Number of days with averaged wind above 10.8m/s
@@ -2755,6 +2844,7 @@ fg6bft = calculate_92 = function(data, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[92] = C_days
 index_titles[92] = "Number of days with averaged wind above 10.8m/s"
 index_names[92] = "fg6bft"
+index_scales[[92]] = c(MONTH, SEASON, YEAR)
 attr(calculate_92, "data") <- c(WIND)
 
 ####aridity/continentality-indices
@@ -2802,6 +2892,7 @@ eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, 
 index_units[93] = C_precipitation
 index_titles[93] = "Reference evapotranspiration"
 index_names[93] = "eto"
+index_scales[[93]] = c(MONTH, SEASON, YEAR)
 attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, DEWPOINT, MDE, RADIATION, INSOLATION, HUMIDITY)
 
 #' @title UNEP Aridity Index
@@ -2830,6 +2921,7 @@ uai = calculate_94 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm =
 index_units[94] = C_index
 index_titles[94] = "UNEP Aridity Index"
 index_names[94] = "uai"
+index_scales[[94]] = c(MONTH, SEASON, YEAR)
 attr(calculate_94, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Climatic moisture deficit
@@ -2858,6 +2950,7 @@ cmd = calculate_95 = function(eto, evapotranspiration, data_names=NULL, time.sca
 index_units[95] = C_index
 index_titles[95] = "Climatic moisture deficit"
 index_names[95] = "cmd"
+index_scales[[95]] = c(MONTH, SEASON, YEAR)
 attr(calculate_95, "data") <- c(ETO, EVAPOTRANSPIRATION)
 
 #' @title De Martonne aridity index
@@ -2889,6 +2982,7 @@ mai = calculate_96 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...)
 index_units[96] = C_index
 index_titles[96] = "De Martonne aridity index"
 index_names[96] = "mai"
+index_scales[[96]] = c(YEAR)
 attr(calculate_96, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Emberger aridity index
@@ -2920,6 +3014,7 @@ eai = calculate_97 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ...)
 index_units[97] = C_index
 index_titles[97] = "Emberger aridity index"
 index_names[97] = "eai"
+index_scales[[97]] = c(YEAR)
 attr(calculate_97, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Johansson Continentality Index
@@ -2949,6 +3044,7 @@ jci = calculate_98 = function(data, data_names=NULL, value, na.rm = FALSE, ...){
 index_units[98] = C_index
 index_titles[98] = "Johansson Continentality Index"
 index_names[98] = "jci"
+index_scales[[98]] = c(YEAR)
 attr(calculate_98, "data") <- c(TMEAN, LAT)
 
 #' @title Kerner Oceanity Index
@@ -2978,6 +3074,7 @@ koi = calculate_99 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[99] = C_index
 index_titles[99] = "Kerner Oceanity Index"
 index_names[99] = "koi"
+index_scales[[99]] = c(YEAR)
 attr(calculate_99, "data") <- c(TMEAN)
 
 #' @title Pinna Combinative Index
@@ -3009,6 +3106,7 @@ pici = calculate_100 = function(pr, taverage, data_names=NULL, na.rm = FALSE, ..
 index_units[100] = C_index
 index_titles[100] = "Pinna Combinative Index"
 index_names[100] = "pici"
+index_scales[[100]] = c(YEAR)
 attr(calculate_100, "data") <- c(PRECIPITATION, TMEAN)
 
 #' @title Budyko Index
@@ -3042,6 +3140,7 @@ bi = calculate_101 = function(data, pr, data_names=NULL, na.rm = FALSE, ...){
 index_units[101] = C_index
 index_titles[101] = "Budyko Index"
 index_names[101] = "bi"
+index_scales[[101]] = c(YEAR)
 attr(calculate_101, "data") <- c(RADIATION, PRECIPITATION)
 
 #' @title Marsz Oceanity Index
@@ -3071,6 +3170,7 @@ moi = calculate_102 = function(data, lat, data_names=NULL, na.rm = FALSE, ...){
 index_units[102] = C_index
 index_titles[102] = "Marsz Oceanity Index"
 index_names[102] = "moi"
+index_scales[[102]] = c(YEAR)
 attr(calculate_102, "data") <- c(TMEAN, LAT)
 
 ####snow-based
@@ -3094,6 +3194,7 @@ ss = calculate_103 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[103] = C_snow
 index_titles[103] = "Snowfall sum"
 index_names[103] = "ss"
+index_scales[[103]] = c(MONTH, SEASON, YEAR)
 attr(calculate_103, "data") <- c(SNOWFALLMM)
 
 #' @title Snow depth 1-10
@@ -3121,6 +3222,7 @@ sd0_10 = calculate_104 = function(data, data_names=NULL, time.scale=YEAR, na.rm 
 index_units[104] = C_days
 index_titles[104] = "Snow depth 1-10"
 index_names[104] = "sd0_10"
+index_scales[[104]] = c(MONTH, SEASON, YEAR)
 attr(calculate_104, "data") <- c(SNOWDEPTH)
 
 #' @title Snow depth 10-20
@@ -3148,6 +3250,7 @@ sd10_20 = calculate_105 = function(data, data_names=NULL, time.scale=YEAR, na.rm
 index_units[105] = C_days
 index_titles[105] = "Snow depth 10-20"
 index_names[105] = "sd10_20"
+index_scales[[105]] = c(MONTH, SEASON, YEAR)
 attr(calculate_105, "data") <- c(SNOWDEPTH)
 
 #' @title Number of snow days
@@ -3174,6 +3277,7 @@ fsd = calculate_107 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[107] = C_days
 index_titles[107] = "Number of snow days"
 index_names[107] = "fsd"
+index_scales[[107]] = c(MONTH, SEASON, YEAR)
 attr(calculate_107, "data") <- c(SNOWFALL)
 
 #' @title Mild snowy days
@@ -3201,6 +3305,7 @@ msd = calculate_108 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[108] = C_days
 index_titles[108] = "Mild snowy days"
 index_names[108] = "msd"
+index_scales[[108]] = c(MONTH, SEASON, YEAR)
 attr(calculate_108, "data") <- c(SNOWDEPTH)
 
 #' @title Heavy snowy days
@@ -3228,6 +3333,7 @@ hsd = calculate_109 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[109] = C_days
 index_titles[109] = "Heavy snowy days"
 index_names[109] = "hsd"
+index_scales[[109]] = c(MONTH, SEASON, YEAR)
 attr(calculate_109, "data") <- c(SNOWDEPTH)
 
 #' @title Date of first snow cover
@@ -3260,6 +3366,7 @@ fsc = calculate_110 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[110] = C_date
 index_titles[110] = "Date of first snow cover"
 index_names[110] = "fsc"
+index_scales[[110]] = c(HYDROYEAR)
 attr(calculate_110, "data") <- c(SNOWDEPTH)
 
 #' @title Date of first permanent snow cover
@@ -3300,6 +3407,7 @@ fpsc = calculate_111 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[111] = C_date
 index_titles[111] = "Date of first permanent snow cover"
 index_names[111] = "fpsc"
+index_scales[[111]] = c(HYDROYEAR)
 attr(calculate_111, "data") <- c(SNOWDEPTH)
 
 #' @title Date of last permanent snow cover
@@ -3340,6 +3448,7 @@ lpsc = calculate_112 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[112] = C_date
 index_titles[112] = "Date of last permanent snow cover"
 index_names[112] = "lpsc"
+index_scales[[112]] = c(HYDROYEAR)
 attr(calculate_112, "data") <- c(SNOWDEPTH)
 
 #' @title Average snow depth
@@ -3365,6 +3474,7 @@ asd = calculate_113 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[113] = C_snow_m
 index_titles[113] = "Average snow depth"
 index_names[113] = "asd"
+index_scales[[113]] = c(MONTH, SEASON, YEAR)
 attr(calculate_113, "data") <- c(SNOWDEPTH)
 
 #' @title Number of snow covered days
@@ -3390,6 +3500,7 @@ scd = calculate_114 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[114] = C_days
 index_titles[114] = "Number of snow covered days"
 index_names[114] = "scd"
+index_scales[[114]] = c(MONTH, SEASON, YEAR)
 attr(calculate_114, "data") <- c(SNOWDEPTH)
 
 #' @title Maximum snow depth
@@ -3412,6 +3523,7 @@ ms = calculate_115 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[115] = C_snow_m
 index_titles[115] = "Maximum snow depth"
 index_names[115] = "ms"
+index_scales[[115]] = c(MONTH, SEASON, YEAR)
 attr(calculate_115, "data") <- c(SNOWDEPTH)
 
 ####Cloud/radiation-based
@@ -3436,6 +3548,7 @@ ssd = calculate_116 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[116] = C_sunshine
 index_titles[116] = "Sum of sunshine duration"
 index_names[116] = "ssd"
+index_scales[[116]] = c(MONTH, SEASON, YEAR)
 attr(calculate_116, "data") <- c(INSOLATION)
 
 #' @title Sunny days
@@ -3461,6 +3574,7 @@ snd = calculate_117 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[117] = C_days
 index_titles[117] = "Sunny days"
 index_names[117] = "snd"
+index_scales[[117]] = c(MONTH, SEASON, YEAR)
 attr(calculate_117, "data") <- c(CLOUD)
 
 #' @title Foggy days
@@ -3487,6 +3601,7 @@ fod = calculate_118 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[118] = C_days
 index_titles[118] = "Foggy days"
 index_names[118] = "fod"
+index_scales[[118]] = c(MONTH, SEASON, YEAR)
 attr(calculate_118, "data") <- c(CLOUD100)
 
 #' @title Mean daily cloud cover
@@ -3509,6 +3624,7 @@ cc = calculate_119 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FA
 index_units[119] = C_cloud
 index_titles[119] = "Mean daily cloud cover"
 index_names[119] = "cc"
+index_scales[[119]] = c(MONTH, SEASON, YEAR)
 attr(calculate_119, "data") <- c(CLOUD)
 
 #' @title Sunshine duration percentage
@@ -3536,6 +3652,7 @@ ssp = calculate_120 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 index_units[120] = C_percentage
 index_titles[120] = "Sunshine duration percentage"
 index_names[120] = "ssp"
+index_scales[[120]] = c(MONTH, SEASON, YEAR)
 attr(calculate_120, "data") <- c(INSOLATION)
 
 #' @title Atmospheric Clarity Index
@@ -3563,6 +3680,7 @@ aci = calculate_121 = function(data, toa, data_names=NULL, time.scale=YEAR, na.r
 index_units[121] = C_index
 index_titles[121] = "Atmospheric Clarity Index"
 index_names[121] = "aci"
+index_scales[[121]] = c(MONTH, SEASON, YEAR)
 attr(calculate_121, "data") <- c(RADIATION, RADIATIONTOA)
 
 ####Drought indices
@@ -3586,6 +3704,7 @@ spi1 = calculate_122 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[122] = C_index
 index_titles[122] = "Standardized precipitation index 1"
 index_names[122] = "spi1"
+index_scales[[122]] = c(MONTH)
 attr(calculate_122, "data") <- c(PRECIPITATION)
 
 #' @title Standardized precipitation index 3
@@ -3608,6 +3727,7 @@ spi3 = calculate_123 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[123] = C_index
 index_titles[123] = "Standardized precipitation index 3"
 index_names[123] = "spi3"
+index_scales[[123]] = c(MONTH)
 attr(calculate_123, "data") <- c(PRECIPITATION)
 
 #' @title Standardized precipitation index 6
@@ -3630,6 +3750,7 @@ spi6 = calculate_124 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[124] = C_index
 index_titles[124] = "Standardized precipitation index 6"
 index_names[124] = "spi6"
+index_scales[[124]] = c(MONTH)
 attr(calculate_124, "data") <- c(PRECIPITATION)
 
 #' @title Standardized precipitation index 12
@@ -3652,6 +3773,7 @@ spi12 = calculate_125 = function(data, data_names=NULL, na.rm = FALSE, ...){
 index_units[125] = C_index
 index_titles[125] = "Standardized precipitation index 12"
 index_names[125] = "spi12"
+index_scales[[125]] = c(MONTH)
 attr(calculate_125, "data") <- c(PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 1
@@ -3675,6 +3797,7 @@ spei1 = calculate_126 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
 index_units[126] = C_index
 index_titles[126] = "Standardised Precipitation-Evapotranspiration Index 1"
 index_names[126] = "spei1"
+index_scales[[126]] = c(MONTH)
 attr(calculate_126, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 3
@@ -3698,6 +3821,7 @@ spei3 = calculate_127 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
 index_units[127] = C_index
 index_titles[127] = "Standardised Precipitation-Evapotranspiration Index 3"
 index_names[127] = "spei3"
+index_scales[[127]] = c(MONTH)
 attr(calculate_127, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 6
@@ -3721,6 +3845,7 @@ spei6 = calculate_128 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
 index_units[128] = C_index
 index_titles[128] = "Standardised Precipitation-Evapotranspiration Index 6"
 index_names[128] = "spei6"
+index_scales[[128]] = c(MONTH)
 attr(calculate_128, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 12
@@ -3744,6 +3869,7 @@ spei12 = calculate_129 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
 index_units[129] = C_index
 index_titles[129] = "Standardised Precipitation-Evapotranspiration Index 12"
 index_names[129] = "spei12"
+index_scales[[129]] = c(MONTH)
 attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
 
 i = 1
