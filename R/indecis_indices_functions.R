@@ -582,7 +582,7 @@ calc_spi = function(data, data_names=NULL, scale=3, na.rm=FALSE){
   # byMonths = byMonths[as.character(1979:2017), ]
   if((na.rm & sum(!is.na(byMonths))!=0) | (!na.rm & sum(is.na(byMonths))==0)){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
-    spi.vector = array(spi(byMonths.vector, scale=scale, na.rm = na.rm)$fitted[, 1])
+    spi.vector = array(spi(byMonths.vector, scale=scale, na.rm = na.rm, verbose = FALSE)$fitted[, 1, 1])
   }else{
     spi.vector = NA
   }
@@ -609,7 +609,7 @@ calc_spei = function(eto, pr, data_names=NULL, scale=3, na.rm=FALSE){
   byMonths = calcf_data(data=data, time.scale=MONTH, operation=sum, na.rm=FALSE, data_names=NULL)
   if((na.rm & sum(!is.na(byMonths))!=0) | (!na.rm & sum(is.na(byMonths))==0)){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
-    spei.vector = array(spei(byMonths.vector, scale=scale, na.rm = na.rm)$fitted[, 1])
+    spei.vector = array(spei(byMonths.vector, scale=scale, na.rm = na.rm, verbose = FALSE)$fitted[, 1, 1])
   }else{
     spei.vector = NA
   }
