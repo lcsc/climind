@@ -3876,7 +3876,7 @@ i = 1
 for (i in 1:length(index_tipes)){
   index_tipes[[i]] = index_names[index_tipes[[i]]]
 }
-names(index_units) = names(index_titles) = names(index_names) = index_names
+names(index_scales) = names(index_units) = names(index_titles) = names(index_names) = index_names
 
 i = 1
 for (i in 1:138){
