@@ -58,7 +58,7 @@ index_tipes = list("Temperature-based"=c(1:42), "Precipitation-based" = c(43:66)
 index_units = array(NA, dim=c(138))
 index_titles = array(NA, dim=c(138))
 index_names = array(NA, dim=c(138))
-index_scales = list()
+index_scales = as.list(rep(NA, 138))
 index_functions = list()
 
 #' @title Mean TX
