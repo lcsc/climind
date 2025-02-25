@@ -3884,3 +3884,65 @@ for (i in 1:138){
     index_functions[[index_names[i]]] = get(paste0("calculate_", i))
   }
 }
+
+#' Calculate the Urban Cleanliness Perception Index (UCP), n = 131
+#'
+#' This function calculates the Urban Cleanliness Perception Index (UCP) based on annual precipitation and mean annual temperature.
+#'
+#' @param pr Numeric vector of precipitation values.
+#' @param tmax Numeric vector of maximum temperature values.
+#' @param tmin Numeric vector of minimum temperature values.
+#' @param data_names Optional character vector with names for the data.
+#' @param na.rm Logical; if `TRUE`, missing values are removed (default is `TRUE`).
+#'
+#' @return A numeric value representing the computed UCP.
+#'
+#' @importFrom stats mean
+#' @importFrom base sum exp log
+#' @importFrom ClimInd calcf_data
+#'
+#' @export
+ucp <- calculate_131 <- function(pr,
+                                 tmax,
+                                 tmin,
+                                 data_names = NULL,
+                                 na.rm = TRUE, ...) {
+  # Input checks
+  if (!is.numeric(pr) || !is.numeric(tmax) || !is.numeric(tmin)) {
+    stop("'pr', 'tmax', and 'tmin' must be numeric")
+  }
+  if (!is.logical(na.rm)) {
+    stop("'na.rm' must be logical")
+  }
+  if (!is.null(data_names) && !is.character(data_names)) {
+    stop("'data_names' must be NULL or character")
+  }
+  
+  function_ <- function(data, tmax, tmin, na.rm) {
+    UCP_max <- 66.18162827
+    C0 <- 27.1853038
+    C <- 10
+    a <- 0.0675826
+    precip_anual <- sum(data, na.rm = na.rm)
+    temp_media_anual <- mean(((tmax + tmin) / 2), na.rm = na.rm)
+    IDM <- precip_anual / (temp_media_anual + C)
+    UCP <- UCP_max * exp(-log(UCP_max / C0) * exp(-a * IDM))
+    return(UCP)
+  }
+  
+  byYears <- calcf_data(
+    data = pr,
+    time.scale = YEAR,
+    data_names = data_names,
+    operation = function_,
+    tmax = tmax,
+    tmin = tmin,
+    na.rm = na.rm
+  )
+  return(byYears)
+}
+index_units[131] = C_index
+index_titles[131] = "Urban Cleanliness Perception Index"
+index_names[131] = "ucp"
+index_scales[[131]] = c(YEAR)
+attr(calculate_131, "data") <- c(PRECIPITATION, TMAX, TMIN)
