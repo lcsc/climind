@@ -3903,13 +3903,12 @@ for (i in 1:138){
 #'
 #' @export
 ucp <- calculate_131 <- function(pr,
-                                 tmax,
-                                 tmin,
+                                 tmean,
                                  data_names = NULL,
                                  na.rm = TRUE, ...) {
   # Input checks
-  if (!is.numeric(pr) || !is.numeric(tmax) || !is.numeric(tmin)) {
-    stop("'pr', 'tmax', and 'tmin' must be numeric")
+  if (!is.numeric(pr) || !is.numeric(tmean)) {
+    stop("'pr', 'tmean' must be numeric")
   }
   if (!is.logical(na.rm)) {
     stop("'na.rm' must be logical")
@@ -3918,13 +3917,13 @@ ucp <- calculate_131 <- function(pr,
     stop("'data_names' must be NULL or character")
   }
   
-  function_ <- function(data, tmax, tmin, na.rm) {
+  function_ <- function(data, tmean, na.rm) {
     UCP_max <- 66.18162827
     C0 <- 27.1853038
     C <- 10
     a <- 0.0675826
     precip_anual <- sum(data, na.rm = na.rm)
-    temp_media_anual <- mean(((tmax + tmin) / 2), na.rm = na.rm)
+    temp_media_anual <- mean(tmean, na.rm = na.rm)
     IDM <- precip_anual / (temp_media_anual + C)
     UCP <- UCP_max * exp(-log(UCP_max / C0) * exp(-a * IDM))
     return(UCP)
@@ -3935,8 +3934,7 @@ ucp <- calculate_131 <- function(pr,
     time.scale = YEAR,
     data_names = data_names,
     operation = function_,
-    tmax = tmax,
-    tmin = tmin,
+    tmean = tmean,
     na.rm = na.rm
   )
   return(byYears)
@@ -3945,4 +3943,4 @@ index_units[131] = C_index
 index_titles[131] = "Urban Cleanliness Perception Index"
 index_names[131] = "ucp"
 index_scales[[131]] = c(YEAR)
-attr(calculate_131, "data") <- c(PRECIPITATION, TMAX, TMIN)
+attr(calculate_131, "data") <- c(PRECIPITATION, TMEAN)
