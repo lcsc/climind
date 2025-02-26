@@ -3887,19 +3887,15 @@ for (i in 1:138){
 
 #' Calculate the Urban Cleanliness Perception Index (UCP), n = 131
 #'
-#' This function calculates the Urban Cleanliness Perception Index (UCP) based on annual precipitation and mean annual temperature.
+#' This function calculates the Urban Cleanliness Perception Index (UCP) based 
+#' on annual precipitation and mean annual temperature.
 #'
 #' @param pr Numeric vector of precipitation values.
-#' @param tmax Numeric vector of maximum temperature values.
-#' @param tmin Numeric vector of minimum temperature values.
+#' @param tmean Numeric vector of mean temperature values.
 #' @param data_names Optional character vector with names for the data.
 #' @param na.rm Logical; if `TRUE`, missing values are removed (default is `TRUE`).
 #'
 #' @return A numeric value representing the computed UCP.
-#'
-#' @importFrom stats mean
-#' @importFrom base sum exp log
-#' @importFrom ClimInd calcf_data
 #'
 #' @export
 ucp <- calculate_131 <- function(pr,
@@ -3922,8 +3918,8 @@ ucp <- calculate_131 <- function(pr,
     C0 <- 27.1853038
     C <- 10
     a <- 0.0675826
-    precip_anual <- sum(data, na.rm = na.rm)
-    temp_media_anual <- mean(tmean, na.rm = na.rm)
+    precip_anual <- base::sum(data, na.rm = na.rm)
+    temp_media_anual <- base::mean(tmean, na.rm = na.rm)
     IDM <- precip_anual / (temp_media_anual + C)
     UCP <- UCP_max * exp(-log(UCP_max / C0) * exp(-a * IDM))
     return(UCP)
