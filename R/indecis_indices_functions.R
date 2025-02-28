@@ -35,8 +35,8 @@ TMIN = "tn" # daily minimum temperature TN, Celsius
 TMAX = "tx" # daily maximum temperature TX, Celsius
 PRECIPITATION = "rr" # daily precipitation sum RR, mm
 LAT = "lat" # latitude, degree
-RADIATION = "radiation" # net radiation, J/m2
-RADIATION_W = "radiation_w" # net radiation, W/m2
+RADIATION = "radiation" # radiation, J/m2
+RADIATION_W = "radiation_w" # radiation, W/m2
 DEWPOINT = "dewpoint" #dew point, Celsius
 WIND = "wind" #average wind, m/s
 HUMIDITY = "humidity" #relative humidity, %
@@ -55,6 +55,7 @@ MDE = "mde" # digital elevation model, m
 SNOWDEPTH = "snowdepth" #snow depth, mm snow
 SNOWDENSITY = "snowdensity" # snow density, kg m-3
 RADIATIONTEMPERATURE = "radiationtemperature" # radiation temperature, Celsius
+NETRADIATION = "netradiation" # net radiation, J/m2
 
 # Necesitamos
 # mean radiation, W/m-2
@@ -349,12 +350,12 @@ select_time_function = function(time.scale){
 #'
 #' @param tmin daily minimum temperature, Celsius, Celsius
 #' @param tmax maximum temperature, Celsius
-#' @param toa radiation toa, J/m2
+#' @param toa radiation toa, J/m2/day
 #' @param w average wind, m/s at 10m
 #' @param mde mde
 #' @param lat latitude
 #' @param tdew dew point, Celsius
-#' @param radiation radiation, J m-2 
+#' @param radiation radiation, J m-2/day
 #' @param insolation insolation, hours
 #' @param rh relative humidity, percentage
 #' @param na.rm na.rm

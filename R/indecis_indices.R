@@ -2855,12 +2855,12 @@ attr(calculate_92, "data") <- c(WIND)
 #' 
 #' @param tmin daily minimum temperature, Celsius
 #' @param tmax daily maximum temperature, Celsius
-#' @param toa solar radiation at TOA, W/m2
+#' @param toa solar radiation at TOA, J/m2/day
 #' @param w average wind, m/s
 #' @param lat latitude, degree
 #' @param tdew dew point, Celsius
 #' @param mde digital elevation model, m
-#' @param radiation net radiation, J/m2
+#' @param radiation radiation, J/m2/day
 #' @param insolation insolation, hours of sun
 #' @param rh relative humidity, percentage
 #' @param data_names names of each period of time
@@ -3124,7 +3124,7 @@ attr(calculate_100, "data") <- c(PRECIPITATION, TMEAN)
 #' @export
 #' @examples
 #' data(data_all)
-#' bi(data = data_all$radiation, pr = data_all$rr)
+#' bi(data = data_all$netradiation, pr = data_all$rr)
 bi = calculate_101 = function(data, pr, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data, pr){
     pr = pr[names(data)]
@@ -3141,7 +3141,7 @@ index_units[101] = C_index
 index_titles[101] = "Budyko Index"
 index_names[101] = "bi"
 index_scales[[101]] = c(YEAR)
-attr(calculate_101, "data") <- c(RADIATION, PRECIPITATION)
+attr(calculate_101, "data") <- c(NETRADIATION, PRECIPITATION)
 
 #' @title Marsz Oceanity Index
 #' @description The annual range of monthly mean air temperatures grados
@@ -3659,7 +3659,7 @@ attr(calculate_120, "data") <- c(INSOLATION)
 #' @description Ratio between solar radiation at surface and solar radiation at TOA (alt top of the atmosphere)
 ## @importance Important application in agriculture and tourism
 #' 
-#' @param data net radiation, J/m2
+#' @param data radiation, J/m2
 #' @param toa solar radiation at TOA, W/m2
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
