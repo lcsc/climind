@@ -3885,11 +3885,12 @@ for (i in 1:138){
   }
 }
 
-#' Calculate the Urban Cleanliness Perception Index (UCP), n = 131
+#' Calculate the Urban Cleanliness Perception Index (UCP)
 #'
-#' This function calculates the Urban Cleanliness Perception Index (UCP) based 
+#' @description Urban Cleanliness Perception Index (UCP) based 
 #' on annual precipitation and mean annual temperature.
-#'
+#' @references Mazon, J., D. Pino, and D. López, 2024: Do Precipitation and Temperature Influence Perceptions of Urban Cleanliness?. Wea. Climate Soc., 16, 555–562, \doi{10.1175/WCAS-D-23-0145.1}. 
+#' 
 #' @param pr Numeric vector of precipitation values.
 #' @param tmean Numeric vector of mean temperature values.
 #' @param data_names Optional character vector with names for the data.
