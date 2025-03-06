@@ -3892,7 +3892,7 @@ attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
 #' @param ... further arguments passed to or from other methods
 #' @return index value
 #' @export
-turc_index <- calculate_130 <- function(data, tmin, rh, pr, radiation, lat, wfc, data_names=NULL, na.rm = FALSE, ...){
+turc <- calculate_130 <- function(data, tmin, rh, pr, radiation, lat, wfc, data_names=NULL, na.rm = FALSE, ...){
   return(calc_turc_index(data, tmin, rh, pr, radiation, lat, wfc, data_names, na.rm))
 }
 names(index_units)[130]  <- "turc"
@@ -3902,7 +3902,7 @@ names(index_scales)[130]  <- "turc"
 index_units[130] <- C_index
 index_titles[130] <- "Turc Index"
 index_scales[[130]] = c(YEAR)
-index_names[130] <- "turc_index"
+index_names[130] <- "turc"
 attr(calculate_130, "data") <- c(TMAX, TMIN, HUMIDITY, PRECIPITATION, RADIATION, LAT, WFC)
 
 #' @title Urban Cleanliness Perception Index (UCP)
