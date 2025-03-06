@@ -23,6 +23,7 @@
 #' @include macArthurFFDI.R
 #' @include nesterovIndex.R
 #' @include penman_fao_dia.R
+#' @include funcion_turc_index_clim.r
 NULL
 
 # Datos diarios
@@ -3872,20 +3873,39 @@ index_names[129] = "spei12"
 index_scales[[129]] = c(MONTH)
 attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
 
-i = 1
-for (i in 1:length(index_tipes)){
-  index_tipes[[i]] = index_names[index_tipes[[i]]]
-}
-names(index_scales) = names(index_units) = names(index_titles) = names(index_names) = index_names
+#### New Indexes
 
-i = 1
-for (i in 1:138){
-  if(!is.na(index_names[i])){
-    index_functions[[index_names[i]]] = get(paste0("calculate_", i))
-  }
+#' @title Turc Index
+#' @description The Turc Index is a hydrometeorological indicator designed to estimate potential vegetation production using key climatic variables, including solar radiation, air temperature (maximum and minimum), relative humidity, and precipitation. Originally developed in 1967, this index integrates three main components: the solar factor (availability of sunlight for photosynthesis), the thermal factor (temperature influence on plant growth), and the dryness factor (balance between evapotranspiration and water availability). By combining these elements, the Turc Index offers a simplified yet robust measure of climate-driven vegetation potential, allowing for global comparisons across diverse ecosystems. Recent studies have demonstrated a strong spatial correlation between the Turc Index and observed vegetation indices, such as the kernel Normalized Difference Vegetation Index (kNDVI), with an R² value of 0.78. This highlights its effectiveness in capturing both spatial patterns and temporal trends of vegetation dynamics worldwide, especially in regions sensitive to climatic variability like semi-arid zones and tropical forests.
+#' @references Turc, L., 1967. Incidence des facteurs macroclimatiques sur les productions végétales. Fourrages 31, 23–25. Turc, L., Lecerf, H., 1972. Indice climatique de potentialité agricole. Sci Sol.
+## @importance The Turc Index is important for assessing vegetation productivity and climate constraints, offering a simple yet effective alternative to complex models. Its ability to estimate potential plant growth using basic climate data makes it valuable for agriculture, water resource management, and ecosystem monitoring. By identifying key limiting factors like humidity and temperature, it helps optimize irrigation, anticipate crop yields, and assess climate change impacts on vegetation
+#' 
+#' @param data daily maximum temperature, Celsius
+#' @param tmin daily minimum temperature, Celsius
+#' @param rh relative humidity, percentage 
+#' @param pr daily precipitation, mm
+#' @param radiation radiation, J/m2/day
+#' @param lat latitude, degree
+#' @param wfc water Field Capacity, initial water balance value
+#' @param data_names names of each period of time
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods
+#' @return index value
+#' @export
+turc_index <- calculate_130 <- function(data, tmin, rh, pr, radiation, lat, wfc, data_names=NULL, na.rm = FALSE, ...){
+  return(calc_turc_index(data, tmin, rh, pr, radiation, lat, wfc, data_names, na.rm))
 }
+names(index_units)[130]  <- "turc"
+names(index_titles)[130]  <- "turc"
+names(index_names)[130]  <- "turc"
+names(index_scales)[130]  <- "turc"
+index_units[130] <- C_index
+index_titles[130] <- "Turc Index"
+index_scales[[130]] = c(YEAR)
+index_names[130] <- "turc_index"
+attr(calculate_130, "data") <- c(TMAX, TMIN, HUMIDITY, PRECIPITATION, RADIATION, LAT, WFC)
 
-#' Calculate the Urban Cleanliness Perception Index (UCP)
+#' @title Urban Cleanliness Perception Index (UCP)
 #'
 #' @description Urban Cleanliness Perception Index (UCP) based 
 #' on annual precipitation and mean annual temperature.
@@ -3895,8 +3915,9 @@ for (i in 1:138){
 #' @param tmean Numeric vector of mean temperature values.
 #' @param data_names Optional character vector with names for the data.
 #' @param na.rm Logical; if `TRUE`, missing values are removed (default is `TRUE`).
+#' @param ... further arguments passed to or from other methods
 #'
-#' @return A numeric value representing the computed UCP.
+#' @return index value
 #'
 #' @export
 ucp <- calculate_131 <- function(pr,
@@ -3936,8 +3957,27 @@ ucp <- calculate_131 <- function(pr,
   )
   return(byYears)
 }
+names(index_units)[131]  <- "ucp"
+names(index_titles)[131]  <- "ucp"
+names(index_names)[131]  <- "ucp"
+names(index_scales)[131]  <- "ucp"
 index_units[131] = C_index
 index_titles[131] = "Urban Cleanliness Perception Index"
 index_names[131] = "ucp"
 index_scales[[131]] = c(YEAR)
 attr(calculate_131, "data") <- c(PRECIPITATION, TMEAN)
+
+####
+
+i = 1
+for (i in 1:length(index_tipes)){
+  index_tipes[[i]] = index_names[index_tipes[[i]]]
+}
+names(index_scales) = names(index_units) = names(index_titles) = names(index_names) = index_names
+
+i = 1
+for (i in 1:138){
+  if(!is.na(index_names[i])){
+    index_functions[[index_names[i]]] = get(paste0("calculate_", i))
+  }
+}

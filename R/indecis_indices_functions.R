@@ -56,6 +56,7 @@ SNOWDEPTH = "snowdepth" #snow depth, mm snow
 SNOWDENSITY = "snowdensity" # snow density, kg m-3
 RADIATIONTEMPERATURE = "radiationtemperature" # radiation temperature, Celsius
 NETRADIATION = "netradiation" # net radiation, J/m2
+WFC = "wfc" # Water Field Capacity, initial water balance value
 
 # Necesitamos
 # mean radiation, W/m-2

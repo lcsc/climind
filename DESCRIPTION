@@ -1,7 +1,7 @@
 Package: ClimInd
 Type: Package
-Version: 0.1-5
-Date: 2024-11-03
+Version: 0.1-6
+Date: 2025-03-03
 Title: Climate Indices
 Author: Fergus Reig-Gracia [aut, cre], Sergio M. Vicente-Serrano [aut], Fernando Dominguez-Castro [aut], Joaquin Bedia-Jiménez [ctb]
 Maintainer: Fergus Reig-Gracia <fergusrg@gmail.com>
@@ -15,8 +15,8 @@ Suggests: MASS,
     rmarkdown,
     testthat
 NeedsCompilation: no
-Packaged: 2024-11-03 09:38:24 UTC; freig
-RoxygenNote: 7.3.1
+Packaged: 2025-03-03 09:38:24 UTC; freig
+RoxygenNote: 7.3.2
 ByteCompile: true
 Collate: 
     'ClimInd.R'
@@ -24,6 +24,7 @@ Collate:
     'custom_functions.R'
     'data.R'
     'ffdi.R'
+    'funcion_turc_index_clim.r'
     'fwi1D.R'
     'penman_fao_dia.R'
     'nesterovIndex.R'
