@@ -103,7 +103,7 @@ DEC = "Dec"
 extract_time_names = function(date, time.scale){
   extract_names = select_time_function(time.scale)
   data_names = extract_names(date)
-  return(data_names)
+  return(as.character(data_names))
 }
 
 #' Operation de data para los valores de oks == ok
