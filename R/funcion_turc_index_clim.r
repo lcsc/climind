@@ -25,7 +25,7 @@ calc_turc_index = function(tmax, tmin, rh, pr, toa, lat, wfc, data_names=NULL, n
 		rh_byMonths.vector = array(t(rh_byMonths), dim=length(rh_byMonths))
 		pr_byMonths.vector = array(t(pr_byMonths), dim=length(pr_byMonths))
 		toa_byMonths.vector = array(t(toa_byMonths), dim=length(toa_byMonths))
-    spi.vector = array(month_turc_index(byMonths.vector, tmin_byMonths.vector, rh_byMonths.vector, pr_byMonths.vector, toa_byMonths.vector, lat, wfc)$fitted[, 1])
+    spi.vector = array(month_turc_index(tmax = byMonths.vector, tmin = tmin_byMonths.vector, rh = rh_byMonths.vector, pr = pr_byMonths.vector, toa = toa_byMonths.vector, lat = lat, wfc = wfc)$fitted[, 1])
   }else{
     spi.vector = NA
   }
@@ -88,7 +88,7 @@ month_turc_index <- function(tmax, tmin, rh, pr, toa, lat, wfc){
   # --- 5. Water balance calculation ---
   # Initialize variables for water balance
   ET <- R <- DIF <- rep(0, length(AvgTemp))  # ET: actual evapotranspiration; R: water reserve; DIF: water balance difference
-  R[1] <- WFC  # Initial water reserve
+  R[1] <- wfc  # Initial water reserve
 
   for (i in 2:length(AvgTemp)) {
     # Update water reserve (R): it cannot exceed 100 or go below 0

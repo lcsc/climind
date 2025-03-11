@@ -3901,7 +3901,7 @@ names(index_names)[130]  <- "turc"
 names(index_scales)[130]  <- "turc"
 index_units[130] <- C_index
 index_titles[130] <- "Turc Index"
-index_scales[[130]] = c(YEAR)
+index_scales[[130]] = c(MONTH)
 index_names[130] <- "turc"
 attr(calculate_130, "data") <- c(TMAX, TMIN, HUMIDITY, PRECIPITATION, RADIATION, LAT, WFC)
 
