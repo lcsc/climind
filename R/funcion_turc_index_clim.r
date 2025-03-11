@@ -50,7 +50,7 @@ calc_turc_index = function(tmax, tmin, rh, pr, toa, lat, wfc, data_names=NULL, n
 #' @return index value
 #' @keywords internal
 month_turc_index <- function(tmax, tmin, rh, pr, toa, lat, wfc){
-	years.data <- length(tmax)
+	years.data <- length(tmax) / 12
 
 	# --- 1. Julian days setup ---
   YearlyMidpoints <- rep(c(15, 46, 74, 104, 135, 165, 196, 227, 257, 288, 318, 349), years.data)  # Midpoint days for each month
