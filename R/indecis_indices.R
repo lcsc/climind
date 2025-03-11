@@ -2862,8 +2862,8 @@ attr(calculate_92, "data") <- c(WIND)
 #' @param tdew dew point, Celsius
 #' @param mde digital elevation model, m
 #' @param radiation radiation, J/m2/day
-#' @param insolation insolation, hours of sun
 #' @param rh relative humidity, percentage
+#' @param insolation insolation, hours of sun
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
@@ -2876,7 +2876,7 @@ attr(calculate_92, "data") <- c(WIND)
 #'      lat=data_all$lat, tdew = data_all$dewpoint, 
 #'      mde=data_all$mde, radiation = data_all$radiation, 
 #'      insolation=data_all$insolation, rh = data_all$humidity)
-eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, insolation=NA, rh=NA, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, rh=NA, insolation=NA, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
 
   if(is.null(w)){
     return(NULL)
