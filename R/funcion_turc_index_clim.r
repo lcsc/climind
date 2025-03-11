@@ -19,18 +19,13 @@ calc_turc_index = function(tmax, tmin, rh, pr, toa, lat, wfc, data_names=NULL, n
 	rh_byMonths = calcf_data(data=rh, time.scale=MONTH, operation=mean, na.rm=FALSE, data_names=NULL)
 	pr_byMonths = calcf_data(data=pr, time.scale=MONTH, operation=sum, na.rm=FALSE, data_names=NULL)
 	toa_byMonths = calcf_data(data=toa_ok, time.scale=MONTH, operation=sum, na.rm=FALSE, data_names=NULL)
-	lat_byMonths = calcf_data(data=lat, time.scale=MONTH, operation=mean, na.rm=FALSE, data_names=NULL)
-	wfc_byMonths = calcf_data(data=wfc, time.scale=MONTH, operation=mean, na.rm=FALSE, data_names=NULL)
-  # byMonths = byMonths[as.character(1979:2017), ]
   if((na.rm & sum(!is.na(byMonths))!=0) | (!na.rm & sum(is.na(byMonths))==0)){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
 		tmin_byMonths.vector = array(t(tmin_byMonths), dim=length(tmin_byMonths))
 		rh_byMonths.vector = array(t(rh_byMonths), dim=length(rh_byMonths))
 		pr_byMonths.vector = array(t(pr_byMonths), dim=length(pr_byMonths))
 		toa_byMonths.vector = array(t(toa_byMonths), dim=length(toa_byMonths))
-		lat_byMonths.vector = array(t(lat_byMonths), dim=length(lat_byMonths))
-		wfc_byMonths.vector = array(t(wfc_byMonths), dim=length(wfc_byMonths))
-    spi.vector = array(month_turc_index(byMonths.vector, tmin_byMonths.vector, rh, pr_byMonths.vector, toa_byMonths.vector, lat_byMonths.vector, wfc_byMonths.vector)$fitted[, 1])
+    spi.vector = array(month_turc_index(byMonths.vector, tmin_byMonths.vector, rh_byMonths.vector, pr_byMonths.vector, toa_byMonths.vector, lat, wfc)$fitted[, 1])
   }else{
     spi.vector = NA
   }
