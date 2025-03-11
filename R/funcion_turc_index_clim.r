@@ -25,7 +25,7 @@ calc_turc_index = function(tmax, tmin, rh, pr, toa, lat, wfc, data_names=NULL, n
 		rh_byMonths.vector = array(t(rh_byMonths), dim=length(rh_byMonths))
 		pr_byMonths.vector = array(t(pr_byMonths), dim=length(pr_byMonths))
 		toa_byMonths.vector = array(t(toa_byMonths), dim=length(toa_byMonths))
-    spi.vector = array(month_turc_index(tmax = byMonths.vector, tmin = tmin_byMonths.vector, rh = rh_byMonths.vector, pr = pr_byMonths.vector, toa = toa_byMonths.vector, lat = lat, wfc = wfc)$fitted[, 1])
+    spi.vector = month_turc_index(tmax = byMonths.vector, tmin = tmin_byMonths.vector, rh = rh_byMonths.vector, pr = pr_byMonths.vector, toa = toa_byMonths.vector, lat = lat, wfc = wfc)
   }else{
     spi.vector = NA
   }
