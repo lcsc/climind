@@ -3893,7 +3893,6 @@ attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
 #' @return index value
 #' @export
 turc <- calculate_130 <- function(data, tmin, rh, pr, radiation, lat, wfc, data_names=NULL, na.rm = FALSE, ...){
-calc_turc_index = function(tmax, tmin, rh, pr, toa, lat, wfc, data_names=NULL, na.rm=FALSE){
   return(calc_turc_index(tmax = data, tmin = tmin, rh = rh, pr = pr, toa = radiation, lat = lat, wfc = wfc, data_names = data_names, na.rm = na.rm))
 }
 names(index_units)[130]  <- "turc"
@@ -3958,6 +3957,7 @@ ucp <- calculate_131 <- function(pr,
   )
   return(byYears)
 }
+
 names(index_units)[131]  <- "ucp"
 names(index_titles)[131]  <- "ucp"
 names(index_names)[131]  <- "ucp"
