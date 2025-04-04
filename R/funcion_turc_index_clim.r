@@ -18,7 +18,7 @@ calc_turc_index = function(tmax, tmin, rh, pr, toa, lat, wfc, data_names=NULL, n
 	tmin_byMonths = calcf_data(data=tmin, time.scale=MONTH, operation=mean, na.rm=FALSE, data_names=NULL)
 	rh_byMonths = calcf_data(data=rh, time.scale=MONTH, operation=mean, na.rm=FALSE, data_names=NULL)
 	pr_byMonths = calcf_data(data=pr, time.scale=MONTH, operation=sum, na.rm=FALSE, data_names=NULL)
-	toa_byMonths = calcf_data(data=toa_ok, time.scale=MONTH, operation=sum, na.rm=FALSE, data_names=NULL)
+	toa_byMonths = calcf_data(data=toa_ok, time.scale=MONTH, operation=mean, na.rm=FALSE, data_names=NULL)
   if((na.rm & sum(!is.na(byMonths))!=0) | (!na.rm & sum(is.na(byMonths))==0)){
     byMonths.vector = array(t(byMonths), dim=length(byMonths))
 		tmin_byMonths.vector = array(t(tmin_byMonths), dim=length(tmin_byMonths))

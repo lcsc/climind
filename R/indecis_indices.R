@@ -2688,7 +2688,7 @@ attr(calculate_86, "data") <- c(TMEAN, WIND)
 #' 
 #' @param taverage daily mean temperature, Celsius
 #' @param w average wind, m/s
-#' @param vapor water vapour pressure, hPa
+#' @param rh relative humidity, percentage
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
@@ -2696,11 +2696,11 @@ attr(calculate_86, "data") <- c(TMEAN, WIND)
 #' @export
 #' @examples
 #' data(data_all)
-#' at(taverage = data_all$tg, w = data_all$wind, vapor = data_all$VAPOUR)
-at = calculate_87 = function(taverage, w, vapor, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
-  e = 6.015*exp(17.2*taverage/(237.7+taverage))*vapor/100
+#' at(taverage = data_all$tg, w = data_all$wind, rh = data_all$HUMIDITY)
+at = calculate_87 = function(taverage, w, rh, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  e = 6.015*exp(17.2*taverage/(237.7+taverage))*rh/100
   data = taverage + 0.33 * e - 0.70 * w - 4.00
-  data[is.na(taverage) | is.na(vapor) | is.na(w)] = NA
+  data[is.na(taverage) | is.na(rh) | is.na(w)] = NA
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
@@ -2711,7 +2711,7 @@ index_units[87] = C_degrees
 index_titles[87] = "Apparent temperature"
 index_names[87] = "at"
 index_scales[[87]] = c(MONTH, SEASON, YEAR)
-attr(calculate_87, "data") <- c(TMEAN, WIND, VAPOUR)
+attr(calculate_87, "data") <- c(TMEAN, WIND, HUMIDITY)
 
 ####wind-based
 #' @title Days wind gusts above 21 m/s
@@ -2882,7 +2882,7 @@ eto = calculate_93 = function(tmin, tmax, toa, w, lat, tdew, mde, radiation=NA, 
     return(NULL)
   }
 
-  data = calc_eto(tmin = tmin, tmax = tmax, radiation = radiation, insolation=insolation, toa = toa, w = w, lat=lat, tdew = tdew, mde=mde, rh = rh)
+  data = calc_eto(tmin = tmin, tmax = tmax, radiation = radiation, insolation = insolation, toa = toa, w = w, lat=lat, tdew = tdew, mde=mde, rh = rh)
 
   function_ = function(data){
     return(sum(data, na.rm=na.rm))
@@ -2914,7 +2914,7 @@ attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, DEWPOINT, M
 uai = calculate_94 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data = pr/eto
   function_ = function(data){
-    return(mean(data, na.rm=na.rm))
+    return(sum(data, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
@@ -3893,7 +3893,8 @@ attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
 #' @return index value
 #' @export
 turc <- calculate_130 <- function(data, tmin, rh, pr, radiation, lat, wfc, data_names=NULL, na.rm = FALSE, ...){
-  return(calc_turc_index(data, tmin, rh, pr, radiation, lat, wfc, data_names, na.rm))
+calc_turc_index = function(tmax, tmin, rh, pr, toa, lat, wfc, data_names=NULL, na.rm=FALSE){
+  return(calc_turc_index(tmax = data, tmin = tmin, rh = rh, pr = pr, toa = radiation, lat = lat, wfc = wfc, data_names = data_names, na.rm = na.rm))
 }
 names(index_units)[130]  <- "turc"
 names(index_titles)[130]  <- "turc"
