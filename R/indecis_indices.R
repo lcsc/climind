@@ -24,6 +24,7 @@
 #' @include nesterovIndex.R
 #' @include penman_fao_dia.R
 #' @include funcion_turc_index_clim.r
+#' @include pvpot.R
 NULL
 
 # Datos diarios
@@ -42,19 +43,7 @@ C_cloud = "%"
 C_sunshine = "hours"
 C_percentage = "%"
 
-# index_tipes = array(NA, dim=c(138))
-# index_tipes[1:42] = "Temperature-based"
-# index_tipes[43:66] = "Precipitation-based"
-# index_tipes[67:87] = "Bioclimatic"
-# index_tipes[88:92] = "wind-based"
-# index_tipes[93:102] = "Aridity/continentality-indices"
-# index_tipes[103:115] = "Snow-based"
-# index_tipes[116:121] = "Cloud/radiation-based"
-# index_tipes[122:129] = "Drought"
-# index_tipes[130:134] = "Fire"
-# index_tipes[135:138] = "Tourism"
-
-index_tipes = list("Temperature-based"=c(1:42), "Precipitation-based" = c(43:66), "Bioclimatic" = c(67:87), "wind-based" = c(88:92), "Aridity/continentality-indices" = c(93:102), "Snow-based" = c(103:115), "Cloud/radiation-based" = c(116:121), "Drought" = c(122:129), "Fire" = c(130:134), "Tourism" = c(135:138))
+index_tipes = list("Temperature-based"=c(1:42), "Precipitation-based" = c(43:66), "Bioclimatic" = c(67:87, 130), "Wind-based" = c(88:92, 132), "Aridity/continentality-indices" = c(93:102, 133), "Snow-based" = c(103:115), "Cloud/radiation-based" = c(116:121), "Drought" = c(122:129), "Fire" = c(134), "Tourism" = c(131, 135:138))
 
 index_units = array(NA, dim=c(138))
 index_titles = array(NA, dim=c(138))
@@ -3967,6 +3956,104 @@ index_titles[131] = "Urban Cleanliness Perception Index"
 index_names[131] = "ucp"
 index_scales[[131]] = c(YEAR)
 attr(calculate_131, "data") <- c(PRECIPITATION, TMEAN)
+
+#' @title Windy days
+#' @description Total numbers of days with wind higher than the 95th percentile. The 95th percentile is computed based on the time scale selected (month, season or year) not daily.
+## @importance Important application in energy and tourism
+#' 
+#' @param data average wind, m/s
+#' @param data_names names of each period of time
+#' @param time.scale month, season or year
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return days
+#' @export
+#' @examples
+#' data(data_all)
+#' w95(data=data_all$wind)
+w95 = calculate_132 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  value = calcf_data(data=data, time.scale=time.scale, extract_names=select_all_time_function, data_names=NULL, operation=quantile_null, probs=c(.95))
+  function_ = function(data, value){
+    value = select_value_for_data(data, value, time.scale)
+    return(100*sum(data>value, na.rm = na.rm)/length(data))
+  }
+  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
+  return(byYears)
+}
+index_units[132] = C_days
+index_titles[132] = "Windy days"
+index_names[132] = "w95"
+index_scales[[132]] = c(MONTH, SEASON, YEAR)
+attr(calculate_132, "data") <- c(WIND)
+
+#' @title Photovoltaic potential index
+#' @description Photovoltaic potential index describing cell potential production with respect to the optimal potential of a global downward shortwave radiation of 1000 W/m2.
+## @importance Important application in energy and tourism
+#' 
+#' @param taverage daily mean temperature, Celsius
+#' @param w average wind, m/s
+#' @param radiation radiation, W m-2
+#' @param data_names names of each period of time
+#' @param time.scale month, season or year
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return days
+#' @export
+#' @examples
+#' data(data_all)
+#' pvpot(taverage=data_all$tg, w=data_all$wind, radiation=data_all$radiation_w)
+pvpot = calculate_133 = function(taverage, w, radiation, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+
+  data = pvpot_(tm = taverage, wss = w, rad = radiation)
+
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=sum, data_names=data_names, na.rm = na.rm)
+
+  return(byYears)
+}
+index_units[133] = C_index
+index_titles[133] = "Photovoltaic potential index"
+index_names[133] = "pvpot"
+index_scales[[133]] = c(MONTH, SEASON, YEAR)
+attr(calculate_133, "data") <- c(TMEAN, WIND, RADIATION_W)
+
+####Fire-based
+#' @title Canadian Fire Weather Index
+#' @description The Canadian Forest Fire Weather Index is an indicator of fire weather intensity and is used to represent potential fire danger. It is computed from daily values of precipitation, temperature, near-surface wind and relative humidity
+#' @references Van Wagner CE. 1987. Development and structure of the Canadian forest fire weather index system. Technical Report 35, Canadian Forestry Service: Ottawa, Ontario. Bedia, J., Herrera, S., Gutiérrez, J. M., Zavala, G., Urbieta, I. R., & Moreno, J. M. (2012). Sensitivity of fire weather index to different reanalysis products in the iberian peninsula. Natural Hazards and Earth System Science, 12(3), 699-708. doi:10.5194/nhess-12-699-2012
+## @importance Important application for fire prevention
+#' 
+#' @param taverage daily mean temperature, Celsius
+#' @param rh relative humidity, percentage
+#' @param w average wind, m/s
+#' @param pr daily precipitation, mm
+#' @param lat latitude, degree
+#' @param data_names names of each period of time
+#' @param time.scale month, season or year
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @return temperature, Celsius
+#' @export
+#' @examples
+#' data(data_all)
+#' fwi(taverage = data_all$tg, rh = data_all$humidity, w = data_all$wind, 
+#'      pr = data_all$rr, lat = data_all$lat)
+fwi = calculate_134 = function(taverage, rh, w, pr, lat, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+  if(is.null(taverage) | is.null(rh) | is.null(w) | is.null(pr) | is.null(lat)) { 
+    return(NULL) 
+  }
+
+  # Ej. fwi1D(dates, Tm, H, r, W, lat = 46, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
+  # dates=names(taverage); Tm=taverage; H=rh; r=pr=data_all$rr; W=w; lat = lat; what = "FWI"; init.pars = c(85, 6, 15); spin.up = 0
+  data = fwi1D(dates=names(taverage), Tm=taverage, H=rh, r=pr, W=w, lat = lat, what = "FWI", init.pars = c(85, 6, 15), spin.up = 0)
+
+  # data = taverage
+  # data[!missing.values] = data.nas
+
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=mean, data_names=data_names, na.rm = na.rm)
+  return(byYears)
+}
+index_units[134] = C_degrees
+index_titles[134] = "Canadian Fire Weather Index"
+index_names[134] = "fwi"
+index_scales[[134]] = c(MONTH, SEASON, YEAR)
+attr(calculate_134, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, LAT)
 
 ####
 
