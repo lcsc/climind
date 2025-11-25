@@ -4055,6 +4055,65 @@ index_names[134] = "fwi"
 index_scales[[134]] = c(MONTH, SEASON, YEAR)
 attr(calculate_134, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, LAT)
 
+####### Index from Agroclim
+#' @title Cumulative growing degree days
+#' @description 
+#' @references 
+## @importance Important application in agriculture
+#' 
+#' @param data daily mean temperature, Celsius
+#' @param data_names names of each period of time 
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return temperature, Celsius
+#' @export
+#' @examples
+#' data(data_all)
+#' gtx(data=data_all$tg)
+cgdd_w = calculate_135 = function(data, data_names=NULL, na.rm = FALSE){
+  function_ = function(data){ # 11-01 a 07-31
+    data = data[months(chron(names(data))) %in% c(NOV, DEC, JAN, FEB, MAR, APR, MAY, JUN, JUL)]
+    return(sum(data, na.rm = na.rm))
+  }
+  data[data < 5] = 0
+  data[data >= 5] = data[data >= 5] - 5
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
+  return(byYears)
+}
+index_units[1] = C_degrees
+index_titles[1] = "Cumulative growing degree days"
+index_names[1] = "cgdd_w"
+index_scales[[1]] = c(HYDROYEAR)
+attr(calculate_135, "data") <- c(TMEAN)
+
+#' @title Cumulative growing degree days
+#' @description 
+#' @references 
+## @importance Important application in agriculture
+#' 
+#' @param data daily mean temperature, Celsius
+#' @param data_names names of each period of time 
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return temperature, Celsius
+#' @export
+#' @examples
+#' data(data_all)
+#' gtx(data=data_all$tg)
+cgdd_s = calculate_136 = function(data, data_names=NULL, na.rm = FALSE){
+  function_ = function(data){ # 11-01 a 07-31
+    data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
+    return(sum(data, na.rm = na.rm))
+  }
+  data[data < 10] = 0
+  data[data >= 10] = data[data >= 10] - 10
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
+  return(byYears)
+}
+index_units[1] = C_degrees
+index_titles[1] = "Cumulative growing degree days"
+index_names[1] = "cgdd_w"
+index_scales[[1]] = c(YEAR)
+attr(calculate_136, "data") <- c(TMEAN)
+
 ####
 
 i = 1
