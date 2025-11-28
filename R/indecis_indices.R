@@ -43,12 +43,12 @@ C_cloud = "%"
 C_sunshine = "hours"
 C_percentage = "%"
 
-index_tipes = list("Temperature-based"=c(1:42), "Precipitation-based" = c(43:66), "Bioclimatic" = c(67:87, 130), "Wind-based" = c(88:92, 132), "Aridity/continentality-indices" = c(93:102, 133), "Snow-based" = c(103:115), "Cloud/radiation-based" = c(116:121), "Drought" = c(122:129), "Fire" = c(134), "Tourism" = c(131, 135:138))
+index_tipes = list("Temperature-based"=c(1:42), "Precipitation-based" = c(43:66), "Bioclimatic" = c(67:87, 130), "Wind-based" = c(88:92, 132), "Aridity/continentality-indices" = c(93:102, 133), "Snow-based" = c(103:115), "Cloud/radiation-based" = c(116:121), "Drought" = c(122:129), "Fire" = c(134), "Tourism" = c(131), "Agroclimatic" = c(135:143))
 
-index_units = array(NA, dim=c(138))
-index_titles = array(NA, dim=c(138))
-index_names = array(NA, dim=c(138))
-index_scales = as.list(rep(NA, 138))
+index_units = array(NA, dim=c(143))
+index_titles = array(NA, dim=c(143))
+index_names = array(NA, dim=c(143))
+index_scales = as.list(rep(NA, 143))
 index_functions = list()
 
 #' @title Mean TX
@@ -4057,8 +4057,8 @@ attr(calculate_134, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, LAT)
 
 ####### Index from Agroclim
 #' @title Cumulative growing degree days
-#' @description 
-#' @references 
+#' @description Sum of daily degree days from November 1st to July 31st. A degree day is defined as the difference between the average daily temperature and the base temperature (5ºC) provided that the average temperature is higher than the base temperature.
+#' @references --
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -4068,15 +4068,14 @@ attr(calculate_134, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, LAT)
 #' @export
 #' @examples
 #' data(data_all)
-#' gtx(data=data_all$tg)
+#' cgdd_w(data=data_all$tg)
 cgdd_w = calculate_135 = function(data, data_names=NULL, na.rm = FALSE){
   function_ = function(data){ # 11-01 a 07-31
     data = data[months(chron(names(data))) %in% c(NOV, DEC, JAN, FEB, MAR, APR, MAY, JUN, JUL)]
     return(sum(data, na.rm = na.rm))
   }
-  data[data < 5] = 0
-  data[data >= 5] = data[data >= 5] - 5
-  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
+  data = data[data >= 5] - 5
+  byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[1] = C_degrees
@@ -4086,8 +4085,8 @@ index_scales[[1]] = c(HYDROYEAR)
 attr(calculate_135, "data") <- c(TMEAN)
 
 #' @title Cumulative growing degree days
-#' @description 
-#' @references 
+#' @description Sum of daily degree days from April 1st to October 31st. A degree day is defined as the difference between the average daily temperature and the base temperature (10ºC) provided that the average temperature is higher than the base temperature.
+#' @references --
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
@@ -4097,14 +4096,13 @@ attr(calculate_135, "data") <- c(TMEAN)
 #' @export
 #' @examples
 #' data(data_all)
-#' gtx(data=data_all$tg)
+#' cgdd_s(data=data_all$tg)
 cgdd_s = calculate_136 = function(data, data_names=NULL, na.rm = FALSE){
   function_ = function(data){ # 11-01 a 07-31
     data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
     return(sum(data, na.rm = na.rm))
   }
-  data[data < 10] = 0
-  data[data >= 10] = data[data >= 10] - 10
+  data = data[data >= 10] - 10
   byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
@@ -4113,6 +4111,208 @@ index_titles[1] = "Cumulative growing degree days"
 index_names[1] = "cgdd_w"
 index_scales[[1]] = c(YEAR)
 attr(calculate_136, "data") <- c(TMEAN)
+
+#' @title Cumulative chilling hours
+#' @description Sum of daily chill hours from November 1 to March 1. A chill hour is defined as the fraction of the day in which the temperature is below 7 Celsius, calculated by taking the difference between 7 Celsius and the daily minimum temperature, dividing it by the range between the maximum and minimum temperature of the day, and multiplying the result by 24 hours, provided that the minimum temperature is below 7 Celsius (Crossa-Raynaud, 1955).
+#' @references --
+## @importance Important application in agriculture
+#' 
+#' @param tmin daily minimum temperature, Celsius
+#' @param tmax daily maximum temperature, Celsius
+#' @param data_names names of each period of time 
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return temperature, Celsius
+#' @export
+#' @examples
+#' data(data_all)
+#' cfdd(tmin=data_all$tn, tmax=data_all$tx)
+cfdd = calculate_137 = function(tmin, tmax, data_names=NULL, na.rm = FALSE){
+  function_ = function(data){ # 11-01, 03-15
+    md = format(as.Date(names(data), "%m/%d/%y"), "%m-%d")
+    data = data[md >= "11-01" | md <= "03-15"]
+    return(sum(data, na.rm = na.rm))
+  }
+  data = tmin[tmin <= 7] - 7
+  data = data * (24 / (tmax - tmin))
+  byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
+  return(byYears)
+}
+index_units[1] = C_sunshine
+index_titles[1] = "Cumulative chilling hours"
+index_names[1] = "cfdd"
+index_scales[[1]] = c(HYDROYEAR)
+attr(calculate_137, "data") <- c(TMIN, TMAX)
+
+#' @title Number of thermal stress days
+#' @description Number of days with a maximum temperature above 28 Celsius from January 1st to June 15th.
+#' @references --
+## @importance Important application in agriculture
+#' 
+#' @param data daily maximum temperature, Celsius
+#' @param data_names names of each period of time 
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return temperature, Celsius
+#' @export
+#' @examples
+#' data(data_all)
+#' nts(data=data_all$tx)
+nts = calculate_138 = function(data, data_names=NULL, na.rm = FALSE){
+  function_ = function(data){ # 01-01, 06-15
+    md = format(as.Date(names(data), "%m/%d/%y"), "%m-%d")
+    data = data[md >= "01-01" & md <= "06-15"]
+    return(sum(data, na.rm = na.rm))
+  }
+  data = data[data > 28]
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
+  return(byYears)
+}
+index_units[1] = C_days
+index_titles[1] = "Number of thermal stress days"
+index_names[1] = "nts"
+index_scales[[1]] = c(YEAR)
+attr(calculate_138, "data") <- c(TMAX)
+
+#' @title Cumulative reference evapotranspiration
+#' @description Sum of daily et0 from November 1 to July 31.
+#' @references --
+## @importance Important application in agriculture
+#' 
+#' @param data et0, mm
+#' @param data_names names of each period of time 
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return temperature, Celsius
+#' @export
+#' @examples
+#' data(data_all)
+#' ETo_w(data=data_all$eto)
+ETo_w = calculate_139 = function(data, data_names=NULL, na.rm = FALSE){
+  function_ = function(data){ #11-01, 07-31
+    data = data[months(chron(names(data))) %in% c(NOV, DEC, JAN, FEB, MAR, APR, MAY, JUN, JUL)]
+    return(sum(data, na.rm = na.rm))
+  }
+  byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
+  return(byYears)
+}
+index_units[1] = C_precipitation
+index_titles[1] = "Cumulative reference evapotranspiration"
+index_names[1] = "ETo_w"
+index_scales[[1]] = c(HYDROYEAR)
+attr(calculate_139, "data") <- c(ETO)
+
+#' @title Cumulative reference evapotranspiration
+#' @description Sum of daily et0 from April 1 to October 31.
+#' @references --
+## @importance Important application in agriculture
+#' 
+#' @param data et0, mm
+#' @param data_names names of each period of time 
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return temperature, Celsius
+#' @export
+#' @examples
+#' data(data_all)
+#' ETo_s(data=data_all$eto)
+ETo_s = calculate_140 = function(data, data_names=NULL, na.rm = FALSE){
+  function_ = function(data){ #04-01, 10-31
+    data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
+    return(sum(data, na.rm = na.rm))
+  }
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
+  return(byYears)
+}
+index_units[1] = C_precipitation
+index_titles[1] = "Cumulative reference evapotranspiration"
+index_names[1] = "ETo_s"
+index_scales[[1]] = c(YEAR)
+attr(calculate_140, "data") <- c(ETO)
+
+#' @title Cumulative hydric balance
+#' @description Sum of the difference between precipitation and daily et0 from November 1 to July 31.
+#' @references --
+## @importance Important application in agriculture
+#' 
+#' @param eto et0, mm
+#' @param pr daily precipitation, mm
+#' @param data_names names of each period of time 
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return temperature, Celsius
+#' @export
+#' @examples
+#' data(data_all)
+#' chb_w(eto=data_all$eto, pr = data_all$rr)
+chb_w = calculate_141 = function(eto, pr, data_names=NULL, na.rm = FALSE){
+  function_ = function(pr, eto){ #11-01, 07-31
+    pr = pr[months(chron(names(pr))) %in% c(NOV, DEC, JAN, FEB, MAR, APR, MAY, JUN, JUL)]
+    return(sum(pr-eto[names(pr)], na.rm = na.rm))
+  }
+  byYears = calcf_data(data=pr, time.scale=HYDROYEAR, data_names=data_names, operation=function_, eto=eto)
+  return(byYears)
+}
+index_units[1] = C_precipitation
+index_titles[1] = "Cumulative hydric balance"
+index_names[1] = "chb_w"
+index_scales[[1]] = c(HYDROYEAR)
+attr(calculate_141, "data") <- c(ETO, PRECIPITATION)
+
+#' @title Cumulative hydric balance
+#' @description Sum of the difference between precipitation and daily et0 from April 1 to October 31.
+#' @references --
+## @importance Important application in agriculture
+#' 
+#' @param eto et0, mm
+#' @param pr daily precipitation, mm
+#' @param data_names names of each period of time 
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return temperature, Celsius
+#' @export
+#' @examples
+#' data(data_all)
+#' chb_s(eto=data_all$eto, pr = data_all$rr)
+chb_s = calculate_142 = function(eto, pr, data_names=NULL, na.rm = FALSE){
+  function_ = function(pr, eto){ #04-01, 10-31
+    pr = pr[months(chron(names(pr))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
+    return(sum(pr-eto[names(pr)], na.rm = na.rm))
+  }
+  byYears = calcf_data(data=pr, time.scale=YEAR, data_names=data_names, operation=function_, eto=eto)
+  return(byYears)
+}
+index_units[1] = C_precipitation
+index_titles[1] = "Cumulative hydric balance"
+index_names[1] = "chb_s"
+index_scales[[1]] = c(YEAR)
+attr(calculate_142, "data") <- c(ETO, PRECIPITATION)
+
+#' @title Mean last frost day
+#' @description Calculates the last frost day within a predefined period.
+#' @references --
+## @importance Important application in agriculture
+#' 
+#' @param data daily minimum temperature, Celsius
+#' @param data_names names of each period of time 
+#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @return temperature, Celsius
+#' @export
+#' @examples
+#' data(data_all)
+#' lastFrost(data=data_all$tn)
+lastFrost = calculate_143 = function(data, data_names=NULL, na.rm = FALSE){
+  function_ = function(data){
+    position = utils::tail(which(data), 1)
+    if(length(position) == 0){
+      return(NA)
+    }else{
+      return(position)
+    }
+  }
+  data = data < 0
+  byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
+  return(byYears)
+}
+index_units[1] = C_days
+index_titles[1] = "Mean last frost day"
+index_names[1] = "lastFrost"
+index_scales[[1]] = c(HYDROYEAR)
+attr(calculate_143, "data") <- c(TMIN)
 
 ####
 
@@ -4123,7 +4323,7 @@ for (i in 1:length(index_tipes)){
 names(index_scales) = names(index_units) = names(index_titles) = names(index_names) = index_names
 
 i = 1
-for (i in 1:138){
+for (i in 1:143){
   if(!is.na(index_names[i])){
     index_functions[[index_names[i]]] = get(paste0("calculate_", i))
   }

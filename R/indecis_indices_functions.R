@@ -380,7 +380,7 @@ calc_eto = function(tmin, tmax, toa, w, mde, lat, tdew, radiation=NA, insolation
   dat_mlen = time1 - time
   dat_msum = as.POSIXlt(time)$yday + round(dat_mlen/2)
   # Tmin=tmin; Tmax=tmax; Ra=toa; Rs=radiation; tsun=insolation; U2=w; J=dat_msum; lat=lat; ed=NA; Tdew=tdew; RH=rh; P=NA; P0=NA; z=mde; crop="short"
-  data <- pm_et0_fao(Tmin=tmin, Tmax=tmax, Ra=toa, Rs=radiation, tsun=NA, U2=w, J=dat_msum, lat=lat, ed=NA, Tdew=tdew, RH=rh, P=NA, P0=NA, z=mde, crop="short")
+  data <- pm_et0_fao(Tmin=tmin, Tmax=tmax, Ra=toa, Rs=radiation, tsun=NA, U2=w, J=dat_msum, lat=lat, Tdew=tdew, RH=rh, P=NA, P0=NA, z=mde, crop="short")
   data <- array(data*dat_mlen)
   names(data) <- names(tmin)
   # print(paste("Values < 0:", sum(data<0, na.rm=TRUE)))

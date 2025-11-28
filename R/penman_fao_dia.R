@@ -247,17 +247,17 @@ penman_rs <- function(J,
     return(Rs)
 }
 
-#' Daily FAO-56 Penman–Monteith reference evapotranspiration (ET0)
+#' Daily FAO-56 Penman-Monteith reference evapotranspiration (ET0)
 #'
 #' Computes daily reference evapotranspiration (ET0) using the FAO-56
-#' Penman–Monteith formulation for a short or tall reference crop.
+#' Penman-Monteith formulation for a short or tall reference crop.
 #' This implementation is valid \strong{only for daily time steps}; i.e.
 #' it, assumes soil heat flux \eqn{G = 0}.
 #'
-#' @param Tmin Numeric vector of minimum daily air temperature (°C).
-#' @param Tmax Numeric vector of maximum daily air temperature (°C).
+#' @param Tmin Numeric vector of minimum daily air temperature (Celsius).
+#' @param Tmax Numeric vector of maximum daily air temperature (Celsius).
 #' @param U2 Numeric vector of daily mean wind speed at 2 m (m s\eqn{^{-1}}).
-#' @param J Integer vector of Julian day (1–366).
+#' @param J Integer vector of Julian day (1-366).
 #'
 #' @param Ra Optional numeric vector of daily extraterrestrial radiation
 #'   (MJ m\eqn{^{-2}} d\eqn{^{-1}}). If not provided, it is computed from
@@ -268,7 +268,7 @@ penman_rs <- function(J,
 #' @param Rs Optional numeric vector of incoming shortwave radiation
 #'   at the surface (MJ m\eqn{^{-2}} d\eqn{^{-1}}). If not provided,
 #'   it is estimated from \code{tsun} and \code{Ra} using the
-#'   Ångström–Prescott relation.
+#'   Ångström-Prescott relation.
 #' @param tsun Optional numeric vector of daily bright sunshine duration (h).
 #'   Used to estimate \code{Rs} when \code{Rs} is not provided.
 #' @param CC Optional numeric vector of cloud cover (fraction or \%).
@@ -278,13 +278,13 @@ penman_rs <- function(J,
 #'   If provided with the correct length, it is used directly and other
 #'   humidity inputs (\code{Tdew}, \code{Twet}, \code{Tdry}, \code{RHx},
 #'   \code{RHn}, \code{RH}) are ignored.
-#' @param Tdew Optional numeric vector of dew point temperature (°C),
+#' @param Tdew Optional numeric vector of dew point temperature (Celsius),
 #'   used to derive \code{ea} when \code{ea} is not supplied.
-#' @param Twet Optional numeric vector of wet bulb temperature (°C),
+#' @param Twet Optional numeric vector of wet bulb temperature (Celsius),
 #'   used to derive \code{ea} when \code{ea} is not supplied.
-#' @param Tdry Optional numeric vector of dry bulb temperature (°C),
+#' @param Tdry Optional numeric vector of dry bulb temperature (Celsius),
 #'   used to derive \code{ea} when \code{ea} is not supplied.
-#' @param apsy Optional psychrometer ventilation coefficient (1 / °C).
+#' @param apsy Optional psychrometer ventilation coefficient (1 / Celsius).
 #'   Typical values are 0.000662 for ventilated (Assmann type) psychrometers,
 #'   0.000800 for naturally ventilated psychrometers,
 #'   0.001200 for non-ventilated psychrometers installed indoors.
@@ -307,11 +307,11 @@ penman_rs <- function(J,
 #'   used to estimate \code{P} when \code{P} is missing.
 #'
 #' @param crop Character string indicating the reference crop type.
-#'   One of \code{“short”} or \code{“tall”}.
+#'   One of \code{"short"} or \code{"tall"}.
 #'   \itemize{
-#'     \item \code{“short”}: short reference crop (clipped grass, height
+#'     \item \code{"short"}: short reference crop (clipped grass, height
 #'       \eqn{\sim 0.12} m), consistent with FAO-56 grass reference.
-#'     \item \code{“tall”}: tall reference crop (alfalfa-type, height
+#'     \item \code{"tall"}: tall reference crop (alfalfa-type, height
 #'       \eqn{\sim 0.5} m), used in ASCE but included here for convenience.
 #'   }
 #'
@@ -319,11 +319,11 @@ penman_rs <- function(J,
 #'   missing values within the calculation.
 #'
 #' @details
-#' The function implements the FAO-56 Penman–Monteith equation on a daily
+#' The function implements the FAO-56 Penman-Monteith equation on a daily
 #' time step. Solar geometry and extraterrestrial radiation \eqn{R_a} are
 #' computed following FAO-56 using \code{\link{potential_radiation}}, and
 #' \eqn{R_s} (incoming shortwave radiation) can be supplied or estimated
-#' from sunshine duration using the Ångström–Prescott relation.
+#' from sunshine duration using the Ångström-Prescott relation.
 #'
 #' Net radiation \eqn{R_n} is computed as the sum of net shortwave and
 #' net longwave radiation, adopting the commonly used FAO-56 coefficients.
@@ -333,8 +333,8 @@ penman_rs <- function(J,
 #' The \code{crop} argument affects only the aerodynamic term through constants
 #' \code{c1} and \code{c2}:
 #' \itemize{
-#'   \item \code{crop = “short”}: \code{c1 = 900}, \code{c2 = 0.34}.
-#'   \item \code{crop = “tall”}: \code{c1 = 1600}, \code{c2 = 0.38}.
+#'   \item \code{crop = "short"}: \code{c1 = 900}, \code{c2 = 0.34}.
+#'   \item \code{crop = "tall"}: \code{c1 = 1600}, \code{c2 = 0.38}.
 #' }
 #'
 #' \strong{Humidity input precedence}
@@ -346,7 +346,7 @@ penman_rs <- function(J,
 #'   \strong{Order} & \strong{Inputs used} & \strong{Formula / Source} \cr
 #'   1 & \code{ea} & used directly \cr
 #'   2 & \code{Tdew} & \eqn{e_a = e_s(T_{dew})} (FAO-56 Eq. 14) \cr
-#'   3 & \code{Twet + Tdry + apsy} & \eqn{e_a = e_s(T_{wet}) - a_{psy} P (T_{dry} - T_{wet})} (FAO-56 Eq. 15–16) \cr
+#'   3 & \code{Twet + Tdry + apsy} & \eqn{e_a = e_s(T_{wet}) - a_{psy} P (T_{dry} - T_{wet})} (FAO-56 Eq. 15-16) \cr
 #'   4 & \code{RHx + RHn} & \eqn{e_a = (e_{s,min} RH_x + e_{s,max} RH_n)/2} (FAO-56 Eq. 17) \cr
 #'   5 & \code{RHx} & \eqn{e_a = e_{s,min} RH_x} (FAO-56 Eq. 18) \cr
 #'   6 & \code{RH} & \eqn{e_a = e_s RH/100} (FAO-56 Eq. 19) \cr
@@ -362,8 +362,8 @@ penman_rs <- function(J,
 #'
 #' @examples
 #' # FAO-56 Example 18; reference ET0 is 3.9 mm / day
-#' Tmin <- 12.3                  # ºC
-#' Tmax <- 21.5                  # ºC
+#' Tmin <- 12.3                  # Celsius
+#' Tmax <- 21.5                  # Celsius
 #' RHx <- 84                     # %
 #' RHn <- 63                     # %
 #' U2 <- 2.078                   # m/s
@@ -399,13 +399,17 @@ pm_et0_fao <- function(
     P     = NA,
     P0    = NA,
     z     = NA,
-    crop  = c(“short”, “tall”),
+    crop  = c("short", "tall"),
     na.rm = FALSE
-) {  crop   <- match.arg(crop)  # Mean air temperature (°C)
+) {  
+  n <- length(Tmin)
+  crop   <- match.arg(crop)  # Mean air temperature (Celsius)
   Tmean <- (Tmin + Tmax) / 2  # Latent heat of vaporization (MJ kg-1)
-  lambda <- 2.501 - 2.361e-3 * Tmean  # --- Atmospheric pressure and psychrometric constant ---  if (all(is.na(P0))) {
+  lambda <- 2.501 - 2.361e-3 * Tmean  # --- Atmospheric pressure and psychrometric constant ---  
+  if (all(is.na(P0))) {
     P0 <- rep(101.3, n)  # sea-level reference (kPa)
-  }  if (all(is.na(P))) {
+  }  
+  if (all(is.na(P))) {
     if (all(is.na(z))) {
       P <- P0
     } else {
@@ -416,18 +420,19 @@ pm_et0_fao <- function(
   etmx <- 0.6108 * exp((17.27 * Tmax) / (Tmax + 237.3))
   etmn <- 0.6108 * exp((17.27 * Tmin) / (Tmin + 237.3))
   et   <- 0.6108 * exp((17.27 * Tmean) / (Tmean + 237.3))  # FAO-56 eq. 12: mean saturation vapour pressure (kPa)
-  es <- (etmx + etmn) / 2  # --- Actual vapour pressure ea (kPa) ---  if (!all(is.na(ea))) {
+  es <- (etmx + etmn) / 2  # --- Actual vapour pressure ea (kPa) ---  
+  if (!all(is.na(ea))) {
     if (length(ea) != n && length(ea) != 1) {
-      stop(“If ‘ea’ is supplied, it must have length 1 or the same length as ‘Tmin’.“)
+      stop("If 'ea' is supplied, it must have length 1 or the same length as 'Tmin'.")
     }  } else if (!all(is.na(Tdew))) {
     # from dew-point temperature (FAO-56 eq. 14)
     ea <- 0.6108 * exp((17.27 * Tdew) / (Tdew + 237.3))  } else if (!all(is.na(Twet)) && !all(is.na(Tdry))) {
-    # from psychrometric data; FAO-56 eq. 15–16
+    # from psychrometric data; FAO-56 eq. 15-16
     if (all(is.na(apsy))) {
-      stop(“Psychrometer ventilation coefficient ‘apsy’ (1/°C) must be supplied when using Twet/Tdry.“)
+      stop("Psychrometer ventilation coefficient 'apsy' (1/Celsius) must be supplied when using Twet/Tdry.")
     }
     es_wet <- 0.6108 * exp((17.27 * Twet) / (Twet + 237.3))
-    gpsy   <- apsy * P  # kPa/°C
+    gpsy   <- apsy * P  # kPa/Celsius
     ea     <- es_wet - gpsy * (Tdry - Twet)  } else if (!all(is.na(RHx)) && !all(is.na(RHn))) {
     # from max and min daily relative humidity; FAO-56 eq. 17
     ea <- (etmn * (RHx / 100) + etmx * (RHn / 100)) / 2  } else if (!all(is.na(RHx)) && all(is.na(RHn))) {
@@ -438,14 +443,15 @@ pm_et0_fao <- function(
     # fallback: from Tmin (ICID eq. 1.19; FAO fallback)
     ea <- etmn  } else {
     stop(
-      “Failed to compute actual vapour pressure ‘ea’. “,
-      “Please provide ‘ea’, ‘Tdew’, ‘Twet/Tdry/apsy’, ‘RHx/RHn’, ‘RHx’ or ‘RH’ with the same length as ‘Tmin’.”
+      "Failed to compute actual vapour pressure 'ea'. ",
+      "Please provide 'ea', 'Tdew', 'Twet/Tdry/apsy', 'RHx/RHn', 'RHx' or 'RH' with the same length as 'Tmin'."
     )
   }  # clamp ea to es if needed
   idx <- which(ea > es)
   if (length(idx) > 0) {
     ea[idx] <- es[idx]
-  }  # --- Slope of saturation vapour pressure curve, Delta (FAO-56 eq. 13) ---  Delta <- 4098 * et / (Tmean + 237.3)^2  # --- Solar geometry and radiation ---  # Daylength N (h), only needed if tsun is used
+  }  # --- Slope of saturation vapour pressure curve, Delta (FAO-56 eq. 13) ---  
+  Delta <- 4098 * et / (Tmean + 237.3)^2  # --- Solar geometry and radiation ---  # Daylength N (h), only needed if tsun is used
   if (!all(is.na(lat))) {
     latr  <- lat * pi / 180
     delta <- 0.409 * sin(0.0172 * J - 1.39)
@@ -477,20 +483,20 @@ pm_et0_fao <- function(
     Ra[Ra < 0] <- 0
   } else {
     if (length(Ra) != n && length(Ra) != 1) {
-      stop(“Length of ‘Ra’ must be 1 or match length of ‘Tmin’.“)
+      stop("Length of 'Ra' must be 1 or match length of 'Tmin'.")
     }
   }  # Incoming shortwave radiation Rs (MJ m-2 d-1)
   if (all(is.na(Rs))) {
     if (!all(is.na(tsun)) && length(tsun) == n) {
       if (all(is.na(N))) {
-        stop(“Latitude ‘lat’ is required to compute daylength N when using ‘tsun’.“)
+        stop("Latitude 'lat' is required to compute daylength N when using 'tsun'.")
       }
       nN <- tsun / N
       as <- 0.25
       bs <- 0.50
       Rs <- (as + bs * nN) * Ra
     } else {
-      stop(“Either ‘Rs’ or ‘tsun’ (sunshine hours) must be provided to estimate Rs.“)
+      stop("Either 'Rs' or 'tsun' (sunshine hours) must be provided to estimate Rs.")
     }
   }  # Clear-sky radiation Rso (MJ m-2 d-1)
   if (all(is.na(z))) {
@@ -503,20 +509,23 @@ pm_et0_fao <- function(
   bc  <- -0.35
   a1  <- 0.34
   b1  <- -0.14
-  alb <- 0.23  Rn <- (1 - alb) * Rs -
+  alb <- 0.23  
+  Rn <- (1 - alb) * Rs -
     (ac * Rs / Rso + bc) *
     (a1 + b1 * sqrt(ea)) *
     4.903e-9 *
-    ((273.15 + Tmax)^4 + (273.15 + Tmin)^4) / 2  Rn[Rs == 0] <- 0  # Soil heat flux G (MJ m-2 d-1), negligible at daily scale
+    ((273.15 + Tmax)^4 + (273.15 + Tmin)^4) / 2  
+    Rn[Rs == 0] <- 0  # Soil heat flux G (MJ m-2 d-1), negligible at daily scale
   G <- 0  # Crop coefficients for aerodynamic term
-  if (crop == “short”) {
+  if (crop == "short") {
     c1 <- 900
     c2 <- 0.34
-  } else { # “tall”
+  } else { # "tall"
     c1 <- 1600
     c2 <- 0.38
-  }  # Daily reference ET0 (mm d-1), FAO-56 Penman–Monteith
+  }  # Daily reference ET0 (mm d-1), FAO-56 Penman-Monteith
   ET0 <- (0.408 * Delta * (Rn - G) +
             gamma * (c1 / (Tmean + 273)) * U2 * (es - ea)) /
-    (Delta + gamma * (1 + c2 * U2))  return(ET0)
+    (Delta + gamma * (1 + c2 * U2))  
+  return(ET0)
 }
