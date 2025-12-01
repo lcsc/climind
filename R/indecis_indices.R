@@ -4078,10 +4078,10 @@ cgdd_w = calculate_135 = function(data, data_names=NULL, na.rm = FALSE){
   byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[1] = C_degrees
-index_titles[1] = "Cumulative growing degree days"
-index_names[1] = "cgdd_w"
-index_scales[[1]] = c(HYDROYEAR)
+index_units[135] = C_degrees
+index_titles[135] = "Cumulative growing degree days"
+index_names[135] = "cgdd_w"
+index_scales[[135]] = c(HYDROYEAR)
 attr(calculate_135, "data") <- c(TMEAN)
 
 #' @title Cumulative growing degree days
@@ -4106,10 +4106,10 @@ cgdd_s = calculate_136 = function(data, data_names=NULL, na.rm = FALSE){
   byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[1] = C_degrees
-index_titles[1] = "Cumulative growing degree days"
-index_names[1] = "cgdd_w"
-index_scales[[1]] = c(YEAR)
+index_units[136] = C_degrees
+index_titles[136] = "Cumulative growing degree days"
+index_names[136] = "cgdd_s"
+index_scales[[136]] = c(YEAR)
 attr(calculate_136, "data") <- c(TMEAN)
 
 #' @title Cumulative chilling hours
@@ -4137,10 +4137,10 @@ cfdd = calculate_137 = function(tmin, tmax, data_names=NULL, na.rm = FALSE){
   byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[1] = C_sunshine
-index_titles[1] = "Cumulative chilling hours"
-index_names[1] = "cfdd"
-index_scales[[1]] = c(HYDROYEAR)
+index_units[137] = C_sunshine
+index_titles[137] = "Cumulative chilling hours"
+index_names[137] = "cfdd"
+index_scales[[137]] = c(HYDROYEAR)
 attr(calculate_137, "data") <- c(TMIN, TMAX)
 
 #' @title Number of thermal stress days
@@ -4166,10 +4166,10 @@ nts = calculate_138 = function(data, data_names=NULL, na.rm = FALSE){
   byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[1] = C_days
-index_titles[1] = "Number of thermal stress days"
-index_names[1] = "nts"
-index_scales[[1]] = c(YEAR)
+index_units[138] = C_days
+index_titles[138] = "Number of thermal stress days"
+index_names[138] = "nts"
+index_scales[[138]] = c(YEAR)
 attr(calculate_138, "data") <- c(TMAX)
 
 #' @title Cumulative reference evapotranspiration
@@ -4193,10 +4193,10 @@ ETo_w = calculate_139 = function(data, data_names=NULL, na.rm = FALSE){
   byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[1] = C_precipitation
-index_titles[1] = "Cumulative reference evapotranspiration"
-index_names[1] = "ETo_w"
-index_scales[[1]] = c(HYDROYEAR)
+index_units[139] = C_precipitation
+index_titles[139] = "Cumulative reference evapotranspiration"
+index_names[139] = "ETo_w"
+index_scales[[139]] = c(HYDROYEAR)
 attr(calculate_139, "data") <- c(ETO)
 
 #' @title Cumulative reference evapotranspiration
@@ -4220,10 +4220,10 @@ ETo_s = calculate_140 = function(data, data_names=NULL, na.rm = FALSE){
   byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[1] = C_precipitation
-index_titles[1] = "Cumulative reference evapotranspiration"
-index_names[1] = "ETo_s"
-index_scales[[1]] = c(YEAR)
+index_units[140] = C_precipitation
+index_titles[140] = "Cumulative reference evapotranspiration"
+index_names[140] = "ETo_s"
+index_scales[[140]] = c(YEAR)
 attr(calculate_140, "data") <- c(ETO)
 
 #' @title Cumulative hydric balance
@@ -4248,10 +4248,10 @@ chb_w = calculate_141 = function(eto, pr, data_names=NULL, na.rm = FALSE){
   byYears = calcf_data(data=pr, time.scale=HYDROYEAR, data_names=data_names, operation=function_, eto=eto)
   return(byYears)
 }
-index_units[1] = C_precipitation
-index_titles[1] = "Cumulative hydric balance"
-index_names[1] = "chb_w"
-index_scales[[1]] = c(HYDROYEAR)
+index_units[141] = C_precipitation
+index_titles[141] = "Cumulative hydric balance"
+index_names[141] = "chb_w"
+index_scales[[141]] = c(HYDROYEAR)
 attr(calculate_141, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Cumulative hydric balance
@@ -4276,10 +4276,10 @@ chb_s = calculate_142 = function(eto, pr, data_names=NULL, na.rm = FALSE){
   byYears = calcf_data(data=pr, time.scale=YEAR, data_names=data_names, operation=function_, eto=eto)
   return(byYears)
 }
-index_units[1] = C_precipitation
-index_titles[1] = "Cumulative hydric balance"
-index_names[1] = "chb_s"
-index_scales[[1]] = c(YEAR)
+index_units[142] = C_precipitation
+index_titles[142] = "Cumulative hydric balance"
+index_names[142] = "chb_s"
+index_scales[[142]] = c(YEAR)
 attr(calculate_142, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Mean last frost day
@@ -4308,10 +4308,10 @@ lastFrost = calculate_143 = function(data, data_names=NULL, na.rm = FALSE){
   byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
-index_units[1] = C_days
-index_titles[1] = "Mean last frost day"
-index_names[1] = "lastFrost"
-index_scales[[1]] = c(HYDROYEAR)
+index_units[143] = C_days
+index_titles[143] = "Mean last frost day"
+index_names[143] = "lastFrost"
+index_scales[[143]] = c(HYDROYEAR)
 attr(calculate_143, "data") <- c(TMIN)
 
 ####
