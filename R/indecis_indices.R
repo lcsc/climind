@@ -4063,19 +4063,21 @@ attr(calculate_134, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, LAT)
 #' 
 #' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time 
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods
 #' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
 #' cgdd_w(data=data_all$tg)
-cgdd_w = calculate_135 = function(data, data_names=NULL, na.rm = FALSE){
+cgdd_w = calculate_135 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){ # 11-01 a 07-31
     data = data[months(chron(names(data))) %in% c(NOV, DEC, JAN, FEB, MAR, APR, MAY, JUN, JUL)]
     return(sum(data, na.rm = na.rm))
   }
-  data = data[data >= 5] - 5
-  byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
+  data_names_cut = data_names[data >= 5]
+  data_cut = data[data >= 5] - 5
+  byYears = calcf_data(data=data_cut, time.scale=HYDROYEAR, data_names=data_names_cut, operation=function_)
   return(byYears)
 }
 index_units[135] = C_degrees
@@ -4091,19 +4093,21 @@ attr(calculate_135, "data") <- c(TMEAN)
 #' 
 #' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time 
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods
 #' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
 #' cgdd_s(data=data_all$tg)
-cgdd_s = calculate_136 = function(data, data_names=NULL, na.rm = FALSE){
+cgdd_s = calculate_136 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){ # 11-01 a 07-31
     data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
     return(sum(data, na.rm = na.rm))
   }
-  data = data[data >= 10] - 10
-  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
+  data_names_cut = data_names[data >= 10]
+  data_cut = data[data >= 10] - 10
+  byYears = calcf_data(data=data_cut, time.scale=YEAR, data_names=data_names_cut, operation=function_)
   return(byYears)
 }
 index_units[136] = C_degrees
@@ -4120,21 +4124,25 @@ attr(calculate_136, "data") <- c(TMEAN)
 #' @param tmin daily minimum temperature, Celsius
 #' @param tmax daily maximum temperature, Celsius
 #' @param data_names names of each period of time 
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods
 #' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
 #' cfdd(tmin=data_all$tn, tmax=data_all$tx)
-cfdd = calculate_137 = function(tmin, tmax, data_names=NULL, na.rm = FALSE){
+cfdd = calculate_137 = function(tmin, tmax, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){ # 11-01, 03-15
     md = format(as.Date(names(data), "%m/%d/%y"), "%m-%d")
     data = data[md >= "11-01" | md <= "03-15"]
     return(sum(data, na.rm = na.rm))
   }
-  data = tmin[tmin <= 7] - 7
+  data_names_cut = data_names[tmin <= 7]
+  tmax = tmax[tmin <= 7]
+  tmin = tmin[tmin <= 7]
+  data = tmin - 7
   data = data * (24 / (tmax - tmin))
-  byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names_cut, operation=function_)
   return(byYears)
 }
 index_units[137] = C_sunshine
@@ -4150,20 +4158,22 @@ attr(calculate_137, "data") <- c(TMIN, TMAX)
 #' 
 #' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time 
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods
 #' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
 #' nts(data=data_all$tx)
-nts = calculate_138 = function(data, data_names=NULL, na.rm = FALSE){
+nts = calculate_138 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){ # 01-01, 06-15
     md = format(as.Date(names(data), "%m/%d/%y"), "%m-%d")
     data = data[md >= "01-01" & md <= "06-15"]
     return(sum(data, na.rm = na.rm))
   }
+  data_names_cut = data_names[data > 28]
   data = data[data > 28]
-  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names_cut, operation=function_)
   return(byYears)
 }
 index_units[138] = C_days
@@ -4179,13 +4189,14 @@ attr(calculate_138, "data") <- c(TMAX)
 #' 
 #' @param data et0, mm
 #' @param data_names names of each period of time 
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods
 #' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
 #' ETo_w(data=data_all$eto)
-ETo_w = calculate_139 = function(data, data_names=NULL, na.rm = FALSE){
+ETo_w = calculate_139 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){ #11-01, 07-31
     data = data[months(chron(names(data))) %in% c(NOV, DEC, JAN, FEB, MAR, APR, MAY, JUN, JUL)]
     return(sum(data, na.rm = na.rm))
@@ -4206,13 +4217,14 @@ attr(calculate_139, "data") <- c(ETO)
 #' 
 #' @param data et0, mm
 #' @param data_names names of each period of time 
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods
 #' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
 #' ETo_s(data=data_all$eto)
-ETo_s = calculate_140 = function(data, data_names=NULL, na.rm = FALSE){
+ETo_s = calculate_140 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){ #04-01, 10-31
     data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
     return(sum(data, na.rm = na.rm))
@@ -4234,13 +4246,14 @@ attr(calculate_140, "data") <- c(ETO)
 #' @param eto et0, mm
 #' @param pr daily precipitation, mm
 #' @param data_names names of each period of time 
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods
 #' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
 #' chb_w(eto=data_all$eto, pr = data_all$rr)
-chb_w = calculate_141 = function(eto, pr, data_names=NULL, na.rm = FALSE){
+chb_w = calculate_141 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(pr, eto){ #11-01, 07-31
     pr = pr[months(chron(names(pr))) %in% c(NOV, DEC, JAN, FEB, MAR, APR, MAY, JUN, JUL)]
     return(sum(pr-eto[names(pr)], na.rm = na.rm))
@@ -4262,13 +4275,14 @@ attr(calculate_141, "data") <- c(ETO, PRECIPITATION)
 #' @param eto et0, mm
 #' @param pr daily precipitation, mm
 #' @param data_names names of each period of time 
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods
 #' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
 #' chb_s(eto=data_all$eto, pr = data_all$rr)
-chb_s = calculate_142 = function(eto, pr, data_names=NULL, na.rm = FALSE){
+chb_s = calculate_142 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(pr, eto){ #04-01, 10-31
     pr = pr[months(chron(names(pr))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
     return(sum(pr-eto[names(pr)], na.rm = na.rm))
@@ -4289,13 +4303,14 @@ attr(calculate_142, "data") <- c(ETO, PRECIPITATION)
 #' 
 #' @param data daily minimum temperature, Celsius
 #' @param data_names names of each period of time 
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods
 #' @return temperature, Celsius
 #' @export
 #' @examples
 #' data(data_all)
 #' lastFrost(data=data_all$tn)
-lastFrost = calculate_143 = function(data, data_names=NULL, na.rm = FALSE){
+lastFrost = calculate_143 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     position = utils::tail(which(data), 1)
     if(length(position) == 0){
@@ -4304,6 +4319,7 @@ lastFrost = calculate_143 = function(data, data_names=NULL, na.rm = FALSE){
       return(position)
     }
   }
+  data_names_cut = data_names[data < 0]
   data = data < 0
   byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
