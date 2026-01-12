@@ -4075,9 +4075,9 @@ cgdd_w = calculate_135 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[months(chron(names(data))) %in% c(NOV, DEC, JAN, FEB, MAR, APR, MAY, JUN, JUL)]
     return(sum(data, na.rm = na.rm))
   }
-  data_names_cut = data_names[data >= 5]
-  data_cut = data[data >= 5] - 5
-  byYears = calcf_data(data=data_cut, time.scale=HYDROYEAR, data_names=data_names_cut, operation=function_)
+  data_cut = data - 5
+  data_cut[data < 5] = 0
+  byYears = calcf_data(data=data_cut, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[135] = C_degrees
@@ -4105,9 +4105,9 @@ cgdd_s = calculate_136 = function(data, data_names=NULL, na.rm = FALSE, ...){
     data = data[months(chron(names(data))) %in% c(APR, MAY, JUN, JUL, AUG, SEP, OCT)]
     return(sum(data, na.rm = na.rm))
   }
-  data_names_cut = data_names[data >= 10]
-  data_cut = data[data >= 10] - 10
-  byYears = calcf_data(data=data_cut, time.scale=YEAR, data_names=data_names_cut, operation=function_)
+  data_cut = data - 10
+  data_cut[data < 10] = 0
+  byYears = calcf_data(data=data_cut, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[136] = C_degrees
@@ -4133,16 +4133,14 @@ attr(calculate_136, "data") <- c(TMEAN)
 #' cfdd(tmin=data_all$tn, tmax=data_all$tx)
 cfdd = calculate_137 = function(tmin, tmax, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){ # 11-01, 03-15
-    md = format(as.Date(names(data), "%m/%d/%y"), "%m-%d")
+    md = format(as.Date(names(data), "%m/%d/%Y"), "%m-%d")
     data = data[md >= "11-01" | md <= "03-15"]
     return(sum(data, na.rm = na.rm))
   }
-  data_names_cut = data_names[tmin <= 7]
-  tmax = tmax[tmin <= 7]
-  tmin = tmin[tmin <= 7]
   data = tmin - 7
   data = data * (24 / (tmax - tmin))
-  byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names_cut, operation=function_)
+  data[tmin > 7] = 0
+  byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[137] = C_sunshine
@@ -4167,13 +4165,12 @@ attr(calculate_137, "data") <- c(TMIN, TMAX)
 #' nts(data=data_all$tx)
 nts = calculate_138 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){ # 01-01, 06-15
-    md = format(as.Date(names(data), "%m/%d/%y"), "%m-%d")
+    md = format(as.Date(names(data), "%m/%d/%Y"), "%m-%d")
     data = data[md >= "01-01" & md <= "06-15"]
     return(sum(data, na.rm = na.rm))
   }
-  data_names_cut = data_names[data > 28]
-  data = data[data > 28]
-  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names_cut, operation=function_)
+  data = data > 28
+  byYears = calcf_data(data=data, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[138] = C_days
@@ -4319,7 +4316,6 @@ lastFrost = calculate_143 = function(data, data_names=NULL, na.rm = FALSE, ...){
       return(position)
     }
   }
-  data_names_cut = data_names[data < 0]
   data = data < 0
   byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
