@@ -1380,8 +1380,8 @@ attr(calculate_46, "data") <- c(PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' rx5d(data = data_all$rr)
-rx5d = calculate_50 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+#' rx5day(data = data_all$rr)
+rx5day = calculate_50 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   function_ = function(data){
     data2 = c(data[c(2:length(data))], 0)
     data3 = c(data[c(3:length(data))], 0, 0)
@@ -1395,7 +1395,7 @@ rx5d = calculate_50 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
 }
 index_units[50] = C_precipitation
 index_titles[50] = "Maximum 5 days R"
-index_names[50] = "rx5d"
+index_names[50] = "rx5day"
 index_scales[[50]] = c(MONTH, SEASON, YEAR)
 attr(calculate_50, "data") <- c(PRECIPITATION)
 
