@@ -4306,8 +4306,8 @@ attr(calculate_142, "data") <- c(ETO, PRECIPITATION)
 #' @export
 #' @examples
 #' data(data_all)
-#' lastFrost(data=data_all$tn)
-lastFrost = calculate_143 = function(data, data_names=NULL, na.rm = FALSE, ...){
+#' lastFrostDate(data=data_all$tn)
+lastFrostDate = calculate_143 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
     position = utils::tail(which(data), 1)
     if(length(position) == 0){
@@ -4322,7 +4322,7 @@ lastFrost = calculate_143 = function(data, data_names=NULL, na.rm = FALSE, ...){
 }
 index_units[143] = C_days
 index_titles[143] = "Mean last frost day"
-index_names[143] = "lastFrost"
+index_names[143] = "lastFrostDate"
 index_scales[[143]] = c(HYDROYEAR)
 attr(calculate_143, "data") <- c(TMIN)
 

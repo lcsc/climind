@@ -321,7 +321,7 @@ penman_rs <- function(J,
 #' @details
 #' The function implements the FAO-56 Penman-Monteith equation on a daily
 #' time step. Solar geometry and extraterrestrial radiation \eqn{R_a} are
-#' computed following FAO-56 using \code{\link{potential_radiation}}, and
+#' computed following FAO-56 using \code{potential_radiation}, and
 #' \eqn{R_s} (incoming shortwave radiation) can be supplied or estimated
 #' from sunshine duration using the Ångström-Prescott relation.
 #'
