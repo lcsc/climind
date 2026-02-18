@@ -4150,7 +4150,7 @@ index_scales[[137]] = c(HYDROYEAR)
 attr(calculate_137, "data") <- c(TMIN, TMAX)
 
 #' @title Number of stress days
-#' @description Number of days between January 1 and June 15 with maximum temperature ≥ 28°C
+#' @description Number of days between January 1 and June 15 with maximum temperature >= 28°C
 #' @references Adapted from common heat stress indices used in climatological and agronomic studies
 ## @importance Used to assess heat stress frequency during the first half of the year, relevant for agriculture, ecology, and human health studies
 #' 
