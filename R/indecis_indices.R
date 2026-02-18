@@ -4056,10 +4056,10 @@ index_scales[[134]] = c(MONTH, SEASON, YEAR)
 attr(calculate_134, "data") <- c(TMEAN, HUMIDITY, WIND, PRECIPITATION, LAT)
 
 ####### Index from Agroclim
-#' @title Cumulative growing degree days
-#' @description Sum of daily degree days from November 1st to July 31st. A degree day is defined as the difference between the average daily temperature and the base temperature (5ºC) provided that the average temperature is higher than the base temperature.
-#' @references --
-## @importance Important application in agriculture
+#' @title Cumulative growing degree days for winter crops
+#' @description Accumulated growing degree days between November 1 and July 31 using a base temperature > 5°C
+#' @references Winkler, A., Cook, J., Kliwer, W., Lider, L., 1974. General Viticulture. University of California Press, Berkeley, CA.
+## @importance Useful for assessing thermal energy available for crop development and phenology during the winter season
 #' 
 #' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time 
@@ -4081,15 +4081,15 @@ cgdd_w = calculate_135 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(byYears)
 }
 index_units[135] = C_degrees
-index_titles[135] = "Cumulative growing degree days"
+index_titles[135] = "Cumulative growing degree days for winter crops"
 index_names[135] = "cgdd_w"
 index_scales[[135]] = c(HYDROYEAR)
 attr(calculate_135, "data") <- c(TMEAN)
 
-#' @title Cumulative growing degree days
-#' @description Sum of daily degree days from April 1st to October 31st. A degree day is defined as the difference between the average daily temperature and the base temperature (10ºC) provided that the average temperature is higher than the base temperature.
-#' @references --
-## @importance Important application in agriculture
+#' @title Cumulative growing degree days for summer crops
+#' @description Accumulated growing degree days between April 1 and October 31 using a base temperature > 10°C
+#' @references Winkler, A., Cook, J., Kliwer, W., Lider, L., 1974. General Viticulture. University of California Press, Berkeley, CA.
+## @importance Important for evaluating summer crop development, growth dynamics, and heat energy availability
 #' 
 #' @param data daily mean temperature, Celsius
 #' @param data_names names of each period of time 
@@ -4111,15 +4111,15 @@ cgdd_s = calculate_136 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(byYears)
 }
 index_units[136] = C_degrees
-index_titles[136] = "Cumulative growing degree days"
+index_titles[136] = "Cumulative growing degree days for summer crops"
 index_names[136] = "cgdd_s"
 index_scales[[136]] = c(YEAR)
 attr(calculate_136, "data") <- c(TMEAN)
 
 #' @title Cumulative chilling hours
-#' @description Sum of daily chill hours from November 1 to March 1. A chill hour is defined as the fraction of the day in which the temperature is below 7 Celsius, calculated by taking the difference between 7 Celsius and the daily minimum temperature, dividing it by the range between the maximum and minimum temperature of the day, and multiplying the result by 24 hours, provided that the minimum temperature is below 7 Celsius (Crossa-Raynaud, 1955).
-#' @references --
-## @importance Important application in agriculture
+#' @description Accumulated number of chilling hours between November 1 and March 15, calculated as the fraction of each day with temperatures below 7°C, relevant for deciduous fruit trees.
+#' @references Crossa-Raynaud, P., 1955. Effets des hivers doux sur le comportement des arbres fruitiers à feuilles caduques: Observations faites en Tunisie à la suite de l’hiver 1954-1955. Annale de Service Botanique et Agronomique, Tunisie, 28: 1–22.
+## @importance Used to assess fulfillment of chilling requirements in temperate fruit trees, critical for bud break and flowering.
 #' 
 #' @param tmin daily minimum temperature, Celsius
 #' @param tmax daily maximum temperature, Celsius
@@ -4149,10 +4149,10 @@ index_names[137] = "cfdd"
 index_scales[[137]] = c(HYDROYEAR)
 attr(calculate_137, "data") <- c(TMIN, TMAX)
 
-#' @title Number of thermal stress days
-#' @description Number of days with a maximum temperature above 28 Celsius from January 1st to June 15th.
-#' @references --
-## @importance Important application in agriculture
+#' @title Number of stress days
+#' @description Number of days between January 1 and June 15 with maximum temperature ≥ 28°C
+#' @references Adapted from common heat stress indices used in climatological and agronomic studies
+## @importance Used to assess heat stress frequency during the first half of the year, relevant for agriculture, ecology, and human health studies
 #' 
 #' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time 
@@ -4174,15 +4174,15 @@ nts = calculate_138 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(byYears)
 }
 index_units[138] = C_days
-index_titles[138] = "Number of thermal stress days"
+index_titles[138] = "Number of stress days"
 index_names[138] = "nts"
 index_scales[[138]] = c(YEAR)
 attr(calculate_138, "data") <- c(TMAX)
 
-#' @title Cumulative reference evapotranspiration
-#' @description Sum of daily et0 from November 1 to July 31.
-#' @references --
-## @importance Important application in agriculture
+#' @title Cumulative reference evapotranspiration (et0) for winter crops
+#' @description Cumulative reference evapotranspiration (et0) from daily ET0 summed from November 1 to July 31, corresponding to the winter crops period
+#' @references Adapted from Allen, R. G., Pereira, L. S., Raes, D., & Smith, M. (1998). Crop evapotranspiration: Guidelines for computing crop water requirements (FAO Irrigation and Drainage Paper 56). Rome: Food and Agriculture Organization of the United Nations.
+## @importance Used to assess water demand and support agricultural planning during the winter cropping cycle
 #' 
 #' @param data et0, mm
 #' @param data_names names of each period of time 
@@ -4202,15 +4202,15 @@ ETo_w = calculate_139 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(byYears)
 }
 index_units[139] = C_precipitation
-index_titles[139] = "Cumulative reference evapotranspiration"
+index_titles[139] = "Cumulative reference evapotranspiration (et0) for winter crops"
 index_names[139] = "ETo_w"
 index_scales[[139]] = c(HYDROYEAR)
 attr(calculate_139, "data") <- c(ETO)
 
-#' @title Cumulative reference evapotranspiration
-#' @description Sum of daily et0 from April 1 to October 31.
-#' @references --
-## @importance Important application in agriculture
+#' @title Cumulative reference evapotranspiration (et0) for summer crops
+#' @description Cumulative reference evapotranspiration (et0) from daily ET0 summed from April 1 to October 31, corresponding to the summer crops period
+#' @references Adapted from Allen, R. G., Pereira, L. S., Raes, D., & Smith, M. (1998). Crop evapotranspiration: Guidelines for computing crop water requirements (FAO Irrigation and Drainage Paper 56). Rome: Food and Agriculture Organization of the United Nations.
+## @importance Used to assess water demand and support agricultural planning during the summer cropping cycle
 #' 
 #' @param data et0, mm
 #' @param data_names names of each period of time 
@@ -4230,15 +4230,15 @@ ETo_s = calculate_140 = function(data, data_names=NULL, na.rm = FALSE, ...){
   return(byYears)
 }
 index_units[140] = C_precipitation
-index_titles[140] = "Cumulative reference evapotranspiration"
+index_titles[140] = "Cumulative reference evapotranspiration (et0) for summer crops"
 index_names[140] = "ETo_s"
 index_scales[[140]] = c(YEAR)
 attr(calculate_140, "data") <- c(ETO)
 
-#' @title Cumulative hydric balance
-#' @description Sum of the difference between precipitation and daily et0 from November 1 to July 31.
-#' @references --
-## @importance Important application in agriculture
+#' @title Cumulative climatic water balance for winter crops
+#' @description Cumulative climatic water balance from daily water balance summed from November 1 to July 31, corresponding to the winter crops period
+#' @references Adapted from FAO Irrigation and Drainage Paper No. 56 (Allen et al., 1998); standard climatological water balance approach
+## @importance Used to assess cumulative water surplus or deficit during the winter cropping period, relevant for agricultural planning, drought monitoring, irrigation management, and hydrological balance studies
 #' 
 #' @param eto et0, mm
 #' @param pr daily precipitation, mm
@@ -4259,15 +4259,15 @@ chb_w = calculate_141 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
   return(byYears)
 }
 index_units[141] = C_precipitation
-index_titles[141] = "Cumulative hydric balance"
+index_titles[141] = "Cumulative climatic water balance for winter crops"
 index_names[141] = "chb_w"
 index_scales[[141]] = c(HYDROYEAR)
 attr(calculate_141, "data") <- c(ETO, PRECIPITATION)
 
-#' @title Cumulative hydric balance
-#' @description Sum of the difference between precipitation and daily et0 from April 1 to October 31.
-#' @references --
-## @importance Important application in agriculture
+#' @title Cumulative climatic water balance for summer crops
+#' @description Cumulative climatic water balance from daily WB (precipitation minus reference evapotranspiration) summed from April 1 to October 31, corresponding to the summer crops period
+#' @references Adapted from FAO Irrigation and Drainage Paper No. 56 (Allen et al., 1998); standard climatological water balance approach
+## @importance Used to assess cumulative water surplus or deficit during the summer cropping period, relevant for agricultural planning, drought monitoring, irrigation management, and hydrological balance studies
 #' 
 #' @param eto et0, mm
 #' @param pr daily precipitation, mm
@@ -4288,14 +4288,14 @@ chb_s = calculate_142 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
   return(byYears)
 }
 index_units[142] = C_precipitation
-index_titles[142] = "Cumulative hydric balance"
+index_titles[142] = "Cumulative climatic water balance for summer crops"
 index_names[142] = "chb_s"
 index_scales[[142]] = c(YEAR)
 attr(calculate_142, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Mean last frost day
-#' @description Calculates the last frost day within a predefined period.
-#' @references --
+#' @description Calculates the last frost day. Last day of the year (ranged from 1 to 272/273 in leap years) recording Tmin below 0°C, from November 1st and 31th July of the next year
+#' @references Adapted from https://doi.org/10.1080/04353676.2017.1369048
 ## @importance Important application in agriculture
 #' 
 #' @param data daily minimum temperature, Celsius
@@ -4309,6 +4309,7 @@ attr(calculate_142, "data") <- c(ETO, PRECIPITATION)
 #' lastFrostDate(data=data_all$tn)
 lastFrostDate = calculate_143 = function(data, data_names=NULL, na.rm = FALSE, ...){
   function_ = function(data){
+    data = data[months(chron(names(data))) %in% c(NOV, DEC, JAN, FEB, MAR, APR, MAY, JUN, JUL)]
     position = utils::tail(which(data), 1)
     if(length(position) == 0){
       return(NA)
