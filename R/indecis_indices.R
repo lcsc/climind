@@ -4138,7 +4138,7 @@ cfdd = calculate_137 = function(tmin, tmax, data_names=NULL, na.rm = FALSE, ...)
     return(sum(data, na.rm = na.rm))
   }
   data = (7 - tmin) * (24 / (tmax - tmin))
-  data[tmax >= 7] =  data[tmax >= 7] + 24
+  data[tmax <= 7] =  24
   data[tmin >= 7] = 0
   byYears = calcf_data(data=data, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
