@@ -4076,7 +4076,7 @@ cgdd_w = calculate_135 = function(data, data_names=NULL, na.rm = FALSE, ...){
     return(sum(data, na.rm = na.rm))
   }
   data_cut = data - 5
-  data_cut[data =< 5] = 0
+  data_cut[data <= 5] = 0
   byYears = calcf_data(data=data_cut, time.scale=HYDROYEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
@@ -4106,7 +4106,7 @@ cgdd_s = calculate_136 = function(data, data_names=NULL, na.rm = FALSE, ...){
     return(sum(data, na.rm = na.rm))
   }
   data_cut = data - 10
-  data_cut[data =< 10] = 0
+  data_cut[data <= 10] = 0
   byYears = calcf_data(data=data_cut, time.scale=YEAR, data_names=data_names, operation=function_)
   return(byYears)
 }
