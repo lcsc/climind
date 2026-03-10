@@ -43,7 +43,7 @@ C_cloud = "%"
 C_sunshine = "hours"
 C_percentage = "%"
 
-index_tipes = list("Temperature-based"=c(1:42), "Precipitation-based" = c(43:66), "Bioclimatic" = c(67:87, 130), "Wind-based" = c(88:92, 132), "Aridity/continentality-indices" = c(93:102, 133), "Snow-based" = c(103:115), "Cloud/radiation-based" = c(116:121), "Drought" = c(122:129), "Fire" = c(134), "Tourism" = c(131), "Agroclimatic" = c(135:143))
+index_tipes = list("Temperature-based"=c(1:42, 143), "Precipitation-based" = c(43:66), "Bioclimatic" = c(67:87, 130), "Wind-based" = c(88:92, 132), "Aridity/continentality-indices" = c(93:102, 133), "Snow-based" = c(103:115), "Cloud/radiation-based" = c(116:121), "Drought" = c(122:129), "Fire" = c(134), "Tourism" = c(131), "Agroclimatic" = c(135:142))
 
 index_units = array(NA, dim=c(143))
 index_titles = array(NA, dim=c(143))
