@@ -3877,12 +3877,15 @@ attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
 #' @param lat latitude, degree
 #' @param wfc water Field Capacity, initial water balance value
 #' @param data_names names of each period of time
+#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... further arguments passed to or from other methods
 #' @return index value
 #' @export
-turc <- calculate_130 <- function(data, tmin, rh, pr, radiation, lat, wfc, data_names=NULL, na.rm = FALSE, ...){
-  return(calc_turc_index(tmax = data, tmin = tmin, rh = rh, pr = pr, toa = radiation, lat = lat, wfc = wfc, data_names = data_names, na.rm = na.rm))
+turc <- calculate_130 <- function(data, tmin, rh, pr, radiation, lat, wfc, data_names=NULL, time.scale=MONTH, , na.rm = FALSE, ...){
+  data <- calc_turc_index(tmax = data, tmin = tmin, rh = rh, pr = pr, toa = radiation, lat = lat, wfc = wfc, data_names = NULL, na.rm = na.rm)
+  byYears = calcf_data(data=data, time.scale=time.scale, operation=sum, data_names=data_names)
+  return(byYears)
 }
 names(index_units)[130]  <- "turc"
 names(index_titles)[130]  <- "turc"
@@ -3890,7 +3893,7 @@ names(index_names)[130]  <- "turc"
 names(index_scales)[130]  <- "turc"
 index_units[130] <- C_index
 index_titles[130] <- "Turc Index"
-index_scales[[130]] = c(MONTH)
+index_scales[[130]] = c(MONTH, SEASON, YEAR)
 index_names[130] <- "turc"
 attr(calculate_130, "data") <- c(TMAX, TMIN, HUMIDITY, PRECIPITATION, RADIATION, LAT, WFC)
 
