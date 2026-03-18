@@ -3882,7 +3882,7 @@ attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
 #' @param ... further arguments passed to or from other methods
 #' @return index value
 #' @export
-turc <- calculate_130 <- function(data, tmin, rh, pr, radiation, lat, wfc, data_names=NULL, time.scale=MONTH, , na.rm = FALSE, ...){
+turc <- calculate_130 <- function(data, tmin, rh, pr, radiation, lat, wfc, data_names=NULL, time.scale=MONTH, na.rm = FALSE, ...){
   data <- calc_turc_index(tmax = data, tmin = tmin, rh = rh, pr = pr, toa = radiation, lat = lat, wfc = wfc, data_names = NULL, na.rm = na.rm)
   byYears = calcf_data(data=data, time.scale=time.scale, operation=sum, data_names=data_names)
   return(byYears)
