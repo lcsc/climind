@@ -2636,7 +2636,7 @@ index_units[85] = C_index
 index_titles[85] = "Heat Index"
 index_names[85] = "hi"
 index_scales[[85]] = c(MONTH, SEASON, YEAR)
-attr(calculate_85, "data") <- c(TMEAN, HUMIDITY)
+attr(calculate_85, "data") <- c(TMAX, HUMIDITY)
 
 #' @title Wind chill index
 #' @description Wind chill index is the lowering of body temperature due to the passing-flow of lower-temperature air. It combines air temperature and wind speed.
@@ -3883,8 +3883,28 @@ attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
 #' @return index value
 #' @export
 turc <- calculate_130 <- function(data, tmin, rh, pr, radiation, lat, wfc, data_names=NULL, time.scale=MONTH, na.rm = FALSE, ...){
-  data <- calc_turc_index(tmax = data, tmin = tmin, rh = rh, pr = pr, toa = radiation, lat = lat, wfc = wfc, data_names = NULL, na.rm = na.rm)
-  byYears = calcf_data(data=data, time.scale=time.scale, operation=sum, data_names=data_names)
+  byYears <- calc_turc_index(tmax = data, tmin = tmin, rh = rh, pr = pr, toa = radiation, lat = lat, wfc = wfc, data_names = NULL, na.rm = na.rm)
+  if(time.scale == SEASON){
+    byStations <- data.frame(
+      year   = rownames(byYears),
+      winter = NA,
+      spring = rowSums(byYears[, c("Mar", "Apr", "May")]),
+      summer = rowSums(byYears[, c("Jun", "Jul", "Aug")]),
+      fall   = rowSums(byYears[, c("Sep", "Oct", "Nov")])
+    )
+    # Winter: Dic del año actual + Ene y Feb del año siguiente
+    years <- as.numeric(rownames(byYears))
+    for (i in 1:(nrow(byYears) - 1)) {
+      byStations$winter[i + 1] <- byYears[i, "Dec"] + 
+                                  byYears[i + 1, "Jan"] + 
+                                  byYears[i + 1, "Feb"]
+    }
+    rownames(byStations) <- byStations$year
+    byStations$year <- NULL
+    byYears <- byStations
+  }else if(time.scale == YEAR){
+    byYears <- rowSums(byYears)
+  }
   return(byYears)
 }
 names(index_units)[130]  <- "turc"

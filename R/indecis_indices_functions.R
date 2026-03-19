@@ -261,7 +261,7 @@ seasonals = function(time){
 #' @keywords internal
 hydrological_years = function(time){
   changeMonths <- as.numeric(months(time))%in%c(10, 11, 12)
-  timeNames <- as.numeric(as.character(years(time)))
+  timeNames <- as.numeric(as.character(chron::years(time)))
   timeNames[changeMonths] <- timeNames[changeMonths] + 1
   return(timeNames)
 }
@@ -273,8 +273,8 @@ hydrological_years = function(time){
 #' @keywords internal
 seasonals_years = function(time){
   changeMonths <- as.numeric(months(time))==12
-  timeNames <- paste(seasonals(time), years(time), sep="_")
-  timeNames[changeMonths] <- paste(seasonals(time[changeMonths]), as.numeric(as.character(years(time[changeMonths])))+1, sep="_")
+  timeNames <- paste(seasonals(time), chron::years(time), sep="_")
+  timeNames[changeMonths] <- paste(seasonals(time[changeMonths]), as.numeric(as.character(chron::years(time[changeMonths])))+1, sep="_")
   return(timeNames)
 }
 
@@ -284,7 +284,7 @@ seasonals_years = function(time){
 #' @return months by years
 #' @keywords internal
 months_years = function(time){
-  return(paste(months(time), years(time), sep="_"))
+  return(paste(months(time), chron::years(time), sep="_"))
 }
 
 #' Function to select all "time" data
