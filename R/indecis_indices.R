@@ -3681,6 +3681,7 @@ attr(calculate_121, "data") <- c(RADIATION, RADIATIONTOA)
 #' 
 #' @param data daily precipitation, mm
 #' @param data_names names of each period of time
+#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... further arguments passed to or from other methods
 #' @return index value
@@ -3688,8 +3689,17 @@ attr(calculate_121, "data") <- c(RADIATION, RADIATIONTOA)
 #' @examples
 #' data(data_all)
 #' spi1(data = data_all$rr)
-spi1 = calculate_122 = function(data, data_names=NULL, na.rm = FALSE, ...){
-  return(calc_spi(data, data_names, scale=1, na.rm=na.rm))
+spi1 = calculate_122 = function(data, data_names=NULL, time.scale=MONTH, na.rm = FALSE, ...){
+  spi <- calc_spi(data, data_names, scale=1, na.rm=na.rm)
+  if(!is.null(spi)){
+    if(time.scale == SEASON){
+      spi <- spi[, c("Feb", "May", "Aug", "Nov")]
+      colnames(spi) <- c(WINTER, SPRING, SUMMER, FALL)
+    }else if (time.scale == YEAR){
+      spi <- spi[, c("Dec")]
+    }   
+  }
+  return(spi)
 }
 index_units[122] = C_index
 index_titles[122] = "Standardized precipitation index 1"
@@ -3704,6 +3714,7 @@ attr(calculate_122, "data") <- c(PRECIPITATION)
 #' 
 #' @param data daily precipitation, mm
 #' @param data_names names of each period of time
+#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... further arguments passed to or from other methods
 #' @return index value
@@ -3711,13 +3722,22 @@ attr(calculate_122, "data") <- c(PRECIPITATION)
 #' @examples
 #' data(data_all)
 #' spi3(data = data_all$rr)
-spi3 = calculate_123 = function(data, data_names=NULL, na.rm = FALSE, ...){
-  return(calc_spi(data, data_names, scale=3, na.rm=na.rm))
+spi3 = calculate_123 = function(data, data_names=NULL, time.scale=SEASON, na.rm = FALSE, ...){
+  spi <- calc_spi(data, data_names, scale=3, na.rm=na.rm)
+  if(!is.null(spi)){
+    if(time.scale == SEASON){
+      spi <- spi[, c("Feb", "May", "Aug", "Nov")]
+      colnames(spi) <- c(WINTER, SPRING, SUMMER, FALL)
+    }else if (time.scale == YEAR){
+      spi <- spi[, c("Dec")]
+    }   
+  }
+  return(spi)
 }
 index_units[123] = C_index
 index_titles[123] = "Standardized precipitation index 3"
 index_names[123] = "spi3"
-index_scales[[123]] = c(MONTH)
+index_scales[[123]] = c(SEASON)
 attr(calculate_123, "data") <- c(PRECIPITATION)
 
 #' @title Standardized precipitation index 6
@@ -3727,6 +3747,7 @@ attr(calculate_123, "data") <- c(PRECIPITATION)
 #' 
 #' @param data daily precipitation, mm
 #' @param data_names names of each period of time
+#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... further arguments passed to or from other methods
 #' @return index value
@@ -3734,8 +3755,17 @@ attr(calculate_123, "data") <- c(PRECIPITATION)
 #' @examples
 #' data(data_all)
 #' spi6(data = data_all$rr)
-spi6 = calculate_124 = function(data, data_names=NULL, na.rm = FALSE, ...){
-  return(calc_spi(data, data_names, scale=6, na.rm=na.rm))
+spi6 = calculate_124 = function(data, data_names=NULL, time.scale=MONTH, na.rm = FALSE, ...){
+  spi <- calc_spi(data, data_names, scale=6, na.rm=na.rm)
+  if(!is.null(spi)){
+    if(time.scale == SEASON){
+      spi <- spi[, c("Feb", "May", "Aug", "Nov")]
+      colnames(spi) <- c(WINTER, SPRING, SUMMER, FALL)
+    }else if (time.scale == YEAR){
+      spi <- spi[, c("Dec")]
+    }   
+  }
+  return(spi)
 }
 index_units[124] = C_index
 index_titles[124] = "Standardized precipitation index 6"
@@ -3750,6 +3780,7 @@ attr(calculate_124, "data") <- c(PRECIPITATION)
 #' 
 #' @param data daily precipitation, mm
 #' @param data_names names of each period of time
+#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... further arguments passed to or from other methods
 #' @return index value
@@ -3757,13 +3788,22 @@ attr(calculate_124, "data") <- c(PRECIPITATION)
 #' @examples
 #' data(data_all)
 #' spi12(data = data_all$rr)
-spi12 = calculate_125 = function(data, data_names=NULL, na.rm = FALSE, ...){
-  return(calc_spi(data, data_names, scale=12, na.rm=na.rm))
+spi12 = calculate_125 = function(data, data_names=NULL, time.scale=YEAR, na.rm = FALSE, ...){
+  spi <- calc_spi(data, data_names, scale=12, na.rm=na.rm)
+  if(!is.null(spi)){
+    if(time.scale == SEASON){
+      spi <- spi[, c("Feb", "May", "Aug", "Nov")]
+      colnames(spi) <- c(WINTER, SPRING, SUMMER, FALL)
+    }else if (time.scale == YEAR){
+      spi <- spi[, c("Dec")]
+    }   
+  }
+  return(spi)
 }
 index_units[125] = C_index
 index_titles[125] = "Standardized precipitation index 12"
 index_names[125] = "spi12"
-index_scales[[125]] = c(MONTH)
+index_scales[[125]] = c(YEAR)
 attr(calculate_125, "data") <- c(PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 1
@@ -3774,6 +3814,7 @@ attr(calculate_125, "data") <- c(PRECIPITATION)
 #' @param eto evapotranspiration, mm
 #' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
+#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... further arguments passed to or from other methods
 #' @return index value
@@ -3781,8 +3822,17 @@ attr(calculate_125, "data") <- c(PRECIPITATION)
 #' @examples
 #' data(data_all)
 #' spei1(eto = data_all$eto, pr = data_all$rr, na.rm = TRUE)
-spei1 = calculate_126 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
-  return(calc_spei(eto, pr, data_names, scale=1, na.rm=na.rm))  
+spei1 = calculate_126 = function(eto, pr, data_names=NULL, time.scale=MONTH, na.rm = FALSE, ...){
+  spei <- calc_spei(eto, pr, data_names, scale=1, na.rm=na.rm)
+  if(!is.null(spei)){
+    if(time.scale == SEASON){
+      spei <- spei[, c("Feb", "May", "Aug", "Nov")]
+      colnames(spei) <- c(WINTER, SPRING, SUMMER, FALL)
+    }else if (time.scale == YEAR){
+      spei <- spei[, c("Dec")]
+    }   
+  }
+  return(spei)
 }
 index_units[126] = C_index
 index_titles[126] = "Standardised Precipitation-Evapotranspiration Index 1"
@@ -3798,6 +3848,7 @@ attr(calculate_126, "data") <- c(ETO, PRECIPITATION)
 #' @param eto evapotranspiration, mm
 #' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
+#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... further arguments passed to or from other methods
 #' @return index value
@@ -3805,13 +3856,22 @@ attr(calculate_126, "data") <- c(ETO, PRECIPITATION)
 #' @examples
 #' data(data_all)
 #' spei3(eto = data_all$eto, pr = data_all$rr)
-spei3 = calculate_127 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
-  return(calc_spei(eto, pr, data_names, scale=3, na.rm=na.rm))
+spei3 = calculate_127 = function(eto, pr, data_names=NULL, time.scale=SEASON, na.rm = FALSE, ...){
+  spei <- calc_spei(eto, pr, data_names, scale=3, na.rm=na.rm)
+  if(!is.null(spei)){
+    if(time.scale == SEASON){
+      spei <- spei[, c("Feb", "May", "Aug", "Nov")]
+      colnames(spei) <- c(WINTER, SPRING, SUMMER, FALL)
+    }else if (time.scale == YEAR){
+      spei <- spei[, c("Dec")]
+    }
+  }  
+  return(spei)
 }
 index_units[127] = C_index
 index_titles[127] = "Standardised Precipitation-Evapotranspiration Index 3"
 index_names[127] = "spei3"
-index_scales[[127]] = c(MONTH)
+index_scales[[127]] = c(SEASON)
 attr(calculate_127, "data") <- c(ETO, PRECIPITATION)
 
 #' @title Standardised Precipitation-Evapotranspiration Index 6
@@ -3822,6 +3882,7 @@ attr(calculate_127, "data") <- c(ETO, PRECIPITATION)
 #' @param eto evapotranspiration, mm
 #' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
+#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... further arguments passed to or from other methods
 #' @return index value
@@ -3829,8 +3890,17 @@ attr(calculate_127, "data") <- c(ETO, PRECIPITATION)
 #' @examples
 #' data(data_all)
 #' spei6(eto = data_all$eto, pr = data_all$rr)
-spei6 = calculate_128 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
-    return(calc_spei(eto, pr, data_names, scale=6, na.rm=na.rm))
+spei6 = calculate_128 = function(eto, pr, data_names=NULL, time.scale=MONTH, na.rm = FALSE, ...){
+  spei <- calc_spei(eto, pr, data_names, scale=6, na.rm=na.rm)
+  if(!is.null(spei)){
+    if(time.scale == SEASON){
+      spei <- spei[, c("Feb", "May", "Aug", "Nov")]
+      colnames(spei) <- c(WINTER, SPRING, SUMMER, FALL)
+    }else if (time.scale == YEAR){
+      spei <- spei[, c("Dec")]
+    }   
+  }
+  return(spei)
 }
 index_units[128] = C_index
 index_titles[128] = "Standardised Precipitation-Evapotranspiration Index 6"
@@ -3846,6 +3916,7 @@ attr(calculate_128, "data") <- c(ETO, PRECIPITATION)
 #' @param eto evapotranspiration, mm
 #' @param pr daily precipitation, mm
 #' @param data_names names of each period of time
+#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed?
 #' @param ... further arguments passed to or from other methods
 #' @return index value
@@ -3853,13 +3924,22 @@ attr(calculate_128, "data") <- c(ETO, PRECIPITATION)
 #' @examples
 #' data(data_all)
 #' spei12(eto = data_all$eto, pr = data_all$rr)
-spei12 = calculate_129 = function(eto, pr, data_names=NULL, na.rm = FALSE, ...){
-   return(calc_spei(eto, pr, data_names, scale=12, na.rm=na.rm))
+spei12 = calculate_129 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE, ...){
+  spei <- calc_spei(eto, pr, data_names, scale=12, na.rm=na.rm)
+  if(!is.null(spei)){
+    if(time.scale == SEASON){
+      spei <- spei[, c("Feb", "May", "Aug", "Nov")]
+      colnames(spei) <- c(WINTER, SPRING, SUMMER, FALL)
+    }else if (time.scale == YEAR){
+      spei <- spei[, c("Dec")]
+    }   
+  }
+  return(spei)
 }
 index_units[129] = C_index
 index_titles[129] = "Standardised Precipitation-Evapotranspiration Index 12"
 index_names[129] = "spei12"
-index_scales[[129]] = c(MONTH)
+index_scales[[129]] = c(YEAR)
 attr(calculate_129, "data") <- c(ETO, PRECIPITATION)
 
 #### New Indexes
