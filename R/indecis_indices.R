@@ -2616,26 +2616,25 @@ attr(calculate_84, "data") <- c(TMEAN, HUMIDITY)
 #' @param taverage daily mean temperature, Celsius
 #' @param rh relative humidity, percentage
 #' @param data_names names of each period of time
-#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
 #' @return index value
 #' @export
 #' @examples
 #' data(data_all)
 #' hi(taverage = data_all$tg, rh = data_all$humidity)
-hi = calculate_85 = function(taverage, rh, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+hi = calculate_85 = function(taverage, rh, data_names=NULL, na.rm = FALSE, ...){
   if( is.null(taverage) | is.null(rh) ) { return(NULL) }
   data = heat.index(t = taverage, rh = rh, temperature.metric = "celsius")
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=MONTH, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[85] = C_index
 index_titles[85] = "Heat Index"
 index_names[85] = "hi"
-index_scales[[85]] = c(MONTH, SEASON, YEAR)
+index_scales[[85]] = c(MONTH)
 attr(calculate_85, "data") <- c(TMAX, HUMIDITY)
 
 #' @title Wind chill index
@@ -2647,27 +2646,26 @@ attr(calculate_85, "data") <- c(TMAX, HUMIDITY)
 #' @param taverage daily mean temperature, Celsius
 #' @param w average wind, m/s
 #' @param data_names names of each period of time
-#' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
 #' @return index value
 #' @export
 #' @examples
 #' data(data_all)
 #' wci(taverage = data_all$tg, w = data_all$wind)
-wci = calculate_86 = function(taverage, w, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
+wci = calculate_86 = function(taverage, w, data_names=NULL, na.rm = FALSE, ...){
   w = w*(3600/1000)
   data = 13.12 + 0.6215*taverage - 11.37*(w^0.16) + 0.3965*taverage*(w^0.16)
   data[is.na(taverage) | is.na(w)] = NA
   function_ = function(data){
     return(mean(data, na.rm=na.rm))
   }
-  byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
+  byYears = calcf_data(data=data, time.scale=MONTH, data_names=data_names, operation=function_)
   return(byYears)
 }
 index_units[86] = C_index
 index_titles[86] = "Wind chill index"
 index_names[86] = "wci"
-index_scales[[86]] = c(MONTH, SEASON, YEAR)
+index_scales[[86]] = c(MONTH)
 attr(calculate_86, "data") <- c(TMEAN, WIND)
 
 #' @title Apparent temperature

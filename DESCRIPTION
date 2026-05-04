@@ -16,7 +16,6 @@ Suggests: MASS,
     testthat
 NeedsCompilation: no
 Packaged: 2026-02-03 09:38:24 UTC; freig
-RoxygenNote: 7.3.3
 ByteCompile: true
 Collate: 
     'ClimInd.R'
@@ -34,3 +33,4 @@ Collate:
     'indecis_indices_functions.R'
     'indecis_indices.R'
     'indecis.R'
+Config/roxygen2/version: 8.0.0
