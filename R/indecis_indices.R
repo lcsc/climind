@@ -790,15 +790,15 @@ index_names[26] = "vwd"
 index_scales[[26]] = c(MONTH, SEASON, YEAR)
 attr(calculate_26, "data") <- c(TMAX)
 
-#' @title Warm days
-#' @description Total numbers of days with TX higher than the 90th percentile. The 90th percentile is computed based on the time scale selected (month, season or year) not daily as ETCCDI does. If you want to compute daily you can use RClimDex package.
+#' @title Percentage of warm days
+#' @description Percentage of days with TX higher than the 90th percentile. The 90th percentile is computed based on the time scale selected (month, season or year) not daily as ETCCDI does. If you want to compute daily you can use RClimDex package.
 ## @importance Important application in agriculture, tourism, human health
 #' 
 #' @param data daily maximum temperature, Celsius
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return days
+#' @return percentage
 #' @export
 #' @examples
 #' data(data_all)
@@ -812,13 +812,13 @@ tx90p = calculate_27 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
-index_units[27] = C_days
-index_titles[27] = "Warm days"
+index_units[27] = C_percentage
+index_titles[27] = "Percentage of warm days"
 index_names[27] = "tx90p"
 index_scales[[27]] = c(MONTH, SEASON, YEAR)
 attr(calculate_27, "data") <- c(TMAX)
 
-#' @title Warm nights
+#' @title Percentages of warm nights
 #' @description Percentages of days with TN higher than the 90th percentile.  The 90th percentile is computed based on the time scale selected (month, season or year) not daily.
 ## @importance Important application in agriculture, tourism, human health
 #' 
@@ -826,7 +826,7 @@ attr(calculate_27, "data") <- c(TMAX)
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return days
+#' @return percentage
 #' @export
 #' @examples
 #' data(data_all)
@@ -841,7 +841,7 @@ tn90p = calculate_28 = function(data, data_names=NULL, time.scale=YEAR, na.rm = 
   return(byYears)
 }
 index_units[28] = C_percentage
-index_titles[28] = "Warm nights"
+index_titles[28] = "Percentages of warm nights"
 index_names[28] = "tn90p"
 index_scales[[28]] = c(MONTH, SEASON, YEAR)
 attr(calculate_28, "data") <- c(TMIN)
@@ -4058,15 +4058,15 @@ index_names[131] = "ucp"
 index_scales[[131]] = c(YEAR)
 attr(calculate_131, "data") <- c(PRECIPITATION, TMEAN)
 
-#' @title Windy days
-#' @description Total numbers of days with wind higher than the 95th percentile. The 95th percentile is computed based on the time scale selected (month, season or year) not daily.
+#' @title Percentage of windy days
+#' @description Percentage of days with wind higher than the 95th percentile. The 95th percentile is computed based on the time scale selected (month, season or year) not daily.
 ## @importance Important application in energy and tourism
 #' 
 #' @param data average wind, m/s
 #' @param data_names names of each period of time
 #' @param time.scale month, season or year
 #' @param na.rm logical. Should missing values (including NaN) be removed? 
-#' @return days
+#' @return percentage
 #' @export
 #' @examples
 #' data(data_all)
@@ -4080,8 +4080,8 @@ w95 = calculate_132 = function(data, data_names=NULL, time.scale=YEAR, na.rm = F
   byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_, value=value)
   return(byYears)
 }
-index_units[132] = C_days
-index_titles[132] = "Windy days"
+index_units[132] = C_percentage
+index_titles[132] = "Percentage of windy days"
 index_names[132] = "w95"
 index_scales[[132]] = c(MONTH, SEASON, YEAR)
 attr(calculate_132, "data") <- c(WIND)
