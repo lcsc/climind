@@ -3008,7 +3008,7 @@ attr(calculate_97, "data") <- c(PRECIPITATION, TMEAN)
 #' @title Johansson Continentality Index
 #' @description The Johansson Continentality Index is usually used for the climatic differentiation between continental and oceanic climates.
 #' @section Formula: \deqn{JCI = \frac {1.7(Thm-Tcm)}{sinf}-20.4} Thm = Average temperature of the hottest month (Celsius); Tcm = Average temperature of the coldest month (Celsius); f = geographical latitude
-#' @references Chronopoulou-Sereli A. 1996. Courses of Agricultural Meteorology.Publications Agricultural University of Athens: Athens, OH
+#' @references Cheval, S., Dumitrescu, A., & Birsan, M. V. (2017). Variability of the aridity in the South-Eastern Europe over 1961–2050. Catena, 151, 74-86, https://doi.org/10.1016/j.catena.2016.11.029
 ## @importance Important application in agriculture
 #' 
 #' @param data daily mean temperature, Celsius
