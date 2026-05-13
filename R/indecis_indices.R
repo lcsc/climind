@@ -2901,7 +2901,7 @@ attr(calculate_93, "data") <- c(TMIN, TMAX, RADIATIONTOA, WIND, LAT, DEWPOINT, M
 uai = calculate_94 = function(eto, pr, data_names=NULL, time.scale=YEAR, na.rm = FALSE){
   data = pr/eto
   function_ = function(data){
-    return(sum(data, na.rm=na.rm))
+    return(mean(data, na.rm=na.rm))
   }
   byYears = calcf_data(data=data, time.scale=time.scale, data_names=data_names, operation=function_)
   return(byYears)
