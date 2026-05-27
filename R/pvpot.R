@@ -15,7 +15,9 @@
 #' Crook, Julia A., Laura A. Jones, Piers M. Forster, and Rolf Crook. 2011. “Climate Change Impacts on Future Photovoltaic and Concentrated Solar Power Energy Output.” Energy & Environmental Science 4 (9): 3101. https://doi.org/10.1039/c1ee01495a.
 #' 
 #' Jerez, Sonia, Isabelle Tobin, Robert Vautard, Juan Pedro Montávez, Jose María López-Romero, Françoise Thais, Blanka Bartok, et al. 2015. “The Impact of Climate Change on Photovoltaic Power Generation in Europe.” Nature Communications 6 (1): 10014. https://doi.org/10.1038/ncomms10014.
-
+#' 
+#' Jerez, S., Tobin, I., Vautard, R. et al. The impact of climate change on photovoltaic power generation in Europe. Nat Commun 6, 10014 (2015). https://doi.org/10.1038/ncomms10014
+#' 
 #' @export
 
 pvpot_ <- function(tm, wss, rad){
