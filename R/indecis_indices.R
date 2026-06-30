@@ -2616,7 +2616,8 @@ attr(calculate_84, "data") <- c(TMEAN, HUMIDITY)
 #' @param taverage daily mean temperature, Celsius
 #' @param rh relative humidity, percentage
 #' @param data_names names of each period of time
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods 
 #' @return index value
 #' @export
 #' @examples
@@ -2646,7 +2647,8 @@ attr(calculate_85, "data") <- c(TMAX, HUMIDITY)
 #' @param taverage daily mean temperature, Celsius
 #' @param w average wind, m/s
 #' @param data_names names of each period of time
-#' @param na.rm logical. Should missing values (including NaN) be removed? 
+#' @param na.rm logical. Should missing values (including NaN) be removed?
+#' @param ... further arguments passed to or from other methods 
 #' @return index value
 #' @export
 #' @examples
